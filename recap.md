@@ -144,3 +144,26 @@ with open("/un/fichier", "w") as f:  # Créé un contexte dans lequel le fichier
 
 (Le mode `'a'` (append) au lieu de `'w'` permet d'ouvrir le fichier pour ajouter
 du contenu à la fin plutôt que de le ré-écrire)
+
+## Exception, assertions
+
+`try`/`except` permettent de tenter des instructions et d'attraper les
+exceptions qui peuvent survenir pour ensuite les gérer de manière spécifique :
+
+```python
+try:
+   instruction1
+   instruction2
+except FirstExceptionTime:
+   instruction3
+except Exception as e:
+   print("an unknown exception happened ! :" + e.str)
+```
+
+Les assertions permettent d'expliciter et de vérifier des suppositions faites
+dans le code :
+
+```
+def une_fonction(n):
+   assert isinstance(n, int) and is_prime(n), "Cette fonction fonctionne seulement pour des entiers premiers !"
+```
