@@ -334,7 +334,21 @@ print(reponse)
 
 - Les variables sont des abstractions de la mémoire
 - Un contenant pour une information : nom + contenu
-- Différence avec le concept mathématique
+- Différent du concept mathématique
+
+.center[![](img/memory1.png)]
+
+---
+
+# 1. Les variables
+
+## 1.2. Principe
+
+- Les variables sont des abstractions de la mémoire
+- Un contenant pour une information : nom + contenu
+- Différent du concept mathématique
+
+.center[![](img/memory2.png)]
 
 ---
 
@@ -410,6 +424,15 @@ reponse = input("Combien font 6 fois 7 ?")
 ```
 
 N.B. : ce que renvoie `input()` est une chaîne de caractère !
+
+---
+
+# 2. Interactivité basique
+
+<br>
+<br>
+<br>
+.center[Demo dans Thonny]
 
 ---
 
@@ -1345,8 +1368,6 @@ print(out)    # -> Affiche 'Hello World'
 
 # Backup topics
 
-
-
 Methode de programmation
 
 Chercher de la doc
@@ -1373,6 +1394,6 @@ virtualenv
 
 Git / vcs
 
+Web : Flask / Django, MVC
 
-
-
+Logging

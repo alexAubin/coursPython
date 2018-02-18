@@ -1,13 +1,13 @@
-Demander et afficher des informations
---------------------------------------
+# Recapitulatif des syntaxes "de base" en Python
+
+## Demander et afficher des informations
 
 | Syntaxe                | Description                              |
 | ---------------------- | ---------------------------------------- |
 | `print("message")`     | Affiche "message" dans la console        |
 | `v = input("message")` | Demande une valeur et la stocke dans `v` |
 
-Calculs
--------
+## Calculs
 
 | Syntaxe  | Description                           |
 | -------- | ------------------------------------- |
@@ -22,8 +22,7 @@ Toutes ces opérations peuvent être appliquées directement sur une variable vi
 la syntaxe du type `a += b` (additionner b à a et directement modifier la valeur
 de a avec le résultat).
 
-Types de variable et conversion
--------------------------------
+## Types de variable et conversion
 
 | Syntaxe    | Description                           |
 | ---------- | ------------------------------------- |
@@ -32,8 +31,7 @@ Types de variable et conversion
 | `float(v)` | Converti `v` en float                 |
 | `str(v)`   | Converti `v` en string                |
 
-Chaînes de caractères
----------------------
+## Chaînes de caractères
 
 | Syntaxe             | Description                                                                  |
 | ------------------- | ---------------------------------------------------------------------------- |
@@ -45,8 +43,7 @@ Chaînes de caractères
 | `str.split(c)`      | Créé une liste à partir de `str` en la séparant par rapport au caractère `c` |
 | `str.strip()`       | "Nettoie" `str` en supprimant les espaces et `\n` au début et à la fin       |
 
-Fonctions
----------
+## Fonctions
 
 ```python
 def ma_fonction(toto, tutu=3):
@@ -61,8 +58,7 @@ Cette fonction :
 - `une_valeur` est une variable locale à la fonction ;
 - elle retourne `une_valeur` ;
 
-Conditions
-----------
+## Conditions
 
 ```python
 if condition:
@@ -98,8 +94,7 @@ else:
 parite = "pair" if n % 2 == 0 else "impair"
 ```
 
-Boucles
--------
+## Boucles
 
 | Syntaxe                       | Description                                                     |
 | ----------------------------- | --------------------------------------------------------------- |
@@ -110,8 +105,7 @@ Boucles
 | `break`                       | Quitte immédiatement une boucle                                 |
 | `continue`                    | Passe immédiatement à l'itération suivante d'une boucle         |
 
-Structures de données
----------------------
+## Structures de données
 
 | Syntaxe                  | Description                                                |
 | ------------------------ | ---------------------------------------------------------- |
@@ -122,11 +116,31 @@ Structures de données
 
 | Syntaxe          | Description                                                                           |
 | ---------------- | ------------------------------------------------------------------------------------- |
-| `L[i], T[i]`     | `i`-eme element d'une liste ou d'une tuple                                            |
+| `L[i]`           | `i`-eme element d'une liste ou d'une tuple                                            |
+| `L[i:]`          | Liste de tous les éléments à partir du `i`-eme                                        |
 | `L[i] = e`       | Remplace le `i`-eme element par `e` dans une liste                                    |
 | `L.append(e)`    | Ajoute `e` à la fin de la liste `L`                                                   |
 | `S.add(e)`       | Ajoute `e` dans le set `S`                                                            |
 | `L.insert(i, e)` | Insère `e` à la position `i` dans la liste `L`                                        |
 | `str.join(L)`    | Produit une string à partir de `L` en intercallant la string `str` entre les elements |
 
+## Fichiers
 
+Ouvrir et lire un fichier :
+
+```
+with open("/un/fichier", "r") as f:  # Créé un contexte dans lequel le fichier
+    content = f.readlines()          # est ouvert en lecture en tant que 'f', 
+                                     # et met son contenu dans 'content'
+```
+
+Ecrire dans un fichier :
+
+```
+with open("/un/fichier", "w") as f:  # Créé un contexte dans lequel le fichier
+    f.write(content)                 # est ouvert en ré-écriture complète et
+                                     # écrit le contenu de 'content' dedans.
+```
+
+(Le mode `'a'` (append) au lieu de `'w'` permet d'ouvrir le fichier pour ajouter
+du contenu à la fin plutôt que de le ré-écrire)
