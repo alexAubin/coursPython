@@ -89,11 +89,18 @@ Formateur indépendant
 #### (Bonnes nouvelles)
 
 - On a du temps
-- Je suis payé pour répondre à vos questions ;)
+- Je suis payé pour répondre à vos questions \o/
 - Vous montrer l'essentiel et l'utile
 - Exercices ludiques ?
 - Priorité aux moins rapides
 - Devenir architecte du cyberespace
+
+
+---
+
+# Enseigner et apprendre la programmation
+
+.center[![](img/noideawhatimdoing.jpg)]
 
 ---
 
@@ -112,11 +119,12 @@ Transmettre :
 
 ## 1. Notions de "bases" (~ 1.5 jours ?)
 ## 2. Orienté objet appliqué à un jeu vidéo (~2 jours ?)
-## 3. ??? Travailler sur "un vrai projet" 
+## 3. ??? Travailler sur "un vrai projet" (~ 1.5 jours ?)
 
-## Et aussi :
+### Et aussi :
 - Une (petite?) évaluation
-
+- Des explications / ProTips™ sur "la vraie vie"
+- Vos questions
 
 ---
 
@@ -125,8 +133,6 @@ Transmettre :
 - 5 jours
     - 9h15 -> 12h15
     - 13h15 -> 17h15
-
-
 
 ---
 
@@ -152,6 +158,16 @@ class: impact
 class: impact
 
 # « Informatique »
+
+---
+
+# Informatique
+
+<br>
+<br>
+<br>
+.center[![](img/programmer_job.png)]
+
 
 ---
 
@@ -186,7 +202,24 @@ class: impact
 - Grande communauté
 - De plus en plus répandu (?)
 
+---
 
+# Python history
+
+.col-8[
+   « ... In December 1989, I was looking for a **"hobby" programming project that would keep me occupied during the week around Christmas**. My office ... would be closed, but I had a home computer, and not much else on my hands. 
+   <br>
+   <br>
+   I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. 
+   <br>
+   <br>
+   I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus). »
+.right[— Guido van Rossum]
+]
+
+.col-4[
+![](img/guido.jpg)
+]
 
 
 ---
@@ -249,9 +282,19 @@ class: impact
 
 # Setup
 
-- Linux ? Python ?
-- Thonny
+- VM Linux
+- Python (3)
+
+## Pour débutter
+
+- Thonny (`pip3 install thonny`
+
+## Plus tard
+
 - Atom
+- Vim
+- Pygame
+- ???
 
 ---
 
@@ -431,7 +474,7 @@ def ma_fonction(arg1, arg2):
 
 .col-6[
 .center[
-    ![test](fonction.png)
+    ![](img/fonction.png)
 ]
 ]
 
@@ -457,7 +500,7 @@ def ma_fonction(arg1, arg2):
 
 .col-6[
 .center[
-    ![test](fonction.png)
+    ![](img/fonction.png)
 ]
 ]
 
@@ -492,6 +535,27 @@ D = distance(3, 5)       # -> D vaut 34
 
 # 4. Fonctions
 
+## 4.3 Exemple
+
+```python
+def distance(dx, dy):
+    dx_carre = dx ** 2
+    dy_carre = dy ** 2
+    print(math.sqrt(dx_carre + dy_carre))
+```
+
+Utilisation :
+
+```python
+D = distance(3, 5)       # -> D vaut None !
+```
+
+
+
+---
+
+# 4. Fonctions
+
 ## 4.4 Variables locales
 
 ```python
@@ -508,7 +572,7 @@ def distance(dx, dy):
 
 # 4. Fonctions
 
-## 4.5 'Return'
+## 4.5 `return`
 
 - `return` quitte immédiatement la fonction !
 - Il peut néanmoins y avoir plusieurs `return` dans une fonction (mais seul un sera executé)
@@ -650,6 +714,12 @@ not (nom == "Jack Sparrow")                # Négation
 "Jack" in nom           # 'nom' contient 'Jack'
 nom.startswith("Jack")  # 'nom' commence par 'Jack'
 nom.endswith("row")     # 'nom' fini par 'row'
+```
+
+## 'Inline' `if`s
+
+```python
+parite = "pair" if n % 2 == 0 else "impair"
 ```
 
 ---
@@ -1273,7 +1343,9 @@ print(out)    # -> Affiche 'Hello World'
 
 ---
 
-xkcd pixels
+# Backup topics
+
+
 
 Methode de programmation
 

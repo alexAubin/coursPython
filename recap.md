@@ -48,7 +48,7 @@ Chaînes de caractères
 Fonctions
 ---------
 
-```
+```python
 def ma_fonction(toto, tutu=3):
     une_valeur = toto * 6 + tutu
     return une_valeur
@@ -64,7 +64,7 @@ Cette fonction :
 Conditions
 ----------
 
-```
+```python
 if condition:
     instruction1
     instruction2
@@ -92,6 +92,12 @@ else:
 | `not cond`        | négation de la condition `cond`         |
 | `a in b`          | `a` est dans `b` (chaîne, liste, set..) |
 
+### Inline `ifs`
+
+```python
+parite = "pair" if n % 2 == 0 else "impair"
+```
+
 Boucles
 -------
 
@@ -107,12 +113,12 @@ Boucles
 Structures de données
 ---------------------
 
-| Syntaxe                | Description                                                |
-| ---------------------- | ---------------------------------------------------------- |
-| L = ["a", 2, 3.14 ]    | Liste (suite ordonnée d'éléments)                          |
-| S = { "a", "b", 3 }    | Ensemble (éléments unique, désordonné)                     |
-| D = { "a": 2, "b": 4 } | Dictionnaire (ensemble de clé-valeurs, avec clés uniques)  |
-| T = (1,2,3)            | Liste (suite d'élément non-mutables)                       |
+| Syntaxe                  | Description                                                |
+| ------------------------ | ---------------------------------------------------------- |
+| `L = ["a", 2, 3.14 ]`    | Liste (suite ordonnée d'éléments)                          |
+| `S = { "a", "b", 3 }`    | Ensemble (éléments unique, désordonné)                     |
+| `D = { "a": 2, "b": 4 }` | Dictionnaire (ensemble de clé-valeurs, avec clés uniques)  |
+| `T = (1,2,3)`            | Liste (suite d'élément non-mutables)                       |
 
 | Syntaxe          | Description                                                                           |
 | ---------------- | ------------------------------------------------------------------------------------- |
@@ -122,8 +128,5 @@ Structures de données
 | `S.add(e)`       | Ajoute `e` dans le set `S`                                                            |
 | `L.insert(i, e)` | Insère `e` à la position `i` dans la liste `L`                                        |
 | `str.join(L)`    | Produit une string à partir de `L` en intercallant la string `str` entre les elements |
-
-
-
 
 
