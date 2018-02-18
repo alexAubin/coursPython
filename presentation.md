@@ -60,7 +60,7 @@ Dev / hacktiviste?
 ]]
 
 .col-4[.center[
-Formateur indépendant
+Formateur
 
 ![](img/python_arduino.jpg)
 ]]
@@ -95,12 +95,6 @@ Formateur indépendant
 - Priorité aux moins rapides
 - Devenir architecte du cyberespace
 
-
----
-
-# Enseigner et apprendre la programmation
-
-.center[![](img/noideawhatimdoing.jpg)]
 
 ---
 
@@ -1028,7 +1022,7 @@ Les "list/dict comprehensions" sont des syntaxes particulière permettant de rap
 Carré des entiers impairs d'une liste
 
 ```python
-[ e**2 for e liste if e % 2 == 1 ]
+[ e**2 for e in liste if e % 2 == 1 ]
 ```
 
 ---
