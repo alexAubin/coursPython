@@ -629,6 +629,134 @@ distance(1, dz=3, dy=2)
 - Domaine généralement mal défini (e.g. type d'entrée et de sortie)
 - Effets de bords (e.g. `print()`)
 
+---
+
+class: impact
+
+# Day 2
+
+---
+
+# Python dans la vraie vie
+
+.center[Dropbox]
+
+.center[![](img/dropbox.png)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Atom]
+
+.center[![](img/atom.png)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Eve online]
+
+.center[![](img/eveonline.jpg)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Matplotlib]
+
+.center[![](img/matplotlib.png)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Blender]
+
+.center[![](img/blender.jpg)]
+
+---
+
+# Python dans la vraie vie
+
+.center[OpenERP / Odoo]
+
+.center[![](img/odoo.jpg)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Tartiflette]
+
+.center[![](img/tartiflette.png)]
+
+---
+
+# Methode de programmation ?
+
+.center[Programming is complicated]
+
+## Conseils
+
+- Identifier clairement ce qu'on veut faire
+
+- Séparer l'"algorithmique" de l'implémentation en python...
+
+---
+
+# Methode de programmation ?
+
+.center[Programming is complicated]
+
+## Tentative de methode ?
+
+0. Identifier clairement les entrées / sorties
+    - Qu'est-ce que j'ai au départ
+    - Qu'est-ce que je dois avoir à l'arrivée
+
+1. Décomposer (mentalement ou sur papier) le problème en sous-problème ou étapes
+
+2. Traduire (mentalement ou sur papier) les étapes en pseudo-code
+
+3. Traduire ce pseudo-code en code python.
+
+
+---
+
+.center[![](img/previously.jpg)]
+
+---
+
+# Previously
+
+* **Des variables** : des cases mémoires pour stocker des informations
+```
+toto = 3.14
+```
+* **Créer de l'interactivité** : demander des informations à l'utilisateur avec
+  `input()`
+
+* **Manipuler des chaînes de caractère**
+
+* **Des fonctions** : des séries d'instructions avec un nom
+```
+def distance(dx=0, dy=0):
+    return math.sqrt(dx*dx + dy*dy)
+```
+
+---
+
+# Coming next
+
+- Conditions
+- Boucles
+- Structures de données
+- Fichiers
+- Exceptions, assertions
+- Librairies
+    - Jouer avec du json
+    - "Adminsys" en python
 
 ---
 
@@ -636,7 +764,7 @@ distance(1, dz=3, dy=2)
 
 Gérer des cas pour adapter le fonctionnement du programme
 
-### 5.1 Syntaxe générale 
+## 5.1 Syntaxe générale 
 
 ```python
 if condition:
@@ -1188,7 +1316,7 @@ except FileNotFoundError:
 
 # 9. Exceptions, assertions
 
-### 9.2 Assertions
+## 9.2 Assertions
 
 Il est possible d'utiliser des `assert`ions pour expliciter certaines hypothèses
 qui sont faites à certains endroit du code. Si l'hypothèse n'est pas validée,
@@ -1268,13 +1396,32 @@ j["mailman"]["state"]     # -> "working"
 
 # 10. Librairies
 
-## 10.4 Exemple : `requests`
+## 10.2 Exemple : `requests`
+
+Envoyer une requête HTTP et récuperer la réponse (et potentiellement le
+contenu d'une page)
+
+```python
+r.request("https://en.wikipedia.org/wiki/Python", timeout=30)
+
+print(r.status_code)    # -> 200 si ça a marché
+print(r.text)           # -> Le contenu de la page
+```
+
+Ce genre de requête peut génerer pleins d'exceptions différentes :
+
+```python
+requests.exceptions.ConnectionError
+requests.exceptions.SSLError
+requests.exceptions.Timeout
+...
+```
 
 ---
 
 # 10. Librairies
 
-## 10.2 Exemple : `os`
+## 10.3 Exemple : `os`
 
 `os` permet d'interagir avec le système d'exploitation pour réaliser différent
 type d'action... Certaines étant spécifiques à l'OS en question (Linux, Windows,
@@ -1295,7 +1442,7 @@ Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
 
 # 10. Librairies
 
-## 10.3 Exemple : `subprocess`
+## 10.4 Exemple : `subprocess`
 
 `subprocess` peut typiquement être utiliser pour lancer des commandes et
 récupérer leur résultat
@@ -1304,21 +1451,6 @@ récupérer leur résultat
 out = subprocess.check_output(["echo", "Hello World!"])
 print(out)    # -> Affiche 'Hello World'
 ```
-
----
-
-# 10. Librairies
-
-## 10.3 Exemple : `subprocess`
-
-`subprocess` peut typiquement être utiliser pour lancer des commandes et
-récupérer leur résultat
-
-```python
-out = subprocess.check_output(["echo", "Hello World!"])
-print(out)    # -> Affiche 'Hello World'
-```
-
 
 ---
 
@@ -1326,28 +1458,179 @@ print(out)    # -> Affiche 'Hello World'
 
 .center[![](img/moar.jpg)]
 
-
 ---
 
 # 10. Librairies
 
-### Moar ?
+## Moar ?
 
 - Debian packages : `python-*`
-
-</br>
-
 - Python package manager : `pip`
-    - `pip search polib`
-    - `pip install polib`
+
+## Exemples
+
+- LDAP
+- JSON, XML, HTML, YAML, ...
+- Regular expressions
+- Logging, Parsing d'options, ...
+- Internationalisation
+- Templating
+- Plots
+- ...
 
 ---
 
-# 11. Les classes
+# 11. Pygame
+
+### Une librairie pensée pour le jeu vidéo
+
+* Afficher une fenêtre
+* Dessiner des formes (lignes, rectangles, ...)
+* Importer et afficher des images à des positions données
+* Détecter les touches de clavier
+* Détecter des collisions entre des objets
+* ...
 
 ---
 
-# 12. Pygame
+# 11. Pygame
+
+## 11.1 Premier programme avec Pygame
+
+```python
+import pygame, sys
+from pygame.locals import *
+```
+
+---
+
+```python
+# Initialiser pygame
+pygame.init()
+
+# Initialiser une fenêtre / l’écran de jeu
+ecran = pygame.display.set_mode((400, 300))
+pygame.display.set_caption('Mon jeu!')
+
+# Boucle principale
+while True:
+
+    # Verifier si il y a des événement en attente
+    for event in pygame.event.get():
+
+        # Si l'utilisateur a déclenché la fermeture de la fenêtre
+        if event.type == QUIT:
+            # Désinitialiser pygame
+            pygame.quit()
+            # Sortir du programme
+            sys.exit()
+```
+
+---
+
+## 11.2 Changer la couleur de fond
+
+Modification du programme (couleur = `(0,0,255)`)
+
+```python
+[...]
+
+# Boucle principale
+while True:
+
+    # Remplir l'écran avec une couleur
+    ecran.fill((0,0,255))
+
+    for event in pygame.event.get():
+        [...]
+
+    # Rafraîchir l'écran
+    pygame.display.update()
+```
+
+---
+
+# 11. Pygame
+
+## 11.3 Les surfaces
+
+### Charger une image
+
+```python
+monImage = pygame.image.load("chaton.jpg").convert_alpha()
+```
+
+### **Blitter** : Coller une surface sur une autre
+
+```python
+surfaceDArrivee.blit(surface, (x,y))
+```
+
+---
+
+### Charger et utiliser des images
+
+```python
+# Charger des images
+fond = pygame.image.load("fond.png").convert()
+image = pygame.image.load("image.png").convert_alpha()
+
+# Boucle principale
+while True:
+
+    for event ...
+        # [...]
+
+    # Coller l'image de fond
+    ecran.blit(fond, (0,0))
+
+    # Coller l'autre image
+    ecran.blit(image, (50,50))
+
+    # [...]
+```
+
+---
+
+# 11. Pygame
+
+## 11.4 Les événements
+
+Des événements sont générés en fonction des appuis des touches et des
+mouvements / clics de la souris.
+
+Par exemple, bouger la souris génère un événement `MOUSEMOTION`.
+
+---
+
+
+Déplacer une image avec le clavier
+---------------------------------
+
+```python
+# Définir la position initiale de l'image
+image_x = 20
+image_y = 20
+
+# Boucle principale
+while True:
+
+    # Verifier si il y a des événement en attente
+    for event in pygame.event.get():
+
+        if (event.type == pygame.KEYDOWN) :
+            if (event.key == pygame.K_LEFT) :
+                image_x -= 2
+            if (event.key == pygame.K_RIGHT) :
+                image_x += 2
+
+    ecran.blit(image, (image_x,image_y))
+```
+
+
+---
+
+# 12. Classes
 
 ---
 
@@ -1362,32 +1645,26 @@ print(out)    # -> Affiche 'Hello World'
 
 # Backup topics
 
-Methode de programmation
+- Debugger
+    - print
+    - rubber duck debugging
+    - gdb
 
-Chercher de la doc
+- Web : Flask / Django, MVC
+    - ORM
+    - virtualenv
+    - Web 
 
-Concept : edge-case
+- VCS : Git/Github
 
-How to write good code
+- How to write "good code"
 
-Code for human and for the future,
-not juste code for machines right now.
+    - Code for human and for the future, not juste code for machines right now.
+    - Code semantique
+    - Code 2 times
 
-Code semantique
+- Looking for doc / help
 
-Debugger du code (rubbger duck programming)
-    -> gdb
+- Logging ?
 
-Factorisation
-
-Paradigme de programmation
-
-Test-driven dev ?
-
-virtualenv
-
-Git / vcs
-
-Web : Flask / Django, MVC
-
-Logging
+- Unit / functionnal testing
