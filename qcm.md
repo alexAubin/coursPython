@@ -1,12 +1,11 @@
 
-### Prenom :
-### Nom :
+### Prenom : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  Nom : \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
 
 # Initiation à Python : questionnaire
 
 *Pour chaque question, entourer la bonne réponse.*
 
-## 1
+### 1
 
 Un programme contient cette instruction : 
 
@@ -23,7 +22,7 @@ Que contient la variable `age` ?
 
 
 
-## 2
+### 2
 
 Pour concaténer un entier `n` à une chaîne de caractère, j'écris :
 
@@ -33,7 +32,7 @@ Pour concaténer un entier `n` à une chaîne de caractère, j'écris :
 
 
 
-## 3
+### 3
 
 Un programme contient seulement les deux lignes suivantes :
 
@@ -50,7 +49,7 @@ Si j'execute ce **programme** :
 
 
 
-## 4
+### 4
 
 À la fin de l'execution de ce programme, que contiendra la variable `x` ?
 
@@ -67,7 +66,7 @@ x = dire_bonjour()
 
 
 
-## 5
+### 5
 
 Dans le programme de la question précédente, pour que la fonction `dire_bonjour()` renvoie `"Bonjour !"`,  j'aurais dû remplacer la deuxième ligne par :
 
@@ -76,7 +75,7 @@ Dans le programme de la question précédente, pour que la fonction `dire_bonjou
 - C. Rien du tout, c'était déjà bon !
 
 
-## 6
+### 6
 
 Pour savoir si une variable `n` contient l'entier 20, j'écris :
 
@@ -86,7 +85,7 @@ Pour savoir si une variable `n` contient l'entier 20, j'écris :
 - D. `n == "20"`
 
 
-## 7
+### 7
 
 Qu'affiche le programme suivant ?
 
@@ -102,7 +101,7 @@ for i in range(0,10):
 - C. Il y a une erreur de syntaxe
 
 
-## 8
+### 8
 
 Qu'affiche le programme suivant ?
 
@@ -118,7 +117,7 @@ for i in range(0,10):
 - C. Il y a une erreur de syntaxe
 
 
-## 9
+### 9
 
 Une liste a été créée de cette manière :
 
@@ -133,7 +132,7 @@ Laquelle de ces instructions renvoie `"Python"` ?
 - C. `ma_liste[3]`
 
 
-## 10
+### 10
 
 Pour faciliter la compréhension de mon programme par mes collègues et mon futur
 moi, j'appelle mes fonctions et mes variables :
