@@ -957,6 +957,68 @@ print(str(x) + " est impair !")
 
 ---
 
+class: impact
+
+# Day 3
+
+---
+
+.center[![](img/previously.jpg)]
+
+---
+
+# Previously
+
+- **Conditions**
+
+```python
+if condition:
+    do_some_stuff()
+else:
+    do_some_other_stuff()
+```
+
+- **Boucles `for`**
+
+```python
+for i in range(0,10):
+    print("En ce moment, i vaut " + str(i))
+```
+
+- **Boucles `while`**
+
+```python
+while input("Mot de passe ?") != "pikachu":
+    print("Mauvais mot de passe !")
+```
+---
+
+# Confusion avec les fonctions non utilisés
+
+---
+
+# Coming next
+
+- Structures de données
+- Fichiers
+- Exceptions, assertions
+- Librairies
+    - Jouer avec du json
+    - "Adminsys" en python
+
+---
+
+# Jeu des allumettes : architecture
+
+
+---
+
+# Jeu des allumettes : IA Battle
+
+
+
+---
+
 # 7. Listes, dictionnaires
 
 Les listes et dictionnaires permettent de stocker des séries
@@ -1177,6 +1239,13 @@ Carré des entiers impairs d'une liste
 
 ---
 
+class: impact
+
+# Day 4
+
+
+---
+
 # 8. Fichiers
 
 ## 8.1 Lire
@@ -1332,26 +1401,33 @@ def somme(liste):
 
 ---
 
+class: impact
+
+# Day 5
+
+---
+
 # 10. Librairies
 
 L'une des puissances de python vient de l'écosystème de librairie disponibles.
 
 Librairie / bibliothèque / module : un ensemble de fonctionnalité déjà pensés et
-éprouvées, prêtes à l'emploi. Par exemple : `datetime`
+éprouvées, prêtes à l'emploi.
 
 ### Syntaxes d'import
 
 ```python
-import some_module            # -> Importer tout un module
-some_module.some_function()   # -> Appeler la fonction some_function()
-                              # du module
+import un_module          # -> Importer tout un module
+un_module.une_fonction()  # -> Appeler la fonction une_function()
+                          #    du module
+```
 
-import some_module as m       # -> Import mais en renommant le module
-m.some_function()
+### Exemple
 
+```python
+import math
 
-from some_module import some_function   # -> Import seulement d'une 
-some_function()                         # fonction
+math.sqrt(2)   # -> 1.4142135623730951
 ```
 
 ---
@@ -1386,9 +1462,13 @@ some_function()                         # fonction
 
 ```python
 import json
-with open("some.json") as f:
-    j = json.loads(f.readlines())
 
+# Ouvrir, lire et interpreter un fichier json
+with open("applications.json") as f:
+    j = json.loads(f.read())
+
+
+# Trouver l'état de l'application mailman
 j["mailman"]["state"]     # -> "working"
 ```
 
@@ -1402,19 +1482,12 @@ Envoyer une requête HTTP et récuperer la réponse (et potentiellement le
 contenu d'une page)
 
 ```python
-r.request("https://en.wikipedia.org/wiki/Python", timeout=30)
+import requests
+
+r = requests.get("https://en.wikipedia.org/wiki/Python", timeout=30)
 
 print(r.status_code)    # -> 200 si ça a marché
 print(r.text)           # -> Le contenu de la page
-```
-
-Ce genre de requête peut génerer pleins d'exceptions différentes :
-
-```python
-requests.exceptions.ConnectionError
-requests.exceptions.SSLError
-requests.exceptions.Timeout
-...
 ```
 
 ---
@@ -1469,202 +1542,93 @@ print(out)    # -> Affiche 'Hello World'
 
 ## Exemples
 
-- LDAP
 - JSON, XML, HTML, YAML, ...
 - Regular expressions
 - Logging, Parsing d'options, ...
 - Internationalisation
 - Templating
 - Plots
+- LDAP
 - ...
 
----
-
-# 11. Pygame
-
-### Une librairie pensée pour le jeu vidéo
-
-* Afficher une fenêtre
-* Dessiner des formes (lignes, rectangles, ...)
-* Importer et afficher des images à des positions données
-* Détecter les touches de clavier
-* Détecter des collisions entre des objets
-* ...
 
 ---
 
-# 11. Pygame
+# Le mot de la fin
 
-## 11.1 Premier programme avec Pygame
+## La programmation, c'est compliqué
 
-```python
-import pygame, sys
-from pygame.locals import *
-```
-
----
-
-```python
-# Initialiser pygame
-pygame.init()
-
-# Initialiser une fenêtre / l’écran de jeu
-ecran = pygame.display.set_mode((400, 300))
-pygame.display.set_caption('Mon jeu!')
-
-# Boucle principale
-while True:
-
-    # Verifier si il y a des événement en attente
-    for event in pygame.event.get():
-
-        # Si l'utilisateur a déclenché la fermeture de la fenêtre
-        if event.type == QUIT:
-            # Désinitialiser pygame
-            pygame.quit()
-            # Sortir du programme
-            sys.exit()
-```
+- Il faut du temps pour assimiler les concepts
+- Il faut être précis et attentif à la syntaxe
+- Il faut avoir les idées claires sur ce qu'on peut faire / veut faire
+- Il faut y aller étape par étape
 
 ---
 
-## 11.2 Changer la couleur de fond
+# Le mot de la fin
 
-Modification du programme (couleur = `(0,0,255)`)
+## Les vrais challenges de la vraie vie
 
-```python
-[...]
-
-# Boucle principale
-while True:
-
-    # Remplir l'écran avec une couleur
-    ecran.fill((0,0,255))
-
-    for event in pygame.event.get():
-        [...]
-
-    # Rafraîchir l'écran
-    pygame.display.update()
-```
-
----
-
-# 11. Pygame
-
-## 11.3 Les surfaces
-
-### Charger une image
-
-```python
-monImage = pygame.image.load("chaton.jpg").convert_alpha()
-```
-
-### **Blitter** : Coller une surface sur une autre
-
-```python
-surfaceDArrivee.blit(surface, (x,y))
-```
-
----
-
-### Charger et utiliser des images
-
-```python
-# Charger des images
-fond = pygame.image.load("fond.png").convert()
-image = pygame.image.load("image.png").convert_alpha()
-
-# Boucle principale
-while True:
-
-    for event ...
-        # [...]
-
-    # Coller l'image de fond
-    ecran.blit(fond, (0,0))
-
-    # Coller l'autre image
-    ecran.blit(image, (50,50))
-
-    # [...]
-```
-
----
-
-# 11. Pygame
-
-## 11.4 Les événements
-
-Des événements sont générés en fonction des appuis des touches et des
-mouvements / clics de la souris.
-
-Par exemple, bouger la souris génère un événement `MOUSEMOTION`.
-
----
-
-
-Déplacer une image avec le clavier
----------------------------------
-
-```python
-# Définir la position initiale de l'image
-image_x = 20
-image_y = 20
-
-# Boucle principale
-while True:
-
-    # Verifier si il y a des événement en attente
-    for event in pygame.event.get():
-
-        if (event.type == pygame.KEYDOWN) :
-            if (event.key == pygame.K_LEFT) :
-                image_x -= 2
-            if (event.key == pygame.K_RIGHT) :
-                image_x += 2
-
-    ecran.blit(image, (image_x,image_y))
-```
+- Lire / comprendre du code existant
+- Découvrir des technos 'sur le tas'
+- Écrire du code facilement compréhensible pour d'autres humains
+- Créer des programmes de qualité : robustes et qui pourront évoluer facilement
+- Résister à votre boss qui veut juste un livrable le plus rapidement possible
 
 
 ---
 
-# 12. Classes
+# Le mot de la fin
+
+.center[**« With great power comes great responsability »**
+
+<br>
+La société est façonnée par l'informatique 
+
+
+=> L'informatique, c'est politique.
+
+]
+
+<br>
+
+## Exemple
+
+.center[**Ecrire un programme qui piste ses utilisateurs, <br>c'est contribuer à créer une
+société de surveillance.**]
 
 ---
 
-
-
-
-
-
-
+<br>
+<br>
+<br>
+.center[You were:]
+<br>
+<br>
+.center[![](img/fantastic.gif)]
 
 ---
 
-# Backup topics
+# Pour approfondir / aller plus loin
 
-- Debugger
-    - print
-    - rubber duck debugging
-    - gdb
+- Debugger avec gdb
 
-- Web : Flask / Django, MVC
-    - ORM
-    - virtualenv
-    - Web 
+- Versionner avec Git
 
-- VCS : Git/Github
+- Travailler collaborativement avec Github
 
-- How to write "good code"
+- Test-driven development avec pytest
 
-    - Code for human and for the future, not juste code for machines right now.
-    - Code semantique
-    - Code 2 times
+- ORM : SQLAlchemy
 
-- Looking for doc / help
+- Frameworks web : Flask / Django
 
-- Logging ?
+- Jeu video / librairie graphique : Pygame
 
-- Unit / functionnal testing
+---
+
+.center[![](img/felicitron.jpg)]
+
+### .center[**Que le sublime gerbille de moldavie touche de son appendice nouillesque votre vie du haut des trois montagne du Valhalla !1!1!!one**]
+
+
