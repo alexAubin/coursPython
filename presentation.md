@@ -1554,14 +1554,45 @@ print(out)    # -> Affiche 'Hello World'
 
 ---
 
+# Pour approfondir / aller plus loin
+
+- Orienté objet / Les classes
+
+- Versionner avec Git
+
+- Travailler collaborativement avec Github
+
+- Debugging avec gdb
+
+- Test-driven development avec pytest
+
+- ORM : SQLAlchemy
+
+- Frameworks web : Flask / Django
+
+- Jeu video / librairie graphique : Pygame
+
+---
+
+.center[![](img/clouds.jpg)]
+
+---
+
+
 # Le mot de la fin
 
-## La programmation, c'est compliqué
+## 5 jours intenses !
 
-- Il faut du temps pour assimiler les concepts
-- Il faut être précis et attentif à la syntaxe
-- Il faut avoir les idées claires sur ce qu'on peut faire / veut faire
-- Il faut y aller étape par étape
+<br>
+
+## *La programmation, c'est compliqué*
+
+Il faut :
+- du temps pour assimiler les concepts
+- être précis et attentif à la syntaxe
+- se mettre à la place de la machine
+- avoir les idées claires sur ce qu'on peut faire / veut faire
+- y aller étape par étape / décomposer le problème
 
 ---
 
@@ -1607,23 +1638,8 @@ société de surveillance.**]
 <br>
 .center[![](img/fantastic.gif)]
 
----
+.center[*(Sorry for the messy exercises :<)*]
 
-# Pour approfondir / aller plus loin
-
-- Debugger avec gdb
-
-- Versionner avec Git
-
-- Travailler collaborativement avec Github
-
-- Test-driven development avec pytest
-
-- ORM : SQLAlchemy
-
-- Frameworks web : Flask / Django
-
-- Jeu video / librairie graphique : Pygame
 
 ---
 
