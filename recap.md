@@ -42,6 +42,7 @@ de a avec le résultat).
 | `chaine.replace(a, b)` | Renvoie `chaine` avec les occurences de `a` remplacées par `b`                  |
 | `chaine.split(c)`      | Créé une liste à partir de `chaine` en la séparant par rapport au caractère `c` |
 | `chaine.strip()`       | "Nettoie" `chaine` en supprimant les espaces et `\n` au début et à la fin       |
+| `\n`                   | Représentation du caractère 'nouvelle ligne'                                    |
 
 ## Fonctions
 
