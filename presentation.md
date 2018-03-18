@@ -111,22 +111,19 @@ Transmettre :
 
 # Plan
 
-## 1. Notions de "bases" (~ 1.5 jours ?)
-## 2. Orienté objet appliqué à un jeu vidéo (~2 jours ?)
-## 3. ??? Travailler sur "un vrai projet" (~ 1.5 jours ?)
+### 1. Notions de "bases" (~ 3 jours ?)
+### 2. Orienté objet, graphisme (~2 jours ?)
+### 3. Bonus : pdb ? Flask ? Git ?
 
 ### Et aussi :
-- Une (petite?) évaluation
-- Des explications / ProTips™ sur "la vraie vie"
+- Une évaluation
+- Des ProTips™ pour la vraie vie
 - Vos questions
 
 ---
 
 # Logistique ?
 
-- 5 jours
-    - 9h15 -> 12h15
-    - 13h15 -> 17h15
 
 ---
 
@@ -181,7 +178,7 @@ class: impact
 
 0. **Concepts** (mots, verbes, phrases ...)
 1. **Grammaire et syntaxe**
-2. **Vocabulaire** 
+2. **Vocabulaire**
 3. **Organiser** sa rédaction et ses idées : **structurer** correctement son code et ses données
 
 ---
@@ -201,10 +198,10 @@ class: impact
 # Python history
 
 .col-8[
-   « ... In December 1989, I was looking for a **"hobby" programming project that would keep me occupied during the week around Christmas**. My office ... would be closed, but I had a home computer, and not much else on my hands. 
+   « ... In December 1989, I was looking for a **"hobby" programming project that would keep me occupied during the week around Christmas**. My office ... would be closed, but I had a home computer, and not much else on my hands.
    <br>
    <br>
-   I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers. 
+   I decided to write an interpreter for the new scripting language I had been thinking about lately: a descendant of ABC that would appeal to Unix/C hackers.
    <br>
    <br>
    I chose Python as a working title for the project, being in a slightly irreverent mood (and a big fan of Monty Python's Flying Circus). »
@@ -246,7 +243,7 @@ class: impact
 ## Programming *is* complicated
 
 ## <br>
-## Don't be ashamed 
+## Don't be ashamed
 ## of not understanding right away
 
 ---
@@ -277,28 +274,35 @@ class: impact
 # Setup
 
 - VM Linux
-- Python (3)
+- Python (3.x)
 
 ## Pour débutter
 
-- Thonny (`pip3 install thonny`
+- **Thonny** (`pip3 install thonny`)
 
 ## Plus tard
 
-- Atom
-- Vim
-- Pygame
+- **Vim** (éditeur en console pour ninjas)
+- **Atom** (IDE relativement minimaliste, épuré et extensible)
+- **Pycharm** (IDE très gros qui fait même le café)
 - ???
 
 ---
 
 # 0. Hello world !
 
-Dans Thonny : 
+Dans Thonny :
 
 ```python
 print("Hello, world!")
 ```
+
+
+---
+
+class: impact
+
+# 1. Les variables
 
 ---
 
@@ -348,16 +352,23 @@ print(reponse)
 
 # 1. Les variables
 
-## 1.3. Déclaration, nommage, assignation
+## 1.3. Déclaration, utilisation
 
 - En python : déclaration implicite
+- Ambiguité : en fonction du contexte, `x` désigne soit le contenant, soit le contenu...
 
 ```python
-x = 42     # déclare et assigne une valeur
+x = 42     # déclare (implicitement) une variable et assigne une valeur
 x = 3.14   # ré-assigne la variable avec une autre valeur
+y = x + 2  # déclare une autre variable y, à partir du contenu de x
+print(y)   # affichage du contenu de y
 ```
 
-- Restrictions sur le nommage : caractères alphanumérique et `_`.
+## 1.4 Restriction sur le nommage
+
+- Noms des variables : caractères alphanumérique et `_`.
+- (Sans commencer par un chiffre)
+
 
 ---
 
@@ -366,11 +377,11 @@ x = 3.14   # ré-assigne la variable avec une autre valeur
 ## 1.5. Opérations mathématiques
 
 ```python
-2 + 3   # Addition      
-2 - 3   # Soustraction  
+2 + 3   # Addition
+2 - 3   # Soustraction
 2 * 3   # Multiplication
-2 / 3   # Division      
-2 % 3   # Moduloe       
+2 / 3   # Division
+2 % 3   # Modulo
 2 ** 3  # Exponentiation
 ```
 
@@ -378,13 +389,13 @@ x = 3.14   # ré-assigne la variable avec une autre valeur
 
 # 1. Les variables
 
-## 1.4. Types
+## 1.6. Types
 
 ```python
-reponse = 42      # Entier / integer    / int
-pi = 3.1415       # Réel                / float
-prenom = "Alex"   # Chaîne de caractère / string
-oui = True        # Booléen             / bool
+reponse = 42      # Entier / integer               / int
+pi = 3.1415       # Réel                           / float
+prenom = "Alex"   # Chaîne de caractère (string)   / str
+oui = True        # Booléen                        / bool
 ```
 
 Connaître le type d'une variable : `type(variable)`
@@ -393,7 +404,7 @@ Connaître le type d'une variable : `type(variable)`
 
 # 1. Les variables
 
-## 1.5. Conversion de type
+## 1.7. Conversion de type
 
 ```python
 int("3")      -> 3
@@ -405,6 +416,13 @@ float("3.14") -> 3.14
 int(True)     -> 1
 int("trois")  -> Erreur
 ```
+
+---
+
+class: impact
+
+# 2. Interactivité basique
+
 
 ---
 
@@ -432,44 +450,85 @@ N.B. : ce que renvoie `input()` est une chaîne de caractère !
 
 # 3. Chaînes de caractères
 
-### Concatenation
+.center[![](img/string.png)]
 
-```python
-"Cette phrase" + " est en deux morceaux"
-```
-
-### Multiplication
-
-```python
-"a" * 6    -> "aaaaaa"
-```
+--
 
 ### Longueur
 
 ```python
-len("Hello world") -> 11
+m = "Hello world"
+len(m)        # -> 11
+```
+
+--
+
+### Extraction
+
+
+```python
+m[:5]    # -> 'Hello'
+m[6:8]   # -> 'wo'
+m[-3:]   # -> 'rld'
+```
+
+---
+
+class: impact
+
+# 3. Chaînes de caractères
+
+
+---
+
+# 3. Chaînes de caractères
+
+### Multiplication
+
+```python
+"a" * 6    # -> "aaaaaa"
+```
+
+### Concatenation
+
+```python
+"Cette phrase" + " est en deux morceaux."
+"J'ai " + str(28) + " ans."
+```
+
+### Construction à partir de données, avec `format`
+
+```python
+"Je m'appelle {name} et j'ai {age} ans".format(name="Alex", age=28)
+"My name is {name} and I am {age} y.o.".format(name="Alex", age=28)
 ```
 
 ---
 
 # 3. Chaînes de caractères
 
-### Extraction
-
-.center[![](img/string.png)]
-
-```python
-m = "Hello world"
-m[:5]  -> 'Hello'
-m[6:8] -> 'wor'
-m[-3:] -> 'rld'
-```
-
 ### Substitution
 
 ```python
-"Hello world".replace("Hello", "Goodbye")
+"Hello world".replace("Hello", "Goodbye")   # -> "Goodbye world"
 ```
+
+### Chaînes sur plusieurs lignes
+
+- `\n` est une syntaxe spéciale faisant référence au caractère "nouvelle ligne"
+
+```python
+"Hello\nworld"     # -> Hello <nouvelle ligne> world
+```
+
+
+---
+
+class: impact
+
+# 4. Fonctions
+
+
 
 ---
 
@@ -495,10 +554,11 @@ def ma_fonction(arg1, arg2):
 ]
 ]
 
-On peut ensuite utiliser la fonction et récupérer le resultat : 
+On peut ensuite utiliser la fonction et récupérer le resultat :
 
 ```python
-mon_resultat = ma_fonction("truc", "bidule")
+mon_resultat = ma_fonction("pikachu", "bulbizarre")
+autre_resultat = ma_fonction("salameche", "roucoups")
 ```
 
 ---
@@ -545,7 +605,7 @@ def distance(dx, dy):
 Utilisation :
 
 ```python
-D = distance(3, 5)       # -> D vaut 34
+D = distance(3, 5)       # -> D vaut 5.830951894845301
 ```
 
 ---
@@ -591,9 +651,9 @@ def distance(dx, dy):
 
 ## 4.5 `return`
 
-- `return` quitte immédiatement la fonction !
+- `return` **quitte immédiatement la fonction !**
 - Il peut néanmoins y avoir plusieurs `return` dans une fonction (mais seul un sera executé)
-- Une fonction sans `return` renvoie implicitement `None`. 
+- Une fonction sans `return` renvoie implicitement `None`.
 
 ---
 
@@ -608,7 +668,7 @@ def distance(dx, dy=0, dz=0):
     [...]
 ```
 
-Dans ce cas, tous ces appels sont valides : 
+Dans ce cas, tous ces appels sont valides :
 
 ```python
 distance(1)
@@ -628,12 +688,6 @@ distance(1, dz=3, dy=2)
 
 - Domaine généralement mal défini (e.g. type d'entrée et de sortie)
 - Effets de bords (e.g. `print()`)
-
----
-
-class: impact
-
-# Day 2
 
 ---
 
@@ -693,70 +747,10 @@ class: impact
 
 ---
 
-# Methode de programmation ?
 
-.center[Programming is complicated]
+class: impact
 
-## Conseils
-
-- Identifier clairement ce qu'on veut faire
-
-- Séparer l'"algorithmique" de l'implémentation en python...
-
----
-
-# Methode de programmation ?
-
-.center[Programming is complicated]
-
-## Tentative de methode ?
-
-0. Identifier clairement les entrées / sorties
-    - Qu'est-ce que j'ai au départ
-    - Qu'est-ce que je dois avoir à l'arrivée
-
-1. Décomposer (mentalement ou sur papier) le problème en sous-problème ou étapes
-
-2. Traduire (mentalement ou sur papier) les étapes en pseudo-code
-
-3. Traduire ce pseudo-code en code python.
-
-
----
-
-.center[![](img/previously.jpg)]
-
----
-
-# Previously
-
-* **Des variables** : des cases mémoires pour stocker des informations
-```
-toto = 3.14
-```
-* **Créer de l'interactivité** : demander des informations à l'utilisateur avec
-  `input()`
-
-* **Manipuler des chaînes de caractère**
-
-* **Des fonctions** : des séries d'instructions avec un nom
-```
-def distance(dx=0, dy=0):
-    return math.sqrt(dx*dx + dy*dy)
-```
-
----
-
-# Coming next
-
-- Conditions
-- Boucles
-- Structures de données
-- Fichiers
-- Exceptions, assertions
-- Librairies
-    - Jouer avec du json
-    - "Adminsys" en python
+# 5. Conditions
 
 ---
 
@@ -764,7 +758,7 @@ def distance(dx=0, dy=0):
 
 Gérer des cas pour adapter le fonctionnement du programme
 
-## 5.1 Syntaxe générale 
+## 5.1 Syntaxe générale
 
 ```python
 if condition:
@@ -813,6 +807,8 @@ def dire_bonjour(nom):
 
 # 5. Conditions
 
+## 5.3 Lien avec les booléens
+
 Les conditions comme `nom == "Jack Sparrow"` sont en fait transformées en booléen lorsque la ligne est interprétée.
 
 On aurait pu écrire :
@@ -830,7 +826,7 @@ else:
 
 # 5. Conditions
 
-## 5.4 Ecrire des conditions
+## 5.4 Écrire des conditions
 
 ```python
 angle == pi      # Égalité
@@ -853,23 +849,160 @@ not (nom == "Jack Sparrow")                # Négation
 
 # 5. Conditions
 
-## Condition "avancées" (chaînes de caractères)
+## 5.5 Conditions "avancées"
+
+### Chercher des choses dans des chaînes de caractères
 
 ```python
-"Jack" in nom           # 'nom' contient 'Jack'
-nom.startswith("Jack")  # 'nom' commence par 'Jack'
-nom.endswith("row")     # 'nom' fini par 'row'
+"Jack" in nom           # 'nom' contient 'Jack' ?
+nom.startswith("Jack")  # 'nom' commence par 'Jack' ?
+nom.endswith("row")     # 'nom' fini par 'row' ?
 ```
 
-## 'Inline' `if`s
+### 'Inline' `if`s
 
 ```python
 parite = "pair" if n % 2 == 0 else "impair"
 ```
 
+
+
+
+
+
 ---
 
-# 6. Boucles
+class: impact
+
+# 6. Exceptions, assertions
+
+
+---
+
+# 6. Exceptions, assertions
+
+Les exceptions correspondent à des erreurs ou des cas particuliers qui empêchent
+(a priori) la suite du déroulement du programme ou d'une fonction.
+
+### Exemple
+
+```python
+>>> int("test")
+[...]
+ValueError: invalid literal for int() with base 10: 'test'
+```
+
+---
+
+# 6. Exceptions, assertions
+
+## 6.1 `try`/`except`
+
+En Python, il est courant d'« essayer » des opérations puis de gérer les
+exceptions.
+
+On utilise pour cela des `try: ... except: ...`. On peut déclencher nos propres
+exceptions avec `raise Exception("message")`
+
+### Exemple
+
+```python
+try:
+    str = input("Entrez un entier svp !")
+    n = int(str)
+except:
+    raise Exception("Ce n'est pas un entier !")
+```
+
+---
+
+# 6. Exceptions, assertions
+
+### Utilisation différente
+
+```python
+try:
+    str = input("Entrez un entier svp !")
+    n = int(str)
+except:
+    n = -1
+```
+
+---
+
+# 6. Exceptions, assertions
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+.center[
+## The "python way"
+### « Better to ask forgiveness than permissions »
+]
+
+---
+
+
+# 6. Exceptions, assertions
+
+## 6.2 Assertions
+
+Il est possible d'utiliser des `assert`ions pour expliciter certaines hypothèses
+qui sont faites à certains endroit du code. Si l'hypothèse n'est pas validée,
+une exception est déclenchée.
+
+```python
+def distance(x=0, y=0):
+    assert isinstance(x, int) or isinstance(x, float), "Cette fonction ne prends que des int ou float en argument !"
+    assert isinstance(y, int) or isinstance(y, float), "Cette fonction ne prends que des int ou float en argument !"
+
+    return math.sqrt(x*x + y*y)
+```
+
+---
+
+# 6. Exceptions, assertions
+
+## 6.2 Assertions (autre exemple)
+
+```python
+def some_function(n):
+    assert isinstance(n, int), "Cette fonction ne prends que des int en argument !"
+    assert n % 2 == 0, "Cette fonction ne prends que des entiers pairs en argument !"
+
+    [...]
+```
+
+
+---
+
+
+# 6. Exceptions, assertions
+
+## 6.3 Pour aller plus loin : type hints ! (Python >= 3.6)
+
+```python
+from typing import Union
+float_or_int = Union[float, int]
+
+def distance(x: float_or_int, y: float_or_int) -> float:
+    return math.sqrt(x*x + y*y)
+```
+
+---
+
+class: impact
+
+# 7. Les boucles
+
+
+
+---
+
+# 7. Boucles
 
 Répéter plusieurs fois un même ensemble d'instruction
 
@@ -878,16 +1011,16 @@ Répéter plusieurs fois un même ensemble d'instruction
 
 ---
 
-# 6. Boucles
+# 7. Boucles
 
-## 6.1 Les boucles `for`
+## 7.1 Les boucles `for`
 
 ```python
 for i in range(0,10):
     print("En ce moment, i vaut " + str(i))
 ```
 
-donne :
+affiche :
 ```python
 En ce moment, i vaut 0
 En ce moment, i vaut 1
@@ -898,9 +1031,9 @@ En ce moment, i vaut 9
 
 ---
 
-# 6. Boucles
+# 7. Boucles
 
-## 6.2 `continue` et `break`
+## 7.2 `continue` et `break`
 
 `continue` permet de passer immédiatement à l'itération suivante
 
@@ -908,9 +1041,9 @@ En ce moment, i vaut 9
 
 ---
 
-# 6. Boucles
+# 7. Boucles
 
-## 6.2 `continue` et `break`
+## 7.2 `continue` et `break`
 
 ```python
 for i in range(0,10):
@@ -924,9 +1057,9 @@ for i in range(0,10):
 
 ---
 
-# 6. Boucles
+# 7. Boucles
 
-## 6.2 `continue` et `break`
+## 7.2 `continue` et `break`
 
 ```python
 for i in range(0,10):
@@ -940,9 +1073,9 @@ for i in range(0,10):
 
 ---
 
-# 6. Boucles
+# 7. Boucles
 
-## 6.3 Boucle `while`
+## 7.3 Boucle `while`
 
 (un peu moins utilisé que `for`)
 
@@ -957,74 +1090,12 @@ print(str(x) + " est impair !")
 
 ---
 
-class: impact
-
-# Day 3
-
----
-
-.center[![](img/previously.jpg)]
-
----
-
-# Previously
-
-- **Conditions**
-
-```python
-if condition:
-    do_some_stuff()
-else:
-    do_some_other_stuff()
-```
-
-- **Boucles `for`**
-
-```python
-for i in range(0,10):
-    print("En ce moment, i vaut " + str(i))
-```
-
-- **Boucles `while`**
-
-```python
-while input("Mot de passe ?") != "pikachu":
-    print("Mauvais mot de passe !")
-```
----
-
-# Confusion avec les fonctions non utilisés
-
----
-
-# Coming next
-
-- Structures de données
-- Fichiers
-- Exceptions, assertions
-- Librairies
-    - Jouer avec du json
-    - "Adminsys" en python
-
----
-
-# Jeu des allumettes : architecture
-
-
----
-
-# Jeu des allumettes : IA Battle
-
-
-
----
-
-# 7. Listes, dictionnaires
+# 8. Listes, dictionnaires
 
 Les listes et dictionnaires permettent de stocker des séries
 d'information...
 
-## 7.1 Les listes
+## 8.1 Les listes
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
@@ -1046,7 +1117,7 @@ len(favourite_pokemons)    -> 3
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
@@ -1068,7 +1139,7 @@ for i, pokemon in enumerate(favourite_pokemons):
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
@@ -1094,7 +1165,7 @@ favourite_pokemons.insert(1, "Papillusion")
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
 ### Transformation de string en liste
 
@@ -1110,9 +1181,9 @@ favourite_pokemons.insert(1, "Papillusion")
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
-## 7.2 Les dictionnaires
+## 8.2 Les dictionnaires
 
 ```python
 ages = { "Alice": 20, "Bob": 24, "Charlie": 19 }
@@ -1162,11 +1233,11 @@ for prenom, age in ages.items():
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
-## 7.3 Les sets
+## 8.3 Les sets
 
-Les `set`s stockent des éléments de manière unique et désordonnée.  
+Les `set`s stockent des éléments de manière unique et désordonnée.
 
 ```python
 chat = set("chat")     # -> {'h', 'c', 'a', 't'}
@@ -1180,9 +1251,9 @@ chat.add("z")          # ajoute `z` à `chat`
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
-## 7.4 Les tuples
+## 8.4 Les tuples
 
 Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière non-mutable. Typiquement : des coordonnées de point.
 
@@ -1195,9 +1266,9 @@ P[0] = 5    # -> Erreur!
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
-## 7.5 List/dict comprehensions
+## 8.5 List/dict comprehensions
 
 Les "list/dict comprehensions" sont des syntaxes particulière permettant de rapidement construire des listes (ou dictionnaires) à partir d'autres structures.
 
@@ -1217,9 +1288,9 @@ Carré des entiers impairs d'une liste
 
 ---
 
-# 7. Structure de données
+# 8. Structure de données
 
-## 7.5 List/dict comprehensions
+## 8.5 List/dict comprehensions
 
 Les "list/dict comprehensions" sont des syntaxes particulière permettant de rapidement construire des listes (ou dictionnaires) à partir d'autres structures.
 
@@ -1239,16 +1310,9 @@ Carré des entiers impairs d'une liste
 
 ---
 
-class: impact
+# 9. Fichiers
 
-# Day 4
-
-
----
-
-# 8. Fichiers
-
-## 8.1 Lire
+## 9.1 Lire
 
 ```python
 with open("/etc/passwd", "r") as f:
@@ -1266,9 +1330,18 @@ for ligne in toutes_les_lignes:
 
 ---
 
-# 8. Fichiers
+# 9. Fichiers
 
-## 8.2 Ecrire
+## 9.1 Lire
+
+- `f.readlines()` renvoie une **liste** contenant les lignes une par une
+- `f.read()` renvoie une (grande) **chaĩne** contenant toutes les lignes concaténées
+
+---
+
+# 9. Fichiers
+
+## 9.2 Ecrire
 
 ### En remplacant tout !
 
@@ -1286,60 +1359,9 @@ with open("/home/alex/test", "a") as f:
 
 ---
 
-# 9. Exceptions, assertions
+# 9. Fichiers
 
-Les exceptions correspondent à des erreurs ou des cas particuliers qui empêchent
-(a priori) la suite du déroulement du programme ou d'une fonction.
-
-### Exemple
-
-```python
->>> int("test")
-[...]
-ValueError: invalid literal for int() with base 10: 'test'
-```
-
----
-
-# 9. Exceptions, assertions
-
-## 9.1 `try`/`except`
-
-En Python, il est courant d'« essayer » des opérations puis de gérer les
-exceptions. 
-
-On utilise pour cela des `try: ... except: ...`. On peut déclencher nos propres
-exceptions avec `raise Exception("message")`
-
-### Exemple
-
-```python
-try:
-    str = input("Entrez un entier svp !")
-    n = int(str)
-except:
-    raise Exception("Ce n'est pas un entier !")
-```
-
----
-
-# 9. Exceptions, assertions
-
-### Utilisation différente
-
-```python
-try:
-    str = input("Entrez un entier svp !")
-    n = int(str)
-except:
-    n = -1
-```
-
----
-
-# 9. Exceptions, assertions
-
-### Autre exemple
+## 9.3 Fichiers et exceptions
 
 ```python
 try:
@@ -1353,7 +1375,7 @@ except:
 
 # 9. Exceptions, assertions
 
-### Autre exemple
+### 9.3 Fichiers et exceptions (autre exemple)
 
 ```python
 try:
@@ -1364,46 +1386,6 @@ except PermissionError:
 except FileNotFoundError:
     raise Exception("Ce fichier n'existe pas !")
 ```
-
----
-
-# 9. Exceptions, assertions
-
-<br>
-<br>
-<br>
-<br>
-<br>
-
-.center[
-## The "python way"
-### « Better to ask forgiveness than permissions »
-]
-
----
-
-
-# 9. Exceptions, assertions
-
-## 9.2 Assertions
-
-Il est possible d'utiliser des `assert`ions pour expliciter certaines hypothèses
-qui sont faites à certains endroit du code. Si l'hypothèse n'est pas validée,
-une exception est déclenchée.
-
-```python
-def somme(liste):
-    assert isinstance(liste, list), "Cette fonction ne marche que pour des list"
-    assert len(liste) >= 1, "Cette liste est vide !"
-    for e in liste:
-        assert isinstance(liste, int), "Cette liste n'est pas une liste d'entier"
-```
-
----
-
-class: impact
-
-# Day 5
 
 ---
 
@@ -1562,7 +1544,7 @@ print(out)    # -> Affiche 'Hello World'
 
 - Travailler collaborativement avec Github
 
-- Debugging avec gdb
+- Debugging avec pdb
 
 - Test-driven development avec pytest
 
@@ -1614,7 +1596,7 @@ Il faut :
 .center[**« With great power comes great responsability »**
 
 <br>
-La société est façonnée par l'informatique 
+La société est façonnée par l'informatique
 
 
 => L'informatique, c'est politique.
@@ -1627,24 +1609,4 @@ La société est façonnée par l'informatique
 
 .center[**Ecrire un programme qui piste ses utilisateurs, <br>c'est contribuer à créer une
 société de surveillance.**]
-
----
-
-<br>
-<br>
-<br>
-.center[You were:]
-<br>
-<br>
-.center[![](img/fantastic.gif)]
-
-.center[*(Sorry for the messy exercises :<)*]
-
-
----
-
-.center[![](img/felicitron.jpg)]
-
-### .center[**Que le sublime gerbille de moldavie touche de son appendice nouillesque votre vie du haut des trois montagne du Valhalla !1!1!!one**]
-
 

@@ -33,15 +33,15 @@ de a avec le résultat).
 
 ## Chaînes de caractères
 
-| Syntaxe             | Description                                                                  |
-| ------------------- | ---------------------------------------------------------------------------- |
-| `str1 + str2`       | Concatène les chaînes de caractères `str1` et `str2`                         |
-| `str[n:m]`          | Retourne les caractères de `str` depuis la position n à m                    |
-| `str * n`           | Retourne `str` concaténée `n` fois avec elle-meme                            |
-| `len(str)`          | Retourne la longueur de `str`                                                |
-| `str.replace(a, b)` | Renvoie `str` avec les occurences de `a` remplacées par `b`                  |
-| `str.split(c)`      | Créé une liste à partir de `str` en la séparant par rapport au caractère `c` |
-| `str.strip()`       | "Nettoie" `str` en supprimant les espaces et `\n` au début et à la fin       |
+| Syntaxe                | Description                                                                     |
+| ---------------------- | ------------------------------------------------------------------------------- |
+| `chaine1 + chaine2`    | Concatène les chaînes de caractères `chaine1` et `chaine2`                      |
+| `chaine[n:m]`          | Retourne les caractères de `chaine` depuis la position n à m                    |
+| `chaine * n`           | Retourne `chaine` concaténée `n` fois avec elle-meme                            |
+| `len(chaine)`          | Retourne la longueur de `chaine`                                                |
+| `chaine.replace(a, b)` | Renvoie `chaine` avec les occurences de `a` remplacées par `b`                  |
+| `chaine.split(c)`      | Créé une liste à partir de `chaine` en la séparant par rapport au caractère `c` |
+| `chaine.strip()`       | "Nettoie" `chaine` en supprimant les espaces et `\n` au début et à la fin       |
 
 ## Fonctions
 
@@ -94,6 +94,30 @@ else:
 parite = "pair" if n % 2 == 0 else "impair"
 ```
 
+## Exception, assertions
+
+`try`/`except` permettent de tenter des instructions et d'attraper les
+exceptions qui peuvent survenir pour ensuite les gérer de manière spécifique :
+
+```python
+try:
+   instruction1
+   instruction2
+except FirstExceptionTime:
+   instruction3
+except Exception as e:
+   print("an unknown exception happened ! :" + e.str)
+```
+
+Les assertions permettent d'expliciter et de vérifier des suppositions faites
+dans le code :
+
+```
+def une_fonction(n):
+   assert isinstance(n, int) and is_prime(n), "Cette fonction fonctionne seulement pour des entiers premiers !"
+```
+
+
 ## Boucles
 
 | Syntaxe                       | Description                                                     |
@@ -145,25 +169,3 @@ with open("/un/fichier", "w") as f:  # Créé un contexte dans lequel le fichier
 (Le mode `'a'` (append) au lieu de `'w'` permet d'ouvrir le fichier pour ajouter
 du contenu à la fin plutôt que de le ré-écrire)
 
-## Exception, assertions
-
-`try`/`except` permettent de tenter des instructions et d'attraper les
-exceptions qui peuvent survenir pour ensuite les gérer de manière spécifique :
-
-```python
-try:
-   instruction1
-   instruction2
-except FirstExceptionTime:
-   instruction3
-except Exception as e:
-   print("an unknown exception happened ! :" + e.str)
-```
-
-Les assertions permettent d'expliciter et de vérifier des suppositions faites
-dans le code :
-
-```
-def une_fonction(n):
-   assert isinstance(n, int) and is_prime(n), "Cette fonction fonctionne seulement pour des entiers premiers !"
-```

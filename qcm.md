@@ -7,7 +7,7 @@
 
 ### 1
 
-Un programme contient cette instruction : 
+Un programme contient cette instruction :
 
 ```python
 age = input("Quel est ton âge ?")
@@ -42,7 +42,7 @@ def afficher_allumettes(n=20):
 ```
 
 Si j'execute ce **programme** :
-    
+
 - A. Il affichera `||||||||||||||||||||` dans la console
 - B. Il y aura une erreur disant que `n` n'est pas défini
 - C. Il ne fera rien
@@ -95,7 +95,7 @@ for i in range(0,10):
         continue
     print("La variable i vaut " + str(i))
 ```
-    
+
 - A. Un message pour chaque entier pair entre 0 et 9 compris
 - B. Rien du tout
 - C. Il y a une erreur de syntaxe
@@ -111,7 +111,7 @@ for i in range(0,10):
     continue
     print("La variable i vaut " + str(i))
 ```
-    
+
 - A. Un message pour chaque entier pair entre 0 et 9 compris
 - B. Rien du tout
 - C. Il y a une erreur de syntaxe
