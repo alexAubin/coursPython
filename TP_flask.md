@@ -6,13 +6,15 @@ trâce dans une base de donnée de ses pokémons capturé pendant une aventure d
 le Pokéworld.
 
 Il diposera des fonctionnalités suivantes :
+
 - lister les pokémons capturés
 - lister les pokémons capturés récemment
 - obtenir des informations sur un pokémon particulier
 - un formulaire permettant d'ajouter un nouveau pokémon
 
-0. Preparation de l'ecran
--------------------------
+
+
+## 0. Preparation de l'ecran
 
 Préparation de l'environnement
 
@@ -20,8 +22,9 @@ Préparation de l'environnement
 - Ajouter dans app.py un "Hello world" Flask, c'est à dire une route simple (`/`) qui affichera juste 'Hello world`
 - Tester cette installation en lancant le serveur de dev/test 
 
-1. Utilisation de templates
----------------------------
+
+
+## 1. Utilisation de templates
 
 - Créer un template HTML basique, le mettre dans `template/index.html`
 - Modifier la route / fonction correspondant à `/` pour renvoyer cette page html
@@ -37,8 +40,8 @@ Bonjour, aujourd'hui nous sommes le {{ date }}
 (pour trouver la date du jour et la donner au template, on pourra utiliser
 quelque chose comme `datetime.datetime.now()` de la librairie `datetime`.)
 
-2. Création de la classe Pokémon
---------------------------------
+
+## 2. Création de la classe Pokémon
 
 - Introduire SQLAlchemy dans l'application et définir `db` (on utilisera une
   base de donnée sqlite)
@@ -49,8 +52,9 @@ quelque chose comme `datetime.datetime.now()` de la librairie `datetime`.)
      - `niveau` (un entier représentant le niveau actuel du pokemon)
      - `date_de_capture` (optionelle - la date a laquelle il fut capturé)
 
-3. Shell interactif pour Flask
-------------------------------
+
+
+## 3. Shell interactif pour Flask
 
 - Créer un fichier `manage.py` qui permet d'ouvrir un shell avec : 
 
@@ -78,8 +82,7 @@ $ db.session.commit()
 $ Pokemon.query.all()
 ```
 
-3. Nuke et Lorem
-----------------
+## 3. Nuke et Lorem
 
 ### 3.1 Nuke
 
@@ -118,8 +121,7 @@ une base de donnée avec des données de test.
   `lorem` de la classe `Pokemon`
 
 
-4. Construction du pokedex
---------------------------
+## 4. Construction du pokedex
 
 - Ajouter une route `/liste` qui permet de lister les pokémons capturés (juste
   leur nom). Pour cela, on créera un template (par exemple, `liste.html`)
@@ -151,8 +153,7 @@ fonction `pokemon("pikachu")`
   datetime.datetime.now()`)
 
 
-5. Formulaire d'ajout
----------------------
+## 5. Formulaire d'ajout
 
 - Ajouter une route `/new` qui permettra d'ajouter un pokemon. La page
   contriendra un formulaire permettant d'entrer le nom, le type et le niveau du
