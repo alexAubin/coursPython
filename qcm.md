@@ -3,8 +3,6 @@
 
 # Initiation à Python : questionnaire
 
-*Pour chaque question, entourer la bonne réponse.*
-
 ### 1
 
 Un programme contient cette instruction :
@@ -34,19 +32,11 @@ Pour concaténer un entier `n` à une chaîne de caractère, j'écris :
 
 ### 3
 
-Un programme contient seulement les deux lignes suivantes :
+Pour vérifier qu'une variable `n` est entier, j'utilise :
 
-``` python
-def afficher_allumettes(n=20):
-    print("|" * n)
-```
-
-Si j'execute ce **programme** :
-
-- A. Il affichera `||||||||||||||||||||` dans la console
-- B. Il y aura une erreur disant que `n` n'est pas défini
-- C. Il ne fera rien
-
+- A. `isinstance(n, int)` 
+- B. `type(n) == "int"` 
+- C. `int(n) == True` 
 
 
 ### 4
@@ -68,7 +58,9 @@ x = dire_bonjour()
 
 ### 5
 
-Dans le programme de la question précédente, pour que la fonction `dire_bonjour()` renvoie `"Bonjour !"`,  j'aurais dû remplacer la deuxième ligne par :
+Dans le programme de la question précédente, pour que la fonction
+`dire_bonjour()` renvoie `"Bonjour !"`,  j'aurais dû remplacer la deuxième ligne
+par :
 
 - A. `return "Bonjour !"`
 - B. `return print("Bonjour !")`
@@ -96,7 +88,7 @@ for i in range(0,10):
     print("La variable i vaut " + str(i))
 ```
 
-- A. Un message pour chaque entier pair entre 0 et 9 compris
+- A. Un message pour chaque entier impair entre 0 et 9 compris
 - B. Rien du tout
 - C. Il y a une erreur de syntaxe
 
@@ -112,7 +104,7 @@ for i in range(0,10):
     print("La variable i vaut " + str(i))
 ```
 
-- A. Un message pour chaque entier pair entre 0 et 9 compris
+- A. Un message pour chaque entier impair entre 0 et 9 compris
 - B. Rien du tout
 - C. Il y a une erreur de syntaxe
 
@@ -122,7 +114,7 @@ for i in range(0,10):
 Une liste a été créée de cette manière :
 
 ```python
-ma_liste = [ "Le", "Python", "c'est", "cool" ]
+ma_liste = [ "Le", "Python", "c'est", "cool", "!" ]
 ```
 
 Laquelle de ces instructions renvoie `"Python"` ?
@@ -131,8 +123,132 @@ Laquelle de ces instructions renvoie `"Python"` ?
 - B. `ma_liste[2]`
 - C. `ma_liste[3]`
 
-
 ### 10
+
+Pour découper une chaine de caractère `s` par rapport aux `;` qu'elle contient
+et obtenir ainsi une liste, j'utilise : 
+
+- A. `s.strip(';')`
+- B. `s.join(';')`
+- C. `s.split(';')`
+
+
+### 11
+
+Pour importer la librairie permettant de manipuler du json, j'écris au début de
+mon programme :
+
+- A. `include json`
+- B. `import json`
+- C. `require json`
+
+### 12
+
+Ecrire une fonction `pairs` qui prends en argument une liste d'entier et renvoie
+la liste entiers pairs qu'elle contient. Par exemple, `pairs([3, 6, 9, 5, 2])`
+renverra `[6, 2]`.
+
+```python
+|
+|
+|
+|
+|
+|
+|
+```
+
+### 13
+
+Ecrire un petit programme qui ouvre le fichier `/etc/resolv.conf` et stocke son
+contenu dans une variable `content`. (Sans oublier de fermer le programme,
+explicitement ou implicitement)
+
+```python
+|
+|
+|
+|
+```
+
+### 14
+
+Compléter ce programme pour afficher dans la console le type de Pikachu à partir
+du contenu de `d` :
+
+```python
+d = { "pikachu":   { "type": "Foudre", "level": 15 }, 
+      "salameche": { "type": "Feu",    "level": 23 }
+    }
+
+|
+|
+|
+```
+
+### 15
+
+Écrire la première ligne (`for ...`) qui permet d'itérer à la fois sur les clefs
+et les valeurs d'un dictionnaire `d`.
+
+```python
+|
+|
+|
+```
+
+### 16
+
+Ecrire un programme qui, étant donné une chaîne de caractère `stuff`, essaye de
+la convertir en `float`, et stocke le résultat dans une variable `f`. Si la
+conversion n'est pas possible / pas réussie, stocker `-1.0` dans `f` à la place.
+
+```python
+|
+|
+|
+|
+|
+|
+```
+
+
+### 17
+
+Ajouter, avant les deux lignes déjà écrites, quelques lignes permettant de
+définir une classe `Voiture`, et que `v.color` renvoie `"bleu"`
+
+```python
+|
+|
+|
+|
+|
+|
+|
+
+v = Voiture()
+print(v.color)
+```
+
+### 18
+
+En python, ce que l'on note généralement `self` représente :
+
+- A. Le constructeur de la classe
+- B. La classe en train d'être modifiée / étudiée
+- C. L'objet en train d'être modifié / étudié
+
+### 19
+
+Pour expliciter et tester une hypothèse faite par un programme (par exemple,
+avoir une liste d'au moins 3 elements), j'utilise :
+
+- A. `if`
+- B. `except`
+- C. `assert`
+
+### 20
 
 Pour faciliter la compréhension de mon programme par mes collègues et mon futur
 moi, j'appelle mes fonctions et mes variables :
