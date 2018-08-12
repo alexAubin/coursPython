@@ -126,7 +126,7 @@ def une_fonction(n):
 | `for i in range(0, 10)`       | Itère sur `i` de 0 à 9                                          |
 | `for element in stuff`        | Itère sur tous les elements de stuff (liste, set, dictionnaire) |
 | `for key, value in d.items()` | Itère sur toutes les clefs, valeurs du dictionnaire `d`         |
-| `while condition`             | Répète un jeu d'instruction tant que condition` est vrai        |
+| `while condition`             | Répète un jeu d'instruction tant que `condition` est vraie      |
 | `break`                       | Quitte immédiatement une boucle                                 |
 | `continue`                    | Passe immédiatement à l'itération suivante d'une boucle         |
 
@@ -154,17 +154,25 @@ def une_fonction(n):
 Ouvrir et lire un fichier :
 
 ```
-with open("/un/fichier", "r") as f:  # Créé un contexte dans lequel le fichier
-    content = f.readlines()          # est ouvert en lecture en tant que 'f', 
-                                     # et met son contenu dans 'content'
+# Créé un contexte dans lequel le fichier
+# est ouvert en lecture en tant que 'f', 
+# et met son contenu dans 'content'
+
+with open("/un/fichier", "r") as f:  
+    content = f.readlines()          
+                                     
 ```
 
 Ecrire dans un fichier :
 
 ```
-with open("/un/fichier", "w") as f:  # Créé un contexte dans lequel le fichier
-    f.write(content)                 # est ouvert en ré-écriture complète et
-                                     # écrit le contenu de 'content' dedans.
+# Créé un contexte dans lequel le fichier
+# est ouvert en ré-écriture complète et
+# écrit le contenu de 'content' dedans.
+
+with open("/un/fichier", "w") as f:  
+    f.write(content)                 
+                                     
 ```
 
 (Le mode `'a'` (append) au lieu de `'w'` permet d'ouvrir le fichier pour ajouter
