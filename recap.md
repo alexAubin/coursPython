@@ -147,7 +147,7 @@ def une_fonction(n):
 | `L.append(e)`    | Ajoute `e` à la fin de la liste `L`                                                   |
 | `S.add(e)`       | Ajoute `e` dans le set `S`                                                            |
 | `L.insert(i, e)` | Insère `e` à la position `i` dans la liste `L`                                        |
-| `str.join(L)`    | Produit une string à partir de `L` en intercallant la string `str` entre les elements |
+| `chaine.join(L)`    | Produit une string à partir de `L` en intercallant la string `chaine` entre les elements |
 
 ## Fichiers
 

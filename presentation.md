@@ -111,14 +111,36 @@ Transmettre :
 
 # Plan
 
-### 1. Notions de "bases" (~ 3 jours ?)
-### 2. Orienté objet, graphisme (~2 jours ?)
-### 3. Bonus : pdb ? Flask ? Git ?
+### Partie 1 : Notions de "bases" (~ 3 jours ?)
 
-### Et aussi :
-- Une évaluation
+- Variables, fonctions
+- Structures de contrôle (conditions, boucles)
+- Structures de données (listes, dictionnaires, ...)
+- Fichiers, exceptions, librairies, ...
+
+### Partie 2 : Orienté objet, graphisme (~2 jours ?)
+
+- Objets et classes en Python
+- Application de tout ce que l'on a vu à un jeu vidéo
+
+### Bonus ?
 - Des ProTips™ pour la vraie vie
-- Vos questions
+- pdb ?
+- Notions avancées ?
+- Flask ?
+
+---
+
+# Fonctionnement, structure du cours
+
+Alternances entre explications théoriques sur une notion donnée, et mise en application sur des exercices. 
+
+---
+
+# Évaluation
+
+- Sous forme de QCM et bouts de programmes à compléter
+- Basée sur des choses et erreurs communes vues dans les exercices
 
 ---
 
@@ -162,7 +184,7 @@ class: impact
 
 ---
 
-# Cooking information
+# Cuisiner de l'information
 
 * Préparer **des outils** et **des ingrédients**
 * Donner **des instructions**
@@ -174,7 +196,7 @@ class: impact
 
 # Langage de programmation
 
-## Comme un vrai language
+## Comme un vrai langage
 
 0. **Concepts** (mots, verbes, phrases ...)
 1. **Grammaire et syntaxe**

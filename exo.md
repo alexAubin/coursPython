@@ -214,7 +214,7 @@ exemple, `somme([3, 4, 5])` renverra 12.
 
 8.6 : Écrire une fonction qui prends en argument un chemin de fichier comme
 "/usr/bin/toto.py" et extrait le nom du fichier, c'est à dire "toto". On pourra
-utiliser la méthode `str.split(caractere)` des chaînes de caractère.
+utiliser la méthode `chaine.split(caractere)` des chaînes de caractère.
 
 8.7 : Écrire un "générateur de formule de compliment / encouragement". Voir :
 http://www.nioutaik.fr/Felicitron/ . Pour cela, construire des chaines de
