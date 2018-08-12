@@ -125,22 +125,20 @@ Transmettre :
 
 ### Bonus ?
 - Des ProTips™ pour la vraie vie
-- pdb ?
-- Notions avancées ?
-- Flask ?
+- pdb ? Notions avancées ? Flask ?
 
 ---
 
-# Fonctionnement, structure du cours
+## Fonctionnement du cours
 
-Alternances entre explications théoriques sur une notion donnée, et mise en application sur des exercices. 
+Alternances entre explications théoriques sur une notion donnée
 
----
+et mise en application sur des exercices. 
 
-# Évaluation
+## Évaluation
 
-- Sous forme de QCM et bouts de programmes à compléter
-- Basée sur des choses et erreurs communes vues dans les exercices
+- QCM et bouts de programmes à compléter
+- Basé sur des cas et erreurs "courantes" vues dans les exercices
 
 ---
 
@@ -184,7 +182,7 @@ class: impact
 
 ---
 
-# Cuisiner de l'information
+# La programmation : cuisiner de l'information
 
 * Préparer **des outils** et **des ingrédients**
 * Donner **des instructions**
@@ -194,9 +192,9 @@ class: impact
 
 ---
 
-# Langage de programmation
+# *Langage* de programmation
 
-## Comme un vrai langage
+## Comme un vrai langage !
 
 0. **Concepts** (mots, verbes, phrases ...)
 1. **Grammaire et syntaxe**
@@ -206,6 +204,8 @@ class: impact
 ---
 
 # Python
+
+.center[![](img/python.png)]
 
 - Versatile
 - "Moyen-niveau"
@@ -543,6 +543,9 @@ class: impact
 "Hello\nworld"     # -> Hello <nouvelle ligne> world
 ```
 
+### Et bien d'autres choses !
+
+c.f. la doc / les internets
 
 ---
 
