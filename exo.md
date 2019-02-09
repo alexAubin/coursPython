@@ -12,9 +12,19 @@ Démarrer Thonny (ou votre éditeur/IDE préféré)
 print("Hello World!")
 ```
 
+Créez un fichier `hello.py` directement dans la console (par exemple via `nano hello.py`) et mettez dedans :
+
+```
+#!/usr/bin/env python3
+print("Hello, world!")
+```
+
+Executez ensuite ce script à l'aide de `python3 hello.py` ou `./hello.py`
+
+
 ## 1. Variables
 
-1.1. : Écrire, lancer et analyser l'execution du programme suivant :
+1.1. : De retour dans Thonny, écrire, lancer et analyser l'execution du programme suivant :
 
 ```
 message = "Je connais la réponse à l'univers, la vie et le reste"
@@ -43,7 +53,7 @@ sans tenir compte du jour et mois de naissance...)
 ## 3. Chaînes de caractères
 
 3.1.1 : Demander un mot à l'utilisateur. Afficher la longueur du mot avec
-une message tel que "Ce mot fait X caractères !"
+une message tel que `"Ce mot fait X caractères !"`
 
 3.1.2 : Remplacer les lettres A et E dans le mot, et afficher le mot ainsi
 modifié.
@@ -53,35 +63,47 @@ modifié.
 
 ## 4. Fonctions
 
-4.1.1 : Ecrire une fonction `centrer` qui permet de centrer une chaîne de
-caractère sur 80 caractères. Par exemple `print(centrer(Pikachu)) affichera :
+4.0.1 : Créer une fonction `dire_bonjour` qui prends en argument un nom et se contente d'afficher `"Bonjour <le nom> !"` dans la console. Par exemple invoquer `dire_bonjour("Alice")` affichera `"Bonjour Alice !"` et `dire_bonjour("Bob")` affichera `"Bonjour Bob !"`.
+
+4.0.2 : Inspecter l'execution du code pas à pas à l'aide de Thonny.
+
+4.1.1 : Ecrire une fonction `centrer` prend en argument une chaîne de caractère, et *renvoie* une nouvelle chaîne centrée sur 40 caractères. Par exemple `print(centrer("Pikachu"))` affichera :
 ```
-|                                    Pikachu                                  |
+|                Pikachu              |
 ```
 
 4.1.2 : Ajouter un argument optionnel pour gérer la largeur au lieu du "80"
-fixé. Par exemple `print(centrer("Pikachu", 40)) affichera :`
+fixé. Par exemple `print(centrer("Pikachu", 20)) affichera :`
 ```
-|                Pikachu               |
+|      Pikachu     |
 ```
 
 4.1.3 : Créer une fonction `encadrer` qui utilise la fonction `centrer` pour
 produire un texte centré et encadré avec des `####`. Par exemple,
-`print(encadrer("Pikachu", 40))` affichera :
+`print(encadrer("Pikachu", 20))` affichera :
 ```
-########################################
-#                Pikachu               #
-########################################
+####################
+#      Pikachu     #
+####################
 ```
 
 4.1.4 : Au lieu d'utiliser des `#` pour encadrer le texte, passer le caractère
 en argument optionnel. (Par exemple : `encadrer("Pikachu", 20, '@')`)
 
 
+
+
+
+
+
+
 ## 5. Conditions
 
-5.1.1 : Reprendre la fonction `centrer` de l'exercice 4.1 et gérer le cas où la
-largueur demandée est -1 : dans ce cas, ne pas centrer. Par exemple,
+5.0.1 : Reprendre la fonction `dire_bonjour` et afficher un message d'erreur si le nom fourni est vide.
+
+5.0.2 : Inspecter l'execution du code pas à pas à l'aide de Thonny.
+
+5.1.1 : Reprendre la fonction `centrer` de l'exercice 4.1 et gérer le cas où la largueur demandée est -1 : dans ce cas, ne pas centrer. Par exemple,
 `print(encadrer("Pikachu", -1))` affichera :
 ```
 ###########
@@ -90,7 +112,7 @@ largueur demandée est -1 : dans ce cas, ne pas centrer. Par exemple,
 ```
 
 5.1.2 : Gérer le cas où le caractère d'encadrement est vide. Dans ce cas, ne pas
-encadrer. Par exemple : `encadrer("Pikachu", 40, '')` affichera juste :
+encadrer. Par exemple : `encadrer("Pikachu", 20, '')` affichera juste :
 ```
 |                Pikachu               |
 ```
@@ -183,12 +205,6 @@ perdant est celui qui se retrouve obligé de prendre la dernière allumette.
 Reprendre le jeu précédent et le modifier pour introduire une "intelligence"
 artificielle qui soit capable de jouer en tant que 2ème joueur. (Par exemple,
 une stratégie très simple consiste à prendre une allumette quoiqu'il arrive)
-
-Produire un fichier unique contenant l'"intelligence" artificielle : le fichier
-devra au moins contenir une fonction `play(allumettes_restantes)` qui renvoie le
-nombre d'allumettes que l'IA décide de prendre. Partager le fichier pour faire
-combattre les différentes IA dans l'arène !
-
 
 
 

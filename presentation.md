@@ -111,39 +111,40 @@ Transmettre :
 
 # Plan
 
-### Partie 1 : Notions de "bases" (~ 3 jours ?)
+### Partie 1 : Notions de "bases" (~ 2.5 jours ?)
 
 - Variables, fonctions
 - Structures de contrôle (conditions, boucles)
 - Structures de données (listes, dictionnaires, ...)
 - Fichiers, exceptions, librairies, ...
 
-### Partie 2 : Orienté objet, graphisme (~2 jours ?)
+### Partie 2 : Notions avancées (~2.5 jours ?)
 
 - Objets et classes en Python
-- Application de tout ce que l'on a vu à un jeu vidéo
-
-### Bonus ?
-- Des ProTips™ pour la vraie vie
-- pdb ? Notions avancées ? Flask ?
+- Manipulation de XML
+- Debuggage avec pdb / ipdb
+- Base de donnée / ORM
+- Construction d'intefaces graphiques
+- Parallelisation ?
+- ...
 
 ---
 
-## Fonctionnement du cours
+# Fonctionnement du cours
 
 Alternances entre explications théoriques sur une notion donnée
 
-et mise en application sur des exercices. 
+et mise en application sur des exercices.
 
-## Évaluation
+# Évaluation
 
 - QCM et bouts de programmes à compléter
 - Basé sur des cas et erreurs "courantes" vues dans les exercices
 
----
-
 # Logistique ?
 
+- 9h -> 12h30 ?
+- 13h30 -> 17h ?
 
 ---
 
@@ -211,9 +212,10 @@ class: impact
 - "Moyen-niveau"
 - Syntaxe légère, lisible, facile à prendre en main
 - Interprété, "scripting"
+- Typage dynamique
 - Prototypage rapide
 - Grande communauté
-- De plus en plus répandu (?)
+- De plus en plus répandu
 
 ---
 
@@ -300,7 +302,7 @@ class: impact
 
 ## Pour débutter
 
-- **Thonny** (`pip3 install thonny`)
+- **Thonny** : `pip3 install thonny` <small>(après avoir installé `python3-pip` et `python3-tk`)</small>
 
 ## Plus tard
 
@@ -319,6 +321,51 @@ Dans Thonny :
 print("Hello, world!")
 ```
 
+---
+
+# 0. Executer du code Python (1/2)
+
+## Executer un script explicitement avec python
+
+```bash
+$ python3 hello.py
+```
+
+## ou implicitement (shebang)
+
+```python
+#!/usr/bin/env python3
+
+print("Hello, world!")
+```
+
+puis on rend le fichier executable et on l'execute
+
+```bash
+$ chmod +x hello.py
+$ ./hello.py
+```
+
+---
+
+# 0. Executer du code Python (2/2)
+
+## En interactif
+
+```bash
+$ python3
+>>> print("Hello, world!")
+```
+
+### `ipython3` : alternative à la console 'classique'
+
+```bash
+$ apt install ipython3
+$ ipython3
+In [1]: print("Hello, world!")
+```
+
+### pour quitter : `exit`
 
 ---
 
@@ -470,6 +517,13 @@ N.B. : ce que renvoie `input()` est une chaîne de caractère !
 
 ---
 
+class: impact
+
+# 3. Chaînes de caractères
+
+---
+
+
 # 3. Chaînes de caractères
 
 .center[![](img/string.png)]
@@ -493,13 +547,6 @@ m[:5]    # -> 'Hello'
 m[6:8]   # -> 'wo'
 m[-3:]   # -> 'rld'
 ```
-
----
-
-class: impact
-
-# 3. Chaînes de caractères
-
 
 ---
 
@@ -545,7 +592,7 @@ class: impact
 
 ### Et bien d'autres choses !
 
-c.f. la doc / les internets
+c.f. documentation, e.g `https://devdocs.io/python~3.7/library/stdtypes#str`
 
 ---
 
@@ -624,7 +671,7 @@ def ma_fonction(arg1, arg2):
 def distance(dx, dy):
     dx_carre = dx ** 2
     dy_carre = dy ** 2
-    return math.sqrt(dx_carre + dy_carre)
+    return racine_carree(dx_carre + dy_carre)
 ```
 
 Utilisation :
@@ -643,7 +690,7 @@ D = distance(3, 5)       # -> D vaut 5.830951894845301
 def distance(dx, dy):
     dx_carre = dx ** 2
     dy_carre = dy ** 2
-    print(math.sqrt(dx_carre + dy_carre))
+    print(racine_carree(dx_carre + dy_carre))
 ```
 
 Utilisation :
@@ -664,7 +711,7 @@ D = distance(3, 5)       # -> D vaut None !
 def distance(dx, dy):
     dx_carre = dx ** 2
     dy_carre = dy ** 2
-    return math.sqrt(dx_carre + dy_carre)
+    return racine_carree(dx_carre + dy_carre)
 ```
 
 - Les variables créées dans la fonction sont **locales**
@@ -715,63 +762,6 @@ distance(1, dz=3, dy=2)
 - Effets de bords (e.g. `print()`)
 
 ---
-
-# Python dans la vraie vie
-
-.center[Dropbox]
-
-.center[![](img/dropbox.png)]
-
----
-
-# Python dans la vraie vie
-
-.center[Atom]
-
-.center[![](img/atom.png)]
-
----
-
-# Python dans la vraie vie
-
-.center[Eve online]
-
-.center[![](img/eveonline.jpg)]
-
----
-
-# Python dans la vraie vie
-
-.center[Matplotlib]
-
-.center[![](img/matplotlib.png)]
-
----
-
-# Python dans la vraie vie
-
-.center[Blender]
-
-.center[![](img/blender.jpg)]
-
----
-
-# Python dans la vraie vie
-
-.center[OpenERP / Odoo]
-
-.center[![](img/odoo.jpg)]
-
----
-
-# Python dans la vraie vie
-
-.center[Tartiflette]
-
-.center[![](img/tartiflette.png)]
-
----
-
 
 class: impact
 
@@ -891,6 +881,91 @@ parite = "pair" if n % 2 == 0 else "impair"
 ```
 
 
+---
+
+# Python dans la vraie vie
+
+.center[Dropbox]
+
+.center[![](img/dropbox.png)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Atom]
+
+.center[![](img/atom.png)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Eve online]
+
+.center[![](img/eveonline.jpg)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Matplotlib]
+
+.center[![](img/matplotlib.png)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Blender]
+
+.center[![](img/blender.jpg)]
+
+---
+
+# Python dans la vraie vie
+
+.center[OpenERP / Odoo]
+
+.center[![](img/odoo.jpg)]
+
+---
+
+# Python dans la vraie vie
+
+.center[Tartiflette]
+
+.center[![](img/tartiflette.png)]
+
+---
+
+# Parenthèse n.1
+
+## Python 2 vs Python 3
+
+- Python 2 existe depuis 2000
+- Python 3 existe depuis 2008
+- Fin de vie de Python 2 en 2020
+
+### Différences principales
+
+- `print "toto"` ne fonctionnera pas en Python 3 (utiliser `print("toto")`
+- Nommage des paquets debian (`python-*` vs `python3-*`)
+- Gestion de l'encodage
+- `range`, `xrange`
+
+---
+
+# Parenthèse n.2
+
+## PEP8 et linters
+
+- Le style d'écriture de python est standardisé via la norme PEP8
+- Il existe des "linter" pour détecter le non-respect des conventions (et également des erreurs logiques)
+    - Par exemple `flake8`, `pylint`
+- `autopep8` permet de corriger un bon nombre de problème automatiquement
+
+
 
 
 
@@ -961,11 +1036,14 @@ except:
 <br>
 <br>
 <br>
-<br>
 
 .center[
 ## The "python way"
 ### « Better to ask forgiveness than permissions »
+
+
+<br>
+(ça se discute)
 ]
 
 ---
@@ -975,16 +1053,13 @@ except:
 
 ## 6.2 Assertions
 
-Il est possible d'utiliser des `assert`ions pour expliciter certaines hypothèses
-qui sont faites à certains endroit du code. Si l'hypothèse n'est pas validée,
-une exception est déclenchée.
+Il est possible d'utiliser des `assert`ions pour **expliciter certaines hypothèses**
+faites pendant l'écriture du code. Si elles ne sont pas remplies, une exception est déclenchée.
 
 ```python
-def distance(x=0, y=0):
-    assert isinstance(x, int) or isinstance(x, float), "Cette fonction ne prends que des int ou float en argument !"
-    assert isinstance(y, int) or isinstance(y, float), "Cette fonction ne prends que des int ou float en argument !"
-
-    return math.sqrt(x*x + y*y)
+def dire_bonjour(nom):
+    assert isinstance(nom, "str"), "'nom' devrait être une chaine !"
+    print("Bonjour {nom} !".format(nom=nom))
 ```
 
 ---
@@ -994,6 +1069,20 @@ def distance(x=0, y=0):
 ## 6.2 Assertions (autre exemple)
 
 ```python
+def distance(x=0, y=0):
+    assert isinstance(x, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
+    assert isinstance(y, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
+
+    return racine_carree(x*x + y*y)
+```
+
+---
+
+# 6. Exceptions, assertions
+
+## 6.2 Assertions (encore un autre exemple)
+
+```python
 def some_function(n):
     assert isinstance(n, int), "Cette fonction ne prends que des int en argument !"
     assert n % 2 == 0, "Cette fonction ne prends que des entiers pairs en argument !"
@@ -1001,6 +1090,62 @@ def some_function(n):
     [...]
 ```
 
+
+---
+
+# 6. Exceptions, assertions
+
+## Plusieurs approches (1/3)
+
+Calcul de la racine carrée d'un nombre.
+
+> Je soupçonne fortemment que `x` puisse être négative
+
+```python
+if x < 0:
+    print("Erreur : x est negatif !")
+else:
+    resultat = racine_carree(x)
+```
+
+Attention : `resultat` n'existera pas si x est negatif
+... que fait la suite du programme ?
+
+---
+
+# 6. Exceptions, assertions
+
+## Plusieurs approches (2/3)
+
+Calcul de la racine carrée d'un nombre
+
+> Ça devrait marcher, mais j'ai un doute ...
+
+```python
+try:
+    resultat = racine_carree(x)
+except ValueError as e:
+    print("Erreur : peut-etre que x est negatif ?")
+```
+
+Attention : `resultat` n'existera pas si x est negatif
+... que fait la suite du programme ?
+
+---
+
+# 6. Exceptions, assertions
+
+## Plusieurs approches (3/3)
+
+Calcul de la racine carrée d'un nombre
+
+> Je soupçonne fortement que le nombre soit positif
+
+```python
+assert x > 0, "Tiens, x est negatif ?"
+
+resultat = racine_carree(x)
+```
 
 ---
 
@@ -1014,7 +1159,7 @@ from typing import Union
 float_or_int = Union[float, int]
 
 def distance(x: float_or_int, y: float_or_int) -> float:
-    return math.sqrt(x*x + y*y)
+    return racine_carree(x*x + y*y)
 ```
 
 ---
@@ -1115,7 +1260,13 @@ print(str(x) + " est impair !")
 
 ---
 
-# 8. Listes, dictionnaires
+class: impact
+
+# 8. Structures de données
+
+---
+
+# 8. Structures de données
 
 Les listes et dictionnaires permettent de stocker des séries
 d'information...
@@ -1142,7 +1293,7 @@ len(favourite_pokemons)    -> 3
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
@@ -1164,7 +1315,7 @@ for i, pokemon in enumerate(favourite_pokemons):
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
@@ -1190,7 +1341,7 @@ favourite_pokemons.insert(1, "Papillusion")
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ### Transformation de string en liste
 
@@ -1206,7 +1357,7 @@ favourite_pokemons.insert(1, "Papillusion")
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.2 Les dictionnaires
 
@@ -1258,7 +1409,7 @@ for prenom, age in ages.items():
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.3 Les sets
 
@@ -1276,7 +1427,7 @@ chat.add("z")          # ajoute `z` à `chat`
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.4 Les tuples
 
@@ -1291,7 +1442,7 @@ P[0] = 5    # -> Erreur!
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.5 List/dict comprehensions
 
@@ -1313,7 +1464,7 @@ Carré des entiers impairs d'une liste
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.5 List/dict comprehensions
 
@@ -1332,6 +1483,12 @@ Carré des entiers impairs d'une liste
 ```python
 { nom: age-20 for nom, age in ages.items() if age >= 20 }
 ```
+
+---
+
+class: impact
+
+# 9. Fichiers
 
 ---
 
@@ -1398,9 +1555,9 @@ except:
 
 ---
 
-# 9. Exceptions, assertions
+# 9. Fichiers
 
-### 9.3 Fichiers et exceptions (autre exemple)
+## 9.3 Fichiers et exceptions (autre exemple)
 
 ```python
 try:
@@ -1411,6 +1568,12 @@ except PermissionError:
 except FileNotFoundError:
     raise Exception("Ce fichier n'existe pas !")
 ```
+
+---
+
+class: impact
+
+# 10. Librairies
 
 ---
 
@@ -1436,6 +1599,29 @@ import math
 
 math.sqrt(2)   # -> 1.4142135623730951
 ```
+
+
+---
+
+# 10. Librairies
+
+### Importer juste des choses précises
+
+```python
+from un_module import une_fonction, une_autre
+
+une_fonction(...)
+```
+
+### Exemple
+
+```python
+from math import sqrt, sin, cos
+
+sqrt(2)   # -> 1.4142135623730951
+```
+
+
 
 ---
 
@@ -1536,6 +1722,59 @@ print(out)    # -> Affiche 'Hello World'
 
 # 10. Librairies
 
+## Ecrire ses propres modules
+
+Considérant les fichiers suivants :
+
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      # <-- Contient "def dire_bonjour..."
+```
+
+Depuis `main.py`, je peux faire
+
+```python
+from mylib.bonjour import dire_bonjour
+
+dire_bonjour("Alex") # -> "Bonjour Alex !"
+
+print(dire_bonjour)
+# -> <function dire_bonjour at 0x7fb964fab668>
+```
+
+---
+
+# 10. Librairies
+
+## Ecrire ses propres modules
+
+Considérant les fichiers suivants :
+
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      # <-- Contient "def dire_bonjour..."
+```
+
+Depuis `main.py`, je peux *aussi* faire
+
+```python
+from mylib import bonjour
+
+bonjour.dire_bonjour("Alex") # -> "Bonjour Alex !"
+
+print(bonjour)
+# -> <module 'mylib.bonjour' from 'mylib/bonjour.pyc'>
+```
+
+
+---
+
+# 10. Librairies
+
 .center[![](img/moar.jpg)]
 
 ---
@@ -1554,503 +1793,6 @@ print(out)    # -> Affiche 'Hello World'
 - Logging, Parsing d'options, ...
 - Internationalisation
 - Templating
-- Plots
-- LDAP
-- ...
-
-
-
----
-
-# 11. Pygame
-
-### Une librairie pensée pour le jeu vidéo
-
-* Afficher une fenêtre
-* Dessiner des formes (lignes, rectangles, ...)
-* Importer et afficher des images à des positions données
-* Détecter les touches de clavier
-* Détecter des collisions entre des objets
-* ...
-
----
-
-# 11. Pygame
-
-## 11.1 Premier programme avec Pygame
-
-```python
-import pygame, sys
-from pygame.locals import *
-```
-
----
-
-```python
-# Initialiser pygame
-pygame.init()
-
-# Initialiser une fenêtre / l’écran de jeu
-ecran = pygame.display.set_mode((400, 300))
-pygame.display.set_caption('Mon jeu!')
-
-# Boucle principale
-while True:
-
-    # Verifier si il y a des événement en attente
-    for event in pygame.event.get():
-
-        # Si l'utilisateur a déclenché la fermeture de la fenêtre
-        if event.type == QUIT:
-            # Désinitialiser pygame
-            pygame.quit()
-            # Sortir du programme
-            sys.exit()
-```
-
----
-
-## 11.2 Changer la couleur de fond
-
-Modification du programme (couleur = `(0,0,255)`)
-
-```python
-[...]
-
-# Boucle principale
-while True:
-
-    # Remplir l'écran avec une couleur
-    ecran.fill((0,0,255))
-
-    for event in pygame.event.get():
-        [...]
-
-    # Rafraîchir l'écran
-    pygame.display.update()
-```
-
----
-
-# 11. Pygame
-
-## 11.3 Les surfaces
-
-### Charger une image
-
-```python
-monImage = pygame.image.load("chaton.jpg").convert_alpha()
-```
-
-### **Blitter** : Coller une surface sur une autre
-
-```python
-surfaceDArrivee.blit(surface, (x,y))
-```
-
----
-
-### Charger et utiliser des images
-
-```python
-# Charger des images
-fond = pygame.image.load("fond.png").convert()
-image = pygame.image.load("image.png").convert_alpha()
-
-# Boucle principale
-while True:
-
-    for event ...
-        # [...]
-
-    # Coller l'image de fond
-    ecran.blit(fond, (0,0))
-
-    # Coller l'autre image
-    ecran.blit(image, (50,50))
-
-    # [...]
-```
-
----
-
-# 11. Pygame
-
-## 11.4 Les événements
-
-Des événements sont générés en fonction des appuis des touches et des
-mouvements / clics de la souris.
-
-Par exemple, bouger la souris génère un événement `MOUSEMOTION`.
-
----
-
-
-Déplacer une image avec le clavier
----------------------------------
-
-```python
-# Définir la position initiale de l'image
-image_x = 20
-image_y = 20
-
-# Boucle principale
-while True:
-
-    # Verifier si il y a des événement en attente
-    for event in pygame.event.get():
-
-        if (event.type == pygame.KEYDOWN) :
-            if (event.key == pygame.K_LEFT) :
-                image_x -= 2
-            if (event.key == pygame.K_RIGHT) :
-                image_x += 2
-
-    ecran.blit(image, (image_x,image_y))
-```
-
----
-
-## 12. Les classes
-
-```python
-class Monstre:
-
-    def attaque(self, cible):
-        cible.hp -= self.force
-
-class Troll(Monstre):
-
-    def __init__(self):
-        self.hp = 20
-        self.force = 4
-
-    def vomir(self):
-        print("Bleuarg!")
-
-class Gobelin(Monstre):
-
-    def __init__(self):
-        self.hp = 5
-        self.force = 1
-```
-
----
-
-## 12. Les classes
-
-```python
-# Initialiser des créatures
-
-troll = Troll()
-gob_army = [ Gobelin() for i in range(0,4) ]
-
-# Faire une bataille !
-
-print("Le troll a {n} hp".format(n=troll.hp))
-
-troll.attaque(gob_army[0])
-for gob in gob_army:
-    gob.attaque(troll)
-
-print("Le troll a {n} hp".format(n=troll.hp))
-```
-
----
-
-## 12. Les classes
-
-### Elements syntaxiques importants : 
-
-- L'indentation
-- Le mot clef `class`
-- `self` corresponds à l'instance / l'object (similaire à `this` dans d'autres
-  langages)
-- `__init__` corresponds au constructeur
-- J'instancie un objet avec `NomDeClasse()` (eventuellement des arguments)
-
----
-
-
-## 12. Les classes
-
-### Appeler le constructeur de la classe mère...
-
-```python
-class Mere():
-    
-    def __init__(self):
-        print("Je suis dans le constructeur de la classe mere !")
-
-class Fille(Mere):
-
-    def __init__(self):
-        super().__init__()
-
-```
-
----
-
-# Construction d'un jeu tile-based
-
----
-
-
-Elements de game building / design
-----------------------------------
-
-* **Afficher des choses** (écran, images, animations, texte)
-* **Gérer les entrées** (clavier, souris, ...)
-* Jouer des sons, de la musique
-* **Penser l'architecture logicielle du jeu** (structures de données)
-* **Penser la mécanique du jeu** (gameplay)
-* Penser l'univers du jeu
-
-Ref : http://lanyrd.com/2012/pycon/spbxc/
-
----
-
-.center[
-## Jeux tile-based
-
-# ![](http://www.emanueleferonato.com/wp-content/uploads/2010/05/rebuildc2.jpg)
-]
-
----
-
-.center[
-## Jeux tile-based
-
-# ![](https://www.pokebip.com/pages/jeuxvideo/rbvj/soluce_rb/screen_ig/screen047.png)
-]
-
----
-
-.center[
-# Format de la map
-
-# ![](img/textToMap.png)
-]
-
----
-
-.center[
-# Sprites
-
-# ![](img/spriteExample.png)
-]
-
----
-
-# Les grandes étapes
-
-### Le héros
-
-1. Charger le sprite en mémoire
-2. Afficher le héros sur l'écran
-3. Ajouter une méthode `look` pour faire regarder le héros à
-   droite/gauche/haut/bas
-4. Ajouter une méthode `move` qui déplace le héros d'une case
-5. Mapper les touches du clavier sur `look` et `move`
-
----
-
-# Les grandes étapes
-
-### La map
-
-1. Lire le fichier ascii de la map vers une liste
-2. Afficher la map
-
-### Les collisions
-
-1. Vérifier dans `move` si la case de destination est libre
-
-
----
-
-class: impact
-# Introduction à Flask
-
----
-
-# Flask
-
-## En quelques mots (détaillés ensuite)
-
-- un "micro-framework" pour faire du web
-- typiquement dans un **virtualenv**
-- Werkzeug : une URL = une fonction (controlleur?) 
-- Jinja : système de **template** (vues?)
-- SQLAlchemy : une classe = table dans une BDD (models, ORM)
-
----
-
-# Virtualenv
-
-- Environnement virtuel
-- Isoler des paquets / dépendances pour utiliser des versions spécifiques
-
-```bash
-# La premiere fois :
-apt-get install python3-virtualenv
-
-# Creation d'un virtualenv 'venv'
-virtualenv -p python3 venv
-source venv/bin/activate
-
-# Installation de dependance, manipulation ...
-pip3 install <une dependance...>
-<une commande...>
-
-# Si on a fini et/ou que l'on veut "sortir" du virtualenv
-deactivate
-```
-
----
-
-# Virtualenv "de base" pour Flask
-
-```python
-virtualenv -p python3 venv
-source venv/bin/activate
-
-pip install Flask
-pip install Flask-Script
-pip install Flask-SQLAlchemy
-```
-
----
-
-# Flask's Hello World
-
-### URL = Fonction
-
-```python
-from flask import Flask
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-```
-
-ensuite : 
-```
-http://monsite.com/   # -> Affichera 'Hello world'
-```
-
-( `@app.route('/')` s'apelle un décorateur )
-
----
-
-# Flask's Hello World
-
-Lancer le serveur web de test/dev :
-
-```bash
-$ export FLASK_APP=hello.py
-$ flask run
- * Running on http://127.0.0.1:5000/
-```
-
----
-
-# Templating / Jinja
-
-Un template ressemble à
-
-```jinja
-  Bonjour {% prenom %} !
-
-  {% for app in apps %}
-    {{ app.name }} est niveau {{ app.level }} !
-  {% endfor %}
-```
-
-avec par exemple : 
-
-```python
-prenom = "Alex"
-apps = [ { "name": "mailman", "level": 2 },
-         { "name": "wordpress", "level": 7 } ]
-```
-
----
-
-# Templating / Jinja
-
-Rendu : 
-
-```
-  Bonjour Alex !
-
-  mailman est niveau 2 !
-  wordpress est niveau 7 !
-```
-
----
-
-# Templates dans Flask
-
-En supposant que le template précédent soit situé dans `templates/hello.html`
-
-```python
-from flask import render_template
-
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name="Alex"):
-    apps = [ { "name": "mailman", "level": 2 },
-             { "name": "wordpress", "level": 7 } ]
-    return render_template('hello.html', 
-                           name=name,
-                           apps=apps)
-```
-
----
-
-# SQL Alchemy, Models / ORM in Flask
-
-```python
-from flask_sqlalchemy import SQLAlchemy
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./db.sqlite'
-db = SQLAlchemy()
-db.init_app(app)
-
-
-class App(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    level = db.Column(db.Integer, nullable=False)
-    date_last_test = db.Column(db.Datetime, nullable=True)
-```
-
----
-
-# SQL Alchemy, Models / ORM in Flask
-
-### Ecrire
-
-```python
-# Creer et ajouter une app dans la database...
-mailman = App(name="mailman", level=3)
-db.session.add(mailman)
-db.session.commit()
-```
-
-### Lire
-
-```python
-# Trouver toutes les apps..
-App.query.all()
-
-# Trouver toutes les apps level 7 ...
-App.query.filter_by(level=7).all()
-
-# Trouver l'app qui s'apelle mailman
-App.query.filter_by(name="mailman").first()
-```
+- Plots, LDAP, ...
 
 
