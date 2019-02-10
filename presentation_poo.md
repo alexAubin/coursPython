@@ -178,8 +178,9 @@ print(ma_voiture.km)
 ## Héritage : à retenir
 
 - `class Voiture(Vehicule)` fais hériter `Voiture` de `Vehicule`
-- `super().__init__(...)` permet d'appeler le constructeur de la classe parent
-- Les classes filles disposent des méthodes de la classe mère mais peuvent les surcharger (c.f. exemple avec `rouler`)
+- `super().__init__(...)` permet d'appeler le constructeur de la classe mère
+- Les classes filles disposent des méthodes de la classe mère mais peuvent les **surcharger** (c.f. exemple avec `rouler`)
+- `super().une_methode(...)` permet d'appeler `une_methode` telle que définie dans la classe mère.
 
 ---
 

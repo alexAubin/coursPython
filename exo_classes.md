@@ -1,6 +1,6 @@
 # Feuille d'exercice : les classes
 
-## Jeu de carte
+## 1 - Jeu de carte
 
 1.1 : Créer une classe `Carte`. Une carte dispose d'une `valeur` (1 à 10 puis J, Q et K) et d'une `couleur` (coeur, pique, careau, trèfle). Par exemple, on pourra créer des cartes en invoquant `Carte(3, 'coeur')` et `Carte('K', 'pique')`. Le constructeur doit valider que les données fournies sont valides.
 
@@ -48,3 +48,14 @@ print(main_alice[1].points())
 # affiche 11
 ```
 
+## 2 - Cercles et cylindres
+
+2.1 : Implémenter une classe `Cercle` avec comme attributs un rayon `r` et les coordonnées `x` et `y` de son centre. Par exemple on pourra instancier un cercle avec `c = Cercle(5, (3,1))`
+
+2.2 : Dans la classe `Cercle`, implémenter une propriété `aire` dépendante du rayon.
+
+2.3 : Implémenter une classe `Cylindre`, fille de `Cercle`, qui est caractérisée par un rayon `r`, une hauteur `h` et des coordonnées `x`, `y` et `z`. On écrira le constructeur de `Cylindre` en appelant le constructeur de `Cercle`.
+
+2.4 : Dans la classe `Cercle`, implémenter une méthode `intersect` qui retourne `True` ou `False` suivant si deux cercles se touchent. Exemple d'utilisation : `c1.intersect(c2)`
+
+2.5 : Surcharger la méthode `intersect` pour la classe `Cylindre`, en se basant sur le résultat de la méthode de la classe mère.
