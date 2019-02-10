@@ -125,7 +125,7 @@ Transmettre :
 - Debuggage avec pdb / ipdb
 - Base de donnée / ORM
 - Construction d'intefaces graphiques
-- Parallelisation ?
+- Parallelisation ? Plots ?
 - ...
 
 ---
