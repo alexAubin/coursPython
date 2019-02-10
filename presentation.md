@@ -143,8 +143,8 @@ et mise en application sur des exercices.
 
 # Logistique ?
 
-- 9h -> 12h30 ?
-- 13h30 -> 17h ?
+- 9h -> 12h30 ? pause vers 10h30 ?
+- 13h30 -> 17h ? pause vers 15h ?
 
 ---
 
@@ -183,7 +183,9 @@ class: impact
 
 ---
 
-# La programmation : cuisiner de l'information
+# La programmation
+
+## Cuisiner de l'information
 
 * Préparer **des outils** et **des ingrédients**
 * Donner **des instructions**
@@ -323,6 +325,27 @@ print("Hello, world!")
 
 ---
 
+# Parenthèse : Python 2 vs Python 3
+
+- Python 2 existe depuis 2000
+- Python 3 existe depuis 2008
+- Fin de vie de Python 2 en 2020
+- ... mais encore la version par défaut dans de nombreux système ... (c.f. `python --version`)
+
+.center[
+il faut lancer `python3` explicitement ! <small>(et non `python`)</small>
+]
+
+## Différences principales
+
+- `print "toto"` ne fonctionnera pas en Python 3 (utiliser `print("toto")`
+- Nommage des paquets debian (`python-*` vs `python3-*`)
+- Gestion de l'encodage
+- `range`, `xrange`
+
+
+---
+
 # 0. Executer du code Python (1/2)
 
 ## Executer un script explicitement avec python
@@ -366,6 +389,7 @@ In [1]: print("Hello, world!")
 ```
 
 ### pour quitter : `exit`
+
 
 ---
 
@@ -756,6 +780,31 @@ distance(1, dz=3, dy=2)
 
 # 4. Fonctions
 
+## 4.6 Arg. optionnels : exemple de la vraie vie
+
+```python
+subprocess.Popen(args,
+                 bufsize=0,
+                 executable=None,
+                 stdin=None,
+                 stdout=None,
+                 stderr=None,
+                 preexec_fn=None,
+                 close_fds=False,
+                 shell=False,
+                 cwd=None,
+                 env=None,
+                 universal_newlines=False,
+                 startupinfo=None,
+                 creationflags=0)
+```
+
+c.f. `https://docs.python.org/2/library/subprocess.html#subprocess.Popen`
+
+---
+
+# 4. Fonctions
+
 ## 4.7 Différence avec le concept mathématique
 
 - Domaine généralement mal défini (e.g. type d'entrée et de sortie)
@@ -852,7 +901,7 @@ angle < pi       # Inférieur
 angle <= pi      # Inférieur ou égal
 ```
 
-## Combiner des conditions
+### Combiner des conditions
 
 ```python
 not (nom == "Jack Sparrow")                # Négation
@@ -936,36 +985,6 @@ parite = "pair" if n % 2 == 0 else "impair"
 .center[Tartiflette]
 
 .center[![](img/tartiflette.png)]
-
----
-
-# Parenthèse n.1
-
-## Python 2 vs Python 3
-
-- Python 2 existe depuis 2000
-- Python 3 existe depuis 2008
-- Fin de vie de Python 2 en 2020
-
-### Différences principales
-
-- `print "toto"` ne fonctionnera pas en Python 3 (utiliser `print("toto")`
-- Nommage des paquets debian (`python-*` vs `python3-*`)
-- Gestion de l'encodage
-- `range`, `xrange`
-
----
-
-# Parenthèse n.2
-
-## PEP8 et linters
-
-- Le style d'écriture de python est standardisé via la norme PEP8
-- Il existe des "linter" pour détecter le non-respect des conventions (et également des erreurs logiques)
-    - Par exemple `flake8`, `pylint`
-- `autopep8` permet de corriger un bon nombre de problème automatiquement
-
-
 
 
 
@@ -1260,6 +1279,10 @@ print(str(x) + " est impair !")
 
 ---
 
+
+
+---
+
 class: impact
 
 # 8. Structures de données
@@ -1486,6 +1509,91 @@ Carré des entiers impairs d'une liste
 
 ---
 
+# 8. Structures de données
+
+## 8.6 Générateurs
+
+(Pas vraiment une structure de données, mais c'est lié aux boucles ...)
+
+- Une fonction qui renvoie **des** résultats "au fur et à mesure" qu'ils sont demandés ...
+- Se comporte comme un itérateur
+- Peut ne jamais s'arrêter ...!
+- Typiquement, évite de créer des listes intermédiaires 
+
+---
+
+# 8. Structures de données
+
+## 8.6 Générateurs : exemple SANS generateur
+
+```python
+mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25, 
+                 "Rattata": 15,       "Rondoudou": 23
+                 # [...]
+               }
+
+def au_moins_niveau_20(pokemons):
+
+    output = []
+    for pokemon, niveau in pokemons.items():
+        if niveau >= 20:
+            output.append(pokemon)
+
+    return output
+
+###
+
+for pokemon in au_moins_niveau_20(mes_pokemons):
+   ...
+```
+
+---
+
+# 8. Structures de données
+
+## 8.6 Générateurs : exemple AVEC generateur
+
+```python
+mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25, 
+                 "Rattata": 15,       "Rondoudou": 23
+                 # [...]
+               }
+
+def au_moins_niveau_20(pokemons):
+
+    for pokemon, niveau in pokemons.items():
+        if niveau >= 20:
+            yield pokemon
+
+####
+
+for pokemon in au_moins_niveau_20(mes_pokemons):
+   ...
+```
+
+Il n'est pas nécessaire de créer la liste intermédiaire `output`
+
+---
+
+# 8. Structures de données
+
+## 8.6 Générateurs : autre exemple
+
+```python
+def factoriel():
+   
+   n = 1
+   acc = 1
+   
+   while True:
+       acc *= n
+       n += 1
+
+       yield acc
+```
+
+---
+
 class: impact
 
 # 9. Fichiers
@@ -1669,6 +1777,28 @@ j["mailman"]["state"]     # -> "working"
 
 # 10. Librairies
 
+## 10.2 Exemple : `csv`
+
+```python
+import csv
+
+# Ouvrir et lire les lignes d'un fichier csv
+with open("table.csv") as f:
+    table = csv.reader(f, delimiter='|')
+    for row in table:
+        print(row[1]) # Afficher le 2eme champ
+        print(row[3]) # Afficher le 4eme champ
+
+with open("newtable.csv", "w") as f:
+    newtable = csv.write(f, delimiter=",")
+    newtable.writerow(["Alice", 32, "Lyon"])
+    newtable.writerow(["Bob", 29, "Bordeaux"])
+```
+
+---
+
+# 10. Librairies
+
 ## 10.2 Exemple : `requests`
 
 Envoyer une requête HTTP et récuperer la réponse (et potentiellement le
@@ -1795,4 +1925,37 @@ print(bonjour)
 - Templating
 - Plots, LDAP, ...
 
+---
 
+# 11. Outils et bonnes pratiques
+
+---
+
+- TODO : `pip`
+
+---
+
+# Syntaxe, PEP8, linters
+
+- Le style d'écriture de python est standardisé via la norme PEP8
+- Il existe des "linter" pour détecter le non-respect des conventions (et également des erreurs logiques)
+    - Par exemple `flake8`, `pylint`
+- `autopep8` permet de corriger un bon nombre de problème automatiquement
+
+---
+
+# Outil de debug : `pdb`, `ipdb`
+
+- utilisation
+
+- commandes l, n, c, w, u, ...
+
+---
+
+# Documentation
+
+- docs.python.org
+- devdocs
+- doc strings
+
+l

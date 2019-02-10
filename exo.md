@@ -212,6 +212,8 @@ une stratégie très simple consiste à prendre une allumette quoiqu'il arrive)
 
 ## 8. Structures de données
 
+8.0 : Écrire une fonction qui retourne le mot le plus grand parmis une liste de mot donnée en argument. Par exemple, `plus_long(["Paris", "Amsterdam", "Londres""])` renverra `"Amsterdam"`
+
 8.1.1 : Écrire une fonction qui retourne le plus grand élément d'une liste (ou
 d'un set) de nombres, et une autre fonction qui permet retourn le plus petit.
 Par exemple, `plus_grand([5, 9, 12, 6, -1, 4])` retournera 12.
@@ -232,12 +234,22 @@ exemple, `somme([3, 4, 5])` renverra 12.
 "/usr/bin/toto.py" et extrait le nom du fichier, c'est à dire "toto". On pourra
 utiliser la méthode `chaine.split(caractere)` des chaînes de caractère.
 
-8.7 : Écrire un "générateur de formule de compliment / encouragement". Voir :
-http://www.nioutaik.fr/Felicitron/ . Pour cela, construire des chaines de
-caractère avec la structure suivante :
-{superlatif} + {chose/personne} + {adjectif} + {verbe} + {beneficiaire} + {duree}.
-Chaque élément sera choisi aléatoirement dans une liste de choix possibles...
+8.7 : En **une seule** ligne de code, générer la matrice suivante :
 
+```python
+[ [ 0, 1, 2, 3,  4  ],
+  [ 0, 2, 4, 6,  8  ],
+  [ 0, 3, 6, 9,  12 ],
+  [ 0, 4, 8, 12, 16 ] ]
+```
+
+8.8 : Ecrire une fonction `compte_lettres` qui prends en argument une (grande) chaîne de caractère et retourne un dictionnaire avec un compte des occurences des lettres. Par exemple `compte_lettres("hello")` retournera `{"h":1, "l": 2, "o": 1, "e":1 }`. Utiliser cette fonction sur Lorem Ipsum ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt [...]")
+
+8.9 : Récuperer le dictionnaire d'exemple auprès du formateur (`example_dict.py`) et boucler sur ce dictionnaire pour afficher le prenom de toutes les personnes ayant une adresse mail en `.edu`.
+
+8.10 : Ecrire un générateur `carre()` qui genere la suite 1, 4, 9, 16, ... Utiliser ce générateur pour afficher les carrés jusqu'à ce qu'une valeur dépasse 200.
+
+8.11 : Ecrire un générateur `fibonnaci` qui genere la suite de fibonnaci 0, 1, 1, 2, 3, 5, 8, ... Utiliser ce générateur pour afficher les valeurs jusqu'à ce qu'elles dépassent 500.
 
 
 
@@ -288,23 +300,29 @@ incorrecte, erreur 404, time-out du serveur, erreur SSL
 10.1.3 : Écrire le résultat d'un tri (par exemple toutes les applications
 cassées) dans un fichier json.
 
-10.2 : Écrire une fonction qui vérifie si un utilisateur système donné a le
+10.2.1 : Récupérer le fichier de données CSV, le lire, et afficher le nom des personnes ayant moins de 24 ans. Pour ce faire, on utilisera la librarie `csv`.
+
+10.2.2 : Trier les personnes du fichier CSV par année de naissance et enregistrer une nouvelle version de ce fichier avec seulement le nom et l'année de naissance. Pour trier, on pourra utiliser `sorted` et son argument `key`.
+
+10.3 : Écrire un fonction `create_tmp_dir` qui choisi un nombre au hasard entre 0 et 100000 puis créer le dossier `/tmp/tmp-{lenombre}` et retourne le nom du dossier ainsi créé. On pourra utiliser la librairie `random` pour choisir un nom aléatoire, et `os.system` ou `subprocess.check_call` pour créer le dossier.
+
+10.4 : Écrire une fonction qui vérifie si un utilisateur système donné a le
 droit d'accéder à un fichier. On précisera en argument si il s'agit de droit de
 lecture, d'écriture ou d'execution.
 
-10.3.1 : Écrire une fonction qui permet de trouver récursivement dans un dossier
+10.5.1 : Écrire une fonction qui permet de trouver récursivement dans un dossier
 tous les fichiers modifiés il y a moins de 5 minutes.
 
-10.3.2 : À l'aide d'une deuxième fonction permettant d'afficher les `n`
+10.5.2 : À l'aide d'une deuxième fonction permettant d'afficher les `n`
 dernières lignes d'un fichier, afficher les 10 dernières lignes des fichiers
 récemment modifiés dans `/var/log`
 
-10.4 : Écrire des fonctions qui permettent de tester automatiqmenet les
-fonctions écrites en 10.3. Pour cela, la première fonction de test pourra par
+10.6 : Écrire des fonctions qui permettent de tester automatiqmenet les
+fonctions écrites en 10.5. Pour cela, la première fonction de test pourra par
 exemple créer un dossier temporaire contenant un fichier récemment modifié et un
 vieux fichier, puis utiliser `assert` pour vérifier ce que renvoie la fonction.
 
-10.5 : Écrire une fonction qui renvoie les 3 processus les plus gourmands
+10.7 : Écrire une fonction qui renvoie les 3 processus les plus gourmands
 actuellement en CPU, et les 3 processus les plus gourmands en RAM (avec
 leur consommation actuelle, chacun en CPU et en RAM)
 
