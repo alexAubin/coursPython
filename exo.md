@@ -8,13 +8,13 @@ Démarrer Thonny (ou votre éditeur/IDE préféré)
 
 Écrire et lancer le programme suivant :
 
-```
+```python
 print("Hello World!")
 ```
 
 Créez un fichier `hello.py` directement dans la console (par exemple via `nano hello.py`) et mettez dedans :
 
-```
+```python
 #!/usr/bin/env python3
 print("Hello, world!")
 ```
@@ -26,7 +26,7 @@ Executez ensuite ce script à l'aide de `python3 hello.py` ou `./hello.py`
 
 1.1. : De retour dans Thonny, écrire, lancer et analyser l'execution du programme suivant :
 
-```
+```python
 message = "Je connais la réponse à l'univers, la vie et le reste"
 reponse = 6 * 7
 
@@ -68,20 +68,23 @@ modifié.
 4.0.2 : Inspecter l'execution du code pas à pas à l'aide de Thonny.
 
 4.1.1 : Ecrire une fonction `centrer` prend en argument une chaîne de caractère, et *renvoie* une nouvelle chaîne centrée sur 40 caractères. Par exemple `print(centrer("Pikachu"))` affichera :
-```
+
+```text
 |                Pikachu              |
 ```
 
 4.1.2 : Ajouter un argument optionnel pour gérer la largeur au lieu du "80"
 fixé. Par exemple `print(centrer("Pikachu", 20)) affichera :`
-```
+
+```text
 |      Pikachu     |
 ```
 
 4.1.3 : Créer une fonction `encadrer` qui utilise la fonction `centrer` pour
 produire un texte centré et encadré avec des `####`. Par exemple,
 `print(encadrer("Pikachu", 20))` affichera :
-```
+
+```text
 ####################
 #      Pikachu     #
 ####################
@@ -105,7 +108,8 @@ en argument optionnel. (Par exemple : `encadrer("Pikachu", 20, '@')`)
 
 5.1.1 : Reprendre la fonction `centrer` de l'exercice 4.1 et gérer le cas où la largueur demandée est -1 : dans ce cas, ne pas centrer. Par exemple,
 `print(encadrer("Pikachu", -1))` affichera :
-```
+
+```text
 ###########
 # Pikachu #
 ###########
@@ -113,14 +117,16 @@ en argument optionnel. (Par exemple : `encadrer("Pikachu", 20, '@')`)
 
 5.1.2 : Gérer le cas où le caractère d'encadrement est vide. Dans ce cas, ne pas
 encadrer. Par exemple : `encadrer("Pikachu", 20, '')` affichera juste :
-```
+
+```text
 |                Pikachu               |
 ```
 
 5.1.3 : Dans la fonction `centrer`, gérer également le cas où le texte dépasse
 la largueur demandée. Dans ce cas, tronquer le texte. Par exemple :
 `encadrer("Pikachu", 8)` affichera :
-```
+
+```text
 ########
 # Pika #
 ########
@@ -139,6 +145,7 @@ tout est bon, la fonction renvoie l'entier entré par l'utilisateur.
 
 6.2 : Reprendre les fonctions `centrer` et `encadrer` et vérifier au début des
 fonctions certaines hypothèses faites, comme :
+
 - la longueur doit être un entier positif ou égal à -1
 - le caractère d'encadrement doit être un caractère (chaine de longueur 1) ou vide
 - le texte donné doit effectivement être une chaîne de caractère
@@ -153,7 +160,8 @@ fonctions certaines hypothèses faites, comme :
 
 7.1.1 : Écrire une fonction qui, pour un nombre donné, renvoie la table de
 multiplication. Par exemple `print(table_du_7())` affichera :
-```
+
+```text
 Table du 7
 ----------
  1 x 7 = 7
