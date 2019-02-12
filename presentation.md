@@ -1077,7 +1077,7 @@ faites pendant l'écriture du code. Si elles ne sont pas remplies, une exception
 
 ```python
 def dire_bonjour(nom):
-    assert isinstance(nom, "str"), "'nom' devrait être une chaine !"
+    assert isinstance(nom, str), "'nom' devrait être une chaine !"
     print("Bonjour {nom} !".format(nom=nom))
 ```
 
@@ -1279,10 +1279,6 @@ print(str(x) + " est impair !")
 
 ---
 
-
-
----
-
 class: impact
 
 # 8. Structures de données
@@ -1393,7 +1389,9 @@ N.B. : dans les dictionnaires, l'ordre des éléments est sans importance !
 ### Accès à une valeur
 
 ```python
-ages["Charlie"]    ->   19
+ages["Charlie"]      -> 19
+ages["Elie"]         -> KeyError !
+ages.get("Elie", -1) -> -1
 ```
 
 ### Modification d'une entrée, ajout d'une nouvelle entrée
@@ -1679,6 +1677,22 @@ except FileNotFoundError:
 
 ---
 
+# 9. Fichiers
+
+## 9.4 Note "technique" sur la lecture des fichiers
+
+- Il y a un "curseur de lecture". On peut lire petit morceaux par petit morceaux ... une fois arrivé au bout, il n'y a plus rien à lire, il faut replacer le curseur si on veut de nouveau lire.
+
+```python
+f = open("/etc/passwd")
+print(f.read())  # ---> Tout plein de choses
+print(f.read())  # ---> Rien !
+f.seek(0)        # On remet le curseur au début
+print(f.read())  # ---> Tout plein de choses !
+```
+
+---
+
 class: impact
 
 # 10. Librairies
@@ -1848,11 +1862,33 @@ out = subprocess.check_output(["echo", "Hello World!"])
 print(out)    # -> Affiche 'Hello World'
 ```
 
+- `check_output` : recupère la sortie d'une commande
+- `check_call` : verifie que la commande a bien marché (code de retour '0') ou declenche une exception
+- `Popen` : méthode plus bas niveau
+
 ---
 
 # 10. Librairies
 
-## Ecrire ses propres modules
+## 10.4 Exemple : `io`
+
+Par exemple, pour créer des objets "file-like". Par exemple : 
+
+```python
+import io
+
+f = io.StringIO("some initial text data")
+print(f.read())    # -> 'some initial text data'
+f.seek(0)
+f.write("i am writing")
+print(f.read())    # -> 'i am writing text data'
+```
+
+---
+
+# 10. Librairies
+
+## 10.6 Ecrire ses propres modules
 
 Considérant les fichiers suivants :
 
@@ -1931,7 +1967,35 @@ print(bonjour)
 
 ---
 
-- TODO : `pip`
+# Documentation
+
+Pour les librairies :
+- `docs.python.org`
+- `devdocs.io`
+- stack overflow ...
+- doc strings
+
+Pour votre code :
+- nom de variables, fonctions, argument !!!
+- commentaires, doc strings
+- generation de doc automatique ?
+
+---
+
+# `pip`
+
+- Gestionnaire de paquet / modules Python
+- PIP : "Pip Install Packages"
+- PyPI : Python Package Index
+- Installer un paquet :
+    - `pip3 install <paquet>` 
+- Rechercher un paquet :
+    - `pip3 search <motclef>`
+- Installer une liste de dépendances :
+    - `pip3 install -r requirements.txt`
+- Lister les paquets installés
+    - `pip3 list`, `pip3 freeze`
+- Les paquets installés sont dans `/usr/lib/python*/dist-packages/`
 
 ---
 
@@ -1940,22 +2004,34 @@ print(bonjour)
 - Le style d'écriture de python est standardisé via la norme PEP8
 - Il existe des "linter" pour détecter le non-respect des conventions (et également des erreurs logiques)
     - Par exemple `flake8`, `pylint`
+- Intégration possible dans `vim` et autres IDE...
 - `autopep8` permet de corriger un bon nombre de problème automatiquement
 
 ---
 
-# Outil de debug : `pdb`, `ipdb`
+# Debugging interactif : `pdb`, `ipdb`
 
-- utilisation
-
-- commandes l, n, c, w, u, ...
+- Python DeBugger
+- Permet (entre autre) de définir des "break point" pour rentrer en interactif
+   - `import ipdb; ipdb.set_trace()`
+   - en 3.7 : `breakpoint()` <small>Mais fait appel à `pdb` et non `ipdb` ?</small>
+- Une fois en interactif, on peut inspecter les variables, tester des choses, ...
+- On dispose aussi de commandes spéciales pour executer le code pas-à-pas
+- Significativement plus efficace que de rajouter des `print()` un peu partout !
 
 ---
 
-# Documentation
+# Debugging interactif : `pdb`, `ipdb`
 
-- docs.python.org
-- devdocs
-- doc strings
+### Commandes spéciales
 
-l
+- `l(ist)` : affiche les lignes de code autour de code (ou continue le listing precedent)
+- `c(ontinue)` : continuer l'execution normalement (jusqu'au prochain breakpoint)
+- `s(tep into)` : investiguer plus en détail la ligne en cours, possiblement en descendant dans les appels de fonction
+- `n(ext)` : passer directement à la ligne suivante
+- `w(here)` : print the stack trace, c.a.d. les différents sous-appels de fonction dans lesquels on se trouve
+- `u(p)` : remonte d'un cran dans les appels de la stacktrace
+- `d(own)` : redescend d'un cran dans les appels de la stacktrace
+
+- `pp <variable>` : pretty-print d'une variable (par ex. une liste, un dict, ..)
+

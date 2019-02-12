@@ -325,12 +325,15 @@ tous les fichiers modifiés il y a moins de 5 minutes.
 dernières lignes d'un fichier, afficher les 10 dernières lignes des fichiers
 récemment modifiés dans `/var/log`
 
-10.6 : Écrire des fonctions qui permettent de tester automatiqmenet les
+10.6 : Écrire des fonctions qui permettent de tester automatiquement les
 fonctions écrites en 10.5. Pour cela, la première fonction de test pourra par
 exemple créer un dossier temporaire contenant un fichier récemment modifié et un
 vieux fichier, puis utiliser `assert` pour vérifier ce que renvoie la fonction.
 
-10.7 : Écrire une fonction qui renvoie les 3 processus les plus gourmands
+10.7 : Écrire une fonction qui récupère l'utilisation actuelle de la mémoire RAM
+via la commande `free`. La fonction retournera une utilisation en pourcent.
+
+10.8 : Écrire une fonction qui renvoie les 3 processus les plus gourmands
 actuellement en CPU, et les 3 processus les plus gourmands en RAM (avec
 leur consommation actuelle, chacun en CPU et en RAM)
 

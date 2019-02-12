@@ -181,6 +181,7 @@ print(ma_voiture.km)
 - `super().__init__(...)` permet d'appeler le constructeur de la classe mère
 - Les classes filles disposent des méthodes de la classe mère mais peuvent les **surcharger** (c.f. exemple avec `rouler`)
 - `super().une_methode(...)` permet d'appeler `une_methode` telle que définie dans la classe mère.
+- `isinstance` verifie l'heritage ! `isinstance(ma_voiture, Vehicule)` vaut `True` !
 
 ---
 
@@ -228,5 +229,41 @@ ma_facture.montant_deja_paye += 7
 
 print("Il reste %s à payer" % ma_facture.montant_restant_a_payer)
 # -> Il reste 38 à payer
+```
+
+---
+
+# Orienté objet
+
+## Enregistrer des objets avec `pickle`
+
+`pickle` permet de "sérialiser" et "déserialiser" des objets (ou de manière générale des structure de données) en un flux binaire (!= texte).
+
+### Sauvegarde
+
+```python
+import pickle
+
+ma_facture = Facture(45)
+
+f = open("save.bin", "wb")   # the 'b' in 'wb' is important !
+pickle.dump(ma_facture, f)
+```
+
+---
+
+# Orienté objet
+
+## Enregistrer des objets avec `pickle`
+
+`pickle` permet de "sérialiser" et "déserialiser" des objets (ou de manière générale des structure de données) en un flux binaire (!= texte).
+
+### Puis recuperation
+
+```python
+import pickle
+
+f = open("save.bin", "rb")
+ma_facture = pickle.load(f)
 ```
 
