@@ -1963,6 +1963,8 @@ print(bonjour)
 
 ---
 
+class: impact
+
 # 11. Outils et bonnes pratiques
 
 ---
