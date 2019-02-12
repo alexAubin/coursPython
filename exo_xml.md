@@ -1,4 +1,4 @@
-# Exercices de manipulation de données XML
+# Feuille d'exercices : manipulation de données XML
 
 ## 1. Utilisation de ElementTree
 
@@ -18,7 +18,7 @@
 
 2.4 - Pour chaque titre trouvé, remonter au parent 'Record' pour trouver le 'Holder Name' correspondant à ce titre. S'aider de `ipython` et/ou `ipdb` pour tester et expérimenter en interactif.
 
-# 3. Scrapping avec BeautifulSoup
+## 3. Scrapping avec BeautifulSoup
 
 3.1 - Récupérer (manuellement à l'aide de Firefox ou `wget`) le code HTML de la page wikipédia "List of Doctor Who episodes (2005-present)". Par exemple, on pourra appeler ce fichier `doctorwho_list.html`. Charger ce fichier à l'aide de BeautifulSoup
 

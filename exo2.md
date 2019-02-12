@@ -1,4 +1,4 @@
-# 11. Outils et bonnes pratiques
+## 11. Outils et bonnes pratiques
 
 11.1 - Utiliser `pip3` pour trouver quelle est le numéro de version du package `requests` installé
 

@@ -1,5 +1,4 @@
-
-# Feuille d'exercices
+# Feuille d'exercices : bases de Python
 
 
 ## 0. Hello world

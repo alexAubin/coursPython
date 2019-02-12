@@ -1,4 +1,4 @@
-# Feuille d'exercice : les classes
+# Feuille d'exercices : orienté objet
 
 ## 1 - Jeu de carte
 
