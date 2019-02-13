@@ -90,9 +90,7 @@ ma_voiture.rouler(143)
 
 ---
 
-# Orienté objet
-
-## Heritage
+# Orienté objet : héritage
 
 Une classe peut hériter d'une autre pour étendre ses fonctionnalités. Inversement, cela permet de *factoriser* plusieurs classes ayant des fonctionnalités communes.
 
@@ -102,7 +100,7 @@ En tant que véhicules, ils ont tous une couleur, une marque. Mais le nombre de 
 
 ---
 
-# Orienté objet
+# Orienté objet : héritage
 
 ```python
 class Vehicule:
@@ -157,9 +155,9 @@ class Velo(Vehicule):
 
 ---
 
-# Orienté objet
+# Orienté objet : héritage
 
-## Héritage : suite de l'exemple
+### (suite de l'exemple)
 
 ```python
 ma_voiture = Voiture("rouge", "citroen")
@@ -173,9 +171,9 @@ print(ma_voiture.km)
 
 ---
 
-# Orienté objet
+# Orienté objet : héritage
 
-## Héritage : à retenir
+## À retenir
 
 - `class Voiture(Vehicule)` fais hériter `Voiture` de `Vehicule`
 - `super().__init__(...)` permet d'appeler le constructeur de la classe mère
@@ -185,9 +183,9 @@ print(ma_voiture.km)
 
 ---
 
-# Orienté objet
+# Orienté objet : `@property`
 
-## `@property` :  des attributs "dynamiques"
+## Des attributs "dynamiques"
 
 ```python
 class Voiture(Vehicule):
@@ -208,9 +206,9 @@ print("Ma voiture a émis %s g de CO2" % ma_voiture.total_emission_co2)
 
 ---
 
-# Orienté objet
+# Orienté objet : `@property`
 
-## `@property` : autre exemple
+### Autre exemple
 
 ```python
 class Facture():
@@ -233,9 +231,9 @@ print("Il reste %s à payer" % ma_facture.montant_restant_a_payer)
 
 ---
 
-# Orienté objet
+# Orienté objet : `pickle`
 
-## Enregistrer des objets avec `pickle`
+## Enregistrer des objets
 
 `pickle` permet de "sérialiser" et "déserialiser" des objets (ou de manière générale des structure de données) en un flux binaire (!= texte).
 
@@ -252,9 +250,9 @@ pickle.dump(ma_facture, f)
 
 ---
 
-# Orienté objet
+# Orienté objet : `pickle`
 
-## Enregistrer des objets avec `pickle`
+## Enregistrer des objets
 
 `pickle` permet de "sérialiser" et "déserialiser" des objets (ou de manière générale des structure de données) en un flux binaire (!= texte).
 
@@ -265,5 +263,152 @@ import pickle
 
 f = open("save.bin", "rb")
 ma_facture = pickle.load(f)
+```
+
+---
+
+# Orienté objet : ORM
+
+## Rappels (?) sur SQL
+
+- Base de données : stocker des informations en masse et de manière efficace
+- On manipule des tables (des lignes, des colonnes) ...
+- Les colonnes sont fortement typées et on peut poser des contraintes (unicité, ...)
+- Relations entres les tables, écritures concurrentes, ...
+- Exemple de requête : 
+
+```sql
+# Create a table
+CREATE TABLE stocks (date text, trans text, symbol text, qty real, price real)
+
+# Add a record
+INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)
+
+# Find records
+SELECT * FROM stocks WHERE qty=100;
+```
+
+---
+
+# Orienté objet : ORM
+
+## SQL "brut" en Python
+
+```python
+import sqlite3
+conn = sqlite3.connect('example.db')
+
+c = conn.cursor()
+
+# Create a table
+c.execute('''CREATE TABLE stocks
+             (date text, trans text, symbol text, qty real, price real)''')
+
+# Add a record
+c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+
+# Save (commit) the changes and close the connection
+conn.commit()
+conn.close()
+```
+
+---
+
+# Orienté objet : ORM
+
+## Object Relational Mapping
+
+- Sauvegarder et charger des objets dans une base de donnée de type SQL de manière "transparente"
+- Simplifie énormément l'interface entre Python et SQL
+   - Python <-> base SQL
+   - classes (ou modèle) <-> tables
+   - objets <-> lignes
+   - attributs <-> colonnes
+- Gère aussi la construction et execution des requêtes (query)
+- Syntaxe spéciale pour définir les types et les contraintes (en fonction de la lib utilisée)
+- Librairie populaire et efficace : `SQLAlchemy` (on utilisera la surcouche `ActiveAlchemy`)
+
+---
+
+# Orienté objet : ORM
+
+## Exemple de classe / modèle
+
+```python
+from active_alchemy import ActiveAlchemy
+
+db = ActiveAlchemy('sqlite://foo.db')
+
+class User(db.Model):
+    # (id existe implicitement avec ActiveAlchemy)
+    # id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(25), unique=True, nullable=False)
+	location = db.Column(db.String(50), default="USA")
+	birthday = db.Column(db.Date, nullable=True)
+```
+
+---
+
+# Orienté objet : ORM
+
+## Créer des tables et des objets
+
+```python
+# Supprimer toutes les tables (attention ! dans la vraie vie on fait des migrations...)
+db.drop_all()
+# Initialiser toutes les tables dont il y a besoin
+db.create_all()
+
+# Créer des utilisateurs
+alex    = User(name="Alex",    location="Strasbourg")
+bob     = User(name="Bob",     location="Strasbourg")
+charlie = User(name="Charlie", location="Paris")
+
+# Dire qu'on veut les enregistrer
+db.session.add(alex)
+db.session.add(bob)
+db.session.add(charlie)
+
+# Commiter les changements
+db.session.commit()
+```
+
+---
+
+# Orienté objet : ORM
+
+## Exemple de requete (`query`)
+
+```python
+
+users_in_strasbourg = User.query()
+                          .filter(User.location == "Strasbourg")
+
+for user in users_in_strasbourg:
+    print(user.name)
+
+# On peut aussi faire : 
+User.query().all()   # ---> Execute la query "pour de vrai" et renvoie une liste
+User.query().filter(User.location == "Strasbourg").all()
+```
+
+---
+
+# Orienté objet : ORM
+
+## `query` ... plus complexes mais plus puissant !
+
+```python
+users_in_strasbourg = User.query()
+                          .filter(User.location == "Strasbourg")
+
+# Meme chose mais en selection des colonnes
+users_in_strasbourg = User.query(User.name, User.last_access)
+                          .filter(User.location == "Strasbourg")
+
+# .. et avec un tri
+users_in_strasbourg = User.query(User.name, User.last_access)
+                          .filter(User.location == "Strasbourg")
+                          .order_by(User.birthday)
 ```
 

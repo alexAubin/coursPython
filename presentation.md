@@ -1452,13 +1452,22 @@ chat.add("z")          # ajoute `z` à `chat`
 
 ## 8.4 Les tuples
 
-Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière non-mutable. Typiquement : des coordonnées de point.
+Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière non-mutable. 
+Generalement itérer sur un tuple n'a pas vraiment de sens...
+
+Typiquement : des coordonnées de point.
 
 ```python
-P = (2,3)
-P[0]        # -> 2
-P[1]        # -> 3
-P[0] = 5    # -> Erreur!
+xyz = (2,3,5)
+xyz[0]        # -> 2
+xyz[1]        # -> 3
+xyz[0] = 5    # -> Erreur!
+```
+
+Autre exemple `dictionnaire.items()` renvoie une liste de tuple `(clef, valeur)` : 
+
+```python
+[ (clef1, valeur1), (clef2, valeur2), ... ]
 ```
 
 ---
