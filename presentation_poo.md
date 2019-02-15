@@ -114,7 +114,7 @@ class Voiture(Vehicule):
     def __init__(self, couleur, marque, km=0, places=5):
         self.km = 0
         self.places = places
-        super().__init__(self, couleur, marque)
+        super().__init__(couleur, marque)
         
     def rouler(self):
         self.km += km
@@ -141,7 +141,7 @@ class Voiture(Vehicule):
     def __init__(self, couleur, marque, km=0, places=5):
         self.km = 0
         self.places = places
-        super().__init__(self, couleur, marque)
+        super().__init__(couleur, marque)
         
     def rouler(self, km):
         self.km += km
