@@ -587,6 +587,7 @@ m[-3:]   # -> 'rld'
 ```python
 "Cette phrase" + " est en deux morceaux."
 "J'ai " + str(28) + " ans."
+"J'ai " + str(age) + " ans."
 ```
 
 ### Construction à partir de données, avec `format`
@@ -623,8 +624,6 @@ c.f. documentation, e.g `https://devdocs.io/python~3.7/library/stdtypes#str`
 class: impact
 
 # 4. Fonctions
-
-
 
 ---
 
@@ -692,17 +691,24 @@ def ma_fonction(arg1, arg2):
 ## 4.3 Exemple
 
 ```python
-def distance(dx, dy):
-    dx_carre = dx ** 2
-    dy_carre = dy ** 2
-    return racine_carree(dx_carre + dy_carre)
+def aire_triangle(b, h):
+    return b * h / 2
+
+A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
+A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
+
+def aire_disque(r):
+    r_carree = r ** 2
+    return 3.1415 * r_carree
+
+A3 = aire_disque(6)           # -> A3 vaut (environ) 113 !
 ```
 
-Utilisation :
+---
 
-```python
-D = distance(3, 5)       # -> D vaut 5.830951894845301
-```
+# 4. Fonctions
+
+... analyse dans Thonny ...
 
 ---
 
@@ -711,19 +717,42 @@ D = distance(3, 5)       # -> D vaut 5.830951894845301
 ## 4.3 Exemple
 
 ```python
-def distance(dx, dy):
-    dx_carre = dx ** 2
-    dy_carre = dy ** 2
-    print(racine_carree(dx_carre + dy_carre))
+def aire_triangle(b, h):
+    return b * h / 2
+
+A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
+A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
+
+def aire_disque(r):
+    r_carree = r ** 2
+    return 3.1415 * r_carree
+
+A3 = aire_disque(6)           # -> A3 vaut (environ) 113
+
+def volume_cylindre(r, h):
+    return h * aire_disque(r)
+
+V1 = volume_cylindre(6, 4)   # -> A4 vaut (environ) 452
+```
+
+
+---
+
+# 4. Fonctions
+
+## 4.3 Exemple
+
+```python
+def aire_disque(r):
+    r_carree = r ** 2
+    print(3.1415 * r_carree)
 ```
 
 Utilisation :
 
 ```python
-D = distance(3, 5)       # -> D vaut None !
+A1 = aire_disque(6)       # -> A1 vaut None !
 ```
-
-
 
 ---
 
@@ -732,14 +761,13 @@ D = distance(3, 5)       # -> D vaut None !
 ## 4.4 Variables locales
 
 ```python
-def distance(dx, dy):
-    dx_carre = dx ** 2
-    dy_carre = dy ** 2
-    return racine_carree(dx_carre + dy_carre)
+def aire_disque(r):
+    r_carree = r ** 2
+    return 3.1415 * r_carree
 ```
 
 - Les variables créées dans la fonction sont **locales**
-- Les noms dx, dy sont égalements "locaux" : ils font reference aux arguments de cette fonction, meme si d'autres variables nommées dx ou dy existent ailleurs dans le code !
+- Les arguments (par ex. `r`) sont égalements "locaux" : ils font reference aux arguments de cette fonction, meme si d'autres variables nommées `r` existent ailleurs dans le code !
 
 ---
 
@@ -755,7 +783,23 @@ def distance(dx, dy):
 
 # 4. Fonctions
 
-## 4.6 Arguments optionnels
+## 4.6 Ordre d'appel des arguments
+
+```python
+def aire_triangle(b, h):
+    return b * h / 2
+
+A1 = aire_triangle(3, 5)
+A2 = aire_triangle(4, h=8)
+A3 = aire_triangle(h=6, b=2)
+A4 = aire_triangle(h=3, 2)    # < Pas possible !
+```
+
+---
+
+# 4. Fonctions
+
+## 4.8 Arguments optionnels
 
 Les arguments peuvent être rendu optionnels si ils ont une valeur par défaut :
 
@@ -780,7 +824,7 @@ distance(1, dz=3, dy=2)
 
 # 4. Fonctions
 
-## 4.6 Arg. optionnels : exemple de la vraie vie
+## 4.8 Arg. optionnels : exemple de la vraie vie
 
 ```python
 subprocess.Popen(args,
@@ -805,7 +849,7 @@ c.f. `https://docs.python.org/2/library/subprocess.html#subprocess.Popen`
 
 # 4. Fonctions
 
-## 4.7 Différence avec le concept mathématique
+## 4.9 Différence avec le concept mathématique
 
 - Domaine généralement mal défini (e.g. type d'entrée et de sortie)
 - Effets de bords (e.g. `print()`)
@@ -1752,6 +1796,26 @@ from math import sqrt, sin, cos
 sqrt(2)   # -> 1.4142135623730951
 ```
 
+---
+
+# 10. Librairies
+
+## 10.3 Exemple : `os`
+
+`os` permet d'interagir avec le système d'exploitation pour réaliser différent
+type d'action... Certaines étant spécifiques à l'OS en question (Linux, Windows,
+...)
+
+Quelques exemples :
+
+```python
+import os
+os.listdir("/etc/")  # Liste les fichiers dans /etc/
+os.path.join("/etc", "passwd") # Génère un chemin à partir de plusieurs parties
+os.system("ls /etc/") # (à éviter) Execute une commande "brute"
+```
+
+Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
 
 
 ---
@@ -1778,6 +1842,7 @@ sqrt(2)   # -> 1.4142135623730951
     }
 }
 ```
+
 ---
 
 # 10. Librairies
@@ -1800,6 +1865,25 @@ j["mailman"]["state"]     # -> "working"
 
 # 10. Librairies
 
+## 10.2 Exemple : `requests`
+
+Envoyer une requête HTTP et récuperer la réponse (et potentiellement le
+contenu d'une page)
+
+```python
+import requests
+
+r = requests.get("https://en.wikipedia.org/wiki/Python", timeout=30)
+
+print(r.status_code)    # -> 200 si ça a marché
+print(r.text)           # -> Le contenu de la page
+```
+
+
+---
+
+# 10. Librairies
+
 ## 10.2 Exemple : `csv`
 
 ```python
@@ -1817,45 +1901,6 @@ with open("newtable.csv", "w") as f:
     newtable.writerow(["Alice", 32, "Lyon"])
     newtable.writerow(["Bob", 29, "Bordeaux"])
 ```
-
----
-
-# 10. Librairies
-
-## 10.2 Exemple : `requests`
-
-Envoyer une requête HTTP et récuperer la réponse (et potentiellement le
-contenu d'une page)
-
-```python
-import requests
-
-r = requests.get("https://en.wikipedia.org/wiki/Python", timeout=30)
-
-print(r.status_code)    # -> 200 si ça a marché
-print(r.text)           # -> Le contenu de la page
-```
-
----
-
-# 10. Librairies
-
-## 10.3 Exemple : `os`
-
-`os` permet d'interagir avec le système d'exploitation pour réaliser différent
-type d'action... Certaines étant spécifiques à l'OS en question (Linux, Windows,
-...)
-
-Quelques exemples :
-
-```python
-import os
-os.listdir("/etc/")  # Liste les fichiers dans /etc/
-os.path.join("/etc", "passwd") # Génère un chemin à partir de plusieurs parties
-os.system("ls /etc/") # (à éviter) Execute une commande "brute"
-```
-
-Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
 
 ---
 
