@@ -54,19 +54,21 @@ sans tenir compte du jour et mois de naissance...)
 3.1.1 : Demander un mot à l'utilisateur. Afficher la longueur du mot avec
 une message tel que `"Ce mot fait X caractères !"`
 
-3.1.2 : Remplacer les lettres A et E dans le mot, et afficher le mot ainsi
-modifié.
+3.1.2 : Afficher le mot encadré avec des `####`. Par exemple:
 
-3.1.3 : Encadrer le mot modifié avec des `####`.
-
+```
+##########
+# Python #
+##########
+```
 
 ## 4. Fonctions
 
-4.0.1 : Créer une fonction `dire_bonjour` qui prends en argument un nom et se contente d'afficher `"Bonjour <le nom> !"` dans la console. Par exemple invoquer `dire_bonjour("Alice")` affichera `"Bonjour Alice !"` et `dire_bonjour("Bob")` affichera `"Bonjour Bob !"`.
+4.0.1 : Écrire une fonction `annee_naissance` qui prends en argument un age et retourne l'année de naissance (+/- 1) sachant que nous sommes ne 2019. Par exemple, `annee_naissance(29)` retounera l'entier `1990`.
 
 4.0.2 : Inspecter l'execution du code pas à pas à l'aide de Thonny.
 
-4.1.1 : Ecrire une fonction `centrer` prend en argument une chaîne de caractère, et *renvoie* une nouvelle chaîne centrée sur 40 caractères. Par exemple `print(centrer("Pikachu"))` affichera :
+4.1.1 : Ecrire une fonction `centrer` prend en argument une chaîne de caractère, et retourne une nouvelle chaîne centrée sur 40 caractères. Par exemple `print(centrer("Pikachu"))` affichera :
 
 ```text
 |                Pikachu              |
@@ -89,19 +91,13 @@ produire un texte centré et encadré avec des `####`. Par exemple,
 ####################
 ```
 
-4.1.4 : Au lieu d'utiliser des `#` pour encadrer le texte, passer le caractère
-en argument optionnel. (Par exemple : `encadrer("Pikachu", 20, '@')`)
-
-
-
-
 
 
 
 
 ## 5. Conditions
 
-5.0.1 : Reprendre la fonction `dire_bonjour` et afficher un message d'erreur si le nom fourni est vide.
+5.0.1 : Reprendre la fonction `annee_naissance` et afficher un message d'erreur et sortir immédiatement de la fonction si l'argument fourni n'est pas un nombre entre 0 et 130. Valider le comportement en appelant votre fonction avec comme argument `-12`, `158`, `None` ou `"toto"`.
 
 5.0.2 : Inspecter l'execution du code pas à pas à l'aide de Thonny.
 
@@ -113,24 +109,6 @@ en argument optionnel. (Par exemple : `encadrer("Pikachu", 20, '@')`)
 # Pikachu #
 ###########
 ```
-
-5.1.2 : Gérer le cas où le caractère d'encadrement est vide. Dans ce cas, ne pas
-encadrer. Par exemple : `encadrer("Pikachu", 20, '')` affichera juste :
-
-```text
-|                Pikachu               |
-```
-
-5.1.3 : Dans la fonction `centrer`, gérer également le cas où le texte dépasse
-la largueur demandée. Dans ce cas, tronquer le texte. Par exemple :
-`encadrer("Pikachu", 8)` affichera :
-
-```text
-########
-# Pika #
-########
-```
-
 
 
 
@@ -146,7 +124,6 @@ tout est bon, la fonction renvoie l'entier entré par l'utilisateur.
 fonctions certaines hypothèses faites, comme :
 
 - la longueur doit être un entier positif ou égal à -1
-- le caractère d'encadrement doit être un caractère (chaine de longueur 1) ou vide
 - le texte donné doit effectivement être une chaîne de caractère
 
 
@@ -172,8 +149,8 @@ Table du 7
 7.1.2 : Cette fois, passer le nombre en argument. La fonction devient par
 exemple `table_multiplication(7)`
 
-7.1.3 : En utilisant cette fonction, afficher les tables de multiplication pour
-tous les nombres entre 1 et 10.
+7.1.3 : En appelant cette fonction plusieurs fois, afficher les tables de
+multiplication pour tous les nombres entre 1 et 10.
 
 7.1.4 : Protéger l'accès à toute cette connaissance précieuse en demandant, au
 début du programme, un "mot de passe" jusqu'à ce que le bon mot de passe soit
@@ -219,7 +196,7 @@ une stratégie très simple consiste à prendre une allumette quoiqu'il arrive)
 
 ## 8. Structures de données
 
-8.0 : Écrire une fonction qui retourne le mot le plus grand parmis une liste de mot donnée en argument. Par exemple, `plus_long(["Paris", "Amsterdam", "Londres""])` renverra `"Amsterdam"`
+8.0 : Écrire une fonction qui retourne le mot le plus long parmis une liste de mot donnée en argument. Par exemple, `plus_long(["Paris", "Amsterdam", "Londres""])` renverra `"Amsterdam"`, et `plus_long(["Choucroute", "Pizza", "Tarte flambée"])` renverra `"Tarte flambée"`.
 
 8.1.1 : Écrire une fonction qui retourne le plus grand élément d'une liste (ou
 d'un set) de nombres, et une autre fonction qui permet retourn le plus petit.
@@ -262,26 +239,24 @@ utiliser la méthode `chaine.split(caractere)` des chaînes de caractère.
 
 ## 9. Fichiers
 
-9.1 Écrire une fonction qui prends un nom de fichier en argument et retourne
-le contenu si elle a été capable de le récupérer. Sinon, elle doit déclencher
-une exception qui explique en français pourquoi elle n'a pas pu.
+9.1 : Créer un fonction `liste_users` qui lit le fichier `/etc/passwd` et retourne la liste des utilisateurs ayant comme shell de login `/bin/bash`.
 
-9.2 : Écrire une fonction qui remplace un mot par un autre dans un fichier. On
-pourra pour cela se servir de `une_chaine.replace("mot", "nouveau_mot")` qui
-renvoie une version modifiée de `une_chaine` en ayant remplacé "mot" par
-"nouveau mot".
+9.2 : Dans le code Python, écrire un modèle d'email comme:
+
+```python
+modele = """
+Bonjour {prenom} !
+
+Voici en pièce jointe les billets pour votre voyage en train vers {destination}.
+"""
+```
+
+Ecrire une fonction `generer_email` qui remplace dans `modele` les chaines `{prenom}` et `{destination}` par des arguments fourni à la fonction, et enregistre le résultat dans un fichier `email_{prenom}.txt`. Par exemple, `generer_email("Alex", "Strasbourg")` générera le texte et sauvegardera le résultat dans `email_Alex.txt`.
 
 9.3 : Écrire une fonction qui permet d'afficher un fichier sans les commentaires
 et les lignes vides. Spécifier le caractère qui symbolise le début d'un
 commentaire en argument de la fonction. (Ou pourra utiliser la méthode `strip()`
 des chaînes de caractère pour identifier plus facilement les lignes vides)
-
-9.4 : Écrire une fonction qui trouve et retourne tous les utilisateurs dont le
-shell de login (?) est `/bin/bash` dans `/etc/passwd`
-
-
-
-
 
 
 
@@ -292,12 +267,12 @@ les précédents, et ont aussi pour objectifs de vous inciter à explorer la
 documentation des librairies pour trouver les outils dont vous avez besoin. Il
 existe de nombreuse façon de résoudre chaque exercice.
 
-10.1.1 : Télécharger le fichier `https://app.yunohost.org/community.json` (avec
+10.1.1 : Télécharger le fichier `https://app.yunohost.org/apps.json` (avec
 votre navigateur ou `wget` par exemple). Écrire une fonction qui lit ce fichier,
 le charge en tant que données json. Écrire une autre fonction capable de filter
 le dictionnaire pour ne garder que les apps d'un level `n` donné en argument.
 Écrire une fonction similaire pour le status (`working`, `inprogress`,
-`broken`).
+`notworking`).
 
 10.1.2 : Améliorez le programme précédent pour récupérer la liste directement
 depuis le programme avec `requests`. Gérer les différentes exceptions qui
@@ -307,11 +282,17 @@ incorrecte, erreur 404, time-out du serveur, erreur SSL
 10.1.3 : Écrire le résultat d'un tri (par exemple toutes les applications
 cassées) dans un fichier json.
 
-10.2.1 : Récupérer le fichier de données CSV, le lire, et afficher le nom des personnes ayant moins de 24 ans. Pour ce faire, on utilisera la librarie `csv`.
+10.2.1 : Récupérer le fichier de données CSV, le lire, et afficher le nom des
+personnes ayant moins de 24 ans. Pour ce faire, on utilisera la librarie `csv`.
 
-10.2.2 : Trier les personnes du fichier CSV par année de naissance et enregistrer une nouvelle version de ce fichier avec seulement le nom et l'année de naissance. Pour trier, on pourra utiliser `sorted` et son argument `key`.
+10.2.2 : Trier les personnes du fichier CSV par année de naissance et
+enregistrer une nouvelle version de ce fichier avec seulement le nom et l'année
+de naissance. Pour trier, on pourra utiliser `sorted` et son argument `key`.
 
-10.3 : Écrire un fonction `create_tmp_dir` qui choisi un nombre au hasard entre 0 et 100000 puis créer le dossier `/tmp/tmp-{lenombre}` et retourne le nom du dossier ainsi créé. On pourra utiliser la librairie `random` pour choisir un nom aléatoire, et `os.system` ou `subprocess.check_call` pour créer le dossier.
+10.3 : Écrire un fonction `create_tmp_dir` qui choisi un nombre au hasard entre
+0 et 100000 puis créer le dossier `/tmp/tmp-{lenombre}` et retourne le nom du
+dossier ainsi créé. On pourra utiliser la librairie `random` pour choisir un
+nom aléatoire, et `os.system` ou `subprocess.check_call` pour créer le dossier.
 
 10.4 : Écrire une fonction qui vérifie si un utilisateur système donné a le
 droit d'accéder à un fichier. On précisera en argument si il s'agit de droit de
@@ -336,4 +317,16 @@ via la commande `free`. La fonction retournera une utilisation en pourcent.
 actuellement en CPU, et les 3 processus les plus gourmands en RAM (avec
 leur consommation actuelle, chacun en CPU et en RAM)
 
+## 11. Outils et bonnes pratiques
 
+11.1 - Utiliser `pip3` pour trouver quelle est le numéro de version du package `requests` installé
+
+11.2 - Rechercher avec `pip3` si les paquets `flake8` et `autopep8` existent. Installez-les.
+
+11.3 - Utilisez `flake8` sur un code que vous avez écrit récemment (disons d'au moins 30 ou 40 lignes !). Étudiez les erreurs et warnings rapportées par flake, et essayer les corriger manuellement. Si certains warnings vous semblent trop aggressif, utiliser `--ignore` pour spécifier des codes d'erreurs à ignorer.
+
+11.4.1 - Sur un autre code relativement mal formatté, utiliser `autopep8` pour tenter d'ajuster automatiquement le formattage du code. Sauvegarder la sortie fournie par `autopep8` dans un autre fichier "version 2" et comparer le fichier initial avec le fichier de sortie à l'aide de `diff` ou de `git diff --no-index file1 file2`.
+
+11.4.2 - Le nouveau fichier est-il exempt de problèmes d'après flake8 ?
+
+11.5 - Récupérer le fichier `to_debug.py` auprès du formateur. Tenter d'executez ce script et de le faire fonctionner en résolvant les problèmes. En particuliez, ajoutez des breakpoints `pdb` (ou `ipdb`) pour étudiez ce qu'il se passe.

@@ -120,21 +120,19 @@ Transmettre :
 
 ### Partie 2 : Notions avancées (~2.5 jours ?)
 
+- Debugging avec pdb / ipdb
 - Objets et classes en Python
-- Manipulation de XML
-- Debuggage avec pdb / ipdb
 - Base de donnée / ORM
-- Construction d'intefaces graphiques
-- Parallelisation ? Plots ?
+- Framework web ?
 - ...
 
 ---
 
-# Fonctionnement du cours
+# Méthode
 
-Alternances entre explications théoriques sur une notion donnée
-
-et mise en application sur des exercices.
+Alternance entre
+- explications théoriques sur une notion donnée
+- mise en application sur des exercices.
 
 # Évaluation
 
@@ -210,14 +208,11 @@ class: impact
 
 .center[![](img/python.png)]
 
-- Versatile
-- "Moyen-niveau"
+- "Moyen-niveau" : équilibre entre performance, flexibilité et simplicité d'écriture
 - Syntaxe légère, lisible, facile à prendre en main
-- Interprété, "scripting"
-- Typage dynamique
-- Prototypage rapide
-- Grande communauté
-- De plus en plus répandu
+- Interprété, "scripting", prototypage rapide
+- Flexible (typage dynamique, ...)
+- Grande communauté, de plus en plus répandu...
 
 ---
 
@@ -457,17 +452,38 @@ y = x + 2  # déclare une autre variable y, à partir du contenu de x
 print(y)   # affichage du contenu de y
 ```
 
-## 1.4 Restriction sur le nommage
+## 1.4 Nommage
 
-- Noms des variables : caractères alphanumérique et `_`.
+- Caractères autorisés : caractères alphanumériques (`a-zA-Z0-9`) et `_`.
+- **Les noms sont sensibles à la casse** : `toto` n'est pas la même chose que `Toto`!
 - (Sans commencer par un chiffre)
-
 
 ---
 
 # 1. Les variables
 
-## 1.5. Opérations mathématiques
+## 1.5 Comparaison de différentes instructions
+
+Faire un calcul **sans l'afficher ni le stocker nul part**:
+```python
+6*7
+```
+
+Faire un calcul et **l'afficher dans la console**:
+```python
+print(6*7)
+```
+
+Faire un calcul et **stocker le résultat dans une variable `r`** pour le réutiliser plus tard
+```python
+r = 6*7
+```
+
+---
+
+# 1. Les variables
+
+## 1.6 Opérations mathématiques
 
 ```python
 2 + 3   # Addition
@@ -482,13 +498,29 @@ print(y)   # affichage du contenu de y
 
 # 1. Les variables
 
-## 1.6. Types
+## 1.6 Calcul avec réassignation
 
 ```python
-reponse = 42      # Entier / integer               / int
-pi = 3.1415       # Réel                           / float
-prenom = "Alex"   # Chaîne de caractère (string)   / str
-oui = True        # Booléen                        / bool
+x += 3   # Équivalent à x = x + 3
+x -= 3   # Équivalent à x = x - 3
+x *= 3   # Équivalent à x = x * 3
+x /= 3   # Équivalent à x = x / 3
+x %= 3   # Équivalent à x = x % 3
+x **= 3  # Équivalent à x = x ** 3
+```
+
+---
+
+# 1. Les variables
+
+## 1.7 Types
+
+```python
+42            # Entier / integer               / int
+3.1415        # Réel                           / float
+"Alex"        # Chaîne de caractère (string)   / str
+True / False  # Booléen                        / bool
+None          # ... "rien" / aucun (similar à `null` dans d'autres langages)
 ```
 
 Connaître le type d'une variable : `type(variable)`
@@ -497,7 +529,7 @@ Connaître le type d'une variable : `type(variable)`
 
 # 1. Les variables
 
-## 1.7. Conversion de type
+## 1.8 Conversion de type
 
 ```python
 int("3")      -> 3
@@ -507,7 +539,7 @@ int(3.14)     -> 3
 str(3.14)     -> "3.14"
 float("3.14") -> 3.14
 int(True)     -> 1
-int("trois")  -> Erreur
+int("trois")  -> Erreur / Exception
 ```
 
 ---
@@ -515,7 +547,6 @@ int("trois")  -> Erreur
 class: impact
 
 # 2. Interactivité basique
-
 
 ---
 
@@ -554,6 +585,12 @@ class: impact
 
 --
 
+### Syntaxe des chaînes
+
+- Entre simple quote (`'`) ou double quotes (`"`). Par exemple: `"hello"`
+- `print("hello")` affiche le texte `Hello`
+- `print(hello)` affiche **le contenu d'une variable qui s'apellerait** `Hello`
+
 ### Longueur
 
 ```python
@@ -561,10 +598,13 @@ m = "Hello world"
 len(m)        # -> 11
 ```
 
---
+---
+
+# 3. Chaînes de caractères
+
+.center[![](img/string.png)]
 
 ### Extraction
-
 
 ```python
 m[:5]    # -> 'Hello'
@@ -572,29 +612,38 @@ m[6:8]   # -> 'wo'
 m[-3:]   # -> 'rld'
 ```
 
----
-
-# 3. Chaînes de caractères
-
 ### Multiplication
 
 ```python
 "a" * 6    # -> "aaaaaa"
 ```
 
+---
+
+# 3. Chaînes de caractères
+
+
 ### Concatenation
 
 ```python
 "Cette phrase" + " est en deux morceaux."
-"J'ai " + str(28) + " ans."
-"J'ai " + str(age) + " ans."
+```
+
+```python
+name = "Alex"
+age = 28
+"Je m'appelle " + name + " et j'ai " + str(age) + " ans"
+```
+### Construction à partir de données, avec `%s`
+
+```python
+"Je m'appelle %s et j'ai %s ans" % ("Alex", 28)
 ```
 
 ### Construction à partir de données, avec `format`
 
 ```python
-"Je m'appelle {name} et j'ai {age} ans".format(name="Alex", age=28)
-"My name is {name} and I am {age} y.o.".format(name="Alex", age=28)
+"Je m'appelle {name} et j'ai {age} ans".format(name=name, age=age)
 ```
 
 ---
@@ -631,7 +680,7 @@ class: impact
 
 ## 4.1 Principe
 
-Donner un nom à un ensemble d'instructions (modularité, sémantique)
+Donner un nom à un ensemble d'instructions pour créer de la **modularité** et de la **sémantique**
 
 .col-6[
 ```python
@@ -649,7 +698,7 @@ def ma_fonction(arg1, arg2):
 ]
 ]
 
-On peut ensuite utiliser la fonction et récupérer le resultat :
+On peut ensuite utiliser la fonction avec les arguments souhaitées et récupérer le resultat :
 
 ```python
 mon_resultat = ma_fonction("pikachu", "bulbizarre")
@@ -658,48 +707,52 @@ autre_resultat = ma_fonction("salameche", "roucoups")
 
 ---
 
-# 4. Fonctions
+#### **Calculs mathématiques**
 
-.col-6[
 ```python
-def ma_fonction(arg1, arg2):
-    instruction1
-    instruction2
-    ...
-    return resultat
+sqrt(2)        -> 1.41421 (environ)
+cos(3.1415)    -> -1 (environ)
 ```
-]
 
-.col-6[
-.center[
-    ![](img/fonction.png)
-]
-]
+#### **Générer ou aller chercher des données**
 
-## 4.2 Elements de syntaxe
+```python
+nom_du_departement(67)        -> "Bas-rhin"
+temperature_actuelle("Lyon")  -> Va chercher une info sur internet et renvoie 12.5
+```
 
-- `def`, `:`
-- indentation !!
-- Des arguments
-- `return`
+#### **Convertir, formatter, filtrer, trier des données ...**
 
+```python
+int("3.14")                     -> 3
+normalize_url("toto.com/pwet/") -> https://toto.com/pwet
+sorted(liste_de_prenoms)     -> renvoie la liste triée alphabétiquement
+```
+
+#### **Afficher / demander des données **
+
+```python
+print("un message")
+input("donne moi un chiffre entre 1 et 10 ?")
+```
 
 ---
 
 # 4. Fonctions
 
-## 4.3 Exemple
+## 4.2 Exemples concrets
 
 ```python
-def aire_triangle(b, h):
-    return b * h / 2
+def aire_triangle(base, hauteur):
+    return base * hauteur / 2
 
 A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
 A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
 
-def aire_disque(r):
-    r_carree = r ** 2
-    return 3.1415 * r_carree
+
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
 
 A3 = aire_disque(6)           # -> A3 vaut (environ) 113 !
 ```
@@ -708,29 +761,25 @@ A3 = aire_disque(6)           # -> A3 vaut (environ) 113 !
 
 # 4. Fonctions
 
-... analyse dans Thonny ...
-
----
-
-# 4. Fonctions
-
-## 4.3 Exemple
+## 4.2 Exemples concrets
 
 ```python
-def aire_triangle(b, h):
-    return b * h / 2
+def aire_triangle(base, hauteur):
+    return base * hauteur / 2
 
 A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
 A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
 
-def aire_disque(r):
-    r_carree = r ** 2
-    return 3.1415 * r_carree
+
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
 
 A3 = aire_disque(6)           # -> A3 vaut (environ) 113
 
-def volume_cylindre(r, h):
-    return h * aire_disque(r)
+
+def volume_cylindre(rayon, hauteur):
+    return hauteur * aire_disque(rayon)
 
 V1 = volume_cylindre(6, 4)   # -> A4 vaut (environ) 452
 ```
@@ -740,66 +789,199 @@ V1 = volume_cylindre(6, 4)   # -> A4 vaut (environ) 452
 
 # 4. Fonctions
 
-## 4.3 Exemple
+## 4.3 Écrire une fonction : les éléments de syntaxe
+
+.col-6[
+```python
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+```
+]
+
+.col-6[
+.center[
+    ![](img/fonction.png)
+]
+]
+
+
+- `def`, `:`
+- des instructions **indentées** !!
+- des arguments (ou pas!)
+- `return` (ou pas)
+
+
+---
+
+# 4. Fonctions
+
+## 4.3 Écrire une fonction : les arguments
 
 ```python
-def aire_disque(r):
-    r_carree = r ** 2
-    print(3.1415 * r_carree)
+def aire_disque(rayon):
+    # [ ... ]
 ```
 
-Utilisation :
+- Une fonction est un traitement *générique*. **On ne connait pas à l'avance la valeur précise qu'aura un argument**, et généralement on appelle la fonction pleins de fois avec des arguments différents...
+- En **définissant** la fonction, on travaille donc avec un **argument** "abstrait" nommé `rayon`
+- Le nom `rayon` en tant qu'argument de la fonction **n'a de sens qu'a l'intérieur de cette fonction** !
+- En **utilisant** la fonction, on fourni la valeur pour `rayon`, par exemple: `aire_disque(6)`.
+
+---
+
+# 4. Fonctions
+
+## 4.3 Écrire une fonction : les variables locales
 
 ```python
-A1 = aire_disque(6)       # -> A1 vaut None !
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    # [ ... ]
+```
+
+- Les variables créées dans la fonction sont **locales**: elles n'ont de sens qu'a l'intérieur de la fonction
+- Ceci dit, cela ne m'empêche pas d'avoir des variables aussi nommées `rayon` ou `rayon_carree` dans une autre fonction ou dans la portée globale (mais ce ne sont pas les mêmes entités)
+
+---
+
+# 4. Fonctions
+
+## 4.3 Écrire une fonction : `return`
+
+```python
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+```
+
+- `return` permet de **récupérer le résultat de la fonction**
+- C'est ce qui donne du sens à `A = aire_disque(6)` (il y a effectivement un résultat à mettre dans `A`)
+- Si une fonction n'a pas de `return`, elle renvoie `None`
+- `return` **quitte immédiatement la fonction**
+
+---
+
+# 4. Fonctions
+
+.center[
+### ... regardons tout cela dans Thonny ...!
+
+#### et discutons des erreurs classiques
+]
+
+---
+
+# 4. Fonctions
+
+## 4.4 Erreur classique: utiliser `print` au lieu de `return`
+
+### Ce programme n'affiche rien
+
+```python
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+
+A = aire_disque(6)      # A vaut bien quelque chose
+                        # mais nous ne demandons pas de l'afficher ...
 ```
 
 ---
 
 # 4. Fonctions
 
-## 4.4 Variables locales
+## 4.4 Erreur classique: utiliser `print` au lieu de `return`
+
+### Solution naive : remplacer le `return` par un `print`
 
 ```python
-def aire_disque(r):
-    r_carree = r ** 2
-    return 3.1415 * r_carree
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    print(3.1415 * rayon_carree)    # Affiche le résultat dans la console
+
+A = aire_disque(6)   # Mais maintenant A vaut None
+                     # car la fonction n'a pas utilisé `return`
 ```
 
-- Les variables créées dans la fonction sont **locales**
-- Les arguments (par ex. `r`) sont égalements "locaux" : ils font reference aux arguments de cette fonction, meme si d'autres variables nommées `r` existent ailleurs dans le code !
-
 ---
 
 # 4. Fonctions
 
-## 4.5 `return`
+## 4.4 Erreur classique: utiliser `print` au lieu de `return`
 
-- `return` **quitte immédiatement la fonction !**
-- Il peut néanmoins y avoir plusieurs `return` dans une fonction (mais seul un sera executé)
-- Une fonction sans `return` renvoie implicitement `None`.
-
----
-
-# 4. Fonctions
-
-## 4.6 Ordre d'appel des arguments
+### "Bonne" solution
 
 ```python
-def aire_triangle(b, h):
-    return b * h / 2
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+
+A = aire_disque(6)   # Stocker le résultat dans A
+print(A)             # Demander d'afficher A dans la console
+```
+
+--
+
+.center[
+Ceci dit, **il peut être tout à fait légitime de mettre des `print`** dans une fonction,
+
+par exemple pour la débugger...!
+]
+
+---
+
+# 4. Fonctions
+
+## 4.5 Appel de fonction avec arguments explicites
+
+```python
+def aire_triangle(base, hauteur):
+    return base * hauteur / 2
 
 A1 = aire_triangle(3, 5)
-A2 = aire_triangle(4, h=8)
-A3 = aire_triangle(h=6, b=2)
-A4 = aire_triangle(h=3, 2)    # < Pas possible !
+A2 = aire_triangle(4, hauteur=8)
+A3 = aire_triangle(hauteur=6, base=2)
+A4 = aire_triangle(hauteur=3, 2)    # < Pas possible !
+```
+
+N.B. : cette écriture est aussi plus explicite / lisible / sémantique:
+
+```python
+aire_triangle(base=3, hauteur=5)
+```
+
+que juste
+
+```python
+aire_triangle(3, 5)
 ```
 
 ---
 
 # 4. Fonctions
 
-## 4.8 Arguments optionnels
+## 4.5 Appel de fonction avec arguments explicites
+
+On peut se retrouver dans des situations comme:
+
+```python
+base = 3
+hauteur = 5
+
+A1 = aire_triangle(base=base, hauteur=hauteur)
+```
+
+Dans l'appel de la fonction :
+- le premier `base` est **le nom de l'argument de la fonction `aire_triangle`**,
+- le deuxième `base` corresponds au **contenu de la variable nommée `base`**.
+
+
+---
+
+# 4. Fonctions
+
+## 4.6 Arguments optionnels
 
 Les arguments peuvent être rendu optionnels si ils ont une valeur par défaut :
 
@@ -811,20 +993,20 @@ def distance(dx, dy=0, dz=0):
 Dans ce cas, tous ces appels sont valides :
 
 ```python
-distance(1)
-distance(1, 2)
-distance(1, 2, 3)
-distance(1, dy=2)
-distance(1, dz=3)
-distance(1, dy=2, dz=3)
-distance(1, dz=3, dy=2)
+distance(5)
+distance(2, 4)
+distance(5, 8, 2)
+distance(9, dy=5)
+distance(0, dz=4)
+distance(1, dy=1, dz=9)
+distance(2, dz=4, dy=7)
 ```
 
 ---
 
 # 4. Fonctions
 
-## 4.8 Arg. optionnels : exemple de la vraie vie
+## 4.6 Arg. optionnels : exemple de la vraie vie
 
 ```python
 subprocess.Popen(args,
@@ -844,15 +1026,6 @@ subprocess.Popen(args,
 ```
 
 c.f. `https://docs.python.org/2/library/subprocess.html#subprocess.Popen`
-
----
-
-# 4. Fonctions
-
-## 4.9 Différence avec le concept mathématique
-
-- Domaine généralement mal défini (e.g. type d'entrée et de sortie)
-- Effets de bords (e.g. `print()`)
 
 ---
 
@@ -917,7 +1090,12 @@ def dire_bonjour(nom):
 
 ## 5.3 Lien avec les booléens
 
-Les conditions comme `nom == "Jack Sparrow"` sont en fait transformées en booléen lorsque la ligne est interprétée.
+L'opérateur `==` est similaire à l'opérateur `+`, dans le sens où l'opération `a == b` renvoie également un résultat (qui est un booléen)
+
+```python
+3 + 5          # -> renvoie 8
+name == "Jack" # -> renvoie True ou False
+```
 
 On aurait pu écrire :
 
@@ -1336,11 +1514,21 @@ d'information...
 
 ## 8.1 Les listes
 
+Une collection d'éléments **ordonnés** référencé par un indice
+
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 fibonnaci = [ 1, 1, 2, 3, 5, 8 ]
 stuff = [ 3.14, 42, "bidule", ["a", "b", "c"] ]
 ```
+
+---
+
+```python
+favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
+```
+
+--
 
 ### Accès à un élément particulier
 
@@ -1348,19 +1536,30 @@ stuff = [ 3.14, 42, "bidule", ["a", "b", "c"] ]
 favourite_pokemons[1]    ->  "Roucoups"
 ```
 
+--
+
 ### Longueur
 
 ```python
 len(favourite_pokemons)    -> 3
 ```
 
----
+--
 
-# 8. Structures de données
+### Tester qu'un élément est (ou n'est pas) dans une liste
+
+```python
+"Insecateur" in favourite_pokemons   # -> True
+"Roucoups" not in favourite_pokemons # -> False
+```
+
+---
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 ```
+
+--
 
 ### Iteration
 
@@ -1368,6 +1567,8 @@ favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 for pokemon in favourite_pokemons:
     print(pokemon + " est un de mes pokemons préférés !")
 ```
+
+--
 
 ### Iteration avec index
 
@@ -1378,11 +1579,11 @@ for i, pokemon in enumerate(favourite_pokemons):
 
 ---
 
-# 8. Structures de données
-
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 ```
+
+--
 
 ### Modification d'un élément
 
@@ -1390,11 +1591,15 @@ favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 favourite_pokemons[1] = "Roucarnage"
 ```
 
+--
+
 ### Ajout à la suite
 
 ```python
 favourite_pokemons.append("Mewtwo")
 ```
+
+--
 
 ### Insertion
 
@@ -1404,7 +1609,33 @@ favourite_pokemons.insert(1, "Papillusion")
 
 ---
 
-# 8. Structures de données
+### Exemple de manip classique : filtrer une liste pour en construire une nouvelle
+
+```python
+favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
+
+# Création d'une liste vide
+pokemons_starting_with_B = []
+
+# J'itère sur la liste de pokémons favoris
+for pokemon in favourite_pokemons:
+
+   # Si le nom du pokémon actuel commence par B
+   if pokemon.startswith("B"):
+
+      # Je l'ajoute à la liste
+      pokemons_starting_with_B.append(pokemon)
+```
+
+--
+
+À la fin, `pokemons_starting_with_B` contient:
+
+```python
+["Bulbizarre"]
+```
+
+---
 
 ### Transformation de string en liste
 
@@ -1424,53 +1655,139 @@ favourite_pokemons.insert(1, "Papillusion")
 
 ## 8.2 Les dictionnaires
 
-```python
-ages = { "Alice": 20, "Bob": 24, "Charlie": 19 }
-```
-
-N.B. : dans les dictionnaires, l'ordre des éléments est sans importance !
-
-### Accès à une valeur
+Une collection **non-ordonnée** (apriori) de **clefs** a qui sont associées des **valeurs**
 
 ```python
-ages["Charlie"]      -> 19
-ages["Elie"]         -> KeyError !
-ages.get("Elie", -1) -> -1
-```
-
-### Modification d'une entrée, ajout d'une nouvelle entrée
-
-```python
-ages["Charlie"] += 1
-ages["Deborah"] = 21
+phone_numbers = { "Alice":   "06 93 28 14 03",
+                  "Bob":     "06 84 19 37 47",
+                  "Charlie": "04 92 84 92 03"  }
 ```
 
 ---
 
 ```python
-ages = { "Alice": 20, "Bob": 24, "Charlie": 19 }
+phone_numbers = { "Alice":   "06 93 28 14 03",
+                  "Bob":     "06 84 19 37 47",
+                  "Charlie": "04 92 84 92 03"  }
+```
+
+--
+
+### Accès à une valeur
+
+```python
+phone_numbers["Charlie"]        -> "04 92 84 92 03"
+phone_numbers["Elie"]           -> KeyError !
+phone_numbers.get("Elie", None) -> None
+```
+
+--
+
+### Modification d'une entrée, ajout d'une nouvelle entrée
+
+```python
+phone_numbers["Charlie"] = "06 25 65 92 83"
+phone_numbers["Deborah"] = "07 02 93 84 21"
+```
+
+--
+
+### Tester qu'une clef est dans le dictionnaire
+
+```python
+"Elie" in phone_numbers    # -> False
+"Bob" not in phone_numbers # -> False
+```
+
+---
+
+```python
+phone_numbers = { "Alice":   "06 93 28 14 03",
+                  "Bob":     "06 84 19 37 47",
+                  "Charlie": "04 92 84 92 03"  }
 ```
 
 ### Iteration sur les clefs
 
 ```python
-for prenom in ages:
-    print("Je connais l'age de "+prenom)
+for prenom in phone_numbers:     # Ou plus explicitement: phone_numbers.keys()
+    print("Je connais le numéro de "+prenom)
 ```
+
+--
 
 ### Iteration sur les valeurs
 
 ```python
-for age in ages.values():
-    print("Quelqu'un a "+str(age)+" ans")
+for phone_number in phone_numbers.values():
+    print("Quelqu'un a comme numéro " + phone_number)
 ```
+
+--
 
 ### Iterations sur les clefs et valeurs
 
 ```python
-for prenom, age in ages.items():
-    print(prenom + " a " + str(age) + " ans !")
+for prenom, phone_number in phone_numbers.items():
+    print("Le numéro de " + prenom + " est " + phone_number)
 ```
+
+---
+
+# 8. Structures de données
+
+## 8.3 Construction plus complexes
+
+Liste de liste, liste de dict, dict de liste, dict de liste, ...
+
+```python
+contacts = { "Alice":  { "phone": "06 93 28 14 03",
+                         "email": "alice@megacorp.eu" },
+
+             "Bob":    { "phone": "06 84 19 37 47",
+                         "email": "bob.peterson@havard.edu.uk" },
+
+             "Charlie": { "phone": "04 92 84 92 03" } }
+```
+
+---
+
+```python
+contacts = { "Alice":  { "phone": "06 93 28 14 03",
+                         "email": "alice@megacorp.eu" },
+
+             "Bob":    { "phone": "06 84 19 37 47",
+                         "email": "bob.peterson@harvard.edu.uk" },
+
+             "Charlie": { "phone": "04 92 84 92 03" } }
+```
+
+--
+
+### Recuperer le numero de Bob
+
+```python
+contacts["Bob"]["phone"]   # -> "06 84 19 37 47"
+```
+
+--
+
+### Ajouter l'email de Charlie
+
+```python
+contacts["Charlie"]["email"] = "charlie@orange.fr"
+```
+
+--
+
+### Ajouter Deborah avec juste une adresse mail
+
+```python
+contacts["Deborah"] = {"email": "deb@hotmail.fr"}
+```
+
+
+
 
 ---
 
@@ -1478,16 +1795,16 @@ for prenom, age in ages.items():
 
 ## 8.3 Les sets
 
-Les `set`s stockent des éléments de manière unique et désordonnée.
+Les `set`s sont des collections d'éléments **unique** et **non-ordonnée**
 
 ```python
-chat = set("chat")     # -> {'h', 'c', 'a', 't'}
-chien = set("chien")   # -> {'c', 'e', 'i', 'n', 'h'}
-chat - chien           # -> {'a', 't'}
-chien - chat           # -> {'i', 'n', 'e'}
-chat & chien           # -> {'h', 'c'}
-chat | chien           # -> {'c', 't', 'e', 'a', 'i', 'n', 'h'}
-chat.add("z")          # ajoute `z` à `chat`
+chat = set(["c", "h", "a", "t"])        # -> {'h', 'c', 'a', 't'}
+chien = set(["c", "h", "i", "e", "n")   # -> {'c', 'e', 'i', 'n', 'h'}
+chat - chien                            # -> {'a', 't'}
+chien - chat                            # -> {'i', 'n', 'e'}
+chat & chien                            # -> {'h', 'c'}
+chat | chien                            # -> {'c', 't', 'e', 'a', 'i', 'n', 'h'}
+chat.add("z")                           # ajoute `z` à `chat`
 ```
 
 ---
@@ -1496,7 +1813,7 @@ chat.add("z")          # ajoute `z` à `chat`
 
 ## 8.4 Les tuples
 
-Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière non-mutable. 
+Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière non-mutable.
 Generalement itérer sur un tuple n'a pas vraiment de sens...
 
 Typiquement : des coordonnées de point.
@@ -1508,7 +1825,7 @@ xyz[1]        # -> 3
 xyz[0] = 5    # -> Erreur!
 ```
 
-Autre exemple `dictionnaire.items()` renvoie une liste de tuple `(clef, valeur)` : 
+Autre exemple `dictionnaire.items()` renvoie une liste de tuple `(clef, valeur)` :
 
 ```python
 [ (clef1, valeur1), (clef2, valeur2), ... ]
@@ -1569,7 +1886,7 @@ Carré des entiers impairs d'une liste
 - Une fonction qui renvoie **des** résultats "au fur et à mesure" qu'ils sont demandés ...
 - Se comporte comme un itérateur
 - Peut ne jamais s'arrêter ...!
-- Typiquement, évite de créer des listes intermédiaires 
+- Typiquement, évite de créer des listes intermédiaires
 
 ---
 
@@ -1578,7 +1895,7 @@ Carré des entiers impairs d'une liste
 ## 8.6 Générateurs : exemple SANS generateur
 
 ```python
-mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25, 
+mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25,
                  "Rattata": 15,       "Rondoudou": 23
                  # [...]
                }
@@ -1605,7 +1922,7 @@ for pokemon in au_moins_niveau_20(mes_pokemons):
 ## 8.6 Générateurs : exemple AVEC generateur
 
 ```python
-mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25, 
+mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25,
                  "Rattata": 15,       "Rondoudou": 23
                  # [...]
                }
@@ -1632,10 +1949,10 @@ Il n'est pas nécessaire de créer la liste intermédiaire `output`
 
 ```python
 def factoriel():
-   
+
    n = 1
    acc = 1
-   
+
    while True:
        acc *= n
        n += 1
@@ -1796,27 +2113,6 @@ from math import sqrt, sin, cos
 sqrt(2)   # -> 1.4142135623730951
 ```
 
----
-
-# 10. Librairies
-
-## 10.3 Exemple : `os`
-
-`os` permet d'interagir avec le système d'exploitation pour réaliser différent
-type d'action... Certaines étant spécifiques à l'OS en question (Linux, Windows,
-...)
-
-Quelques exemples :
-
-```python
-import os
-os.listdir("/etc/")  # Liste les fichiers dans /etc/
-os.path.join("/etc", "passwd") # Génère un chemin à partir de plusieurs parties
-os.system("ls /etc/") # (à éviter) Execute une commande "brute"
-```
-
-Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
-
 
 ---
 
@@ -1884,7 +2180,7 @@ print(r.text)           # -> Le contenu de la page
 
 # 10. Librairies
 
-## 10.2 Exemple : `csv`
+## 10.3 Exemple : `csv`
 
 ```python
 import csv
@@ -1906,7 +2202,29 @@ with open("newtable.csv", "w") as f:
 
 # 10. Librairies
 
-## 10.4 Exemple : `subprocess`
+## 10.4 Exemple : `os`
+
+`os` permet d'interagir avec le système d'exploitation pour réaliser différent
+type d'action... Certaines étant spécifiques à l'OS en question (Linux, Windows,
+...)
+
+Quelques exemples :
+
+```python
+import os
+os.listdir("/etc/")            # Liste les fichiers dans /etc/
+os.path.join("/etc", "passwd") # Génère un chemin à partir de plusieurs parties
+os.system("touch /etc/toto")   # (à éviter) Execute une commande "brute"
+```
+
+Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
+
+
+---
+
+# 10. Librairies
+
+## 10.5 Exemple : `subprocess`
 
 `subprocess` peut typiquement être utiliser pour lancer des commandes et
 récupérer leur résultat
@@ -1924,9 +2242,9 @@ print(out)    # -> Affiche 'Hello World'
 
 # 10. Librairies
 
-## 10.4 Exemple : `io`
+## 10.6 Exemple : `io`
 
-Par exemple, pour créer des objets "file-like". Par exemple : 
+Par exemple, pour créer des objets "file-like". Par exemple :
 
 ```python
 import io
@@ -1942,7 +2260,31 @@ print(f.read())    # -> 'i am writing text data'
 
 # 10. Librairies
 
-## 10.6 Ecrire ses propres modules
+.center[![](img/moar.jpg)]
+
+---
+
+# 10. Librairies
+
+## Moar ?
+
+- Debian packages : `python-*`
+- Python package manager : `pip`
+
+## Exemples
+
+- JSON, XML, HTML, YAML, ...
+- Regular expressions
+- Logging, Parsing d'options, ...
+- Internationalisation
+- Templating
+- Plots, LDAP, ...
+
+---
+
+# 10. Librairies
+
+## 10.7 Ecrire ses propres modules
 
 Considérant les fichiers suivants :
 
@@ -1968,7 +2310,7 @@ print(dire_bonjour)
 
 # 10. Librairies
 
-## Ecrire ses propres modules
+## 10.7 Ecrire ses propres modules
 
 Considérant les fichiers suivants :
 
@@ -1989,31 +2331,6 @@ bonjour.dire_bonjour("Alex") # -> "Bonjour Alex !"
 print(bonjour)
 # -> <module 'mylib.bonjour' from 'mylib/bonjour.pyc'>
 ```
-
-
----
-
-# 10. Librairies
-
-.center[![](img/moar.jpg)]
-
----
-
-# 10. Librairies
-
-## Moar ?
-
-- Debian packages : `python-*`
-- Python package manager : `pip`
-
-## Exemples
-
-- JSON, XML, HTML, YAML, ...
-- Regular expressions
-- Logging, Parsing d'options, ...
-- Internationalisation
-- Templating
-- Plots, LDAP, ...
 
 ---
 
@@ -2044,7 +2361,7 @@ Pour votre code :
 - PIP : "Pip Install Packages"
 - PyPI : Python Package Index
 - Installer un paquet :
-    - `pip3 install <paquet>` 
+    - `pip3 install <paquet>`
 - Rechercher un paquet :
     - `pip3 search <motclef>`
 - Installer une liste de dépendances :
