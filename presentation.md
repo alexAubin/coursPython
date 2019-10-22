@@ -71,6 +71,13 @@ Formateur
 
 ---
 
+# Horaires ?
+
+- 9h -> 12h30 ? pause vers 10h30 ?
+- 14h -> 17h30 ? pause vers 15h30 ?
+
+---
+
 # Enseigner et apprendre la programmation
 
 #### (Mauvaises nouvelles)
@@ -111,20 +118,21 @@ Transmettre :
 
 # Plan
 
-### Partie 1 : Notions de "bases" (~ 2.5 jours ?)
+### Partie 1 : Notions de "bases"
 
 - Variables, fonctions
 - Structures de contrôle (conditions, boucles)
 - Structures de données (listes, dictionnaires, ...)
 - Fichiers, exceptions, librairies, ...
 
-### Partie 2 : Notions avancées (~2.5 jours ?)
+### Partie 2 : Notions avancées
 
+- Orienté objet
 - Debugging avec pdb / ipdb
-- Objets et classes en Python
 - Base de donnée / ORM
 - Framework web ?
-- ...
+- Tests unitaires ? Regex ?
+- Generateurs, décorateurs, parallelisation, ... ?
 
 ---
 
@@ -132,17 +140,8 @@ Transmettre :
 
 Alternance entre
 - explications théoriques sur une notion donnée
+- partage du support sur Dismorphia
 - mise en application sur des exercices.
-
-# Évaluation
-
-- QCM et bouts de programmes à compléter
-- Basé sur des cas et erreurs "courantes" vues dans les exercices
-
-# Logistique ?
-
-- 9h -> 12h30 ? pause vers 10h30 ?
-- 13h30 -> 17h ? pause vers 15h ?
 
 ---
 
