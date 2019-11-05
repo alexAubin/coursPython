@@ -23,7 +23,7 @@ Executez ensuite ce script à l'aide de `python3 hello.py` ou `./hello.py`
 
 ## 1. Variables
 
-1.1. : De retour dans Thonny, écrire, lancer et analyser l'execution du programme suivant :
+1.1. : De retour dans Thonny, écrire, lancer et analyser pas à pas l'execution du programme suivant :
 
 ```python
 message = "Je connais la réponse à l'univers, la vie et le reste"
@@ -68,26 +68,25 @@ une message tel que `"Ce mot fait X caractères !"`
 
 4.0.2 : Inspecter l'execution du code pas à pas à l'aide de Thonny.
 
-4.1.1 : Ecrire une fonction `centrer` prend en argument une chaîne de caractère, et retourne une nouvelle chaîne centrée sur 40 caractères. Par exemple `print(centrer("Pikachu"))` affichera :
+4.1.1 : Ecrire une fonction `centrer` prend en argument une chaîne de caractère, et retourne une nouvelle chaîne centrée sur 40 caractères. Par exemple `print(centrer("Python"))` affichera :
 
 ```text
-|                Pikachu              |
+|                Python                |
 ```
 
-4.1.2 : Ajouter un argument optionnel pour gérer la largeur au lieu du "80"
-fixé. Par exemple `print(centrer("Pikachu", 20)) affichera :`
+4.1.2 : Ajouter un argument optionnel pour gérer la largeur au lieu du 40 "codé en dur". Par exemple `print(centrer("Python", 20)) affichera :`
 
 ```text
-|      Pikachu     |
+|      Python      |
 ```
 
 4.1.3 : Créer une fonction `encadrer` qui utilise la fonction `centrer` pour
 produire un texte centré et encadré avec des `####`. Par exemple,
-`print(encadrer("Pikachu", 20))` affichera :
+`print(encadrer("Python", 20))` affichera :
 
 ```text
 ####################
-#      Pikachu     #
+|      Python      |
 ####################
 ```
 
@@ -102,12 +101,12 @@ produire un texte centré et encadré avec des `####`. Par exemple,
 5.0.2 : Inspecter l'execution du code pas à pas à l'aide de Thonny.
 
 5.1.1 : Reprendre la fonction `centrer` de l'exercice 4.1 et gérer le cas où la largueur demandée est -1 : dans ce cas, ne pas centrer. Par exemple,
-`print(encadrer("Pikachu", -1))` affichera :
+`print(encadrer("Python", -1))` affichera :
 
 ```text
-###########
-# Pikachu #
-###########
+##########
+# Python #
+##########
 ```
 
 
@@ -135,7 +134,17 @@ fonctions certaines hypothèses faites, comme :
 ## 7. Boucles
 
 7.1.1 : Écrire une fonction qui, pour un nombre donné, renvoie la table de
-multiplication. Par exemple `print(table_du_7())` affichera :
+multiplication. Dans un premier temps, on pourra se contenter d'afficher les résultats. Par exemple `print(table_du_7())` affichera :
+
+```text
+7
+14
+21
+...
+70
+```
+
+puis ensuite on peut améliorer la présentation pour obtenir le résultat :
 
 ```text
 Table du 7
@@ -156,10 +165,10 @@ multiplication pour tous les nombres entre 1 et 10.
 début du programme, un "mot de passe" jusqu'à ce que le bon mot de passe soit
 donné.
 
-7.2 : Écrire une fonction qui permet de déterminer si un nombre est premier. Par
+7.2 : (Optionnel) Écrire une fonction qui permet de déterminer si un nombre est premier. Par
 exemple `is_prime(3)` renverra True, et `is_prime(10)` renverra False.
 
-7.3 : Écrire une fonction qui permet de générer les n premiers nombres de la
+7.3 : (Optionnel) Écrire une fonction qui permet de générer les n premiers nombres de la
 suite de Fibonnaci
 
 7.4.1 : Jeu des allumettes
@@ -180,11 +189,12 @@ perdant est celui qui se retrouve obligé de prendre la dernière allumette.
   - Demander à l'utilisateur combien il veut prendre d'allumettes avec `choisir_nombre`
   - Propager ce choix sur le nombre d'allumette actuellement sur la table
   - Afficher le nouvel état avec `afficher_allumettes`
-- Modifier `partie_allumettes` pour gérer deux joueurs (1 et 2) et les faire
-  jouer à tour de rôle jusqu'à ce qu'une condition de victoire soit détectée (il
-  reste moins d'une allumette...) moins d'une allumette.
 
-7.4.2 : Intelligence artificielle
+7.4.2 : (Optionnel) Modifier `partie_allumettes` pour gérer deux joueurs (1 et 2) et les faire
+  jouer à tour de rôle jusqu'à ce qu'une condition de victoire soit détectée (il
+  reste moins d'une allumette...).
+
+7.4.3 : (Optionnel) Intelligence artificielle
 
 Reprendre le jeu précédent et le modifier pour introduire une "intelligence"
 artificielle qui soit capable de jouer en tant que 2ème joueur. (Par exemple,
@@ -196,29 +206,56 @@ une stratégie très simple consiste à prendre une allumette quoiqu'il arrive)
 
 ## 8. Structures de données
 
-8.0 : Écrire une fonction qui retourne le mot le plus long parmis une liste de mot donnée en argument. Par exemple, `plus_long(["Paris", "Amsterdam", "Londres""])` renverra `"Amsterdam"`, et `plus_long(["Choucroute", "Pizza", "Tarte flambée"])` renverra `"Tarte flambée"`.
-
-8.1.1 : Écrire une fonction qui retourne le plus grand élément d'une liste (ou
-d'un set) de nombres, et une autre fonction qui permet retourn le plus petit.
+8.0 : Écrire une fonction qui retourne le plus grand élément d'une liste (ou
+d'un set) de nombres, et une autre fonction qui retourne le plus petit.
 Par exemple, `plus_grand([5, 9, 12, 6, -1, 4])` retournera 12.
 
-8.1.2 : Dans la fonction précédente, vérifier que l'argument donné est bien une
-liste non vide.
+```python
+assert plus_grand([5, 9, 12, 6, -1, 4]) == 12
+assert plus_grand([-6, -19, -2]) == -2
 
-8.2 : Écrire une fonction qui calcule la somme d'une liste de nombres. Par
-exemple, `somme([3, 4, 5])` renverra 12.
+assert plus_petit([5, 9, 12, 6, -1, 4]) == -1
+assert plus_petit([-6, -19, -2]) == -19
+```
 
-8.3 : Comme 8.2, mais cette fois sans utiliser de variable intermédiaire (utiliser la récursivité)
+8.1 : Écrire une fonction qui retourne le mot le plus long parmis une liste de mot donnée en argument.
 
-8.4 : Écrire une fonction qui retourne seulement les entiers pairs d'une liste
+```python
+assert plus_long(["Paris", "Amsterdam", "Londres"]) == "Amsterdam"
+assert plus_long(["Choucroute", "Pizza", "Tarte flambée"]) == "Tarte flambée"
+```
 
-8.5 : Écrire une fonction qui permet de trier une liste (ou un set) d'entiers
+8.2 : Écrire une fonction qui calcule la somme d'une liste de nombres.
 
-8.6 : Écrire une fonction qui prends en argument un chemin de fichier comme
+```python
+assert somme([3, 4, 5]) == 12
+assert somme([0, 7, -3]) == 4
+```
+
+8.3 : Écrire une fonction qui prends en argument un chemin de fichier comme
 "/usr/bin/toto.py" et extrait le nom du fichier, c'est à dire "toto". On pourra
 utiliser la méthode `chaine.split(caractere)` des chaînes de caractère.
 
-8.7 : En **une seule** ligne de code, générer la matrice suivante :
+
+8.4.1 : Récuperer le dictionnaire d'exemple auprès du formateur (`example_dict.py`) et boucler sur ce dictionnaire pour afficher quelque chose comme:
+
+```text
+Sebastian est né.e en 1979
+Barclay est né.e en 2000
+Vivien est né.e en 1955
+...
+```
+
+8.4.2 : Transformer le programme précédent pour n'afficher que les personnes ayant une adresse mail finissant par `.edu`.
+
+8.5 : Ecrire une fonction `compte_lettres` qui prends en argument une (grande) chaîne de caractère et retourne un dictionnaire avec un compte des occurences des lettres. Par exemple `compte_lettres("hello")` retournera `{"h":1, "l": 2, "o": 1, "e":1 }`. Utiliser cette fonction sur Lorem Ipsum ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt [...]")
+
+
+8.6 : Écrire une fonction qui retourne seulement les entiers pairs d'une liste
+
+8.7 : Écrire une fonction qui permet de trier une liste (ou un set) d'entiers
+
+8.8 : En **une seule** ligne de code, générer la matrice suivante :
 
 ```python
 [ [ 0, 1, 2, 3,  4  ],
@@ -227,15 +264,11 @@ utiliser la méthode `chaine.split(caractere)` des chaînes de caractère.
   [ 0, 4, 8, 12, 16 ] ]
 ```
 
-8.8 : Ecrire une fonction `compte_lettres` qui prends en argument une (grande) chaîne de caractère et retourne un dictionnaire avec un compte des occurences des lettres. Par exemple `compte_lettres("hello")` retournera `{"h":1, "l": 2, "o": 1, "e":1 }`. Utiliser cette fonction sur Lorem Ipsum ("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt [...]")
-
-8.9 : Récuperer le dictionnaire d'exemple auprès du formateur (`example_dict.py`) et boucler sur ce dictionnaire pour afficher le prenom de toutes les personnes ayant une adresse mail en `.edu`.
+8.9 : Réécrire la fonction  `somme` du 8.2, mais cette fois sans utiliser de variable intermédiaire (utiliser la récursivité)
 
 8.10 : Ecrire un générateur `carre()` qui genere la suite 1, 4, 9, 16, ... Utiliser ce générateur pour afficher les carrés jusqu'à ce qu'une valeur dépasse 200.
 
 8.11 : Ecrire un générateur `fibonnaci` qui genere la suite de fibonnaci 0, 1, 1, 2, 3, 5, 8, ... Utiliser ce générateur pour afficher les valeurs jusqu'à ce qu'elles dépassent 500.
-
-
 
 ## 9. Fichiers
 
@@ -316,6 +349,8 @@ via la commande `free`. La fonction retournera une utilisation en pourcent.
 10.8 : Écrire une fonction qui renvoie les 3 processus les plus gourmands
 actuellement en CPU, et les 3 processus les plus gourmands en RAM (avec
 leur consommation actuelle, chacun en CPU et en RAM)
+
+
 
 ## 11. Outils et bonnes pratiques
 

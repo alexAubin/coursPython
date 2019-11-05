@@ -125,14 +125,13 @@ Transmettre :
 - Structures de données (listes, dictionnaires, ...)
 - Fichiers, exceptions, librairies, ...
 
-### Partie 2 : Notions avancées
+### Partie 2 : Notions "avancées"
 
+- Debugging avec pdb / ipdb, bonnes pratiques, ...
 - Orienté objet
-- Debugging avec pdb / ipdb
-- Base de donnée / ORM
+- Base de données / ORM ?
 - Framework web ?
-- Tests unitaires ? Regex ?
-- Generateurs, décorateurs, parallelisation, ... ?
+- Tests unitaires, generateurs, décorateurs, regex, parallelisation, ... ?
 
 ---
 
@@ -1221,8 +1220,7 @@ class: impact
 
 # 6. Exceptions, assertions
 
-Les exceptions correspondent à des erreurs ou des cas particuliers qui empêchent
-(a priori) la suite du déroulement du programme ou d'une fonction.
+En Python, lorsqu'une erreur se produit ou qu'un cas particulier empêche (a priori) la suite du déroulement normal d'un programme ou d'une fonction, une *exception* est déclenchée.
 
 ### Exemple
 
@@ -1236,13 +1234,59 @@ ValueError: invalid literal for int() with base 10: 'test'
 
 # 6. Exceptions, assertions
 
+## 6.0 `raise`
+
+Il est possible de déclencher ses propres exceptions à l'aide de `raise`
+
+```python
+if n < 0 or n > 10:
+    raise Exception("Ce n'est pas un nombre entre 0 et 10 !")
+```
+
+---
+
+# 6. Exceptions, assertions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Par exemple : écrire dans un fichier
+- Est-ce que le programme a la permission d'écrire dans ce fichier ?
+- Est-ce qu'aucun autre programme n'est en train d'écrire dans ce fichier ?
+- Est-ce qu'il y a assez d'espace disque libre ?
+- Si je commence à écrire, peut-être vais-je tomber sur un secteur disque deffectueux
+- ...
+
+---
+
+# 6. Exceptions, assertions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Autre exemple : aller chercher une information sur internet
+- Est-ce que je suis connecté à Internet ?
+- Est-ce que la connection est suffisament stable et rapide ?
+- Est-ce que le programme a le droit d'effectuer d'envoyer des requêtes ?
+- Est-ce qu'un firewall va bloquer ma requête ?
+- Est-ce que le site que je veux contacter est disponible actuellement ?
+- Est-ce que le certificat SSL du site est à jour ?
+- Quid de si la connexion est perdue en plein milieu de l'échange ?
+- ...
+
+
+---
+
+# 6. Exceptions, assertions
+
 ## 6.1 `try`/`except`
 
 En Python, il est courant d'« essayer » des opérations puis de gérer les
-exceptions.
+exceptions si elles surviennent.
 
-On utilise pour cela des `try: ... except: ...`. On peut déclencher nos propres
-exceptions avec `raise Exception("message")`
+On utilise pour cela des `try: ... except: ...`.
 
 ### Exemple
 
@@ -1267,6 +1311,21 @@ try:
 except:
     n = -1
 ```
+
+---
+
+# 6. Exceptions, assertions
+
+### Utilisation différente
+
+```python
+try:
+    str = input("Entrez un entier svp !")
+    n = int(str)
+except:
+    # Faire en sorte de boucler pour reposer la question à l'utilisateur ...
+```
+
 
 ---
 
@@ -1529,10 +1588,11 @@ favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 
 --
 
-### Accès à un élément particulier
+### Accès à element particulier ou a une "tranche"
 
 ```python
-favourite_pokemons[1]    ->  "Roucoups"
+favourite_pokemons[1]      ->  "Roucoups"
+favourite_pokemons[-2:]    ->  ["Roucoups", "Insecateur"]
 ```
 
 --
@@ -1549,7 +1609,7 @@ len(favourite_pokemons)    -> 3
 
 ```python
 "Insecateur" in favourite_pokemons   # -> True
-"Roucoups" not in favourite_pokemons # -> False
+"Mewtwo" not in favourite_pokemons   # -> True
 ```
 
 ---
@@ -1592,7 +1652,7 @@ favourite_pokemons[1] = "Roucarnage"
 
 --
 
-### Ajout à la suite
+### Ajout à la suite, contatenation
 
 ```python
 favourite_pokemons.append("Mewtwo")
@@ -1600,10 +1660,11 @@ favourite_pokemons.append("Mewtwo")
 
 --
 
-### Insertion
+### Insertion, concatenation
 
 ```python
 favourite_pokemons.insert(1, "Papillusion")
+favourite_pokemons += ["Pikachu", "Scarabrute"]
 ```
 
 ---
@@ -1969,20 +2030,40 @@ class: impact
 
 # 9. Fichiers
 
-## 9.1 Lire
+## 9.0 Lire "brutalement"
+
+```python
+f = open("/etc/passwd", "r")
+contenu_du_fichier = f.readlines()
+f.close()
+
+for ligne in contenu_du_fichier:
+    print(ligne)
+```
+
+Attention à bien distinguer:
+- le nom du fichier (`passwd`) et son chemin d'accès absolu (`/etc/passwd`)
+- le vrai fichier qui existe sur le disque
+- la variable / objet Python (dans l'exemple, nommée `f`) qui est une interface pour interagir avec ce fichier
+
+---
+
+# 9. Fichiers
+
+## 9.1 Lire, avec une "gestion de contexte"
 
 ```python
 with open("/etc/passwd", "r") as f:
-    toutes_les_lignes = f.readlines()
+    contenu_du_fichier = f.readlines()
 
-for ligne in toutes_les_lignes:
+for ligne in contenu_du_fichier:
     print(ligne)
 ```
 
 ### Explications
 
 - `open("fichier", "r")` ouvre un fichier en lecture
-- `with ... as ...` ouvre un contexte, à la fin duquel le fichier sera fermé
+- `with ... as ...` ouvre un contexte, à la fin duquel le fichier sera fermé automatiquement
 - `f.readlines()` permet d'obtenir une liste de toutes les lignes du fichier
 
 ---
@@ -1993,6 +2074,8 @@ for ligne in toutes_les_lignes:
 
 - `f.readlines()` renvoie une **liste** contenant les lignes une par une
 - `f.read()` renvoie une (grande) **chaĩne** contenant toutes les lignes concaténées
+
+- Attention, si je modifie la variable `contenu_du_fichier` ... je ne modifie pas vraiment le fichier sur le disque ! Pour cela, il faut explicitement demander à *écrire* dans le fichier.
 
 ---
 
