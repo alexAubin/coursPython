@@ -14,7 +14,7 @@ layout: true
 class: impact
 
 # {{title}}
-*From padawan to jedi master in five days!*
+*Devenez un jedi de la programmation en trois jours!*
 
 ---
 
@@ -101,18 +101,6 @@ Formateur
 - Exercices ludiques ?
 - Priorité aux moins rapides
 - Devenir architecte du cyberespace
-
-
----
-
-# Objectifs
-
-Transmettre :
-
-- Des bases solides et une vue globale
-- De l'enthousiasme !
-- Des bonnes pratiques ?
-- Du "pragmatisme" et du fun ?
 
 ---
 
@@ -297,7 +285,7 @@ class: impact
 
 ## Pour débutter
 
-- **Thonny** : `pip3 install thonny` <small>(après avoir installé `python3-pip` et `python3-tk`)</small>
+- **Thonny** : `apt install thonny`
 
 ## Plus tard
 
@@ -336,6 +324,9 @@ il faut lancer `python3` explicitement ! <small>(et non `python`)</small>
 - Gestion de l'encodage
 - `range`, `xrange`
 
+.center[
+Il existe des outils comme 2to3 pour ~automatiser la transition
+]
 
 ---
 
@@ -1632,8 +1623,9 @@ for pokemon in favourite_pokemons:
 ### Iteration avec index
 
 ```python
+print("Voici la liste de mes pokemons préféré:")
 for i, pokemon in enumerate(favourite_pokemons):
-    print(pokemon + " est mon "+ str(i) +"ème pokemon préféré !")
+    print(str(i+1) + " : " + pokemon)
 ```
 
 ---
@@ -1873,9 +1865,10 @@ chat.add("z")                           # ajoute `z` à `chat`
 
 ## 8.4 Les tuples
 
-Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière non-mutable.
+Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière **non-mutable**.
 Generalement itérer sur un tuple n'a pas vraiment de sens...
 
+Les tuples permettent de **grouper des informations ensembles**.
 Typiquement : des coordonnées de point.
 
 ```python
