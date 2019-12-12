@@ -270,6 +270,8 @@ Vivien est né.e en 1955
 
 8.11 : Ecrire un générateur `fibonnaci` qui genere la suite de fibonnaci 0, 1, 1, 2, 3, 5, 8, ... Utiliser ce générateur pour afficher les valeurs jusqu'à ce qu'elles dépassent 500.
 
+
+
 ## 9. Fichiers
 
 9.1 : Créer un fonction `liste_users` qui lit le fichier `/etc/passwd` et retourne la liste des utilisateurs ayant comme shell de login `/bin/bash`.
@@ -295,10 +297,11 @@ des chaînes de caractère pour identifier plus facilement les lignes vides)
 
 ## 10. Librairies
 
-Les énoncés des exercices suivants sont un peu plus compliqués et techniques que
-les précédents, et ont aussi pour objectifs de vous inciter à explorer la
-documentation des librairies pour trouver les outils dont vous avez besoin. Il
-existe de nombreuse façon de résoudre chaque exercice.
+Les énoncés des exercices suivants peuvent être un peu plus ouverts que les
+précédents, et ont aussi pour objectifs de vous inciter à explorer la
+documentation des librairies (ou Internet en général...) pour trouver les
+outils dont vous avez besoin. Il existe de nombreuse façon de résoudre chaque
+exercice.
 
 10.1.1 : Télécharger le fichier `https://app.yunohost.org/apps.json` (avec
 votre navigateur ou `wget` par exemple). Écrire une fonction qui lit ce fichier,
@@ -352,7 +355,7 @@ leur consommation actuelle, chacun en CPU et en RAM)
 
 
 
-## 11. Outils et bonnes pratiques
+## 11. Outils pour développer
 
 11.1 - Utiliser `pip3` pour trouver quelle est le numéro de version du package `requests` installé
 

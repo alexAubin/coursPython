@@ -124,7 +124,7 @@ def une_fonction(n):
 | Syntaxe                       | Description                                                     |
 | ----------------------------- | --------------------------------------------------------------- |
 | `for i in range(0, 10)`       | Itère sur `i` de 0 à 9                                          |
-| `for element in stuff`        | Itère sur tous les elements de stuff (liste, set, dictionnaire) |
+| `for element in iterable`     | Itère sur tous les elements de iterable (liste, set, dict, ...) |
 | `for key, value in d.items()` | Itère sur toutes les clefs, valeurs du dictionnaire `d`         |
 | `while condition`             | Répète un jeu d'instruction tant que `condition` est vraie      |
 | `break`                       | Quitte immédiatement une boucle                                 |
@@ -137,7 +137,7 @@ def une_fonction(n):
 | `L = ["a", 2, 3.14 ]`    | Liste (suite ordonnée d'éléments)                          |
 | `S = { "a", "b", 3 }`    | Ensemble (éléments unique, désordonné)                     |
 | `D = { "a": 2, "b": 4 }` | Dictionnaire (ensemble de clé-valeurs, avec clés uniques)  |
-| `T = (1,2,3)`            | Liste (suite d'élément non-mutables)                       |
+| `T = (1,2,3)`            | Tuple (suite d'élément non-mutables)                       |
 
 | Syntaxe          | Description                                                                           |
 | ---------------- | ------------------------------------------------------------------------------------- |

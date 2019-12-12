@@ -61,30 +61,20 @@ print(main_alice[1].points())
 2.5 : Surcharger la méthode `intersect` pour la classe `Cylindre`, en se basant sur le résultat de la méthode de la classe mère.
 
 
-## 3 - Sauvegardes et restauration avec Pickle
-
-3.1 - Reprendre le code des jeux de carte. Générer 4 mains et, à l'aide de Pickle, enregistrer dans un fichier une unique structure de donnée qui contient les 4 mains ainsi que l'état du Paquet restant.
-
-3.2 - Modifier le code de votre programme pour que, si une sauvegarde existe, la sauvegarde soit restaurée plutôt que de générer un nouveau paquet et de redistribuer les cartes.
-
-
-
-## 4. Introduction à SQLAlchemy (via ActiveAlchemy)
+## 3. Introduction à SQLAlchemy (via ActiveAlchemy)
 
 On se propose de reprendre le jeu de donnée des apps Yunohost (fichier `app.yunohost.org/community.json`) et d'importer ces données dans une base SQL (plus précisémment SQLite)
 
-4.0 - Installer `active_alchemy` à l'aide de `pip3`
+3.0 - Installer `active_alchemy` à l'aide de `pip3`
 
-4.1 - Créer un fichier `mydb.py` qui se contente de créer une base `db` (instance de ActiveAlchemy) de type sqlite. Dans la suite, on importera `db` depuis `mydb.py` dans les autres fichiers si besoin.
+3.1 - Créer un fichier `mydb.py` qui se contente de créer une base `db` (instance de ActiveAlchemy) de type sqlite. Dans la suite, on importera l'objet `db` depuis `mydb.py` dans les autres fichiers si besoin.
 
-4.2 - Créer un fichier `models.py` et créer dedans une classe (ou modèle) `App`. On se limitera aux attributs (ou champs, ou colonnes) suivants : 
+3.2 - Créer un fichier `models.py` et créer dedans une classe (aussi appellé modèle) `App`. On se limitera aux attributs (aussi appellés champs / colonnes) suivants : 
 
-- un **nom** qui est une chaîne de caractère *unique* parmis toutes les App's ;
+- un **nom** qui est une chaîne de caractère *unique* parmis toutes les `App` ;
 - un **niveau** qui est un entier (ou vide) ;
-- une **adresse** qui est une chaîne de caractère *unique* parmis toutes les App's ;
+- une **adresse** qui est une chaîne de caractère *unique* parmis toutes les `App` ;
 
-4.3 - Créer un fichier `nuke_and_reinit.py` dont le rôle est de détruire et réinitialiser les tables, puis de les remplir avec les données du fichier json. On utilisera pour ce faire `db.drop_all()` et `db.create_all()`. Puis on itérera sur les données venant du json pour créer des objet `App` correspondant. Commiter les changements à l'aide de `db.session.add` et `commit`.
+3.3 - Créer un fichier `nuke_and_reinit.py` dont le rôle est de détruire et réinitialiser les tables, puis de les remplir avec les données du fichier json. On utilisera pour ce faire `db.drop_all()` et `db.create_all()`. Puis, itérer sur les données du fichier json pour créer les objets `App` correspondant. Commiter les changements à l'aide de `db.session.add` et `commit`.
 
-4.4 - Créer un fichier `analyze.py` qui cherche et affiche le nom de toutes les `App` connue avec un niveau supérieur ou égal à `n`. En utilisant l'utilitaire bash `time` (ou bien avec `time.time()` en python), comparer les performances de `analyze.py` avec un script python équivalent mais qui travaille à partir du fichier `community.json` (en local, pas via `requests.get`)
-
-
+3.4 - Créer un fichier `analyze.py` qui cherche et affiche le nom de toutes les `App` connue avec un niveau supérieur ou égal à `n`. En utilisant l'utilitaire bash `time` (ou bien avec `time.time()` en python), comparer les performances de `analyze.py` avec un script python équivalent mais qui travaille à partir du fichier `community.json` directement (en local, pas via `requests.get`)

@@ -34,19 +34,39 @@ class: impact
 
 ## Exemple
 
-### **Les voitures** (classe) 
+### **Les voitures** (classe)
 
-ont une couleur, une marque, un nombre de place et un kilométrage : ce sont des attributs. 
+ont une couleur, une marque, un nombre de place et un kilométrage : ce sont des attributs.
 
 Elles peuvent embarquer des passager, rouler, activer un clignotant : ce sont des méthodes.
 
-### **Ma voiture** (objet, ou instance) 
+### **Ma voiture** (objet, ou instance)
 
 est une citroên rouge, 3 places et a parcouru 15672 km.
 
-### **Celle de mon voisin** (autre objet, instance) 
+### **Celle de mon voisin** (autre objet, instance)
 
 est une peugeot bleue, 5 places et a parcouru 3450 km.
+
+---
+
+# Orienté objet
+
+## Autre exemple
+
+### **Les cercles** (classe)
+
+ont un centre, un rayon, une couleur, une épaisseur de trait : ce sont des attributs.
+
+On peut : déplacer le cercle, l'agrandir, calculer son aire, le dessiner sur l'écran  : ce sont des méthodes.
+
+### **Un petit cercle rouge** (objet, ou instance)
+
+centre = (3, 5), rayon = 2, couleur = "red", épaisseur = 0.1
+
+### **Un grand cercle bleu** (autre objet, instance)
+
+centre = (-4, 2), rayon = 6, couleur = "blue", épaisseur = 1
 
 ---
 
@@ -55,23 +75,24 @@ est une peugeot bleue, 5 places et a parcouru 3450 km.
 ## Exemple en Python
 
 ```python
-class Voiture:
+class Cercle:
 
-   def __init__(self, couleur, marque, places=5, km=0):
+   def __init__(self, centre, rayon, couleur="black", epaisseur=0.1):
+       self.centre = centre
+       self.rayon = rayon
        self.couleur = couleur
-       self.marque = marque
-       self.places = places
-       self.km = km
+       self.epaisseur = epaisseur
 
-   def rouler(self, km):
-       self.km += km
+   def deplacer(self, dx=0, dy=0):
+       self.centre = (self.centre[0]+dx, self.centre[1]+dy)
 
 ########################################################
 
-ma_voiture = Voiture("rouge", "citroen", places=3, km=15672)
-voiture_voisin = Voiture("bleu", "peugeot", km=3450)
+cercle1 = Cercle((3, 5), 2, "red")
+cercle2 = Cercle((-4, 2), 6, "blue", epaisseur=1)
 
-ma_voiture.rouler(143)
+cercle1.deplacer(dy=2)
+print(cercle1.centre)
 ```
 
 ---
@@ -81,12 +102,12 @@ ma_voiture.rouler(143)
 ## Exemple en Python : précision
 
 - `__init__` est le constructeur
-- `__init__` et `rouler` sont des méthodes
+- `__init__` et `deplacer` sont des méthodes
 - `self` correspond à l'objet en train d'être manipulé
-- Toutes les méthodes ont au moins `self` comme premier argument 
+- Toutes les méthodes ont au moins `self` comme premier argument
 - On utilise les methodes en faisant `un_objet.la_methode(...)`
-- `self.couleur`, `self.marque`, `self.places`, `self.km` sont des attributs
-- On instancie un object en faissant `mon_objet = Classe(...)`
+- `self.centre`, `self.rayon`, `self.couleur`, `self.epaisseur` sont des attributs
+- On instancie un objet en faissant `mon_objet = Classe(...)`
 
 ---
 
@@ -94,62 +115,89 @@ ma_voiture.rouler(143)
 
 Une classe peut hériter d'une autre pour étendre ses fonctionnalités. Inversement, cela permet de *factoriser* plusieurs classes ayant des fonctionnalités communes.
 
-Par exemple, les **voitures**, les **camions** et les **vélos** sont trois types de **véhicules**.
+Par exemple, les **cercles**, les **carrés** et les **étoiles** sont trois types de **figures géométriques**.
 
-En tant que véhicules, ils ont tous une couleur, une marque. Mais le nombre de place n'est pas très pertinent pour un vélo
+En tant que figure géométriques, elles ont toutes un centre, une couleur et une épaisseur utilisés pour le dessin. On peut les déplacer, et on peut calculer leur aire.
 
 ---
 
-# Orienté objet : héritage
-
 ```python
-class Vehicule:
-    
-    def __init__(self, couleur, marque):
+class FigureGeometrique:
+
+    def __init__(self, centre, couleur="black", epaisseur=0.1):
+        self.centre = centre
         self.couleur = couleur
-        self.marque = marque
+        self.epaisseur = epaisseur
 
-class Voiture(Vehicule):
-    
-    def __init__(self, couleur, marque, km=0, places=5):
-        self.km = 0
-        self.places = places
-        super().__init__(couleur, marque)
-        
-    def rouler(self):
-        self.km += km
+    def deplacer(self, dx=0, dy=0):
+        self.centre = (self.centre[0]+dx, self.centre[1]+dy)
 
-class Velo(Vehicule):
-    
-    pass
+class Cercle(FigureGeometrique):
+
+    def __init__(self, centre, rayon, couleur="black", epaisseur=0.1):
+        self.rayon = rayon
+        super().__init__(centre, couleur, epaisseur)
+
+class Carre(FigureGeometrique):
+
+    def __init__(self, centre, cote, couleur="black", epaisseur=0.1):
+        self.cote = cote
+        super().__init__(centre, couleur, epaisseur)
 ```
 
 ---
 
 ```python
-class Vehicule:
+class FigureGeometrique:
 
-    def __init__(self, couleur, marque):
+    def __init__(self, centre, couleur="black", epaisseur=0.1):
+        self.centre = centre
         self.couleur = couleur
-        self.marque = marque
+        self.epaisseur = epaisseur
 
-    def rouler(self, km):
-        raise Exception("La classe fille doit implémenter cette fonction!")
+    def deplacer(self, dx=0, dy=0):
+        self.centre = (self.centre[0]+dx, self.centre[1]+dy)
 
-class Voiture(Vehicule):
-    
-    def __init__(self, couleur, marque, km=0, places=5):
-        self.km = 0
-        self.places = places
-        super().__init__(couleur, marque)
-        
-    def rouler(self, km):
-        self.km += km
+class Cercle(FigureGeometrique):
 
-class Velo(Vehicule):
-    
-    def rouler(self, km):
-        pass
+    def __init__(self, centre, rayon, couleur="black", epaisseur=0.1):
+        self.rayon = rayon
+        super().__init__(centre, couleur, epaisseur)
+
+class Carre(FigureGeometrique):
+
+    def __init__(self, centre, cote, couleur="black", epaisseur=0.1):
+        self.cote = cote
+        super().__init__(centre, couleur, epaisseur)
+```
+
+
+---
+
+```python
+class FigureGeometrique:
+
+    # def __init__ ...
+
+    def deplacer(self, dx=0, dy=0):
+        self.centre = (self.centre[0]+dx, self.centre[1]+dy)
+
+    def aire(self):
+        raise NotImplementedError("La classe fille doit implémenter cette fonction!")
+
+class Cercle(FigureGeometrique):
+
+    # def __init__ ...
+
+    def aire(self):
+        return 3.1415 * self.rayon * self.rayon
+
+class Carre(FigureGeometrique):
+
+    # def __init__ ...
+
+    def aire(self):
+        return self.cote ** 2
 ```
 
 
@@ -160,13 +208,14 @@ class Velo(Vehicule):
 ### (suite de l'exemple)
 
 ```python
-ma_voiture = Voiture("rouge", "citroen")
-mon_velo = Velo("argent", "decatlhon")
+cercle_rouge = Cercle((3, 5), 2, "red")
+carre_vert  = Carre((5, -1), 3, "green", epaisseur=0.2)
 
-ma_voiture.rouler(34)
-mon_velo.rouler(21)
+cercle_rouge.deplacer(dy=2)
+carre_vert.deplacer(dx=-3)
 
-print(ma_voiture.km)
+print(carre_vert.centre) # -> affiche (2, -1)
+print(carre_vert.aire()) # -> affiche 9
 ```
 
 ---
@@ -175,11 +224,11 @@ print(ma_voiture.km)
 
 ## À retenir
 
-- `class Voiture(Vehicule)` fais hériter `Voiture` de `Vehicule`
-- `super().__init__(...)` permet d'appeler le constructeur de la classe mère
-- Les classes filles disposent des méthodes de la classe mère mais peuvent les **surcharger** (c.f. exemple avec `rouler`)
+- `class Cercle(FigureGeometrique)` fais hériter `Cercle` de `FigureGeometrique`
+- `super().__init__(...)` permet d'appeler *le constructeur de la classe mère*
+- Les classes filles disposent des méthodes de la classe mère mais peuvent les **surcharger** (c.f. exemple avec `aire`)
 - `super().une_methode(...)` permet d'appeler `une_methode` telle que définie dans la classe mère.
-- `isinstance` verifie l'heritage ! `isinstance(ma_voiture, Vehicule)` vaut `True` !
+- `isinstance` verifie l'heritage ! `isinstance(cercle_rouge, FigureGeometrique)` vaut `True` !
 
 ---
 
@@ -188,20 +237,17 @@ print(ma_voiture.km)
 ## Des attributs "dynamiques"
 
 ```python
-class Voiture(Vehicule):
+class Carre(FigureGeometrique):
 
-    [ ... ]
+    # [ ... ]
 
     @property
-    def total_emission_co2(self):
-        return self.km * 0.0031
+    def aire(self):
+        return self.cote * self.cote
 
 
-ma_voiture = Voiture("rouge", "citroen")
-ma_voiture.rouler(342)
-
-print("Ma voiture a émis %s g de CO2" % ma_voiture.total_emission_co2)
-# -> Ma voiture a émis 1.0602 g de CO2
+carre_vert  = Carre((5, -1), 3, "green", epaisseur=0.2)
+print(carre_vert.aire) # N.B. : plus besoin de mettre de parenthèse ! Se comporte comme un attribut
 ```
 
 ---
@@ -275,17 +321,17 @@ ma_facture = pickle.load(f)
 - On manipule des tables (des lignes, des colonnes) ...
 - Les colonnes sont fortement typées et on peut poser des contraintes (unicité, ...)
 - Relations entres les tables, écritures concurrentes, ...
-- Exemple de requête : 
+- Exemple de requête :
 
 ```sql
 # Create a table
-CREATE TABLE stocks (date text, trans text, symbol text, qty real, price real)
+CREATE TABLE members (username text, email text, memberSince date, balance real)
 
 # Add a record
-INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)
+INSERT INTO members VALUES ('alice', 'alice@gmail.com', '2017-11-05', 35.14)
 
 # Find records
-SELECT * FROM stocks WHERE qty=100;
+SELECT * FROM members WHERE balance>0;
 ```
 
 ---
@@ -301,11 +347,11 @@ conn = sqlite3.connect('example.db')
 c = conn.cursor()
 
 # Create a table
-c.execute('''CREATE TABLE stocks
-             (date text, trans text, symbol text, qty real, price real)''')
+c.execute('''CREATE TABLE members
+             (username text, email text, memberSince date, balance real)''')
 
 # Add a record
-c.execute("INSERT INTO stocks VALUES ('2006-01-05','BUY','RHAT',100,35.14)")
+c.execute("INSERT INTO members VALUES ('alice', 'alice@gmail.com', '2017-11-05', 35.14)")
 
 # Save (commit) the changes and close the connection
 conn.commit()
@@ -337,14 +383,14 @@ conn.close()
 ```python
 from active_alchemy import ActiveAlchemy
 
-db = ActiveAlchemy('sqlite://foo.db')
+db = ActiveAlchemy('sqlite:///members.db')
 
-class User(db.Model):
-    # (id existe implicitement avec ActiveAlchemy)
-    # id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(25), unique=True, nullable=False)
-	location = db.Column(db.String(50), default="USA")
-	birthday = db.Column(db.Date, nullable=True)
+class Member(db.Model):
+	username    = db.Column(db.String(25), nullable=False, unique=True)
+	email       = db.Column(db.String(50), nullable=True)
+	memberSince = db.Column(db.Date,       nullable=False)
+    balance     = db.Column(db.Float,      nullable=False, default=0.0)
+    active      = db.Column(db.Boolean,    nullable=False, default=True)
 ```
 
 ---
@@ -360,14 +406,14 @@ db.drop_all()
 db.create_all()
 
 # Créer des utilisateurs
-alex    = User(name="Alex",    location="Strasbourg")
-bob     = User(name="Bob",     location="Strasbourg")
-charlie = User(name="Charlie", location="Paris")
+alex    = Member(name="Alice",   memberSince=datetime.date(day=5, month=11, year=2017))
+bob     = Member(name="Bob",     memberSince=datetime.date.today(), balance=15)
+camille = Member(name="Camille", memberSince=datetime.date(day=7, month=10, year=2018), balance=10)
 
 # Dire qu'on veut les enregistrer
 db.session.add(alex)
 db.session.add(bob)
-db.session.add(charlie)
+db.session.add(camille)
 
 # Commiter les changements
 db.session.commit()
@@ -380,35 +426,14 @@ db.session.commit()
 ## Exemple de requete (`query`)
 
 ```python
+active_members = Member.query()
+                .filter(Member.active == True)
+                .order_by(Member.memberSince)
 
-users_in_strasbourg = User.query()
-                          .filter(User.location == "Strasbourg")
-
-for user in users_in_strasbourg:
+for member in active_members:
     print(user.name)
 
-# On peut aussi faire : 
-User.query().all()   # ---> Execute la query "pour de vrai" et renvoie une liste
-User.query().filter(User.location == "Strasbourg").all()
+# On peut aussi faire :
+Member.query().all()   # ---> Execute la query "pour de vrai" et renvoie une liste
+Member.query().filter(Member.active == True).all()
 ```
-
----
-
-# Orienté objet : ORM
-
-## `query` ... plus complexes mais plus puissant !
-
-```python
-users_in_strasbourg = User.query()
-                          .filter(User.location == "Strasbourg")
-
-# Meme chose mais en selection des colonnes
-users_in_strasbourg = User.query(User.name, User.last_access)
-                          .filter(User.location == "Strasbourg")
-
-# .. et avec un tri
-users_in_strasbourg = User.query(User.name, User.last_access)
-                          .filter(User.location == "Strasbourg")
-                          .order_by(User.birthday)
-```
-

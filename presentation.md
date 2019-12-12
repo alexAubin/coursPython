@@ -1018,6 +1018,67 @@ c.f. `https://docs.python.org/2/library/subprocess.html#subprocess.Popen`
 
 ---
 
+# Posture et bonnes pratiques
+
+---
+
+# Posture et bonnes pratiques
+
+- Lorsqu'on écrit du code, la partie "tester" et "debugger" fait partie du job.
+
+.center[
+**On écrit pas un programme qui marche au premier essai**
+]
+
+- Il faut tester et débugger **au fur et à mesure**, **pas tout d'un seul coup** !
+
+---
+
+# Posture et bonnes pratiques
+
+## Écrire un programme ... pour qui ? pour quoi ?
+
+- Le fait qu'un programme marche en "secondaire" !
+- ... Mieux vaut un programme cassé mais lisible (donc débuggable)
+- ... qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
+
+Autrement dit : **la lisibilité pour vous et vos collègues a énormément d'importance pour la maintenabilité et l'évolution du projet**
+
+---
+
+# Posture et bonnes pratiques
+
+## Bonnes pratiques pour la lisibilité, maintenabilité
+
+- Keep It Simple
+- Sémantique : utiliser des noms de variables et de fonctions **qui ont du sens**
+- Architecture : découper son programme en fonction qui chacune résolvent un sous-problème précis
+- Robustesse : garder ses fonctions autant que possibles indépendantes, limiter les effets de bords
+    - lorsque j'arose mes plantes, ça ne change pas la température du four
+- Lorsque mon programme évolue, je prends le temps de le refactoriser si nécessaire
+    - si je répète plusieurs fois les mémes opérations, il peut être intéressant d'introduire une nouvelle fonction
+    - si le contenu d'une variable ou d'une fonction change, peut-être qu'il faut modifier son nom
+
+---
+
+# Posture et bonnes pratiques
+
+## Ne pas réinventer la roue
+
+Il y a des tas de problème qui ont déjà été résolu par d'autres développeurs et ont créé des bibliothèques !
+
+ Par exemple :
+- fonctions mathématiques (cos, sqrt, ...)
+- fonctions cryptographiques (hash de mot de passe, ...)
+- lecture / parsing de fichier divers (JSON, YAML, CSV, HTML, XLS, ...)
+
+Généralement lorsqu'on réinvente la roue:
+- on perd du temps
+- on le fais moins bien que les bibliothèques existantes
+- on créé des risques de sécurité
+
+---
+
 class: impact
 
 # 5. Conditions
@@ -1204,253 +1265,12 @@ parite = "pair" if n % 2 == 0 else "impair"
 
 class: impact
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
 
 
 ---
 
-# 6. Exceptions, assertions
-
-En Python, lorsqu'une erreur se produit ou qu'un cas particulier empêche (a priori) la suite du déroulement normal d'un programme ou d'une fonction, une *exception* est déclenchée.
-
-### Exemple
-
-```python
->>> int("test")
-[...]
-ValueError: invalid literal for int() with base 10: 'test'
-```
-
----
-
-# 6. Exceptions, assertions
-
-## 6.0 `raise`
-
-Il est possible de déclencher ses propres exceptions à l'aide de `raise`
-
-```python
-if n < 0 or n > 10:
-    raise Exception("Ce n'est pas un nombre entre 0 et 10 !")
-```
-
----
-
-# 6. Exceptions, assertions
-
-## 6.1 `try`/`except`
-
-De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
-
-Par exemple : écrire dans un fichier
-- Est-ce que le programme a la permission d'écrire dans ce fichier ?
-- Est-ce qu'aucun autre programme n'est en train d'écrire dans ce fichier ?
-- Est-ce qu'il y a assez d'espace disque libre ?
-- Si je commence à écrire, peut-être vais-je tomber sur un secteur disque deffectueux
-- ...
-
----
-
-# 6. Exceptions, assertions
-
-## 6.1 `try`/`except`
-
-De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
-
-Autre exemple : aller chercher une information sur internet
-- Est-ce que je suis connecté à Internet ?
-- Est-ce que la connection est suffisament stable et rapide ?
-- Est-ce que le programme a le droit d'effectuer d'envoyer des requêtes ?
-- Est-ce qu'un firewall va bloquer ma requête ?
-- Est-ce que le site que je veux contacter est disponible actuellement ?
-- Est-ce que le certificat SSL du site est à jour ?
-- Quid de si la connexion est perdue en plein milieu de l'échange ?
-- ...
-
-
----
-
-# 6. Exceptions, assertions
-
-## 6.1 `try`/`except`
-
-En Python, il est courant d'« essayer » des opérations puis de gérer les
-exceptions si elles surviennent.
-
-On utilise pour cela des `try: ... except: ...`.
-
-### Exemple
-
-```python
-try:
-    str = input("Entrez un entier svp !")
-    n = int(str)
-except:
-    raise Exception("Ce n'est pas un entier !")
-```
-
----
-
-# 6. Exceptions, assertions
-
-### Utilisation différente
-
-```python
-try:
-    str = input("Entrez un entier svp !")
-    n = int(str)
-except:
-    n = -1
-```
-
----
-
-# 6. Exceptions, assertions
-
-### Utilisation différente
-
-```python
-try:
-    str = input("Entrez un entier svp !")
-    n = int(str)
-except:
-    # Faire en sorte de boucler pour reposer la question à l'utilisateur ...
-```
-
-
----
-
-# 6. Exceptions, assertions
-
-<br>
-<br>
-<br>
-<br>
-
-.center[
-## The "python way"
-### « Better to ask forgiveness than permissions »
-
-
-<br>
-(ça se discute)
-]
-
----
-
-
-# 6. Exceptions, assertions
-
-## 6.2 Assertions
-
-Il est possible d'utiliser des `assert`ions pour **expliciter certaines hypothèses**
-faites pendant l'écriture du code. Si elles ne sont pas remplies, une exception est déclenchée.
-
-```python
-def dire_bonjour(nom):
-    assert isinstance(nom, str), "'nom' devrait être une chaine !"
-    print("Bonjour {nom} !".format(nom=nom))
-```
-
----
-
-# 6. Exceptions, assertions
-
-## 6.2 Assertions (autre exemple)
-
-```python
-def distance(x=0, y=0):
-    assert isinstance(x, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
-    assert isinstance(y, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
-
-    return racine_carree(x*x + y*y)
-```
-
----
-
-# 6. Exceptions, assertions
-
-## 6.2 Assertions (encore un autre exemple)
-
-```python
-def some_function(n):
-    assert isinstance(n, int), "Cette fonction ne prends que des int en argument !"
-    assert n % 2 == 0, "Cette fonction ne prends que des entiers pairs en argument !"
-
-    [...]
-```
-
-
----
-
-# 6. Exceptions, assertions
-
-## Plusieurs approches (1/3)
-
-Calcul de la racine carrée d'un nombre.
-
-> Je soupçonne fortemment que `x` puisse être négative
-
-```python
-if x < 0:
-    print("Erreur : x est negatif !")
-else:
-    resultat = racine_carree(x)
-```
-
-Attention : `resultat` n'existera pas si x est negatif
-... que fait la suite du programme ?
-
----
-
-# 6. Exceptions, assertions
-
-## Plusieurs approches (2/3)
-
-Calcul de la racine carrée d'un nombre
-
-> Ça devrait marcher, mais j'ai un doute ...
-
-```python
-try:
-    resultat = racine_carree(x)
-except ValueError as e:
-    print("Erreur : peut-etre que x est negatif ?")
-```
-
-Attention : `resultat` n'existera pas si x est negatif
-... que fait la suite du programme ?
-
----
-
-# 6. Exceptions, assertions
-
-## Plusieurs approches (3/3)
-
-Calcul de la racine carrée d'un nombre
-
-> Je soupçonne fortement que le nombre soit positif
-
-```python
-assert x > 0, "Tiens, x est negatif ?"
-
-resultat = racine_carree(x)
-```
-
----
-
-
-# 6. Exceptions, assertions
-
-## 6.3 Pour aller plus loin : type hints ! (Python >= 3.6)
-
-```python
-from typing import Union
-float_or_int = Union[float, int]
-
-def distance(x: float_or_int, y: float_or_int) -> float:
-    return racine_carree(x*x + y*y)
-```
+... plus tard en fait ...
 
 ---
 
@@ -2017,6 +1837,453 @@ def factoriel():
 
 class: impact
 
+# Recap'
+
+---
+
+# Recap'
+
+## Programmation impérative / procédurale
+
+- Comme une recette de cuisine qui manipule de l'information
+- Une suite d'opération à effectuer
+- Différents concepts pour construire ces opérations:
+    - des variables
+    - des fonctions
+    - des conditions
+    - des boucles
+    - des structures de données (listes, dictionnaires)
+
+---
+
+# Recap'
+
+## Variables
+
+```python
+x = "Toto"
+x = 40
+y = x + 2
+print("y contient " + str(y))
+```
+
+---
+
+# Recap'
+
+## Fonctions
+
+```python
+def aire_triangle(base, hauteur):
+    calcul = base * hauteur / 2
+    return calcul
+
+A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
+A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
+```
+
+- Indentation
+- Arguments (peuvent être optionnels si on spécifie une valeur par défaut)
+- Variables locales
+- `return` pour pouvoir récupérer un résultat depuis l'extérieur
+- Appel de fonction
+
+---
+
+# Recap'
+
+## Conditions
+
+```python
+def aire_triangle(base, hauteur):
+
+    if base < 0 or hauteur < 0:
+        print("Il faut donner des valeurs positives!")
+        return -1
+
+    calcul = base * hauteur / 2
+    return calcul
+```
+
+- Indentation
+- Opérateurs (`==`, `!=`, `<=`, `>=`, `and`, `or`, `not`, `in`, ...)
+- Mot clefs `if`, `elif`, `else`
+
+---
+
+# Recap'
+
+## Listes, dictionnaires et boucles
+
+```python
+breakfast = ["Spam", "Eggs", "Bacon", "Spam"]
+breakfast.append("Coffee")
+
+print("Au petit dej' je mange: ")
+for stuff in breakfast:
+    print(stuff)
+```
+
+
+```python
+ingredients_gateau = {"farine": 200,
+                      "beurre": 100,
+                      "chocolat": 150}
+
+for ingredient, qty in ingredients_gateau.items():
+    print("J'ai besoin de " + str(qty) + "g de " + ingredient)
+```
+
+---
+
+# Recap'
+
+## Algorithmes simples : `max`
+
+```python
+def max(liste_entiers):
+    if liste_entiers == []:
+        print("Erreur, peut pas calculer le max d'une liste vide")
+        return None
+
+    m = liste_entiers[0]
+    for entier in liste_entiers:
+        if m < entier:
+            m = entier
+
+    return m
+```
+
+---
+
+# Recap'
+
+## Algorithmes simples : filtrer une liste
+
+```python
+def pairs(liste_entiers):
+
+    resultat = []
+
+    for entier in liste_entiers:
+        if entier % 2 == 0:
+            resultat.append(entier)
+
+    return resultat
+```
+
+---
+
+class: impact
+
+# 6. Les exceptions
+
+
+---
+
+# 6. Les exceptions
+
+En Python, lorsqu'une erreur se produit ou qu'un cas particulier empêche (a priori) la suite du déroulement normal d'un programme ou d'une fonction, une *exception* est déclenchée
+
+### Exemple d'exceptions
+
+- Utiliser une variable qui n'existe pas
+- Utiliser `int()` sur quelque chose qui ne peut pas être converti en entier
+- Diviser un nombre par zero
+- Diviser un nombre par une chaine de caractère
+- Tenter d'accéder à un élément d'une liste qui n'existe pas
+- Tenter d'ouvrir un fichier qui n'existe pas ou qu'on ne peut pas lire
+- Tenter d'accéder de télêcharger des données sans être connecté à internet
+- etc...
+
+---
+
+# 6. Les exceptions
+
+- Une exception a un *type*
+    - `Exception`, `ValueError`, `IndexError`, `TypeError`, `ZeroDivisionError`, ...
+- Lorsqu'une exception interrompt le programme, l'interpréteur affiche la *stacktrace* (TraceBack) qui contient des informations pour comprendre quand et pourquoi l'exception s'est produite.
+
+```python
+# python3 test_int.py
+
+Tape un entier entre 1 et 3: truc
+
+Traceback (most recent call last):
+  File "test_int.py", line 8, in <module>
+    demander_nombre()
+  File "test_int.py", line 4, in demander_nombre
+    r = int(input("Tape un entier entre 1 et 3: "))
+ValueError: invalid literal for int() with base 10: 'truc'
+```
+
+---
+
+# 6. Les exceptions
+
+## 6.0 `raise`
+
+Il est possible de déclencher ses propres exceptions à l'aide de `raise`
+
+```python
+def max(liste_entiers):
+    if liste_entiers == []:
+        raise Exception("max() ne peut pas fonctionner sur une liste vide!")
+```
+
+(Ici, le type utilisé est le type générique `Exception`)
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Par exemple : écrire dans un fichier
+- Est-ce que le programme a la permission d'écrire dans ce fichier ?
+- Est-ce qu'aucun autre programme n'est en train d'écrire dans ce fichier ?
+- Est-ce qu'il y a assez d'espace disque libre ?
+- Si je commence à écrire, peut-être vais-je tomber sur un secteur disque deffectueux
+- ...
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Autre exemple : aller chercher une information sur internet
+- Est-ce que je suis connecté à Internet ?
+- Est-ce que la connection est suffisament stable et rapide ?
+- Est-ce que le programme a le droit d'effectuer d'envoyer des requêtes ?
+- Est-ce qu'un firewall va bloquer ma requête ?
+- Est-ce que le site que je veux contacter est disponible actuellement ?
+- Est-ce que le certificat SSL du site est à jour ?
+- Quid de si la connexion est perdue en plein milieu de l'échange ?
+- ...
+
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+En Python, il est courant d'« essayer » des opérations puis de gérer les
+exceptions si elles surviennent.
+
+On utilise pour cela des `try: ... except: ...`.
+
+### Exemple
+
+```python
+reponse = input("Entrez un entier svp !")
+
+try:
+    n = int(reponse)
+except:
+    raise Exception("Ce n'est pas un entier !")
+```
+
+---
+
+# 6. Les exceptions
+
+### Utilisation différente
+
+```python
+reponse = input("Entrez un entier svp !")
+
+try:
+    n = int(reponse)
+except:
+    n = -1
+```
+
+---
+
+# 6. Les exceptions
+
+### Utilisation différente
+
+```python
+reponse = input("Entrez un entier svp !")
+
+try:
+    n = int(reponse)
+except:
+    # Faire en sorte de boucler pour reposer la question à l'utilisateur ...
+```
+
+---
+
+# 6. Les exceptions
+
+### Utilisation différente
+
+```python
+def can_be_converted_to_int(stuff):
+    try:
+        int(stuff)
+    except:
+        return False
+
+    return True
+
+can_be_converted_to_int("3")    # -> True
+can_be_converted_to_int("abcd") # -> False
+```
+
+---
+
+# 6. Les exceptions
+
+<br>
+<br>
+<br>
+<br>
+
+.center[
+## The "python way"
+### « Better to ask forgiveness than permissions »
+
+
+<br>
+(ça se discute)
+]
+
+---
+
+
+# 6. Les exceptions
+
+## 6.2 Assertions
+
+Il est possible d'utiliser des `assert`ions pour **expliciter certaines hypothèses**
+faites pendant l'écriture du code. Si elles ne sont pas remplies, une exception est déclenchée.
+
+```python
+def max(liste_entiers):
+    assert liste_entiers != [], "max() ne peut pas fonctionner sur une liste vide!"
+```
+
+(`assert toto` est équivalent à `if not toto: raise Exception()`)
+
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions (autre exemple)
+
+```python
+def distance(x=0, y=0):
+    assert isinstance(x, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
+    assert isinstance(y, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
+
+    return racine_carree(x*x + y*y)
+```
+
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions (encore un autre exemple)
+
+```python
+def some_function(n):
+    assert isinstance(n, int), "Cette fonction ne prends que des int en argument !"
+    assert n % 2 == 0, "Cette fonction ne prends que des entiers pairs en argument !"
+
+    [...]
+```
+
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions et tests unitaires
+
+En pratique, l'une des utilisations les plus courantes de `assert` est l'écriture de tests unitaires qui permettent de valider qu'une fonction marche dans tous les cas (et continue à marcher si on la modifie)
+
+Dans votre application:
+
+```python
+def trier(liste_entiers):
+    # on définie le comportement de la fonction
+```
+
+Dans les tests (fichier à part):
+
+```python
+assert trier([15, 8, 4, 42, 23, 16]) == [4, 8, 15, 16, 23, 42]
+assert trier([0, 82, 4, -21, 2]) == [-21, 0, 2, 4, 82]
+assert trier([-7, -3, 0]) == [-7, -3, 0]
+assert trier([]) == []
+```
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (1/3)
+
+Calcul du max d'une liste d'entiers
+
+> Je soupçonne fortemment que `ma_liste` puisse ne pas être une liste ou puisse être vide
+
+```python
+if not isinstance(ma_liste, list) or ma_liste == []:
+    resultat = None
+else:
+    resultat = max(ma_liste)
+```
+
+Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (2/3)
+
+Calcul du max d'une liste d'entiers
+
+> Ça devrait marcher, mais j'ai un doute ...
+
+```python
+try:
+    resultat = max(ma_liste)
+except ValueError as e:
+    print("Warning : peut-etre que ma_liste n'etait pas une liste non-vide ?")
+    resultat = None
+```
+
+Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (3/3)
+
+Calcul du max d'une liste d'entiers
+
+> Normalement `ma_liste` est une liste non-vide, sinon il y a un très gros problème avant dans le programme...
+
+```python
+assert isinstance(ma_liste, list) and ma_liste != []
+
+resultat = max(ma_liste)
+```
+
+---
+
+class: impact
+
 # 9. Fichiers
 
 ---
@@ -2359,7 +2626,27 @@ print(f.read())    # -> 'i am writing text data'
 
 # 10. Librairies
 
-## 10.7 Ecrire ses propres modules
+## 10.7 `pip`
+
+- Gestionnaire de paquet / modules Python
+- PIP : "Pip Install Packages"
+- PyPI : Python Package Index
+- Installer un paquet :
+    - `pip3 install <paquet>`
+- Rechercher un paquet :
+    - `pip3 search <motclef>`
+- Installer une liste de dépendances :
+    - `pip3 install -r requirements.txt`
+- Lister les paquets installés
+    - `pip3 list`, `pip3 freeze`
+- Les paquets installés sont dans `/usr/lib/python*/dist-packages/`
+
+
+---
+
+# 10. Librairies
+
+## 10.8 Ecrire ses propres modules
 
 Considérant les fichiers suivants :
 
@@ -2385,7 +2672,7 @@ print(dire_bonjour)
 
 # 10. Librairies
 
-## 10.7 Ecrire ses propres modules
+## 10.8 Ecrire ses propres modules
 
 Considérant les fichiers suivants :
 
@@ -2417,7 +2704,7 @@ class: impact
 
 # Documentation
 
-Pour les librairies :
+Pour les librairies (et Python en général) :
 - `docs.python.org`
 - `devdocs.io`
 - stack overflow ...
@@ -2426,34 +2713,62 @@ Pour les librairies :
 Pour votre code :
 - nom de variables, fonctions, argument !!!
 - commentaires, doc strings
+- gestionnaire de version
 - generation de doc automatique ?
 
 ---
 
-# `pip`
+# Faire du "bon code"
 
-- Gestionnaire de paquet / modules Python
-- PIP : "Pip Install Packages"
-- PyPI : Python Package Index
-- Installer un paquet :
-    - `pip3 install <paquet>`
-- Rechercher un paquet :
-    - `pip3 search <motclef>`
-- Installer une liste de dépendances :
-    - `pip3 install -r requirements.txt`
-- Lister les paquets installés
-    - `pip3 list`, `pip3 freeze`
-- Les paquets installés sont dans `/usr/lib/python*/dist-packages/`
+.center[
+**La lisibilité est la priorité numéro 1**
+]
+
+> Un programme est vivant et évolue. Mieux vaut un programme cassé mais lisible (donc débuggable) qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
+
+(c.f. Guido van Rossum chez Dropbox)
+
+Autrement dit : **la lisibilité pour vous et vos collègues a énormément d'importance pour la maintenabilité et l'évolution du projet**
+
+---
+
+# Lisibilité, "bon code"
+
+- **Keep It Simple**
+- **Sémantique** : utiliser des noms de variables et de fonctions concis et pertinents
+- **Commentaires** : *lorsque c'est nécessaire*, pour démystifier ce qu'il se passe
+- **Modularité** : découper son programme en fonctions qui chacune résolvent un sous-problème
+- **Couplage faible** : garder ses fonctions autant que possibles indépendantes, limiter les effets de bords
+- **Prendre le temps de refactoriser** quand nécessaire
+    - si je répète plusieurs fois les mémes opérations, peut-être définir une nouvelle fonction
+    - si le contenu d'une variable ou d'une fonction change, peut-être changer son nom
+- **Ne pas abuser** des principes précédents
+    - trop d'abstractions tue l'abstraction
+    - tout ça viens avec le temps et l'expérience
+
+---
+
+# Lisibilité, "bon code"
+
+[How to write good code](https://xkcd.lapin.org/strips/844Code%20correct.png)
+
+---
+
+# Conventions de nommages des variables, fonctions et classes
+
+Variables et fonctions en snake case : `nom_de_ma_variable`
+Constantes globales en macro case: `NOM_DE_MA_CONSTANTE`
+Nom de classes en upper camel case : `NomDeMaClasse`
 
 ---
 
 # Syntaxe, PEP8, linters
 
 - Le style d'écriture de python est standardisé via la norme PEP8
-- Il existe des "linter" pour détecter le non-respect des conventions (et également des erreurs logiques)
+- Il existe des "linter" pour détecter le non-respect des conventions (et également certaines erreurs logiques)
     - Par exemple `flake8`, `pylint`
 - Intégration possible dans `vim` et autres IDE...
-- `autopep8` permet de corriger un bon nombre de problème automatiquement
+- `autopep8` ou `black` permettent de corriger un bon nombre de problème automatiquement
 
 ---
 
