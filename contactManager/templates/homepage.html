@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Gestionnaire de contact</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container mt-5">
+
+            <div class="row">
+                <div class="page-header col-lg-12">
+                    <h1>Mes contacts</h1>
+                </div>
+
+                <table class="table table-hover col-lg-12">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Telephone</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Anniversaire</th>
+                        </tr>
+                    </thead>
+                    {% for contact in contacts %}
+                    <tbody>
+                        <tr>
+                            <th scope="row">{{contact.name}}</th>
+                            <td>{{contact.phone}}</td>
+                            <td>{{contact.email}}</td>
+                            <td>{{contact.birthday}}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="page-header col-lg-12">
+                    <h3>Ajouter un contact</h3>
+                </div>
+                <form action="/add" method="POST" class="col-lg-6">
+                    <fieldset>
+                        <div class="form-group row">
+                            <label for="name" class="col-sm-2 col-form-label">Nom</label>
+                            <div class="col-sm-10">
+                                <input id="name" name="name" placeholder="Sacha" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="phone" class="col-sm-2 col-form-label">Telephone</label>
+                            <div class="col-sm-10">
+                                <input id="phone" name="phone" placeholder="0612345678" type="text">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input id="email" name="email" placeholder="sacha@example.com" type="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="birthday" class="col-sm-2 col-form-label">Annif'</label>
+                            <div class="col-sm-10">
+                                <input id="birthday" name="birthday" placeholder="16/03/1993" type="text">
+                            </div>
+                        </div>
+
+                        <input type="submit" class="btn btn-primary" value="Ajouter">
+                    </fieldset>
+                </form>
+            </div>
+
+    </body>
+</html>

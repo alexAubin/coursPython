@@ -1,181 +1,54 @@
-Construction d'un pokedex avec Flask
-======================================
+TP Flask
+========
 
-On se propose de programmer un petit site web avec Flask, qui permette de garder
-trâce dans une base de donnée de ses pokémons capturé pendant une aventure dans 
-le Pokéworld.
+Hello World avec Flask
+----------------------
 
-Il diposera des fonctionnalités suivantes :
+Avant de se lancer dans le gestionnaire de contact (partie suivante), il peut être intéressant de se familiariser avec Flask dans son ensemble. Pour cela, reprendre les slides sur le "Hello world" **donnés dans le cours** : 
 
-- lister les pokémons capturés
-- lister les pokémons capturés récemment
-- obtenir des informations sur un pokémon particulier
-- un formulaire permettant d'ajouter un nouveau pokémon
+0 : Créer un dossier de travail `hello/`. Dedans, initialiser un virtualenv `venv` dans lequel on installera `Flask`.
 
-
-
-## 0. Preparation de l'ecran
-
-Préparation de l'environnement
-
-- Créer et activer un environnement virtuel, dans lequel on installera Flask, Flask-Script et Flask-SQLAlchemy
-- Ajouter dans app.py un "Hello world" Flask, c'est à dire une route simple (`/`) qui affichera juste 'Hello world`
-- Tester cette installation en lancant le serveur de dev/test 
-
-
-
-## 1. Utilisation de templates
-
-- Créer un template HTML basique, le mettre dans `template/index.html`
-- Modifier la route / fonction correspondant à `/` pour renvoyer cette page html
-  à la place.
-
-Comme données d'exemple, on pourra par exemple afficher dans la page quelque
-  chose comme : 
-
-```
-Bonjour, aujourd'hui nous sommes le {{ date }}
-```
-
-(pour trouver la date du jour et la donner au template, on pourra utiliser
-quelque chose comme `datetime.datetime.now()` de la librairie `datetime`.)
-
-
-## 2. Création de la classe Pokémon
-
-- Introduire SQLAlchemy dans l'application et définir `db` (on utilisera une
-  base de donnée sqlite)
-- Définir une classe Pokemon interfacée avec cette base de donnée. Chaque
-  pokémon aura ce type d'information : 
-     - `nom` (une chaîne de caractère représentant le nom du pokemon)
-     - `type` (une chaine de caractère représentant son type)
-     - `niveau` (un entier représentant le niveau actuel du pokemon)
-     - `date_de_capture` (optionelle - la date a laquelle il fut capturé)
-
-
-
-## 3. Shell interactif pour Flask
-
-- Créer un fichier `manage.py` qui permet d'ouvrir un shell avec : 
+1 : Créer un fichier `hello.py` qui contient l'exemple du cours:
 
 ```python
-#!/usr/bin/env python3
+from flask import Flask
+app = Flask(__name__)
 
-from flask_script import Manager, Shell, Command
-from ????? import app, db
-
-manager = Manager(app)
-manager.add_command('shell', Shell(make_context=lambda:{"app":app, "db":db}))
-manager.run()
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
 ```
 
-On peut ensuite l'utiliser via : `python3 manage.py shell`
+2 : Dans un terminal, lancer le serveur de test avec
 
-- S'en servir pour tester la classe Pokémon définie précédemment en créant des
-  Pokemons et en fesant des query sur la base... Par exemple : 
-
-```
-$ from ????? import Pokemon
-$ pikachu = Pokemon(name="Pikachu", type="Foudre", niveau=12)
-$ db.session.add(pikachu)
-$ db.session.commit()
-$ Pokemon.query.all()
+```bash
+$ export FLASK_APP=hello.py
+$ flask run
 ```
 
-## 3. Nuke et Lorem
+Le serveur devrait se lancer et écouter sur le port 5000
 
-### 3.1 Nuke
+3 : Valider que l'application fonctionne en visitant `http://127.0.0.1:5000/` depuis un navigateur web (dans la machine virtuelle).
 
-Dans le `manage.py`, ajouter une commande personnalisée "nuke" qui permet de
-détruire la database existante.
+Construction d'un gestionnaire de contacts avec Flask
+-----------------------------------------------------
 
-Pour cela, utiliser quelque chose comme : 
+On propose de réaliser une petite application web avec Flask, qui permet de gérer des contacts stockés dans une base SQL. Pour pouvoir se concentrer sur les aspects les plus importants, l'architecture du projet est déjà prémachée (récupérer l'archive auprès du formateur) et la partie vue (template) est déjà écrite. Nous allons surtout nous concentrer sur l'écriture du modèle et des controlleurs.
 
-```python
-manager.add_command('nuke', Nuke(db))
+0 : Récupérer l'archive contenant l'architecture du projet auprès du formateur. La dézipper dans un dossier que l'on apellera par exemple `contactManager/`. Dedans, initialiser un virtualenv `venv` et installer à l'aide de `pip` les modules `Flask` et `Flask-SQLAlchemy`.
+
+1 : Dans un premier temps, concentrons nous sur définir le modèle que nous allons utiliser pour décrire et stocker nos contacts. Inspecter le fichier `models.py` et implémenter les choses demandées dans les commentaires.
+
+2 : Pour tester que notre modèle fonctionne, nous souhaiterions créer les tables SQL correspondantes. Le fichier `common.py` défini déjà que celles-ci seront stockées dans une base de type SQLite, et en particulier le fichier `db.sqlite` (qui sera automatiquement créé par Flask le moment venu). Le fichier `initialize.py` est un petit script destiné à (ré)initialiser les tables SQL et à remplir ces tables avec des données de test. Inspecter le fichier `initialize.py` et implémenter les instructions demandées dans les commentaires, et tester d'executer ce script. (Eventuellement, faire un `print(Contact.query.all())` pour valider que la base contient bien quelque chose...)
+
+3 : Inspecter le premier controlleur défini dans `app.py`, qui gère l'URL `/`. Comment faire pour récupérer tous les objets `Contact` existants et ainsi remplir la variable `contacts` qui est ensuite utilisé par la vue ? Une fois cette question résolue, vous pouvez tester l'application en lançant dans un terminal :
+
+```bash
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask run
 ```
 
-  et il faut ensuite construire la commande nuke via une classe : 
+puis en essayant d'accéder à `http://127.0.0.1:5000/`.
 
-```python
-class Nuke(Command):
-
-    def __init__(self, db):
-        self.db = db
-
-    def run(self):
-        self.db.drop_all()
-        self.db.create_all()
-        self.db.session.commit()
-```
-
-### 3.2 Lorem
-
-Une commande `lorem` (en référence à Lorem Ipsum) peut permettre de provisonner
-une base de donnée avec des données de test.
-
-- Ajouter une methode `lorem()` dans la classe `Pokemon` qui instancie quelques
-  pokemons "de test"
-
-- Dans `manage.py`, ajouter une commande `lorem` qui utilisera la methode
-  `lorem` de la classe `Pokemon`
-
-
-## 4. Construction du pokedex
-
-- Ajouter une route `/liste` qui permet de lister les pokémons capturés (juste
-  leur nom). Pour cela, on créera un template (par exemple, `liste.html`)
-
-- Ajouter un lien vers `/liste` depuis la page d'acceuil. Pour ce faire, on
-  pourra utiliser, dans le template `index.html` la syntaxe `{{ url_for('app.liste') }}`
-  qui permet d'obtenir / générer la route correpondant à la fonction `liste()`.
-
-- Ajouter une route `/infos/<pokemon>` qui, pour un nom de pokemon donné,
-  affiche une page avec des informations "détaillée" (son niveau et sa date de
-  capture). Pour cela, on créera un template (par exemple, `infos.html`)
-
-- Modifier le template `liste.html` pour ajouter un lien HTML : ainsi, cliquer
-  sur le nom d'un pokemon permettra d'aller sur la page correspondante
-  (`/infos/<pokemon>`). Pour ce faire, dans le template, on pourra utiliser
-  quelque chose comme :
-
-```
-    {{ url_for('app.pokemon', pokemon="pikachu") }}
-```
-
-qui permet de generer automatiquement l'URL correspondant à l'appel de la
-fonction `pokemon("pikachu")`
-
-- Ajouter un paramètre optionnel à la route `/liste`, de sorte à ce que l'URL
-  `/liste?recent` permette de lister seulement les pokémons capturés depuis une
-  semaine. Pour cela, on pourra itérer sur les pokémons et calculer la
-  différence de date (avec quelque chose comme `delta = ma_date -
-  datetime.datetime.now()`)
-
-
-## 5. Formulaire d'ajout
-
-- Ajouter une route `/new` qui permettra d'ajouter un pokemon. La page
-  contriendra un formulaire permettant d'entrer le nom, le type et le niveau du
-  pokemon, ainsi qu'un bouton pour envoyer (via une requête POST) les donnés
-  entrées.
-
-- Gérer la réception de la requête POST dans Flask avec ce type de syntaxe : 
-
-```
-from flask import request
-
-@app.route('/new', methods=['GET', 'POST'])
-def new():
-    if request.method == 'POST':
-        print("Le nom donné est " + request.form["name"])
-        ...
-    else:
-        return render_template("new.html")
-```
-
-La fonction analysera les données et ajoutera le pokemon à la base de donnée
-(par exemple, en vérifiant avant que la pokemon n'existe pas déjà)
-
-
-
+4 : Gérons maintenant le cas où l'utilisateur ajouter un nouveau contact depuis le formulaire de l'interface. Le clic sur le bouton 'Ajouter' déclenche une requête vers `/add` géré par le deuxième controlleur, dont certaines parties restent à implémenter. Les données du formulaire sont disponibles dans le dictionnaire `request.form`. À partir de celle-ci, il faut créer un nouveau `Contact` et l'ajouter à la BDD. Validez que votre programme fonctionne en tentant de remplir le formulaire. (N.B. : la question du parsing de la date d'anniversaire n'étant pas triviale, dans un premier temps on peut l'ignorer et forcer sa valeur à `None`)

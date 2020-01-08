@@ -222,6 +222,24 @@ print(carre_vert.aire()) # -> affiche 9
 
 # Orienté objet : héritage
 
+### (llustration du polymorphisme)
+
+```python
+formes = [Cercle((3, 5), 2, "red"),
+          Carre((5, -1), 3, "green"),
+          Cercle((-2, 4), 5, "yellow"),
+          Carre((4, -2), 2, "purple")]
+
+for forme in formes:
+    print(forme.aire())
+```
+
+(c.f. aussi [autre exemple sur stack overflow](https://stackoverflow.com/a/3724160))
+
+---
+
+# Orienté objet : héritage
+
 ## À retenir
 
 - `class Cercle(FigureGeometrique)` fais hériter `Cercle` de `FigureGeometrique`
@@ -232,9 +250,52 @@ print(carre_vert.aire()) # -> affiche 9
 
 ---
 
-# Orienté objet : `@property`
+# Orienté objet : aller + loin
 
-## Des attributs "dynamiques"
+## Méthodes spéciales / "magiques"
+
+- `__repr__` et `__str__` : génère une représentation de l'objet sous forme de chaîne de caractère
+
+```python
+   def __repr__(self):
+      return "Cercle de couleur " + self.color + " et de rayon " + self.rayon
+```
+
+- `__add__` : définir l'addition de deux objets
+
+- `__eq__` : définir l'égalité entre deux objets
+
+- `__iter__` : définir comment itérer sur un objet
+
+- ... [et plein d'autres](https://docs.python.org/3/reference/datamodel.html) ...
+
+---
+
+# Orienté objet : aller + loin
+
+# Attributs 'statiques' (partagés par tous les objets d'une classe)
+
+```python
+class FormeGeometrique():
+
+    nb_instances = 0
+
+    def __init__(self):
+        FormeGeometrique.nb_instances += 1
+
+forme1 = FormeGeometrique()
+forme2 = FormeGeometrique()
+forme3 = FormeGeometrique()
+
+print(FormeGeometrique.nb_instances)
+# -> affiche 3
+```
+
+---
+
+# Orienté objet : aller + loin
+
+##  Des attributs "dynamiques" avec `@property`
 
 ```python
 class Carre(FigureGeometrique):
@@ -252,9 +313,9 @@ print(carre_vert.aire) # N.B. : plus besoin de mettre de parenthèse ! Se compor
 
 ---
 
-# Orienté objet : `@property`
+# Orienté objet : aller + loin
 
-### Autre exemple
+## Autre exemple avec `@property`
 
 ```python
 class Facture():
@@ -277,9 +338,9 @@ print("Il reste %s à payer" % ma_facture.montant_restant_a_payer)
 
 ---
 
-# Orienté objet : `pickle`
+# Orienté objet : aller + loin
 
-## Enregistrer des objets
+## Enregistrer des objets avec `pickle`
 
 `pickle` permet de "sérialiser" et "déserialiser" des objets (ou de manière générale des structure de données) en un flux binaire (!= texte).
 
@@ -296,9 +357,9 @@ pickle.dump(ma_facture, f)
 
 ---
 
-# Orienté objet : `pickle`
+# Orienté objet : aller + loin
 
-## Enregistrer des objets
+## Enregistrer des objets avec `pickle`
 
 `pickle` permet de "sérialiser" et "déserialiser" des objets (ou de manière générale des structure de données) en un flux binaire (!= texte).
 
@@ -406,12 +467,12 @@ db.drop_all()
 db.create_all()
 
 # Créer des utilisateurs
-alex    = Member(name="Alice",   memberSince=datetime.date(day=5, month=11, year=2017))
+alice   = Member(name="Alice",   memberSince=datetime.date(day=5, month=11, year=2017))
 bob     = Member(name="Bob",     memberSince=datetime.date.today(), balance=15)
 camille = Member(name="Camille", memberSince=datetime.date(day=7, month=10, year=2018), balance=10)
 
 # Dire qu'on veut les enregistrer
-db.session.add(alex)
+db.session.add(alice)
 db.session.add(bob)
 db.session.add(camille)
 
@@ -426,14 +487,12 @@ db.session.commit()
 ## Exemple de requete (`query`)
 
 ```python
+all_members = Member.query().all()
+
 active_members = Member.query()
                 .filter(Member.active == True)
                 .order_by(Member.memberSince)
 
 for member in active_members:
     print(user.name)
-
-# On peut aussi faire :
-Member.query().all()   # ---> Execute la query "pour de vrai" et renvoie une liste
-Member.query().filter(Member.active == True).all()
 ```

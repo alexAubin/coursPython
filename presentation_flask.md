@@ -16,15 +16,74 @@ class: impact
 
 ---
 
+# Une application web
+
+- On interagit avec au travers d'un navigateur web
+- Avec le navigateur, on accède à des ressources par des URL. Par exemple : 
+    - La racine du site : `/`
+    - Une page avec un formulaire de contact : `/contact`
+    - Une image stockée sur le site : `/chat.jpg`
+- On clique sur des liens qui vont demander d'autres ressources (GET)
+- On clique sur des boutons qui peuvent envoyer des informations (POST)
+
+---
+
+# Une application web
+
+## ... mais pourquoi une app web ? (plutôt qu'un logiciel classique)
+
+Pros:
+
+- Cross-platform
+- Mise à jour simple
+- Au niveau technique : distinction plus évidente entre le front et le back-end ?
+- Plus de possibilité et de flexibilité cosmétiques
+
+Cons:
+
+- Moins de vie privée
+- Le web est un désastre au niveau CPU
+
+
+---
+
+# L'architecture MVC
+
+.center[
+![](img/mvc2.png)
+]
+
+---
+
+# L'architecture MVC
+
+- **Modèle** = les données et la façon dont elles sont structurées...
+- **Vue** = affichage, mise en forme des données
+- **Controlleur** = la logique qui gère la requête de l'utilisateur, va chercher les données qu'il faut, et les donne à manger à la vue
+
+
+---
+
+# L'architecture MVC ... en exemple?
+
+.center[
+![](img/mvc3.png)
+]
+
+---
+
 # Flask
 
-## En quelques mots (détaillés ensuite)
+## En quelques mots
 
-- un "micro-framework" pour faire du web
-- typiquement dans un **virtualenv**
-- Werkzeug : une URL = une fonction (controlleur?) 
-- Jinja : système de **template** (vues?)
-- SQLAlchemy : une classe = table dans une BDD (models, ORM)
+Un "micro-framework" pour faire du web, composé de plusieurs morceaux
+- Vues gérées avec **Jinja**  (moteur de template avec une syntaxe "à la Python")
+- Controlleurs gérés avec **Werkzeug**  (une URL <-\> une fonction)
+- Modèles gérées avec **SQLAlchemy**  (ORM : une classe <-\> une table SQL)
+
+On peut y greffer pleins d'autres modules petits modules optionnels
+
+Pour des applications plus grosses, on préferera tout même **Django** qui est un framework plus complet (mais plus complexe) mais qui suis la même logique
 
 ---
 
@@ -41,9 +100,13 @@ sudo apt install python-virtualenv python3-virtualenv
 virtualenv -p python3 venv
 source venv/bin/activate
 
-# Installation de dependance, manipulation ...
+# Installation de dependances
 pip3 install <une dependance...>
-<une commande...>
+pip3 install <une autre dependance...>
+
+
+# On développe, on teste, etc....
+
 
 # Si on a fini et/ou que l'on veut "sortir" du virtualenv
 deactivate
@@ -58,15 +121,14 @@ virtualenv -p python3 venv
 source venv/bin/activate
 
 pip install Flask
-pip install Flask-Script
 pip install Flask-SQLAlchemy
 ```
 
 ---
 
-# Flask's Hello World
+# Hello World en Flask
 
-### URL = Fonction
+#### On associe l'url `/` à un controlleur (= une fonction) qui renvoie `Hello World`
 
 ```python
 from flask import Flask
@@ -77,18 +139,13 @@ def hello_world():
     return 'Hello, World!'
 ```
 
-ensuite : 
-```
-http://monsite.com/   # -> Affichera 'Hello world'
-```
-
-( `@app.route('/')` s'apelle un décorateur )
+Mon controlleur `hello_world()` doit renvoyer du texte ou une "HTTP response" (par exemple, erreur 404, ou redirection, ...)
 
 ---
 
-# Flask's Hello World
+# Hello World en Flask
 
-Lancer le serveur web de test/dev :
+Lancer le serveur web de test :
 
 ```bash
 $ export FLASK_APP=hello.py
@@ -96,63 +153,98 @@ $ flask run
  * Running on http://127.0.0.1:5000/
 ```
 
+ensuite, je visite: 
+```
+http://127.0.0.1:5000/     # -> Affichera 'Hello world'
+```
+
 ---
 
-# Templating / Jinja
+# Hello World en Flask
 
-Un template ressemble à
+#### On peut créer d'autres controlleur pour d'autres URLs...
+
+```python
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+@app.route('/python')
+def python():
+    return "Le python, c'est la vie!"
+```
+
+ensuite : 
+```
+http://127.0.0.1:5000/python    # -> Affichera 'Le python, c'est la vie!'
+```
+
+---
+
+# Créer des vues avec Jinja
+
+Un template ressemble à :
 
 ```jinja
+<html>
   Bonjour {% prenom %} !
 
   {% for app in apps %}
     {{ app.name }} est niveau {{ app.level }} !
   {% endfor %}
+</html>
 ```
 
-avec par exemple : 
+On peut l'*hydrater* avec par exemple ces données :
 
 ```python
 prenom = "Alex"
 apps = [ { "name": "mailman", "level": 2 },
-         { "name": "wordpress", "level": 7 } ]
+         { "name": "wordpress", "level": 7 },
+         { "name": "nextcloud", "level": 8 }    ]
 ```
 
 ---
 
-# Templating / Jinja
+# Créer des vues avec Jinja
 
 Rendu : 
 
 ```
+<html>
   Bonjour Alex !
 
   mailman est niveau 2 !
   wordpress est niveau 7 !
+  nextcloud est de niveau 8 !
+</html>
 ```
 
 ---
 
-# Templates dans Flask
+# Créer des vues avec Jinja
 
-En supposant que le template précédent soit situé dans `templates/hello.html`
+En supposant que le template précédent soit situé dans `templates/hello.html`, je peux utiliser `render_template` dans mon controlleur générer un rendu à l'aide de mes données
 
 ```python
 from flask import render_template
 
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name="Alex"):
+@app.route('/')
+def homepage():
     apps = [ { "name": "mailman", "level": 2 },
-             { "name": "wordpress", "level": 7 } ]
+             { "name": "wordpress", "level": 7 },
+             { "name": "nextcloud", "level": 8 }    ]
     return render_template('hello.html', 
-                           name=name,
+                           name="Alex",
                            apps=apps)
 ```
 
 ---
 
-# SQL Alchemy, Models / ORM in Flask
+# Gérer les données avec SQL Alchemy
 
 ```python
 from flask_sqlalchemy import SQLAlchemy
@@ -166,12 +258,27 @@ class App(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     level = db.Column(db.Integer, nullable=False)
-    date_last_test = db.Column(db.Datetime, nullable=True)
+    date_last_test = db.Column(db.Date, nullable=True)
 ```
 
 ---
 
-# SQL Alchemy, Models / ORM in Flask
+# Gérer les données avec SQL Alchemy
+
+### Initialiser les tables
+
+```python
+# Supprimer toutes les tables existantes (achtung!)
+db.drop_all()
+
+# Recréer toutes les tables qui vont bien
+db.create_all()
+```
+
+
+---
+
+# Gérer les données avec SQL Alchemy
 
 ### Ecrire
 
@@ -195,4 +302,26 @@ App.query.filter_by(level=7).all()
 App.query.filter_by(name="mailman").first()
 ```
 
+---
 
+# Gérer les données avec SQL Alchemy
+
+### Dans un controlleur
+
+```python
+from flask import render_template
+from my_models import App
+
+@app.route('/')
+def homepage():
+
+    apps = App.query.all()
+    
+    return render_template('hello.html', 
+                           name="Alex",
+                           apps=apps)
+```
+
+---
+
+TP de mise en application : gestionnaire de contacts

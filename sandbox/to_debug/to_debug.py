@@ -41,13 +41,17 @@ def get_lists_history():
         os.system(cmd % t.strftime("%b %d %Y"))
 
         # Merge community and official
-        community = json.loads(open(".work/apps/community.json").read())
-        official = json.loads(open(".work/apps/officials.json").read())
-        for key in official:
-            official[keys]["state"] = "official"
         merged = {}
-        merged.update(community)
-        merged.update(official)
+
+        if os.path.exists(".work/apps/community.json"):
+            community = json.loads(open(".work/apps/community.json").read())
+            merged.update(community)
+
+        if os.path.exists(".work/apps/official.json"):
+            official = json.loads(open(".work/apps/officials.json").read())
+            for key in official:
+                official[keys]["state"] = "official"
+            merged.update(official)
 
         # Save it
         json.dump(merged, open('./.work/merged_lists.json.%s' % t.strftime("%y-%m-%d"), 'w'))

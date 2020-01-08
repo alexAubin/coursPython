@@ -63,7 +63,7 @@ print(main_alice[1].points())
 
 ## 3. Introduction à SQLAlchemy (via ActiveAlchemy)
 
-On se propose de reprendre le jeu de donnée des apps Yunohost (fichier `app.yunohost.org/community.json`) et d'importer ces données dans une base SQL (plus précisémment SQLite)
+On se propose de reprendre le jeu de données des apps Yunohost (fichier `app.yunohost.org/community.json`) et d'importer ces données dans une base SQL (plus précisémment SQLite)
 
 3.0 - Installer `active_alchemy` à l'aide de `pip3`
 
