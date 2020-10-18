@@ -3,9 +3,9 @@
 
 ## 0. Hello world
 
-Démarrer Thonny (ou votre éditeur/IDE préféré)
+0.1 : Démarrer Thonny (ou votre éditeur/IDE préféré)
 
-Écrire et lancer le programme suivant :
+0.2 : Écrire et lancer le programme suivant :
 
 ```python
 print("Hello World!")
@@ -18,8 +18,11 @@ Créez un fichier `hello.py` directement dans la console (par exemple via `nano 
 print("Hello, world!")
 ```
 
-Executez ensuite ce script à l'aide de `python3 hello.py` ou `./hello.py`
+0.3 : Executez ensuite ce script à l'aide de `python3 hello.py` ou `./hello.py`
+dans un terminal
 
+0.4 : Encore dans un terminal, lancez l'interpréteur en interactif et tapez
+directement dedans `print("Hello, world!")`
 
 ## 1. Variables
 

@@ -14,7 +14,7 @@ layout: true
 class: impact
 
 # {{title}}
-*Devenez un jedi de la programmation en trois jours!*
+*Devenez un jedi de la programmation en cinq jours!*
 
 ---
 
@@ -24,8 +24,42 @@ class: impact
 
 ---
 
+## En attendant : 
+
+- Aller sur virtualbox.org > Downloads > "Windows hosts"
+- ... puis installer Virtualbox
+
+.center[
+![](img/download_virtualbox.png)
+]
+
+- Aller sur osboxes.org/linux-mint
+
+.center[
+![](img/download_linuxmint.png)
+]
+
+---
+
+## En attendant : 
+
+- Puis dans Virtualbox : créer une nouvelle VM
+- Version de l'OS : Ubuntu ou "Other Linux" 64bit
+- Mettre 2~4 Go de RAM
+- **Utiliser un fichier de disque dur virtuel existant** : utiliser le VDI
+  téléchargé
+
+Puis se logger avec : 
+- login: osboxes.org
+- password: osboxes.org 
+      - (attention de base clavier en querty.. ça donne: osboxes:org)
+
+
+---
+
 ## À propos de moi
 
+.row[
 .col-4[
 .center[
 ![](img/me.jpg)
@@ -45,6 +79,7 @@ class: impact
 <br>
 <br>
 ]]
+]
 
 .col-4[.center[
 Ingénieur/Physicien
@@ -62,7 +97,7 @@ Dev / hacktiviste?
 .col-4[.center[
 Formateur
 
-![](img/python_arduino.jpg)
+![](img/python_arduino_linux.png)
 ]]
 
 ---
@@ -189,8 +224,6 @@ class: impact
 3. **Organiser** sa rédaction et ses idées : **structurer** correctement son code et ses données
 
 ---
-
-# Python
 
 .center[![](img/python.png)]
 
@@ -323,6 +356,7 @@ il faut lancer `python3` explicitement ! <small>(et non `python`)</small>
 - Nommage des paquets debian (`python-*` vs `python3-*`)
 - Gestion de l'encodage
 - `range`, `xrange`
+- Disponibilité des librairies ?
 
 .center[
 Il existe des outils comme 2to3 pour ~automatiser la transition
@@ -1038,7 +1072,7 @@ c.f. `https://docs.python.org/2/library/subprocess.html#subprocess.Popen`
 
 ## Écrire un programme ... pour qui ? pour quoi ?
 
-- Le fait qu'un programme marche en "secondaire" !
+- Le fait qu'un programme marche est "secondaire" !
 - ... Mieux vaut un programme cassé mais lisible (donc débuggable)
 - ... qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
 
@@ -1050,14 +1084,17 @@ Autrement dit : **la lisibilité pour vous et vos collègues a énormément d'im
 
 ## Bonnes pratiques pour la lisibilité, maintenabilité
 
-- Keep It Simple
-- Sémantique : utiliser des noms de variables et de fonctions **qui ont du sens**
-- Architecture : découper son programme en fonction qui chacune résolvent un sous-problème précis
-- Robustesse : garder ses fonctions autant que possibles indépendantes, limiter les effets de bords
+- **Keep It Simple**
+- **Sémantique** : utiliser des noms de variables et de fonctions **qui ont du sens**
+- **Architecture** : découper son programme en fonction qui chacune résolvent un sous-problème précis
+- **Robustesse** : garder ses fonctions autant que possibles indépendantes, limiter les effets de bords
     - lorsque j'arose mes plantes, ça ne change pas la température du four
-- Lorsque mon programme évolue, je prends le temps de le refactoriser si nécessaire
+
+
+- Lorsque mon programme évolue, **je prends le temps de le refactoriser si nécessaire**
     - si je répète plusieurs fois les mémes opérations, il peut être intéressant d'introduire une nouvelle fonction
     - si le contenu d'une variable ou d'une fonction change, peut-être qu'il faut modifier son nom
+    - si je fais pleins de petites opérations bizarre, peut-être qu'il faut créer une fonction
 
 ---
 
@@ -1133,6 +1170,26 @@ def dire_bonjour(nom):
 ```
 
 .center[![](img/captain.jpg)]
+
+
+---
+
+# 5. Conditions
+
+## 5.2 Exemple 2
+
+```python
+X = 42
+
+n = int(input("Devine à quel nombre je pense !"))
+
+if n == X:
+   print("Oui, c'est bien ça, comment as-tu fait ?!")
+elif n < X:
+   print("Mon nombre est plus grand que ça !)
+else:
+   print("Mon nombre est plus petit que ça !)
+```
 
 ---
 
@@ -1270,7 +1327,342 @@ class: impact
 
 ---
 
-... plus tard en fait ...
+# 6. Les exceptions
+
+En Python, lorsqu'une erreur se produit ou qu'un cas particulier empêche (a priori) la suite du déroulement normal d'un programme ou d'une fonction, une *exception* est déclenchée
+
+Attention : différent des erreurs de syntaxe
+
+### Exemple d'exceptions
+
+- Utiliser une variable qui n'existe pas
+- Utiliser `int()` sur quelque chose qui ne peut pas être converti en entier
+- Diviser un nombre par zero
+- Diviser un nombre par une chaine de caractère
+- Tenter d'accéder à un élément d'une liste qui n'existe pas
+- Tenter d'ouvrir un fichier qui n'existe pas ou qu'on ne peut pas lire
+- Tenter de télêcharger des données sans être connecté à internet
+- etc...
+
+---
+
+# 6. Les exceptions
+
+- Une exception a un *type*
+    - `Exception`, `ValueError`, `IndexError`, `TypeError`, `ZeroDivisionError`, ...
+- Lorsqu'une exception interrompt le programme, l'interpréteur affiche la *stacktrace* (TraceBack) qui contient des informations pour comprendre quand et pourquoi l'exception s'est produite.
+
+```python
+Traceback (most recent call last):
+  File "coucou.py", line 3, in <module>
+    print(coucou)
+NameError: name 'coucou' is not defined
+```
+
+---
+
+# 6. Les exceptions
+
+- Une exception a un *type*
+    - `Exception`, `ValueError`, `IndexError`, `TypeError`, `ZeroDivisionError`, ...
+- Lorsqu'une exception interrompt le programme, l'interpréteur affiche la *stacktrace* (TraceBack) qui contient des informations pour comprendre quand et pourquoi l'exception s'est produite.
+
+```python
+# python3 test_int.py
+
+Tape un entier entre 1 et 3: truc
+
+Traceback (most recent call last):
+  File "test_int.py", line 8, in <module>
+    demander_nombre()
+  File "test_int.py", line 4, in demander_nombre
+    r = int(input("Tape un entier entre 1 et 3: "))
+ValueError: invalid literal for int() with base 10: 'truc'
+```
+
+---
+
+# 6. Les exceptions
+
+## 6.0 `raise`
+
+Il est possible de déclencher ses propres exceptions à l'aide de `raise`
+
+```python
+def max(liste_entiers):
+    if liste_entiers == []:
+        raise Exception("max() ne peut pas fonctionner sur une liste vide!")
+```
+
+(Ici, le type utilisé est le type générique `Exception`)
+
+---
+
+# 6. Les exceptions
+
+## 6.0 `raise`
+
+Autre exemple:
+
+```python
+def envoyer_mail(destinataire, sujet, contenu):
+    if '@' not in destinataire:
+        raise Exception('Une adresse mail doit comporter un @ !')
+```
+
+(Ici, le type utilisé est le type générique `Exception`)
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Par exemple : écrire dans un fichier
+- Est-ce que le programme a la permission d'écrire dans ce fichier ?
+- Est-ce qu'aucun autre programme n'est en train d'écrire dans ce fichier ?
+- Est-ce qu'il y a assez d'espace disque libre ?
+- Si je commence à écrire, peut-être vais-je tomber sur un secteur disque deffectueux
+- ...
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Autre exemple : aller chercher une information sur internet
+- Est-ce que je suis connecté à Internet ?
+- Est-ce que la connection est suffisament stable et rapide ?
+- Est-ce que le programme a le droit d'effectuer d'envoyer des requêtes ?
+- Est-ce qu'un firewall va bloquer ma requête ?
+- Est-ce que le site que je veux contacter est disponible actuellement ?
+- Est-ce que le certificat SSL du site est à jour ?
+- Quid de si la connexion est perdue en plein milieu de l'échange ?
+- ...
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+En Python, il est courant d'« essayer » des opérations puis de gérer les
+exceptions si elles surviennent.
+
+On utilise pour cela des `try: ... except: ...`.
+
+### Exemple
+
+```python
+reponse = input("Entrez un entier svp !")
+
+try:
+    n = int(reponse)
+except:
+    raise Exception("Ce n'est pas un entier !")
+```
+
+---
+
+# 6. Les exceptions
+
+### Utilisation différente
+
+```python
+reponse = input("Entrez un entier svp !")
+
+try:
+    n = int(reponse)
+except:
+    n = -1
+```
+
+---
+
+# 6. Les exceptions
+
+### Utilisation différente
+
+```python
+reponse = input("Entrez un entier svp !")
+
+try:
+    n = int(reponse)
+except:
+    # Faire en sorte de boucler pour reposer la question à l'utilisateur ...
+```
+
+---
+
+# 6. Les exceptions
+
+### Utilisation différente
+
+```python
+def can_be_converted_to_int(stuff):
+    try:
+        int(stuff)
+    except:
+        return False
+
+    return True
+
+can_be_converted_to_int("3")    # -> True
+can_be_converted_to_int("abcd") # -> False
+```
+
+---
+
+# 6. Les exceptions
+
+<br>
+<br>
+<br>
+<br>
+
+.center[
+## The "python way"
+### « Better to ask forgiveness than permissions »
+
+
+<br>
+(ça se discute)
+]
+
+---
+
+
+# 6. Les exceptions
+
+## 6.2 Assertions
+
+Il est possible d'utiliser des `assert`ions pour **expliciter certaines hypothèses**
+faites pendant l'écriture du code. Si elles ne sont pas remplies, une exception est déclenchée.
+
+```python
+def max(liste_entiers):
+    assert liste_entiers != [], "max() ne peut pas fonctionner sur une liste vide!"
+```
+
+(`assert toto` est équivalent à `if not toto: raise Exception()`)
+
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions (autre exemple)
+
+```python
+def distance(x=0, y=0):
+    assert isinstance(x, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
+    assert isinstance(y, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
+
+    return racine_carree(x*x + y*y)
+```
+
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions (encore un autre exemple)
+
+```python
+def some_function(n):
+    assert isinstance(n, int), "Cette fonction ne prends que des int en argument !"
+    assert n % 2 == 0, "Cette fonction ne prends que des entiers pairs en argument !"
+
+    [...]
+```
+
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions et tests unitaires
+
+En pratique, l'une des utilisations les plus courantes de `assert` est l'écriture de tests unitaires qui permettent de valider qu'une fonction marche dans tous les cas (et continue à marcher si on la modifie)
+
+Dans votre application:
+
+```python
+def trier(liste_entiers):
+    # on définie le comportement de la fonction
+```
+
+Dans les tests (fichier à part):
+
+```python
+assert trier([15, 8, 4, 42, 23, 16]) == [4, 8, 15, 16, 23, 42]
+assert trier([0, 82, 4, -21, 2]) == [-21, 0, 2, 4, 82]
+assert trier([-7, -3, 0]) == [-7, -3, 0]
+assert trier([]) == []
+```
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (1/3)
+
+Calcul du max d'une liste d'entiers
+
+> Je soupçonne fortemment que `ma_liste` puisse ne pas être une liste ou puisse être vide
+
+```python
+if not isinstance(ma_liste, list) or ma_liste == []:
+    resultat = None
+else:
+    resultat = max(ma_liste)
+```
+
+Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
+
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (2/3)
+
+Calcul du max d'une liste d'entiers
+
+> Ça devrait marcher, mais j'ai un doute ...
+
+```python
+try:
+    resultat = max(ma_liste)
+except ValueError as e:
+    print("Warning : peut-etre que ma_liste n'etait pas une liste non-vide ?")
+    resultat = None
+```
+
+Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (3/3)
+
+Calcul du max d'une liste d'entiers
+
+> Normalement `ma_liste` est une liste non-vide, sinon il y a un très gros problème avant dans le programme...
+
+```python
+assert isinstance(ma_liste, list) and ma_liste != []
+
+resultat = max(ma_liste)
+```
+
+
+
+
+
 
 ---
 
@@ -1972,313 +2364,8 @@ def pairs(liste_entiers):
     return resultat
 ```
 
----
 
-class: impact
 
-# 6. Les exceptions
-
-
----
-
-# 6. Les exceptions
-
-En Python, lorsqu'une erreur se produit ou qu'un cas particulier empêche (a priori) la suite du déroulement normal d'un programme ou d'une fonction, une *exception* est déclenchée
-
-### Exemple d'exceptions
-
-- Utiliser une variable qui n'existe pas
-- Utiliser `int()` sur quelque chose qui ne peut pas être converti en entier
-- Diviser un nombre par zero
-- Diviser un nombre par une chaine de caractère
-- Tenter d'accéder à un élément d'une liste qui n'existe pas
-- Tenter d'ouvrir un fichier qui n'existe pas ou qu'on ne peut pas lire
-- Tenter d'accéder de télêcharger des données sans être connecté à internet
-- etc...
-
----
-
-# 6. Les exceptions
-
-- Une exception a un *type*
-    - `Exception`, `ValueError`, `IndexError`, `TypeError`, `ZeroDivisionError`, ...
-- Lorsqu'une exception interrompt le programme, l'interpréteur affiche la *stacktrace* (TraceBack) qui contient des informations pour comprendre quand et pourquoi l'exception s'est produite.
-
-```python
-# python3 test_int.py
-
-Tape un entier entre 1 et 3: truc
-
-Traceback (most recent call last):
-  File "test_int.py", line 8, in <module>
-    demander_nombre()
-  File "test_int.py", line 4, in demander_nombre
-    r = int(input("Tape un entier entre 1 et 3: "))
-ValueError: invalid literal for int() with base 10: 'truc'
-```
-
----
-
-# 6. Les exceptions
-
-## 6.0 `raise`
-
-Il est possible de déclencher ses propres exceptions à l'aide de `raise`
-
-```python
-def max(liste_entiers):
-    if liste_entiers == []:
-        raise Exception("max() ne peut pas fonctionner sur une liste vide!")
-```
-
-(Ici, le type utilisé est le type générique `Exception`)
-
----
-
-# 6. Les exceptions
-
-## 6.1 `try`/`except`
-
-De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
-
-Par exemple : écrire dans un fichier
-- Est-ce que le programme a la permission d'écrire dans ce fichier ?
-- Est-ce qu'aucun autre programme n'est en train d'écrire dans ce fichier ?
-- Est-ce qu'il y a assez d'espace disque libre ?
-- Si je commence à écrire, peut-être vais-je tomber sur un secteur disque deffectueux
-- ...
-
----
-
-# 6. Les exceptions
-
-## 6.1 `try`/`except`
-
-De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
-
-Autre exemple : aller chercher une information sur internet
-- Est-ce que je suis connecté à Internet ?
-- Est-ce que la connection est suffisament stable et rapide ?
-- Est-ce que le programme a le droit d'effectuer d'envoyer des requêtes ?
-- Est-ce qu'un firewall va bloquer ma requête ?
-- Est-ce que le site que je veux contacter est disponible actuellement ?
-- Est-ce que le certificat SSL du site est à jour ?
-- Quid de si la connexion est perdue en plein milieu de l'échange ?
-- ...
-
-
----
-
-# 6. Les exceptions
-
-## 6.1 `try`/`except`
-
-En Python, il est courant d'« essayer » des opérations puis de gérer les
-exceptions si elles surviennent.
-
-On utilise pour cela des `try: ... except: ...`.
-
-### Exemple
-
-```python
-reponse = input("Entrez un entier svp !")
-
-try:
-    n = int(reponse)
-except:
-    raise Exception("Ce n'est pas un entier !")
-```
-
----
-
-# 6. Les exceptions
-
-### Utilisation différente
-
-```python
-reponse = input("Entrez un entier svp !")
-
-try:
-    n = int(reponse)
-except:
-    n = -1
-```
-
----
-
-# 6. Les exceptions
-
-### Utilisation différente
-
-```python
-reponse = input("Entrez un entier svp !")
-
-try:
-    n = int(reponse)
-except:
-    # Faire en sorte de boucler pour reposer la question à l'utilisateur ...
-```
-
----
-
-# 6. Les exceptions
-
-### Utilisation différente
-
-```python
-def can_be_converted_to_int(stuff):
-    try:
-        int(stuff)
-    except:
-        return False
-
-    return True
-
-can_be_converted_to_int("3")    # -> True
-can_be_converted_to_int("abcd") # -> False
-```
-
----
-
-# 6. Les exceptions
-
-<br>
-<br>
-<br>
-<br>
-
-.center[
-## The "python way"
-### « Better to ask forgiveness than permissions »
-
-
-<br>
-(ça se discute)
-]
-
----
-
-
-# 6. Les exceptions
-
-## 6.2 Assertions
-
-Il est possible d'utiliser des `assert`ions pour **expliciter certaines hypothèses**
-faites pendant l'écriture du code. Si elles ne sont pas remplies, une exception est déclenchée.
-
-```python
-def max(liste_entiers):
-    assert liste_entiers != [], "max() ne peut pas fonctionner sur une liste vide!"
-```
-
-(`assert toto` est équivalent à `if not toto: raise Exception()`)
-
----
-
-# 6. Les exceptions
-
-## 6.2 Assertions (autre exemple)
-
-```python
-def distance(x=0, y=0):
-    assert isinstance(x, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
-    assert isinstance(y, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
-
-    return racine_carree(x*x + y*y)
-```
-
----
-
-# 6. Les exceptions
-
-## 6.2 Assertions (encore un autre exemple)
-
-```python
-def some_function(n):
-    assert isinstance(n, int), "Cette fonction ne prends que des int en argument !"
-    assert n % 2 == 0, "Cette fonction ne prends que des entiers pairs en argument !"
-
-    [...]
-```
-
----
-
-# 6. Les exceptions
-
-## 6.2 Assertions et tests unitaires
-
-En pratique, l'une des utilisations les plus courantes de `assert` est l'écriture de tests unitaires qui permettent de valider qu'une fonction marche dans tous les cas (et continue à marcher si on la modifie)
-
-Dans votre application:
-
-```python
-def trier(liste_entiers):
-    # on définie le comportement de la fonction
-```
-
-Dans les tests (fichier à part):
-
-```python
-assert trier([15, 8, 4, 42, 23, 16]) == [4, 8, 15, 16, 23, 42]
-assert trier([0, 82, 4, -21, 2]) == [-21, 0, 2, 4, 82]
-assert trier([-7, -3, 0]) == [-7, -3, 0]
-assert trier([]) == []
-```
-
----
-
-# 6. Les exceptions
-
-## Plusieurs approches (1/3)
-
-Calcul du max d'une liste d'entiers
-
-> Je soupçonne fortemment que `ma_liste` puisse ne pas être une liste ou puisse être vide
-
-```python
-if not isinstance(ma_liste, list) or ma_liste == []:
-    resultat = None
-else:
-    resultat = max(ma_liste)
-```
-
-Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
-
----
-
-# 6. Les exceptions
-
-## Plusieurs approches (2/3)
-
-Calcul du max d'une liste d'entiers
-
-> Ça devrait marcher, mais j'ai un doute ...
-
-```python
-try:
-    resultat = max(ma_liste)
-except ValueError as e:
-    print("Warning : peut-etre que ma_liste n'etait pas une liste non-vide ?")
-    resultat = None
-```
-
-Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
-
----
-
-# 6. Les exceptions
-
-## Plusieurs approches (3/3)
-
-Calcul du max d'une liste d'entiers
-
-> Normalement `ma_liste` est une liste non-vide, sinon il y a un très gros problème avant dans le programme...
-
-```python
-assert isinstance(ma_liste, list) and ma_liste != []
-
-resultat = max(ma_liste)
-```
 
 ---
 
@@ -2724,7 +2811,7 @@ Pour votre code :
 **La lisibilité est la priorité numéro 1**
 ]
 
-> Un programme est vivant et évolue. Mieux vaut un programme cassé mais lisible (donc débuggable) qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
+Un programme est vivant et évolue. Mieux vaut un programme cassé mais lisible (donc débuggable) qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
 
 (c.f. Guido van Rossum chez Dropbox)
 

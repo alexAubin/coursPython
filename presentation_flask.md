@@ -43,7 +43,7 @@ Cons:
 
 - Moins de vie privée
 - Le web est un désastre au niveau CPU
-
+- Demnade de connaitre + de technos ? (HTML/CSS/JS)
 
 ---
 
@@ -59,7 +59,7 @@ Cons:
 
 - **Modèle** = les données et la façon dont elles sont structurées...
 - **Vue** = affichage, mise en forme des données
-- **Controlleur** = la logique qui gère la requête de l'utilisateur, va chercher les données qu'il faut, et les donne à manger à la vue
+- **Controleur** = la logique qui gère la requête de l'utilisateur, va chercher les données qu'il faut, et les donne à manger à la vue
 
 
 ---
@@ -78,7 +78,7 @@ Cons:
 
 Un "micro-framework" pour faire du web, composé de plusieurs morceaux
 - Vues gérées avec **Jinja**  (moteur de template avec une syntaxe "à la Python")
-- Controlleurs gérés avec **Werkzeug**  (une URL <-\> une fonction)
+- Controleurs gérés avec **Werkzeug**  (une URL <-\> une fonction)
 - Modèles gérées avec **SQLAlchemy**  (ORM : une classe <-\> une table SQL)
 
 On peut y greffer pleins d'autres modules petits modules optionnels
@@ -94,7 +94,7 @@ Pour des applications plus grosses, on préferera tout même **Django** qui est 
 
 ```bash
 # La premiere fois :
-sudo apt install python-virtualenv python3-virtualenv
+sudo apt install python-virtualenv python3-virtualenv virtualenv
 
 # Creation d'un virtualenv 'venv'
 virtualenv -p python3 venv
@@ -128,7 +128,7 @@ pip install Flask-SQLAlchemy
 
 # Hello World en Flask
 
-#### On associe l'url `/` à un controlleur (= une fonction) qui renvoie `Hello World`
+#### On associe l'url `/` à un controleur (= une fonction) qui renvoie `Hello World`
 
 ```python
 from flask import Flask
@@ -139,7 +139,7 @@ def hello_world():
     return 'Hello, World!'
 ```
 
-Mon controlleur `hello_world()` doit renvoyer du texte ou une "HTTP response" (par exemple, erreur 404, ou redirection, ...)
+Mon controleur `hello_world()` doit renvoyer du texte ou une "HTTP response" (par exemple, erreur 404, ou redirection, ...)
 
 ---
 
@@ -162,7 +162,7 @@ http://127.0.0.1:5000/     # -> Affichera 'Hello world'
 
 # Hello World en Flask
 
-#### On peut créer d'autres controlleur pour d'autres URLs...
+#### On peut créer d'autres controleur pour d'autres URLs...
 
 ```python
 from flask import Flask
@@ -190,7 +190,7 @@ Un template ressemble à :
 
 ```jinja
 <html>
-  Bonjour {% prenom %} !
+  Bonjour {{ prenom }} !
 
   {% for app in apps %}
     {{ app.name }} est niveau {{ app.level }} !
@@ -227,7 +227,7 @@ Rendu :
 
 # Créer des vues avec Jinja
 
-En supposant que le template précédent soit situé dans `templates/hello.html`, je peux utiliser `render_template` dans mon controlleur générer un rendu à l'aide de mes données
+En supposant que le template précédent soit situé dans `templates/hello.html`, je peux utiliser `render_template` dans mon controleur générer un rendu à l'aide de mes données
 
 ```python
 from flask import render_template
@@ -306,7 +306,7 @@ App.query.filter_by(name="mailman").first()
 
 # Gérer les données avec SQL Alchemy
 
-### Dans un controlleur
+### Dans un controleur
 
 ```python
 from flask import render_template
@@ -318,7 +318,7 @@ def homepage():
     apps = App.query.all()
     
     return render_template('hello.html', 
-                           name="Alex",
+                           prenom="Alex",
                            apps=apps)
 ```
 
