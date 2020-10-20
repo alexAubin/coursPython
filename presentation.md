@@ -2653,7 +2653,35 @@ Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
 
 # 10. Librairies
 
-## 10.5 Exemple : `subprocess`
+## 10.5 Exemple : `sys`
+
+permet d'interagir / de s'interfacer avec le systeme
+
+Par exemple:
+
+```python
+import sys
+
+sys.stdout   # La sortie standard du programme
+sys.path     # Les chemins depuis lesquels sont chargés les imports
+sys.argv     # Tableau des arguments passés en ligne de commande
+sys.exit(1)  # Sortir du programme avec un code de retour de 1
+```
+
+---
+
+# 10. Librairies
+
+## 10.6 Exemple : `argparse`
+
+- Du vrai parsing d'argument en ligne de commande
+- (Un peu long à initialiser mais puissant)
+
+---
+
+# 10. Librairies
+
+## 10.7 Exemple : `subprocess`
 
 `subprocess` peut typiquement être utiliser pour lancer des commandes et
 récupérer leur résultat
@@ -2671,7 +2699,7 @@ print(out)    # -> Affiche 'Hello World'
 
 # 10. Librairies
 
-## 10.6 Exemple : `io`
+## 10.8 Exemple : `io`
 
 Par exemple, pour créer des objets "file-like". Par exemple :
 
@@ -2783,6 +2811,18 @@ print(bonjour)
 
 ---
 
+# Exercices complementaires
+
+- Utiliser la librairie random pour simuler 100 lancés de dé 6 et calculer dans un dictionnaire la frequence de chaque face obtenue
+- Dans l'exo precedent, utiliser argparse pour gerer via des arguments en ligne de commande :
+    - le nombre de lancés (par ex. -n 30)
+    - afficer le nombre de lancés bruts (--raw) ou bien la frequence (--freq)
+- Charger deux dates en utlisant la librairie datetime et calculer le "timedelta" en jours
+   - "2019-08-25T00:07:46Z"
+   - "2016-05-17T12:06:54Z"
+
+---
+
 class: impact
 
 # 11. Outils et bonnes pratiques
@@ -2844,7 +2884,9 @@ Autrement dit : **la lisibilité pour vous et vos collègues a énormément d'im
 # Conventions de nommages des variables, fonctions et classes
 
 Variables et fonctions en snake case : `nom_de_ma_variable`
+
 Constantes globales en macro case: `NOM_DE_MA_CONSTANTE`
+
 Nom de classes en upper camel case : `NomDeMaClasse`
 
 ---
@@ -2856,6 +2898,28 @@ Nom de classes en upper camel case : `NomDeMaClasse`
     - Par exemple `flake8`, `pylint`
 - Intégration possible dans `vim` et autres IDE...
 - `autopep8` ou `black` permettent de corriger un bon nombre de problème automatiquement
+
+---
+
+# Faire des vrais tests avec pytest
+
+Dans mylib.py 
+```
+def func(x):
+    return x + 1
+```
+
+Dans tests.py
+```
+from mylib import func
+
+def test_answer():
+    assert func(3) == 5
+```
+
+puis lancer: `pytest tests.py`
+
+`pytest` considere comme des tests toutes les fonctions qui commencent par `test_`
 
 ---
 

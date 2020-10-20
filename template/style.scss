@@ -19,7 +19,7 @@ $font-title       : Open Sans, Arial, Helvetica, sans-serif;
 $font-fixed       : 'Lucida Console', Monaco, monospace;
 $margin           : 20px;
 $iframe-scale     : 1.5;
-
+$link-color       : greenyellow;
 
 // CSS Base
 // ---------------------------------------------------------------------------
@@ -41,7 +41,7 @@ pre, code {
   background: $code-background;
   padding: 0.1em;
 }
-a, a:visited, a:hover, a:active { color: $text-dark; }
+a, a:visited, a:hover, a:active { color: $link-color; }
 img { vertical-align: inherit; }
 blockquote {
   border-left: 8px solid;

@@ -99,7 +99,7 @@ print(cercle1.centre)
 
 # Orienté objet
 
-## Exemple en Python : précision
+## Exemple en Python : précisions
 
 - `__init__` est le constructeur
 - `__init__` et `deplacer` sont des méthodes
@@ -248,6 +248,7 @@ for forme in formes:
 - `super().une_methode(...)` permet d'appeler `une_methode` telle que définie dans la classe mère.
 - `isinstance` verifie l'heritage ! `isinstance(cercle_rouge, FigureGeometrique)` vaut `True` !
 
+
 ---
 
 # Orienté objet : aller + loin
@@ -273,7 +274,7 @@ for forme in formes:
 
 # Orienté objet : aller + loin
 
-# Attributs 'statiques' (partagés par tous les objets d'une classe)
+## Attributs 'statiques' (partagés par tous les objets d'une classe)
 
 ```python
 class FormeGeometrique():
@@ -290,6 +291,16 @@ forme3 = FormeGeometrique()
 print(FormeGeometrique.nb_instances)
 # -> affiche 3
 ```
+
+---
+
+# Orienté objet : aller + loin
+
+## Quelques astuces
+
+- `dir(un_objet)` : listes tous les attributs / methodes d'un objet (ou module)
+- Il existe aussi `un_objet.__dict__` 
+- `MaClasse.__subclasses__()` : lister toutes les classes filles d'une classe
 
 ---
 
@@ -335,6 +346,53 @@ ma_facture.montant_deja_paye += 7
 print("Il reste %s à payer" % ma_facture.montant_restant_a_payer)
 # -> Il reste 38 à payer
 ```
+---
+
+# Orienté objet : aller + loin
+
+## Attributs et méthodes privées
+
+- Il est possible de définir des attributs et méthode privées si elles commencent par `__`
+   - par exemple: `self.__toto`
+- Un attribut / méthode privée de peut être appelé que depuis "l'intérieur de la classe"
+   - attention : il ne s'agit pas de vraie "privacy" mais plutot de disuasion...
+
+---
+
+# Orienté objet : aller + loin
+
+## Attributs et méthodes privées
+
+- On peut étre tenté de définir des getters et setters `get_toto()`, `set_toto()` pour interagir avec les attributs privés ... mais la façon pythonique est:
+
+```python
+        @property
+        def toto(self):
+            return self.__toto
+
+        @toto.setter
+        def toto(self, value):
+            self.__toto = value   # ... ou tout autre traitement
+```
+
+
+---
+
+# Orienté objet : aller + loin
+
+## Attributs et méthodes privées
+
+
+On peut ensuite accéder et modifier l'attribut `toto` de manière transparente : 
+
+```python
+monobjet = Objet()
+
+print(monobjet.toto)
+
+monobjet.toto = 3
+```
+
 
 ---
 
@@ -371,6 +429,7 @@ import pickle
 f = open("save.bin", "rb")
 ma_facture = pickle.load(f)
 ```
+
 
 ---
 
