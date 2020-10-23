@@ -256,7 +256,7 @@ Une discussion plus exhaustive sur les verbes :
 url = "https://api.github.com/repos/torvalds/linux/issues"
 
 r = requests.get(url)
-if r.text != 200:
+if r.status_code != 200:
     raise Exception(r.text)
     
 issues = json.loads(r.text)
@@ -282,7 +282,7 @@ pull_request = {
 url = "https://api.github.com/repos/torvalds/linux/pulls"
 r = requests.post(url, json.dumps(pull_request))
 
-if r.text != 200:
+if r.status_code != 200:
     raise Exception(r.text)
 ```
 
@@ -552,6 +552,39 @@ def get_user(username):
 
 # Gérer des requetes POST (`request`)
 
+```python
+from Flask import app, jsonify
+
+@app.route('/users', methods=['POST'])
+def create_user(username):
+
+    # Gérer la création de l'utilisateur...
+``` 
+
+(Lorsque l'on avait écrit `@app.route('/users')` précédemment, il s'agissait implictement des requetes GET)
+
+---
+
+# Gérer des requetes POST (`request`)
+
+```python
+from Flask import app, jsonify, request
+
+@app.route('/users', methods=['POST'])
+def create_user(username):
+
+    # Obtenir les données de la paylog
+    data = json.loads(request.data
+``` 
+
+On introduit l'objet `request` qui contient toutes les infos de la requetes (url, headers HTTP, payload, cookie, ...)
+
+N.B. : l'*objet* `request` viens de Flask et n'a rien à voir avec la *librairie* `requests` qui permet de faire des requetes HTTP...
+
+---
+
+# Gérer des requetes POST (`request`)
+
 - Exemple à visée pedagogique uniquement ... pas faire des horreurs comme ça dans la vraie vie !
 
 ```python
@@ -566,7 +599,7 @@ def create_user(username):
              return "Cet utilisateur existe deja", 400
 
     try:
-       data = json.loads(data)
+       data = json.loads(request.data)
        assert isinstance(data, dict)
        assert "username" in data
        assert data["username"].isalnum()
@@ -591,14 +624,14 @@ def homepage():
 
 ```html
 <html>
-   <head>...</head>
 <body>
     <ul>
     {% for user in users %}
         <li>{{user.username}}</li>
     {% endfor %}
     </ul>
-<body>
+</body>
+</html>
 ```
 
 ---
