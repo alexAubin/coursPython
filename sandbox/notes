@@ -2,19 +2,30 @@
 - isprimer -> encourager test avec assert
 - exemple assert type with all() ?
 - password -> ajouter un compte d'essai ?
-- ordre de definition des fonctions, pertinence d'un main(), ...
 
 # important
 
-- x+=, x*=
-- affectations multiples
 - explain 'in' for lists !
 - also somme de list, extend(), ...
 - listes et dict vides ...
+
 - 4,1 : oublier le coup du pair/impair, what do with no if ?
 - list comprehension -> side by side exemple with "regular" for loop ?
 - exemple moins complexe pour generateurs ?
-- different type d'except, hierarchie d'except
 
 
+
+
+# bonus
+
+
+- generateur   / all / any
+- decorateur
+
+- class method, class attributes
+- truc abc classes abstraites
+- heritage multiple
+
+- inspect / __dict__
+- libs : check le __name__ = "main" truc
 

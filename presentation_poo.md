@@ -253,6 +253,52 @@ for forme in formes:
 
 # Orienté objet : aller + loin
 
+## Classe abstraites (1/2)
+
+Dans l'absolu, cette "bidouille" :
+
+```python
+class FigureGeometrique:
+
+    # [ ... ]
+
+    def aire(self):
+        raise NotImplementedError("La classe fille doit implémenter cette fonction!")
+```
+
+.. n'empêche pas complètement de créer des classes filles de FigureGeometrique qui n'implémentent pas cette méthode
+
+(il suffit de ne jamais appeler `.aire()`)
+
+
+---
+
+
+# Orienté objet : aller + loin
+
+## Classe abstraites (2/2)
+
+Pour formaliser un peu mieux les choses, on peut utiliser le module `abc` (abstract base class):
+
+```python
+import abc
+
+class Shape(abc.ABC):
+
+   # [ ... ]
+
+   @abc.abstractmethod
+   def aire(self):
+      pass
+```
+
+Dans ce cas, une erreur sera déclenchée si nous essayons de créer une classe fille (sans même essayer d'instancier d'objet) qui n'implémente pas la méthode `aire()`.
+
+
+---
+
+# Orienté objet : aller + loin
+
 ## Méthodes spéciales / "magiques"
 
 - `__repr__` et `__str__` : génère une représentation de l'objet sous forme de chaîne de caractère
@@ -284,6 +330,9 @@ class FormeGeometrique():
     def __init__(self):
         FormeGeometrique.nb_instances += 1
 
+    def __del__(self):
+        FormeGeometrique.nb_instances -= 1
+
 forme1 = FormeGeometrique()
 forme2 = FormeGeometrique()
 forme3 = FormeGeometrique()
@@ -296,10 +345,63 @@ print(FormeGeometrique.nb_instances)
 
 # Orienté objet : aller + loin
 
+## Méthodes 'de classe', ou 'statiques'
+
+```python
+class FormeGeometrique():
+
+    nb_instances = 0
+
+    @staticmethod
+    def reset_nb_instances():
+        FormeGeometrique.nb_instances = 0
+
+
+forme1 = FormeGeometrique()
+FormeGeometrique.reset_nb_instances()
+print(FormeGeometrique.nb_instances)
+# -> affiche 0
+```
+
+---
+
+# Orienté objet : aller + loin
+
+## Création des objets
+
+Les objets sont réellements créés par la méthode "cachée" `__new__` qui est une méthode de classe qui créé l'objet, puis apelle `__init__` sur cet objet !
+
+---
+
+# Orienté objet : aller + loin
+
+## Héritage multiple
+
+```python
+class LogAttrChangeMixin:
+
+    def __setattr__(self, attr_name, attr_value):
+
+        print(f"Updating {self} . {attr_name} with new value {attr_value} ")
+        super().__setattr__(attr_name, attr_value)
+
+class Cercle(LogAttrChangeMixin, FigureGeometrique):
+
+    # def __init__ ...
+```
+
+-> Avec `LogAttrChangeMixin`, un message sera affiché avec `print` à chaque fois qu'un attribut d'un objet `Cercle` est modifié.
+
+---
+
+# Orienté objet : aller + loin
+
 ## Quelques astuces
 
 - `dir(un_objet)` : listes tous les attributs / methodes d'un objet (ou module)
-- Il existe aussi `un_objet.__dict__` 
+- Il existe aussi `un_objet.__dict__`
+    - NB: ça marche aussi sur par ex. les objets 'modules'
+    - pour aller plus loin, voir aussi la librairie `inspect`
 - `MaClasse.__subclasses__()` : lister toutes les classes filles d'une classe
 
 ---

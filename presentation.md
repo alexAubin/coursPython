@@ -11,10 +11,15 @@ layout: true
 
 ---
 
-class: impact
+<br/>
+
+.center[
+![](img/pythonlogo.png)
 
 # {{title}}
-*Devenez un jedi de la programmation en cinq jours!*
+
+*Devenez un jedi de la programmation en trois jours!*
+]
 
 ---
 
@@ -22,7 +27,8 @@ class: impact
 
 ## Hello, world!
 
----
+
+<!-- 
 
 ## En attendant : 
 
@@ -39,8 +45,6 @@ class: impact
 ![](img/download_linuxmint.png)
 ]
 
----
-
 ## En attendant : 
 
 - Puis dans Virtualbox : créer une nouvelle VM
@@ -54,12 +58,14 @@ Puis se logger avec :
 - password: osboxes.org 
       - (attention de base clavier en querty.. ça donne: osboxes:org)
 
+-->
+
 
 ---
 
 ## À propos de moi
 
-.row[
+.col-12[
 .col-4[
 .center[
 ![](img/me.jpg)
@@ -69,13 +75,10 @@ Puis se logger avec :
 .col-8[.center[
 <br>
 <br>
-<br>
 `https://github.com/alexAubin`
 <br>
 <br>
 `alex.aubin@mailoo.org`
-<br>
-<br>
 <br>
 <br>
 ]]
@@ -83,15 +86,18 @@ Puis se logger avec :
 
 .col-4[.center[
 Ingénieur/Physicien
-</br>
+
+![](img/cern.png)
 </br>
 ![](img/particles.jpg)
 ]]
 
 .col-4[.center[
-Dev / hacktiviste?
+Dev / adminsys / ...
 
-![](img/yunohost.jpg)
+![](img/yunohost.png)
+![](img/arn.png)
+![](img/odoo.png)
 ]]
 
 .col-4[.center[
@@ -111,50 +117,70 @@ Formateur
 - 9h -> 12h30 ? pause vers 10h30 ?
 - 14h -> 17h30 ? pause vers 15h30 ?
 
----
+# Évaluation
 
-# Enseigner et apprendre la programmation
-
-#### (Mauvaises nouvelles)
-
-- Abstrait
-- Booooring exercices
-- Disparité de vitesses d'apprentissage
-- Rien ne remplace l'expérience..
-- Eloigné du taf de "la vraie vie" :
-    - Analyse, architecture, UX, debugging, refactoring, tests, VCS, ...
-
----
-
-# Enseigner et apprendre la programmation
-
-#### (Bonnes nouvelles)
-
-- On a du temps
-- Je suis payé pour répondre à vos questions \o/
-- Vous montrer l'essentiel et l'utile
-- Exercices ludiques ?
-- Priorité aux moins rapides
-- Devenir architecte du cyberespace
+- .. de la formation par les stagiaires ;)
+- le dernier jour de formation
 
 ---
 
 # Plan
 
-### Partie 1 : Notions de "bases"
+#### Partie 1 : Notions de "bases" (1 jour ... et demi?)
 
 - Variables, fonctions
 - Structures de contrôle (conditions, boucles)
 - Structures de données (listes, dictionnaires, ...)
 - Fichiers, exceptions, librairies, ...
 
-### Partie 2 : Notions "avancées"
+---
 
-- Debugging avec pdb / ipdb, bonnes pratiques, ...
+# Plan
+
+
+#### Partie 2 : Orienté objet (1 jour)
+
 - Orienté objet
 - Base de données / ORM ?
-- Framework web ?
-- Tests unitaires, generateurs, décorateurs, regex, parallelisation, ... ?
+
+---
+
+# Plan
+
+
+#### Partie 3 : Python 'avancé' (le reste)
+
+- Modules pythons : création, publication
+- Bonnes pratiques : conventions, PEP8, Black, MyPy
+- Debugging avec pdb / ipdb
+- Librairies communes : `os`, `logging`
+- Multiprocess, multithreading
+
+---
+
+#### Partie 1 : Notions de "bases" (1 jour ... et demi?)
+
+- Variables, fonctions
+- Structures de contrôle (conditions, boucles)
+- Structures de données (listes, dictionnaires, ...)
+- Fichiers, exceptions, librairies, ...
+
+
+#### Partie 2 : Orienté objet (1 jour)
+
+- Orienté objet
+- Base de données / ORM ?
+
+
+#### Partie 3 : Python 'avancé' (le reste)
+
+- Modules pythons : création, publication
+- Bonnes pratiques : conventions, PEP8, Black, MyPy
+- Debugging avec pdb / ipdb
+- Librairies communes : `os`, `logging`
+- Multiprocess, multithreading
+
+
 
 ---
 
@@ -162,16 +188,16 @@ Formateur
 
 Alternance entre
 - explications théoriques sur une notion donnée
-- partage du support sur Dismorphia
+- partage du support sur [https://aleks.internetlib.re/](https://aleks.internetlib.re/)
 - mise en application sur des exercices.
+- n'hésitez pas à poser vos questions !!
+
+# Travail en distanciel
+
+- VM Linux dans Guacamole sur [https://formationpython.internetlib.re/](https://formationpython.internetlib.re)
+- Thonny
 
 ---
-
-
-
-
-
-
 
 
 class: impact
@@ -252,79 +278,22 @@ class: impact
 ![](img/guido.jpg)
 ]
 
-
 ---
 
-class: impact
+# Environnement de travail
 
-
-*Programming mindset*
-
----
-
-class: impact
-
-# Machines ain't smart.
-
-# You are !
-
----
-
-.center[![](img/brainMelting.jpg)]
-
----
-
-.center[![](img/clouds.jpg)]
-
----
-
-class: impact
-
-## Programming *is* complicated
-
-## <br>
-## Don't be ashamed
-## of not understanding right away
-
----
-
-.center[![](img/suckingAtSomething.jpg)]
-
----
-
-# Cassez des trucs !
-
-.center[![](img/yodaMistakes.jpg)]
-
----
-
-# Explorez !
-
-.center[![](img/changingThings.jpg)]
-
----
-
-
-
-
-
-
-
-
-# Setup
-
-- VM Linux
+- VM Linux dans Guacamole
 - Python (3.x)
 
 ## Pour débutter
 
-- **Thonny** : `apt install thonny`
+- **Thonny** : `apt install thonny` 
 
 ## Plus tard
 
 - **Vim** (éditeur en console pour ninjas)
-- **Atom** (IDE relativement minimaliste, épuré et extensible)
 - **Pycharm** (IDE très gros qui fait même le café)
+- **VS Code?**
 - ???
 
 ---
@@ -467,6 +436,7 @@ print(reponse)
 
 - En python : déclaration implicite
 - Ambiguité : en fonction du contexte, `x` désigne soit le contenant, soit le contenu...
+- En python : les variables sont plutôt à voir comme des étiquettes (ou comme des références en C)
 
 ```python
 x = 42     # déclare (implicitement) une variable et assigne une valeur
@@ -548,6 +518,15 @@ None          # ... "rien" / aucun (similar à `null` dans d'autres langages)
 
 Connaître le type d'une variable : `type(variable)`
 
+On verra aussi plus tard:
+
+```python
+[1, 2, 3, "Soleil"]       # Liste
+(1, 2, 3, "Soleil")       # Tuple (liste immuable)
+{1, 2, 3, "Soleil"}       # Ensemble (set)
+{"Alice": 43, "Bob": 24}  # Dictionnaire
+```
+
 ---
 
 # 1. Les variables
@@ -564,6 +543,28 @@ float("3.14") -> 3.14
 int(True)     -> 1
 int("trois")  -> Erreur / Exception
 ```
+
+---
+
+
+# 1. Les variables
+
+## 1.9 Affectations multiples
+
+```python
+x, y = (3.14, "Toto")
+print(x)   # -> 3.14
+print(y)   # -> Toto
+
+# On peut aussi faire:
+x, y = "XY"
+print(x)  # -> X
+print(y)  # -> Y
+
+# Classiquement lorsqu'une valeur ne nous intéresse pas, on utilise '_'
+a, b, _, _, _ = ("A", "B", "C", "D", "E")
+```
+
 
 ---
 
@@ -645,28 +646,43 @@ m[-3:]   # -> 'rld'
 
 # 3. Chaînes de caractères
 
-
 ### Concatenation
 
 ```python
 "Cette phrase" + " est en deux morceaux."
 ```
 
+---
+
+## Construction de chaîne avec des données
+
 ```python
 name = "Alex"
 age = 28
+```
+
+##### Concatenation "simple"
+
+```python
 "Je m'appelle " + name + " et j'ai " + str(age) + " ans"
 ```
-### Construction à partir de données, avec `%s`
+
+##### Avec `%s`
 
 ```python
 "Je m'appelle %s et j'ai %s ans" % ("Alex", 28)
 ```
 
-### Construction à partir de données, avec `format`
+##### Avec `format`
 
 ```python
 "Je m'appelle {name} et j'ai {age} ans".format(name=name, age=age)
+```
+
+##### Avec les `f`-strings (Python >= 3.6)
+
+```python
+f"Je m'appelle {name} et j'ai {age} ans"
 ```
 
 ---
@@ -956,7 +972,7 @@ par exemple pour la débugger...!
 
 # 4. Fonctions
 
-## 4.5 Appel de fonction avec arguments explicites
+## 4.5 Specifier les arguments par mot-clef
 
 ```python
 def aire_triangle(base, hauteur):
@@ -984,7 +1000,7 @@ aire_triangle(3, 5)
 
 # 4. Fonctions
 
-## 4.5 Appel de fonction avec arguments explicites
+## 4.5 Specifier les arguments par mot-clef
 
 On peut se retrouver dans des situations comme:
 
@@ -1186,9 +1202,9 @@ n = int(input("Devine à quel nombre je pense !"))
 if n == X:
    print("Oui, c'est bien ça, comment as-tu fait ?!")
 elif n < X:
-   print("Mon nombre est plus grand que ça !)
+   print("Mon nombre est plus grand que ça !")
 else:
-   print("Mon nombre est plus petit que ça !)
+   print("Mon nombre est plus petit que ça !")
 ```
 
 ---
@@ -1389,9 +1405,10 @@ ValueError: invalid literal for int() with base 10: 'truc'
 Il est possible de déclencher ses propres exceptions à l'aide de `raise`
 
 ```python
-def max(liste_entiers):
-    if liste_entiers == []:
-        raise Exception("max() ne peut pas fonctionner sur une liste vide!")
+def racine_carree(nombre):
+    if nombre < 0:
+        raise Exception("Il n'est pas possible de calculer la racine carree d'un nombre negatif!")
+    # [ ... ]
 ```
 
 (Ici, le type utilisé est le type générique `Exception`)
@@ -1471,7 +1488,9 @@ except:
 
 # 6. Les exceptions
 
-### Utilisation différente
+## 6.1 `try`/`except`
+
+### Utilisation différente : ce qu'on veut vraiment faire dépends de la logique métier...
 
 ```python
 reponse = input("Entrez un entier svp !")
@@ -1486,7 +1505,9 @@ except:
 
 # 6. Les exceptions
 
-### Utilisation différente
+## 6.1 `try`/`except`
+
+### Utilisation différente : ce qu'on veut vraiment faire dépends de la logique métier...
 
 ```python
 reponse = input("Entrez un entier svp !")
@@ -1501,7 +1522,9 @@ except:
 
 # 6. Les exceptions
 
-### Utilisation différente
+## 6.1 `try`/`except`
+
+Exemple concret : créer une fonction qui teste si une chaine peut être convertie en entier
 
 ```python
 def can_be_converted_to_int(stuff):
@@ -1531,11 +1554,33 @@ can_be_converted_to_int("abcd") # -> False
 
 
 <br>
-(ça se discute)
+(mouai, ça se discute)
 ]
 
 ---
 
+# 6. Les exceptions
+
+## 6.1 `try`/`except` ... mais aussi `else` et `finally`
+
+```python
+l_operation_a_reussi = None
+try:
+    # ... Opération risquée ...
+except:
+    l_operation_a_reussi = False
+    print("L'opération a échoué")
+    raise
+else:
+    l_operation_a_reussi = True
+    print("L'opération a réussi")
+finally:
+    # Ici, quelque chose executé dans tous les cas
+    # à la sortie du try/except
+    print("Le code sort du try/except")
+```
+
+---
 
 # 6. Les exceptions
 
@@ -1607,62 +1652,67 @@ assert trier([]) == []
 
 # 6. Les exceptions
 
-## Plusieurs approches (1/3)
+## 6.3 Les types d'exceptions
 
-Calcul du max d'une liste d'entiers
+.center[
+![](img/exceptions.png)
+]
 
-> Je soupçonne fortemment que `ma_liste` puisse ne pas être une liste ou puisse être vide
-
-```python
-if not isinstance(ma_liste, list) or ma_liste == []:
-    resultat = None
-else:
-    resultat = max(ma_liste)
-```
-
-Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
-
+et aussi par exemple : `AssertionError` lorsqu'une assertion a échoué
 
 ---
 
 # 6. Les exceptions
 
-## Plusieurs approches (2/3)
+## 6.3 Les types d'exceptions
 
-Calcul du max d'une liste d'entiers
+.center[
+![](img/exception_tre.png)
+]
 
-> Ça devrait marcher, mais j'ai un doute ...
+---
+
+# 6. Les exceptions
+
+## 6.3 Les types d'exceptions
+
+On peut effectuer des traitements différents en fonction du type d'erreur. Il est aussi possible de manipuler l'exception en tant qu'objet (ici, `e`) :
 
 ```python
 try:
-    resultat = max(ma_liste)
-except ValueError as e:
-    print("Warning : peut-etre que ma_liste n'etait pas une liste non-vide ?")
-    resultat = None
-```
+    # ... Opération risquée ...
 
-Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
+except KeyboardInterrupt:
+    # Afficher un message et quitter (sans montrer de stacktrace)
+    print("L'opération a été interrompu par l'utilisateur (Ctrl+C)")
+    sys.exit(1)
+
+except ZeroDivisionError:
+    print("Une tentative de division par zéro a eu lieu")
+    # .. ici, on choisi de laisser le programme se poursuivre
+
+except Exception as e:
+    # ici, créer une nouvelle exception personnalisée qui contient le message d'erreur initial
+    raise Exception("Une erreur s'est produite: " + str(e))
+```
 
 ---
 
 # 6. Les exceptions
 
-## Plusieurs approches (3/3)
+## 6.4 Discussion
 
-Calcul du max d'une liste d'entiers
-
-> Normalement `ma_liste` est une liste non-vide, sinon il y a un très gros problème avant dans le programme...
-
-```python
-assert isinstance(ma_liste, list) and ma_liste != []
-
-resultat = max(ma_liste)
-```
-
-
-
-
-
+- Il n'y a jamais qu'une seule erreur mais toujours une "pile" d'erreur (ou de problème)
+   - le programme n'a pas pu faire le virement bancaire
+   - car il y a une erreur de connexion à l'API de la banque
+   - car le certificat n'est pas valide
+   - car la date de validité du certificat est dépassée
+- La façon dont on gère les exceptions **dépends *beaucoup* du contexte et de la logique métier**
+   - on pourrait choisir que `racine_carree(-5)` renvoie `None` plutôt qu'une exception
+   - lorsque je créé un utilisateur dans une base, je veux vérifier qu'il n'existe pas déjà
+   - ... et au contraire, lorsque je modifie un utilisateur dans une base, je veux vérifier qu'il existe bien
+- Gérer les exceptions ou les cas particuliers d'un programme **peut représenter un grosse part du travail** de développement (principe de Pareto ...)
+- **La gestion des erreurs est un travail compliqué mais important** car peut simplifier énormément la résolution des problèmes pour les devs et users ... ou au contraire, être une source de frustration ou de perte de temps
 
 ---
 
@@ -1915,11 +1965,40 @@ for pokemon in favourite_pokemons:
 
 ---
 
+### Les listes sont comme des références en C++
+
+```python
+L = []
+M = L
+M.append("toto")
+
+print(M)
+print(L)
+```
+
+Affiche:
+
+```python
+["toto"]
+["toto"]
+```
+
+---
+
 # 8. Structures de données
 
 ## 8.2 Les dictionnaires
 
 Une collection **non-ordonnée** (apriori) de **clefs** a qui sont associées des **valeurs**
+
+
+```python
+ingredients_gateau = {"farine": 200,
+                      "beurre": 100,
+                      "chocolat": 150}
+```
+
+Autre exemple :
 
 ```python
 phone_numbers = { "Alice":   "06 93 28 14 03",
@@ -2224,6 +2303,33 @@ def factoriel():
 
        yield acc
 ```
+
+---
+
+# 8. Structures de données
+
+## 8.7 Fonctions avec arguments arbitraires (`*args`, `**kwargs`)
+
+```python
+def ma_fonction(*args, **kwargs):
+    print("Positional args: ", args)
+    print("Keyword wargs: ", kwargs)
+```
+
+Exemple:
+
+```python
+ma_fonction("foo", "bar", alice=3, bob=6, charlie=1)
+```
+
+Affiche:
+
+```text
+Positional args: ["foo", "bar"]
+Keyword args: {"alice": 3, "bob": 6, "charlie": 1}
+```
+
+
 
 ---
 
@@ -2631,117 +2737,7 @@ with open("newtable.csv", "w") as f:
 
 # 10. Librairies
 
-## 10.4 Exemple : `os`
-
-`os` permet d'interagir avec le système d'exploitation pour réaliser différent
-type d'action... Certaines étant spécifiques à l'OS en question (Linux, Windows,
-...)
-
-Quelques exemples :
-
-```python
-import os
-os.listdir("/etc/")            # Liste les fichiers dans /etc/
-os.path.join("/etc", "passwd") # Génère un chemin à partir de plusieurs parties
-os.system("touch /etc/toto")   # (à éviter) Execute une commande "brute"
-```
-
-Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
-
-
----
-
-# 10. Librairies
-
-## 10.5 Exemple : `sys`
-
-permet d'interagir / de s'interfacer avec le systeme
-
-Par exemple:
-
-```python
-import sys
-
-sys.stdout   # La sortie standard du programme
-sys.path     # Les chemins depuis lesquels sont chargés les imports
-sys.argv     # Tableau des arguments passés en ligne de commande
-sys.exit(1)  # Sortir du programme avec un code de retour de 1
-```
-
----
-
-# 10. Librairies
-
-## 10.6 Exemple : `argparse`
-
-- Du vrai parsing d'argument en ligne de commande
-- (Un peu long à initialiser mais puissant)
-
----
-
-# 10. Librairies
-
-## 10.7 Exemple : `subprocess`
-
-`subprocess` peut typiquement être utiliser pour lancer des commandes et
-récupérer leur résultat
-
-```python
-out = subprocess.check_output(["echo", "Hello World!"])
-print(out)    # -> Affiche 'Hello World'
-```
-
-- `check_output` : recupère la sortie d'une commande
-- `check_call` : verifie que la commande a bien marché (code de retour '0') ou declenche une exception
-- `Popen` : méthode plus bas niveau
-
----
-
-# 10. Librairies
-
-## 10.8 Exemple : `io`
-
-Par exemple, pour créer des objets "file-like". Par exemple :
-
-```python
-import io
-
-f = io.StringIO("some initial text data")
-print(f.read())    # -> 'some initial text data'
-f.seek(0)
-f.write("i am writing")
-print(f.read())    # -> 'i am writing text data'
-```
-
----
-
-# 10. Librairies
-
-.center[![](img/moar.jpg)]
-
----
-
-# 10. Librairies
-
-## Moar ?
-
-- Debian packages : `python-*`
-- Python package manager : `pip`
-
-## Exemples
-
-- JSON, XML, HTML, YAML, ...
-- Regular expressions
-- Logging, Parsing d'options, ...
-- Internationalisation
-- Templating
-- Plots, LDAP, ...
-
----
-
-# 10. Librairies
-
-## 10.7 `pip`
+## 10.4 `pip`
 
 - Gestionnaire de paquet / modules Python
 - PIP : "Pip Install Packages"
@@ -2756,196 +2752,4 @@ print(f.read())    # -> 'i am writing text data'
     - `pip3 list`, `pip3 freeze`
 - Les paquets installés sont dans `/usr/lib/python*/dist-packages/`
 
-
----
-
-# 10. Librairies
-
-## 10.8 Ecrire ses propres modules
-
-Considérant les fichiers suivants :
-
-```bash
-├── main.py
-└── mylib/
-    ├── __init__.py
-    └── bonjour.py      # <-- Contient "def dire_bonjour..."
-```
-
-Depuis `main.py`, je peux faire
-
-```python
-from mylib.bonjour import dire_bonjour
-
-dire_bonjour("Alex") # -> "Bonjour Alex !"
-
-print(dire_bonjour)
-# -> <function dire_bonjour at 0x7fb964fab668>
-```
-
----
-
-# 10. Librairies
-
-## 10.8 Ecrire ses propres modules
-
-Considérant les fichiers suivants :
-
-```bash
-├── main.py
-└── mylib/
-    ├── __init__.py
-    └── bonjour.py      # <-- Contient "def dire_bonjour..."
-```
-
-Depuis `main.py`, je peux *aussi* faire
-
-```python
-from mylib import bonjour
-
-bonjour.dire_bonjour("Alex") # -> "Bonjour Alex !"
-
-print(bonjour)
-# -> <module 'mylib.bonjour' from 'mylib/bonjour.pyc'>
-```
-
----
-
-# Exercices complementaires
-
-- Utiliser la librairie random pour simuler 100 lancés de dé 6 et calculer dans un dictionnaire la frequence de chaque face obtenue
-- Dans l'exo precedent, utiliser argparse pour gerer via des arguments en ligne de commande :
-    - le nombre de lancés (par ex. -n 30)
-    - afficer le nombre de lancés bruts (--raw) ou bien la frequence (--freq)
-- Charger deux dates en utlisant la librairie datetime et calculer le "timedelta" en jours
-   - "2019-08-25T00:07:46Z"
-   - "2016-05-17T12:06:54Z"
-
----
-
-class: impact
-
-# 11. Outils et bonnes pratiques
-
----
-
-# Documentation
-
-Pour les librairies (et Python en général) :
-- `docs.python.org`
-- `devdocs.io`
-- stack overflow ...
-- doc strings
-
-Pour votre code :
-- nom de variables, fonctions, argument !!!
-- commentaires, doc strings
-- gestionnaire de version
-- generation de doc automatique ?
-
----
-
-# Faire du "bon code"
-
-.center[
-**La lisibilité est la priorité numéro 1**
-]
-
-Un programme est vivant et évolue. Mieux vaut un programme cassé mais lisible (donc débuggable) qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
-
-(c.f. Guido van Rossum chez Dropbox)
-
-Autrement dit : **la lisibilité pour vous et vos collègues a énormément d'importance pour la maintenabilité et l'évolution du projet**
-
----
-
-# Lisibilité, "bon code"
-
-- **Keep It Simple**
-- **Sémantique** : utiliser des noms de variables et de fonctions concis et pertinents
-- **Commentaires** : *lorsque c'est nécessaire*, pour démystifier ce qu'il se passe
-- **Modularité** : découper son programme en fonctions qui chacune résolvent un sous-problème
-- **Couplage faible** : garder ses fonctions autant que possibles indépendantes, limiter les effets de bords
-- **Prendre le temps de refactoriser** quand nécessaire
-    - si je répète plusieurs fois les mémes opérations, peut-être définir une nouvelle fonction
-    - si le contenu d'une variable ou d'une fonction change, peut-être changer son nom
-- **Ne pas abuser** des principes précédents
-    - trop d'abstractions tue l'abstraction
-    - tout ça viens avec le temps et l'expérience
-
----
-
-# Lisibilité, "bon code"
-
-[How to write good code](https://xkcd.lapin.org/strips/844Code%20correct.png)
-
----
-
-# Conventions de nommages des variables, fonctions et classes
-
-Variables et fonctions en snake case : `nom_de_ma_variable`
-
-Constantes globales en macro case: `NOM_DE_MA_CONSTANTE`
-
-Nom de classes en upper camel case : `NomDeMaClasse`
-
----
-
-# Syntaxe, PEP8, linters
-
-- Le style d'écriture de python est standardisé via la norme PEP8
-- Il existe des "linter" pour détecter le non-respect des conventions (et également certaines erreurs logiques)
-    - Par exemple `flake8`, `pylint`
-- Intégration possible dans `vim` et autres IDE...
-- `autopep8` ou `black` permettent de corriger un bon nombre de problème automatiquement
-
----
-
-# Faire des vrais tests avec pytest
-
-Dans mylib.py 
-```
-def func(x):
-    return x + 1
-```
-
-Dans tests.py
-```
-from mylib import func
-
-def test_answer():
-    assert func(3) == 5
-```
-
-puis lancer: `pytest tests.py`
-
-`pytest` considere comme des tests toutes les fonctions qui commencent par `test_`
-
----
-
-# Debugging interactif : `pdb`, `ipdb`
-
-- Python DeBugger
-- Permet (entre autre) de définir des "break point" pour rentrer en interactif
-   - `import ipdb; ipdb.set_trace()`
-   - en 3.7 : `breakpoint()` <small>Mais fait appel à `pdb` et non `ipdb` ?</small>
-- Une fois en interactif, on peut inspecter les variables, tester des choses, ...
-- On dispose aussi de commandes spéciales pour executer le code pas-à-pas
-- Significativement plus efficace que de rajouter des `print()` un peu partout !
-
----
-
-# Debugging interactif : `pdb`, `ipdb`
-
-### Commandes spéciales
-
-- `l(ist)` : affiche les lignes de code autour de code (ou continue le listing precedent)
-- `c(ontinue)` : continuer l'execution normalement (jusqu'au prochain breakpoint)
-- `s(tep into)` : investiguer plus en détail la ligne en cours, possiblement en descendant dans les appels de fonction
-- `n(ext)` : passer directement à la ligne suivante
-- `w(here)` : print the stack trace, c.a.d. les différents sous-appels de fonction dans lesquels on se trouve
-- `u(p)` : remonte d'un cran dans les appels de la stacktrace
-- `d(own)` : redescend d'un cran dans les appels de la stacktrace
-
-- `pp <variable>` : pretty-print d'une variable (par ex. une liste, un dict, ..)
 

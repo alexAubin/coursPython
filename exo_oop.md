@@ -73,20 +73,26 @@ Nous proposons d'appliquer ce patron de conception pour créer un système avec 
 
 3.1 : Créer deux classes Channel (chaîne youtube) et User (suceptibles de s'abonner)
    - Chaque Channel et User a un nom.
-   - La classe Channel implémente des méthodes `subscribe` et `unsubscribe` qui ajoutent/enlèvent un compte observateur donné en argument. On introduira également un attribut dans User qui liste les vidéos auxquel un compte est abonné et qui est modifié par les appel de `subscribe` et `unsubscribe`.
+   - La classe Channel implémente des méthodes `subscribe` et `unsubscribe` qui ajoutent/enlèvent un compte observateur donné en argument. On introduira également un attribut dans User qui liste les chaînes auxquelles un compte est abonné et qui est modifié par les appel de `subscribe` et `unsubscribe`.
    - La classe Channel implémente aussi une méthode `notifySubscribers` qui appelle `compte.actualiser()` pour chaque compte abonné de la chaîne. Pour le moment, la méthode `actualiser` de la classe User ne fait rien (`pass`)
 
 3.2 : Ajoutons une méthode `publish` à la classe `Channel` qui permet d'ajouter une vidéo à la liste de vidéo de la chaíne. Chaque vidéo correspondra uniquement à un titre et une date de publication (gérée avec la librairie datetime). Lorsque la méthode publish est appellée, elle déclenche aussi `notifySubscribers`.
 
-3.3 : La méthode `actualiser` de la classe `User` s'occupe de parcourir toutes les chaines auxquelles le compte  est abonné, et de récupérer le titre des 3 vidéos les plus récentes parmis toutes ses chaines. Ces 3 titres (et le nom du channel associé!) sont ensuite écris dans `latest_videos_for_{username}.txt`.
+3.3 : La méthode `actualiser` de la classe `User` s'occupe de parcourir toutes les chaines auxquelles le compte  est abonné, et de récupérer le titre des 3 vidéos les plus récentes parmis toutes ses chaines. Ces 3 titres (et le nom du channel associé!) sont ensuite écris dans `latest_videos_for_{username}.txt`. Par exemple:
+
+```text
+C'est pas sorcier - Les chateaux forts
+C'est pas sorcier - Le génie des fourmis
+ARTE - La grenouille, un animal extraordinaire
+```
 
 3.4 : Tester l'ensemble du fonctionnement avec un programme tel que:
 
 ```python
 
 arte = Channel("ARTE")
-cestpassorcier = Channel("c'est pas sorcier")
-videodechat = Channel("video de chat")
+cestpassorcier = Channel("C'est pas sorcier")
+videodechat = Channel("Video de chat")
 
 alice = User("alice")
 bob = User("bob")
@@ -108,9 +114,9 @@ cestpassorcier.publish("Les chateaux forts")
 
 ## 4. Introduction aux ORM avec ActiveAlchemy
 
-On se propose de reprendre le jeu de données des apps Yunohost (fichier `app.yunohost.org/community.json`) et d'importer ces données dans une base SQL (plus précisémment SQLite)
+On se propose de reprendre le jeu de données des apps Yunohost (fichier `app.yunohost.org/default/v2/apps.json`) et d'importer ces données dans une base SQL (plus précisémment SQLite)
 
-4.0 - Installer `active_alchemy` à l'aide de `pip3`
+4.0 - Installer `active_alchemy` à l'aide de `pip3` : `sudo pip3 install active_alchemy`
 
 4.1 - Créer un fichier `mydb.py` qui se contente de créer une base `db` (instance de ActiveAlchemy) de type sqlite. Dans la suite, on importera l'objet `db` depuis `mydb.py` dans les autres fichiers si besoin.
 
@@ -122,7 +128,7 @@ On se propose de reprendre le jeu de données des apps Yunohost (fichier `app.yu
 
 4.3 - Créer un fichier `nuke_and_reinit.py` dont le rôle est de détruire et réinitialiser les tables, puis de les remplir avec les données du fichier json. On utilisera pour ce faire `db.drop_all()` et `db.create_all()`. Puis, itérer sur les données du fichier json pour créer les objets `App` correspondant. Commiter les changements à l'aide de `db.session.add` et `commit`.
 
-5.4 - Créer un fichier `analyze.py` qui cherche et affiche le nom de toutes les `App` connue avec un niveau supérieur ou égal à `n`. En utilisant l'utilitaire bash `time` (ou bien avec `time.time()` en python), comparer les performances de `analyze.py` avec un script python équivalent mais qui travaille à partir du fichier `community.json` directement (en local, pas via `requests.get`)
+4.4 - Créer un fichier `analyze.py` qui cherche et affiche le nom de toutes les `App` connue avec un niveau supérieur ou égal à `n`. En utilisant l'utilitaire bash `time` (ou bien avec `time.time()` en python), comparer les performances de `analyze.py` avec un script python équivalent mais qui travaille à partir du fichier `community.json` directement (en local, pas via `requests.get`)
 
 
 
