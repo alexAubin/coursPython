@@ -14,7 +14,7 @@ layout: true
 class: impact
 
 # {{title}}
-*From padawan to jedi master in five days!*
+*Devenez un jedi de la programmation en cinq jours!*
 
 ---
 
@@ -24,8 +24,42 @@ class: impact
 
 ---
 
+## En attendant : 
+
+- Aller sur virtualbox.org > Downloads > "Windows hosts"
+- ... puis installer Virtualbox
+
+.center[
+![](img/download_virtualbox.png)
+]
+
+- Aller sur osboxes.org/linux-mint
+
+.center[
+![](img/download_linuxmint.png)
+]
+
+---
+
+## En attendant : 
+
+- Puis dans Virtualbox : créer une nouvelle VM
+- Version de l'OS : Ubuntu ou "Other Linux" 64bit
+- Mettre 2~4 Go de RAM
+- **Utiliser un fichier de disque dur virtuel existant** : utiliser le VDI
+  téléchargé
+
+Puis se logger avec : 
+- login: osboxes.org
+- password: osboxes.org 
+      - (attention de base clavier en querty.. ça donne: osboxes:org)
+
+
+---
+
 ## À propos de moi
 
+.row[
 .col-4[
 .center[
 ![](img/me.jpg)
@@ -45,6 +79,7 @@ class: impact
 <br>
 <br>
 ]]
+]
 
 .col-4[.center[
 Ingénieur/Physicien
@@ -62,12 +97,19 @@ Dev / hacktiviste?
 .col-4[.center[
 Formateur
 
-![](img/python_arduino.jpg)
+![](img/python_arduino_linux.png)
 ]]
 
 ---
 
 ## À propos de vous
+
+---
+
+# Horaires ?
+
+- 9h -> 12h30 ? pause vers 10h30 ?
+- 14h -> 17h30 ? pause vers 15h30 ?
 
 ---
 
@@ -95,55 +137,33 @@ Formateur
 - Priorité aux moins rapides
 - Devenir architecte du cyberespace
 
-
----
-
-# Objectifs
-
-Transmettre :
-
-- Des bases solides et une vue globale
-- De l'enthousiasme !
-- Des bonnes pratiques ?
-- Du "pragmatisme" et du fun ?
-
 ---
 
 # Plan
 
-### Partie 1 : Notions de "bases" (~ 3 jours ?)
+### Partie 1 : Notions de "bases"
 
 - Variables, fonctions
 - Structures de contrôle (conditions, boucles)
 - Structures de données (listes, dictionnaires, ...)
 - Fichiers, exceptions, librairies, ...
 
-### Partie 2 : Orienté objet, graphisme (~2 jours ?)
+### Partie 2 : Notions "avancées"
 
-- Objets et classes en Python
-- Application de tout ce que l'on a vu à un jeu vidéo
-
-### Bonus ?
-- Des ProTips™ pour la vraie vie
-- pdb ? Notions avancées ? Flask ?
-
----
-
-## Fonctionnement du cours
-
-Alternances entre explications théoriques sur une notion donnée
-
-et mise en application sur des exercices. 
-
-## Évaluation
-
-- QCM et bouts de programmes à compléter
-- Basé sur des cas et erreurs "courantes" vues dans les exercices
+- Debugging avec pdb / ipdb, bonnes pratiques, ...
+- Orienté objet
+- Base de données / ORM ?
+- Framework web ?
+- Tests unitaires, generateurs, décorateurs, regex, parallelisation, ... ?
 
 ---
 
-# Logistique ?
+# Méthode
 
+Alternance entre
+- explications théoriques sur une notion donnée
+- partage du support sur Dismorphia
+- mise en application sur des exercices.
 
 ---
 
@@ -182,7 +202,9 @@ class: impact
 
 ---
 
-# La programmation : cuisiner de l'information
+# La programmation
+
+## Cuisiner de l'information
 
 * Préparer **des outils** et **des ingrédients**
 * Donner **des instructions**
@@ -203,17 +225,13 @@ class: impact
 
 ---
 
-# Python
-
 .center[![](img/python.png)]
 
-- Versatile
-- "Moyen-niveau"
+- "Moyen-niveau" : équilibre entre performance, flexibilité et simplicité d'écriture
 - Syntaxe légère, lisible, facile à prendre en main
-- Interprété, "scripting"
-- Prototypage rapide
-- Grande communauté
-- De plus en plus répandu (?)
+- Interprété, "scripting", prototypage rapide
+- Flexible (typage dynamique, ...)
+- Grande communauté, de plus en plus répandu...
 
 ---
 
@@ -300,7 +318,7 @@ class: impact
 
 ## Pour débutter
 
-- **Thonny** (`pip3 install thonny`)
+- **Thonny** : `apt install thonny`
 
 ## Plus tard
 
@@ -318,6 +336,77 @@ Dans Thonny :
 ```python
 print("Hello, world!")
 ```
+
+---
+
+# Parenthèse : Python 2 vs Python 3
+
+- Python 2 existe depuis 2000
+- Python 3 existe depuis 2008
+- Fin de vie de Python 2 en 2020
+- ... mais encore la version par défaut dans de nombreux système ... (c.f. `python --version`)
+
+.center[
+il faut lancer `python3` explicitement ! <small>(et non `python`)</small>
+]
+
+## Différences principales
+
+- `print "toto"` ne fonctionnera pas en Python 3 (utiliser `print("toto")`
+- Nommage des paquets debian (`python-*` vs `python3-*`)
+- Gestion de l'encodage
+- `range`, `xrange`
+- Disponibilité des librairies ?
+
+.center[
+Il existe des outils comme 2to3 pour ~automatiser la transition
+]
+
+---
+
+# 0. Executer du code Python (1/2)
+
+## Executer un script explicitement avec python
+
+```bash
+$ python3 hello.py
+```
+
+## ou implicitement (shebang)
+
+```python
+#!/usr/bin/env python3
+
+print("Hello, world!")
+```
+
+puis on rend le fichier executable et on l'execute
+
+```bash
+$ chmod +x hello.py
+$ ./hello.py
+```
+
+---
+
+# 0. Executer du code Python (2/2)
+
+## En interactif
+
+```bash
+$ python3
+>>> print("Hello, world!")
+```
+
+### `ipython3` : alternative à la console 'classique'
+
+```bash
+$ apt install ipython3
+$ ipython3
+In [1]: print("Hello, world!")
+```
+
+### pour quitter : `exit`
 
 
 ---
@@ -386,17 +475,38 @@ y = x + 2  # déclare une autre variable y, à partir du contenu de x
 print(y)   # affichage du contenu de y
 ```
 
-## 1.4 Restriction sur le nommage
+## 1.4 Nommage
 
-- Noms des variables : caractères alphanumérique et `_`.
+- Caractères autorisés : caractères alphanumériques (`a-zA-Z0-9`) et `_`.
+- **Les noms sont sensibles à la casse** : `toto` n'est pas la même chose que `Toto`!
 - (Sans commencer par un chiffre)
-
 
 ---
 
 # 1. Les variables
 
-## 1.5. Opérations mathématiques
+## 1.5 Comparaison de différentes instructions
+
+Faire un calcul **sans l'afficher ni le stocker nul part**:
+```python
+6*7
+```
+
+Faire un calcul et **l'afficher dans la console**:
+```python
+print(6*7)
+```
+
+Faire un calcul et **stocker le résultat dans une variable `r`** pour le réutiliser plus tard
+```python
+r = 6*7
+```
+
+---
+
+# 1. Les variables
+
+## 1.6 Opérations mathématiques
 
 ```python
 2 + 3   # Addition
@@ -411,13 +521,29 @@ print(y)   # affichage du contenu de y
 
 # 1. Les variables
 
-## 1.6. Types
+## 1.6 Calcul avec réassignation
 
 ```python
-reponse = 42      # Entier / integer               / int
-pi = 3.1415       # Réel                           / float
-prenom = "Alex"   # Chaîne de caractère (string)   / str
-oui = True        # Booléen                        / bool
+x += 3   # Équivalent à x = x + 3
+x -= 3   # Équivalent à x = x - 3
+x *= 3   # Équivalent à x = x * 3
+x /= 3   # Équivalent à x = x / 3
+x %= 3   # Équivalent à x = x % 3
+x **= 3  # Équivalent à x = x ** 3
+```
+
+---
+
+# 1. Les variables
+
+## 1.7 Types
+
+```python
+42            # Entier / integer               / int
+3.1415        # Réel                           / float
+"Alex"        # Chaîne de caractère (string)   / str
+True / False  # Booléen                        / bool
+None          # ... "rien" / aucun (similar à `null` dans d'autres langages)
 ```
 
 Connaître le type d'une variable : `type(variable)`
@@ -426,7 +552,7 @@ Connaître le type d'une variable : `type(variable)`
 
 # 1. Les variables
 
-## 1.7. Conversion de type
+## 1.8 Conversion de type
 
 ```python
 int("3")      -> 3
@@ -436,7 +562,7 @@ int(3.14)     -> 3
 str(3.14)     -> "3.14"
 float("3.14") -> 3.14
 int(True)     -> 1
-int("trois")  -> Erreur
+int("trois")  -> Erreur / Exception
 ```
 
 ---
@@ -444,7 +570,6 @@ int("trois")  -> Erreur
 class: impact
 
 # 2. Interactivité basique
-
 
 ---
 
@@ -470,11 +595,24 @@ N.B. : ce que renvoie `input()` est une chaîne de caractère !
 
 ---
 
+class: impact
+
+# 3. Chaînes de caractères
+
+---
+
+
 # 3. Chaînes de caractères
 
 .center[![](img/string.png)]
 
 --
+
+### Syntaxe des chaînes
+
+- Entre simple quote (`'`) ou double quotes (`"`). Par exemple: `"hello"`
+- `print("hello")` affiche le texte `Hello`
+- `print(hello)` affiche **le contenu d'une variable qui s'apellerait** `Hello`
 
 ### Longueur
 
@@ -483,10 +621,13 @@ m = "Hello world"
 len(m)        # -> 11
 ```
 
---
+---
+
+# 3. Chaînes de caractères
+
+.center[![](img/string.png)]
 
 ### Extraction
-
 
 ```python
 m[:5]    # -> 'Hello'
@@ -494,35 +635,38 @@ m[6:8]   # -> 'wo'
 m[-3:]   # -> 'rld'
 ```
 
----
-
-class: impact
-
-# 3. Chaînes de caractères
-
-
----
-
-# 3. Chaînes de caractères
-
 ### Multiplication
 
 ```python
 "a" * 6    # -> "aaaaaa"
 ```
 
+---
+
+# 3. Chaînes de caractères
+
+
 ### Concatenation
 
 ```python
 "Cette phrase" + " est en deux morceaux."
-"J'ai " + str(28) + " ans."
+```
+
+```python
+name = "Alex"
+age = 28
+"Je m'appelle " + name + " et j'ai " + str(age) + " ans"
+```
+### Construction à partir de données, avec `%s`
+
+```python
+"Je m'appelle %s et j'ai %s ans" % ("Alex", 28)
 ```
 
 ### Construction à partir de données, avec `format`
 
 ```python
-"Je m'appelle {name} et j'ai {age} ans".format(name="Alex", age=28)
-"My name is {name} and I am {age} y.o.".format(name="Alex", age=28)
+"Je m'appelle {name} et j'ai {age} ans".format(name=name, age=age)
 ```
 
 ---
@@ -545,7 +689,7 @@ class: impact
 
 ### Et bien d'autres choses !
 
-c.f. la doc / les internets
+c.f. documentation, e.g `https://devdocs.io/python~3.7/library/stdtypes#str`
 
 ---
 
@@ -553,15 +697,13 @@ class: impact
 
 # 4. Fonctions
 
-
-
 ---
 
 # 4. Fonctions
 
 ## 4.1 Principe
 
-Donner un nom à un ensemble d'instructions (modularité, sémantique)
+Donner un nom à un ensemble d'instructions pour créer de la **modularité** et de la **sémantique**
 
 .col-6[
 ```python
@@ -579,7 +721,7 @@ def ma_fonction(arg1, arg2):
 ]
 ]
 
-On peut ensuite utiliser la fonction et récupérer le resultat :
+On peut ensuite utiliser la fonction avec les arguments souhaitées et récupérer le resultat :
 
 ```python
 mon_resultat = ma_fonction("pikachu", "bulbizarre")
@@ -588,15 +730,95 @@ autre_resultat = ma_fonction("salameche", "roucoups")
 
 ---
 
+#### **Calculs mathématiques**
+
+```python
+sqrt(2)        -> 1.41421 (environ)
+cos(3.1415)    -> -1 (environ)
+```
+
+#### **Générer ou aller chercher des données**
+
+```python
+nom_du_departement(67)        -> "Bas-rhin"
+temperature_actuelle("Lyon")  -> Va chercher une info sur internet et renvoie 12.5
+```
+
+#### **Convertir, formatter, filtrer, trier des données ...**
+
+```python
+int("3.14")                     -> 3
+normalize_url("toto.com/pwet/") -> https://toto.com/pwet
+sorted(liste_de_prenoms)     -> renvoie la liste triée alphabétiquement
+```
+
+#### **Afficher / demander des données **
+
+```python
+print("un message")
+input("donne moi un chiffre entre 1 et 10 ?")
+```
+
+---
+
 # 4. Fonctions
+
+## 4.2 Exemples concrets
+
+```python
+def aire_triangle(base, hauteur):
+    return base * hauteur / 2
+
+A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
+A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
+
+
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+
+A3 = aire_disque(6)           # -> A3 vaut (environ) 113 !
+```
+
+---
+
+# 4. Fonctions
+
+## 4.2 Exemples concrets
+
+```python
+def aire_triangle(base, hauteur):
+    return base * hauteur / 2
+
+A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
+A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
+
+
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+
+A3 = aire_disque(6)           # -> A3 vaut (environ) 113
+
+
+def volume_cylindre(rayon, hauteur):
+    return hauteur * aire_disque(rayon)
+
+V1 = volume_cylindre(6, 4)   # -> A4 vaut (environ) 452
+```
+
+
+---
+
+# 4. Fonctions
+
+## 4.3 Écrire une fonction : les éléments de syntaxe
 
 .col-6[
 ```python
-def ma_fonction(arg1, arg2):
-    instruction1
-    instruction2
-    ...
-    return resultat
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
 ```
 ]
 
@@ -606,79 +828,177 @@ def ma_fonction(arg1, arg2):
 ]
 ]
 
-## 4.2 Elements de syntaxe
 
 - `def`, `:`
-- indentation !!
-- Des arguments
-- `return`
+- des instructions **indentées** !!
+- des arguments (ou pas!)
+- `return` (ou pas)
 
 
 ---
 
 # 4. Fonctions
 
-## 4.3 Exemple
+## 4.3 Écrire une fonction : les arguments
 
 ```python
-def distance(dx, dy):
-    dx_carre = dx ** 2
-    dy_carre = dy ** 2
-    return math.sqrt(dx_carre + dy_carre)
+def aire_disque(rayon):
+    # [ ... ]
 ```
 
-Utilisation :
+- Une fonction est un traitement *générique*. **On ne connait pas à l'avance la valeur précise qu'aura un argument**, et généralement on appelle la fonction pleins de fois avec des arguments différents...
+- En **définissant** la fonction, on travaille donc avec un **argument** "abstrait" nommé `rayon`
+- Le nom `rayon` en tant qu'argument de la fonction **n'a de sens qu'a l'intérieur de cette fonction** !
+- En **utilisant** la fonction, on fourni la valeur pour `rayon`, par exemple: `aire_disque(6)`.
+
+---
+
+# 4. Fonctions
+
+## 4.3 Écrire une fonction : les variables locales
 
 ```python
-D = distance(3, 5)       # -> D vaut 5.830951894845301
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    # [ ... ]
+```
+
+- Les variables créées dans la fonction sont **locales**: elles n'ont de sens qu'a l'intérieur de la fonction
+- Ceci dit, cela ne m'empêche pas d'avoir des variables aussi nommées `rayon` ou `rayon_carree` dans une autre fonction ou dans la portée globale (mais ce ne sont pas les mêmes entités)
+
+---
+
+# 4. Fonctions
+
+## 4.3 Écrire une fonction : `return`
+
+```python
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+```
+
+- `return` permet de **récupérer le résultat de la fonction**
+- C'est ce qui donne du sens à `A = aire_disque(6)` (il y a effectivement un résultat à mettre dans `A`)
+- Si une fonction n'a pas de `return`, elle renvoie `None`
+- `return` **quitte immédiatement la fonction**
+
+---
+
+# 4. Fonctions
+
+.center[
+### ... regardons tout cela dans Thonny ...!
+
+#### et discutons des erreurs classiques
+]
+
+---
+
+# 4. Fonctions
+
+## 4.4 Erreur classique: utiliser `print` au lieu de `return`
+
+### Ce programme n'affiche rien
+
+```python
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+
+A = aire_disque(6)      # A vaut bien quelque chose
+                        # mais nous ne demandons pas de l'afficher ...
 ```
 
 ---
 
 # 4. Fonctions
 
-## 4.3 Exemple
+## 4.4 Erreur classique: utiliser `print` au lieu de `return`
+
+### Solution naive : remplacer le `return` par un `print`
 
 ```python
-def distance(dx, dy):
-    dx_carre = dx ** 2
-    dy_carre = dy ** 2
-    print(math.sqrt(dx_carre + dy_carre))
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    print(3.1415 * rayon_carree)    # Affiche le résultat dans la console
+
+A = aire_disque(6)   # Mais maintenant A vaut None
+                     # car la fonction n'a pas utilisé `return`
 ```
-
-Utilisation :
-
-```python
-D = distance(3, 5)       # -> D vaut None !
-```
-
-
 
 ---
 
 # 4. Fonctions
 
-## 4.4 Variables locales
+## 4.4 Erreur classique: utiliser `print` au lieu de `return`
+
+### "Bonne" solution
 
 ```python
-def distance(dx, dy):
-    dx_carre = dx ** 2
-    dy_carre = dy ** 2
-    return math.sqrt(dx_carre + dy_carre)
+def aire_disque(rayon):
+    rayon_carree = rayon ** 2
+    return 3.1415 * rayon_carree
+
+A = aire_disque(6)   # Stocker le résultat dans A
+print(A)             # Demander d'afficher A dans la console
 ```
 
-- Les variables créées dans la fonction sont **locales**
-- Les noms dx, dy sont égalements "locaux" : ils font reference aux arguments de cette fonction, meme si d'autres variables nommées dx ou dy existent ailleurs dans le code !
+--
+
+.center[
+Ceci dit, **il peut être tout à fait légitime de mettre des `print`** dans une fonction,
+
+par exemple pour la débugger...!
+]
 
 ---
 
 # 4. Fonctions
 
-## 4.5 `return`
+## 4.5 Appel de fonction avec arguments explicites
 
-- `return` **quitte immédiatement la fonction !**
-- Il peut néanmoins y avoir plusieurs `return` dans une fonction (mais seul un sera executé)
-- Une fonction sans `return` renvoie implicitement `None`.
+```python
+def aire_triangle(base, hauteur):
+    return base * hauteur / 2
+
+A1 = aire_triangle(3, 5)
+A2 = aire_triangle(4, hauteur=8)
+A3 = aire_triangle(hauteur=6, base=2)
+A4 = aire_triangle(hauteur=3, 2)    # < Pas possible !
+```
+
+N.B. : cette écriture est aussi plus explicite / lisible / sémantique:
+
+```python
+aire_triangle(base=3, hauteur=5)
+```
+
+que juste
+
+```python
+aire_triangle(3, 5)
+```
+
+---
+
+# 4. Fonctions
+
+## 4.5 Appel de fonction avec arguments explicites
+
+On peut se retrouver dans des situations comme:
+
+```python
+base = 3
+hauteur = 5
+
+A1 = aire_triangle(base=base, hauteur=hauteur)
+```
+
+Dans l'appel de la fonction :
+- le premier `base` est **le nom de l'argument de la fonction `aire_triangle`**,
+- le deuxième `base` corresponds au **contenu de la variable nommée `base`**.
+
 
 ---
 
@@ -696,23 +1016,248 @@ def distance(dx, dy=0, dz=0):
 Dans ce cas, tous ces appels sont valides :
 
 ```python
-distance(1)
-distance(1, 2)
-distance(1, 2, 3)
-distance(1, dy=2)
-distance(1, dz=3)
-distance(1, dy=2, dz=3)
-distance(1, dz=3, dy=2)
+distance(5)
+distance(2, 4)
+distance(5, 8, 2)
+distance(9, dy=5)
+distance(0, dz=4)
+distance(1, dy=1, dz=9)
+distance(2, dz=4, dy=7)
 ```
 
 ---
 
 # 4. Fonctions
 
-## 4.7 Différence avec le concept mathématique
+## 4.6 Arg. optionnels : exemple de la vraie vie
 
-- Domaine généralement mal défini (e.g. type d'entrée et de sortie)
-- Effets de bords (e.g. `print()`)
+```python
+subprocess.Popen(args,
+                 bufsize=0,
+                 executable=None,
+                 stdin=None,
+                 stdout=None,
+                 stderr=None,
+                 preexec_fn=None,
+                 close_fds=False,
+                 shell=False,
+                 cwd=None,
+                 env=None,
+                 universal_newlines=False,
+                 startupinfo=None,
+                 creationflags=0)
+```
+
+c.f. `https://docs.python.org/2/library/subprocess.html#subprocess.Popen`
+
+---
+
+# Posture et bonnes pratiques
+
+---
+
+# Posture et bonnes pratiques
+
+- Lorsqu'on écrit du code, la partie "tester" et "debugger" fait partie du job.
+
+.center[
+**On écrit pas un programme qui marche au premier essai**
+]
+
+- Il faut tester et débugger **au fur et à mesure**, **pas tout d'un seul coup** !
+
+---
+
+# Posture et bonnes pratiques
+
+## Écrire un programme ... pour qui ? pour quoi ?
+
+- Le fait qu'un programme marche est "secondaire" !
+- ... Mieux vaut un programme cassé mais lisible (donc débuggable)
+- ... qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
+
+Autrement dit : **la lisibilité pour vous et vos collègues a énormément d'importance pour la maintenabilité et l'évolution du projet**
+
+---
+
+# Posture et bonnes pratiques
+
+## Bonnes pratiques pour la lisibilité, maintenabilité
+
+- **Keep It Simple**
+- **Sémantique** : utiliser des noms de variables et de fonctions **qui ont du sens**
+- **Architecture** : découper son programme en fonction qui chacune résolvent un sous-problème précis
+- **Robustesse** : garder ses fonctions autant que possibles indépendantes, limiter les effets de bords
+    - lorsque j'arose mes plantes, ça ne change pas la température du four
+
+
+- Lorsque mon programme évolue, **je prends le temps de le refactoriser si nécessaire**
+    - si je répète plusieurs fois les mémes opérations, il peut être intéressant d'introduire une nouvelle fonction
+    - si le contenu d'une variable ou d'une fonction change, peut-être qu'il faut modifier son nom
+    - si je fais pleins de petites opérations bizarre, peut-être qu'il faut créer une fonction
+
+---
+
+# Posture et bonnes pratiques
+
+## Ne pas réinventer la roue
+
+Il y a des tas de problème qui ont déjà été résolu par d'autres développeurs et ont créé des bibliothèques !
+
+ Par exemple :
+- fonctions mathématiques (cos, sqrt, ...)
+- fonctions cryptographiques (hash de mot de passe, ...)
+- lecture / parsing de fichier divers (JSON, YAML, CSV, HTML, XLS, ...)
+
+Généralement lorsqu'on réinvente la roue:
+- on perd du temps
+- on le fais moins bien que les bibliothèques existantes
+- on créé des risques de sécurité
+
+---
+
+class: impact
+
+# 5. Conditions
+
+---
+
+# 5. Conditions
+
+Gérer des cas pour adapter le fonctionnement du programme
+
+## 5.1 Syntaxe générale
+
+```python
+if condition:
+    instruction1
+    instruction2
+elif (autre condition):
+    instruction3
+elif (encore autre condition):
+    instruction4
+else:
+    instruction5
+    instruction6
+```
+
+Attention à l'indentation !
+
+---
+
+# 5. Conditions
+
+Tout n'est pas nécessaire, par exemple on peut simplement mettre un `if` :
+
+```python
+if condition:
+    instruction1
+    instruction2
+```
+
+---
+
+# 5. Conditions
+
+## 5.2 Exemple
+
+```python
+def dire_bonjour(nom):
+    if nom == "Jack Sparrow":
+        return "Bonjour, *Capitaine* " + nom
+    else:
+        return "Bonjour, " + nom
+```
+
+.center[![](img/captain.jpg)]
+
+
+---
+
+# 5. Conditions
+
+## 5.2 Exemple 2
+
+```python
+X = 42
+
+n = int(input("Devine à quel nombre je pense !"))
+
+if n == X:
+   print("Oui, c'est bien ça, comment as-tu fait ?!")
+elif n < X:
+   print("Mon nombre est plus grand que ça !)
+else:
+   print("Mon nombre est plus petit que ça !)
+```
+
+---
+
+# 5. Conditions
+
+## 5.3 Lien avec les booléens
+
+L'opérateur `==` est similaire à l'opérateur `+`, dans le sens où l'opération `a == b` renvoie également un résultat (qui est un booléen)
+
+```python
+3 + 5          # -> renvoie 8
+name == "Jack" # -> renvoie True ou False
+```
+
+On aurait pu écrire :
+
+```python
+is_jack_sparrow = (nom == "Jack Sparrow")
+
+if is_jack_sparrow:
+    [...]
+else:
+    [...]
+```
+
+---
+
+# 5. Conditions
+
+## 5.4 Écrire des conditions
+
+```python
+angle == pi      # Égalité
+angle != pi      # Différence
+angle > pi       # Supérieur
+angle >= pi      # Supérieur ou égal
+angle < pi       # Inférieur
+angle <= pi      # Inférieur ou égal
+```
+
+### Combiner des conditions
+
+```python
+not (nom == "Jack Sparrow")                # Négation
+(nom == "Sparrow") and (prenom == "Jack")  # ET
+(nom == "Sparrow") or (prenom == "Jack")   # OU inclusif
+```
+
+---
+
+# 5. Conditions
+
+## 5.5 Conditions "avancées"
+
+### Chercher des choses dans des chaînes de caractères
+
+```python
+"Jack" in nom           # 'nom' contient 'Jack' ?
+nom.startswith("Jack")  # 'nom' commence par 'Jack' ?
+nom.endswith("row")     # 'nom' fini par 'row' ?
+```
+
+### 'Inline' `if`s
+
+```python
+parite = "pair" if n % 2 == 0 else "impair"
+```
+
 
 ---
 
@@ -770,128 +1315,6 @@ distance(1, dz=3, dy=2)
 
 .center[![](img/tartiflette.png)]
 
----
-
-
-class: impact
-
-# 5. Conditions
-
----
-
-# 5. Conditions
-
-Gérer des cas pour adapter le fonctionnement du programme
-
-## 5.1 Syntaxe générale
-
-```python
-if condition:
-    instruction1
-    instruction2
-elif (autre condition):
-    instruction3
-elif (encore autre condition):
-    instruction4
-else:
-    instruction5
-    instruction6
-```
-
-Attention à l'indentation !
-
----
-
-# 5. Conditions
-
-Tout n'est pas nécessaire, par exemple on peut simplement mettre un `if` :
-
-```python
-if condition:
-    instruction1
-    instruction2
-```
-
----
-
-# 5. Conditions
-
-## 5.2 Exemple
-
-```python
-def dire_bonjour(nom):
-    if nom == "Jack Sparrow":
-        return "Bonjour, *Capitaine* " + nom
-    else:
-        return "Bonjour, " + nom
-```
-
-.center[![](img/captain.jpg)]
-
----
-
-# 5. Conditions
-
-## 5.3 Lien avec les booléens
-
-Les conditions comme `nom == "Jack Sparrow"` sont en fait transformées en booléen lorsque la ligne est interprétée.
-
-On aurait pu écrire :
-
-```python
-is_jack_sparrow = (nom == "Jack Sparrow")
-
-if is_jack_sparrow:
-    [...]
-else:
-    [...]
-```
-
----
-
-# 5. Conditions
-
-## 5.4 Écrire des conditions
-
-```python
-angle == pi      # Égalité
-angle != pi      # Différence
-angle > pi       # Supérieur
-angle >= pi      # Supérieur ou égal
-angle < pi       # Inférieur
-angle <= pi      # Inférieur ou égal
-```
-
-## Combiner des conditions
-
-```python
-not (nom == "Jack Sparrow")                # Négation
-(nom == "Sparrow") and (prenom == "Jack")  # ET
-(nom == "Sparrow") or (prenom == "Jack")   # OU inclusif
-```
-
----
-
-# 5. Conditions
-
-## 5.5 Conditions "avancées"
-
-### Chercher des choses dans des chaînes de caractères
-
-```python
-"Jack" in nom           # 'nom' contient 'Jack' ?
-nom.startswith("Jack")  # 'nom' commence par 'Jack' ?
-nom.endswith("row")     # 'nom' fini par 'row' ?
-```
-
-### 'Inline' `if`s
-
-```python
-parite = "pair" if n % 2 == 0 else "impair"
-```
-
-
-
 
 
 
@@ -899,65 +1322,204 @@ parite = "pair" if n % 2 == 0 else "impair"
 
 class: impact
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
 
 
 ---
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
 
-Les exceptions correspondent à des erreurs ou des cas particuliers qui empêchent
-(a priori) la suite du déroulement du programme ou d'une fonction.
+En Python, lorsqu'une erreur se produit ou qu'un cas particulier empêche (a priori) la suite du déroulement normal d'un programme ou d'une fonction, une *exception* est déclenchée
 
-### Exemple
+Attention : différent des erreurs de syntaxe
+
+### Exemple d'exceptions
+
+- Utiliser une variable qui n'existe pas
+- Utiliser `int()` sur quelque chose qui ne peut pas être converti en entier
+- Diviser un nombre par zero
+- Diviser un nombre par une chaine de caractère
+- Tenter d'accéder à un élément d'une liste qui n'existe pas
+- Tenter d'ouvrir un fichier qui n'existe pas ou qu'on ne peut pas lire
+- Tenter de télêcharger des données sans être connecté à internet
+- etc...
+
+---
+
+# 6. Les exceptions
+
+- Une exception a un *type*
+    - `Exception`, `ValueError`, `IndexError`, `TypeError`, `ZeroDivisionError`, ...
+- Lorsqu'une exception interrompt le programme, l'interpréteur affiche la *stacktrace* (TraceBack) qui contient des informations pour comprendre quand et pourquoi l'exception s'est produite.
 
 ```python
->>> int("test")
-[...]
-ValueError: invalid literal for int() with base 10: 'test'
+Traceback (most recent call last):
+  File "coucou.py", line 3, in <module>
+    print(coucou)
+NameError: name 'coucou' is not defined
 ```
 
 ---
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
+
+- Une exception a un *type*
+    - `Exception`, `ValueError`, `IndexError`, `TypeError`, `ZeroDivisionError`, ...
+- Lorsqu'une exception interrompt le programme, l'interpréteur affiche la *stacktrace* (TraceBack) qui contient des informations pour comprendre quand et pourquoi l'exception s'est produite.
+
+```python
+# python3 test_int.py
+
+Tape un entier entre 1 et 3: truc
+
+Traceback (most recent call last):
+  File "test_int.py", line 8, in <module>
+    demander_nombre()
+  File "test_int.py", line 4, in demander_nombre
+    r = int(input("Tape un entier entre 1 et 3: "))
+ValueError: invalid literal for int() with base 10: 'truc'
+```
+
+---
+
+# 6. Les exceptions
+
+## 6.0 `raise`
+
+Il est possible de déclencher ses propres exceptions à l'aide de `raise`
+
+```python
+def max(liste_entiers):
+    if liste_entiers == []:
+        raise Exception("max() ne peut pas fonctionner sur une liste vide!")
+```
+
+(Ici, le type utilisé est le type générique `Exception`)
+
+---
+
+# 6. Les exceptions
+
+## 6.0 `raise`
+
+Autre exemple:
+
+```python
+def envoyer_mail(destinataire, sujet, contenu):
+    if '@' not in destinataire:
+        raise Exception('Une adresse mail doit comporter un @ !')
+```
+
+(Ici, le type utilisé est le type générique `Exception`)
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Par exemple : écrire dans un fichier
+- Est-ce que le programme a la permission d'écrire dans ce fichier ?
+- Est-ce qu'aucun autre programme n'est en train d'écrire dans ce fichier ?
+- Est-ce qu'il y a assez d'espace disque libre ?
+- Si je commence à écrire, peut-être vais-je tomber sur un secteur disque deffectueux
+- ...
+
+---
+
+# 6. Les exceptions
+
+## 6.1 `try`/`except`
+
+De manière générale dans un programme, il peut y'avoir beaucoup de manipulation dont on sait qu'elles peuvent échouer pour un nombre de raisons trop grandes à lister ...
+
+Autre exemple : aller chercher une information sur internet
+- Est-ce que je suis connecté à Internet ?
+- Est-ce que la connection est suffisament stable et rapide ?
+- Est-ce que le programme a le droit d'effectuer d'envoyer des requêtes ?
+- Est-ce qu'un firewall va bloquer ma requête ?
+- Est-ce que le site que je veux contacter est disponible actuellement ?
+- Est-ce que le certificat SSL du site est à jour ?
+- Quid de si la connexion est perdue en plein milieu de l'échange ?
+- ...
+
+---
+
+# 6. Les exceptions
 
 ## 6.1 `try`/`except`
 
 En Python, il est courant d'« essayer » des opérations puis de gérer les
-exceptions.
+exceptions si elles surviennent.
 
-On utilise pour cela des `try: ... except: ...`. On peut déclencher nos propres
-exceptions avec `raise Exception("message")`
+On utilise pour cela des `try: ... except: ...`.
 
 ### Exemple
 
 ```python
+reponse = input("Entrez un entier svp !")
+
 try:
-    str = input("Entrez un entier svp !")
-    n = int(str)
+    n = int(reponse)
 except:
     raise Exception("Ce n'est pas un entier !")
 ```
 
 ---
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
 
 ### Utilisation différente
 
 ```python
+reponse = input("Entrez un entier svp !")
+
 try:
-    str = input("Entrez un entier svp !")
-    n = int(str)
+    n = int(reponse)
 except:
     n = -1
 ```
 
 ---
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
 
-<br>
+### Utilisation différente
+
+```python
+reponse = input("Entrez un entier svp !")
+
+try:
+    n = int(reponse)
+except:
+    # Faire en sorte de boucler pour reposer la question à l'utilisateur ...
+```
+
+---
+
+# 6. Les exceptions
+
+### Utilisation différente
+
+```python
+def can_be_converted_to_int(stuff):
+    try:
+        int(stuff)
+    except:
+        return False
+
+    return True
+
+can_be_converted_to_int("3")    # -> True
+can_be_converted_to_int("abcd") # -> False
+```
+
+---
+
+# 6. Les exceptions
+
 <br>
 <br>
 <br>
@@ -966,32 +1528,48 @@ except:
 .center[
 ## The "python way"
 ### « Better to ask forgiveness than permissions »
+
+
+<br>
+(ça se discute)
 ]
 
 ---
 
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
 
 ## 6.2 Assertions
 
-Il est possible d'utiliser des `assert`ions pour expliciter certaines hypothèses
-qui sont faites à certains endroit du code. Si l'hypothèse n'est pas validée,
-une exception est déclenchée.
+Il est possible d'utiliser des `assert`ions pour **expliciter certaines hypothèses**
+faites pendant l'écriture du code. Si elles ne sont pas remplies, une exception est déclenchée.
+
+```python
+def max(liste_entiers):
+    assert liste_entiers != [], "max() ne peut pas fonctionner sur une liste vide!"
+```
+
+(`assert toto` est équivalent à `if not toto: raise Exception()`)
+
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions (autre exemple)
 
 ```python
 def distance(x=0, y=0):
-    assert isinstance(x, int) or isinstance(x, float), "Cette fonction ne prends que des int ou float en argument !"
-    assert isinstance(y, int) or isinstance(y, float), "Cette fonction ne prends que des int ou float en argument !"
+    assert isinstance(x, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
+    assert isinstance(y, (int, float)), "Cette fonction ne prends que des int ou float en argument !"
 
-    return math.sqrt(x*x + y*y)
+    return racine_carree(x*x + y*y)
 ```
 
 ---
 
-# 6. Exceptions, assertions
+# 6. Les exceptions
 
-## 6.2 Assertions (autre exemple)
+## 6.2 Assertions (encore un autre exemple)
 
 ```python
 def some_function(n):
@@ -1001,21 +1579,90 @@ def some_function(n):
     [...]
 ```
 
+---
+
+# 6. Les exceptions
+
+## 6.2 Assertions et tests unitaires
+
+En pratique, l'une des utilisations les plus courantes de `assert` est l'écriture de tests unitaires qui permettent de valider qu'une fonction marche dans tous les cas (et continue à marcher si on la modifie)
+
+Dans votre application:
+
+```python
+def trier(liste_entiers):
+    # on définie le comportement de la fonction
+```
+
+Dans les tests (fichier à part):
+
+```python
+assert trier([15, 8, 4, 42, 23, 16]) == [4, 8, 15, 16, 23, 42]
+assert trier([0, 82, 4, -21, 2]) == [-21, 0, 2, 4, 82]
+assert trier([-7, -3, 0]) == [-7, -3, 0]
+assert trier([]) == []
+```
 
 ---
 
+# 6. Les exceptions
 
-# 6. Exceptions, assertions
+## Plusieurs approches (1/3)
 
-## 6.3 Pour aller plus loin : type hints ! (Python >= 3.6)
+Calcul du max d'une liste d'entiers
+
+> Je soupçonne fortemment que `ma_liste` puisse ne pas être une liste ou puisse être vide
 
 ```python
-from typing import Union
-float_or_int = Union[float, int]
-
-def distance(x: float_or_int, y: float_or_int) -> float:
-    return math.sqrt(x*x + y*y)
+if not isinstance(ma_liste, list) or ma_liste == []:
+    resultat = None
+else:
+    resultat = max(ma_liste)
 ```
+
+Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
+
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (2/3)
+
+Calcul du max d'une liste d'entiers
+
+> Ça devrait marcher, mais j'ai un doute ...
+
+```python
+try:
+    resultat = max(ma_liste)
+except ValueError as e:
+    print("Warning : peut-etre que ma_liste n'etait pas une liste non-vide ?")
+    resultat = None
+```
+
+Attention : dans la suite du programme, je dois penser au cas où `resultat` peut valoir `None`
+
+---
+
+# 6. Les exceptions
+
+## Plusieurs approches (3/3)
+
+Calcul du max d'une liste d'entiers
+
+> Normalement `ma_liste` est une liste non-vide, sinon il y a un très gros problème avant dans le programme...
+
+```python
+assert isinstance(ma_liste, list) and ma_liste != []
+
+resultat = max(ma_liste)
+```
+
+
+
+
+
 
 ---
 
@@ -1115,12 +1762,20 @@ print(str(x) + " est impair !")
 
 ---
 
-# 8. Listes, dictionnaires
+class: impact
+
+# 8. Structures de données
+
+---
+
+# 8. Structures de données
 
 Les listes et dictionnaires permettent de stocker des séries
 d'information...
 
 ## 8.1 Les listes
+
+Une collection d'éléments **ordonnés** référencé par un indice
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
@@ -1128,11 +1783,22 @@ fibonnaci = [ 1, 1, 2, 3, 5, 8 ]
 stuff = [ 3.14, 42, "bidule", ["a", "b", "c"] ]
 ```
 
-### Accès à un élément particulier
+---
 
 ```python
-favourite_pokemons[1]    ->  "Roucoups"
+favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 ```
+
+--
+
+### Accès à element particulier ou a une "tranche"
+
+```python
+favourite_pokemons[1]      ->  "Roucoups"
+favourite_pokemons[-2:]    ->  ["Roucoups", "Insecateur"]
+```
+
+--
 
 ### Longueur
 
@@ -1140,13 +1806,22 @@ favourite_pokemons[1]    ->  "Roucoups"
 len(favourite_pokemons)    -> 3
 ```
 
----
+--
 
-# 8. Structure de données
+### Tester qu'un élément est (ou n'est pas) dans une liste
+
+```python
+"Insecateur" in favourite_pokemons   # -> True
+"Mewtwo" not in favourite_pokemons   # -> True
+```
+
+---
 
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 ```
+
+--
 
 ### Iteration
 
@@ -1155,20 +1830,23 @@ for pokemon in favourite_pokemons:
     print(pokemon + " est un de mes pokemons préférés !")
 ```
 
+--
+
 ### Iteration avec index
 
 ```python
+print("Voici la liste de mes pokemons préféré:")
 for i, pokemon in enumerate(favourite_pokemons):
-    print(pokemon + " est mon "+ str(i) +"ème pokemon préféré !")
+    print(str(i+1) + " : " + pokemon)
 ```
 
 ---
 
-# 8. Structure de données
-
 ```python
 favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 ```
+
+--
 
 ### Modification d'un élément
 
@@ -1176,21 +1854,52 @@ favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
 favourite_pokemons[1] = "Roucarnage"
 ```
 
-### Ajout à la suite
+--
+
+### Ajout à la suite, contatenation
 
 ```python
 favourite_pokemons.append("Mewtwo")
 ```
 
-### Insertion
+--
+
+### Insertion, concatenation
 
 ```python
 favourite_pokemons.insert(1, "Papillusion")
+favourite_pokemons += ["Pikachu", "Scarabrute"]
 ```
 
 ---
 
-# 8. Structure de données
+### Exemple de manip classique : filtrer une liste pour en construire une nouvelle
+
+```python
+favourite_pokemons = [ "Bulbizarre", "Roucoups", "Insecateur" ]
+
+# Création d'une liste vide
+pokemons_starting_with_B = []
+
+# J'itère sur la liste de pokémons favoris
+for pokemon in favourite_pokemons:
+
+   # Si le nom du pokémon actuel commence par B
+   if pokemon.startswith("B"):
+
+      # Je l'ajoute à la liste
+      pokemons_starting_with_B.append(pokemon)
+```
+
+--
+
+À la fin, `pokemons_starting_with_B` contient:
+
+```python
+["Bulbizarre"]
+```
+
+---
 
 ### Transformation de string en liste
 
@@ -1206,92 +1915,190 @@ favourite_pokemons.insert(1, "Papillusion")
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.2 Les dictionnaires
 
-```python
-ages = { "Alice": 20, "Bob": 24, "Charlie": 19 }
-```
-
-N.B. : dans les dictionnaires, l'ordre des éléments est sans importance !
-
-### Accès à une valeur
+Une collection **non-ordonnée** (apriori) de **clefs** a qui sont associées des **valeurs**
 
 ```python
-ages["Charlie"]    ->   19
-```
-
-### Modification d'une entrée, ajout d'une nouvelle entrée
-
-```python
-ages["Charlie"] += 1
-ages["Deborah"] = 21
+phone_numbers = { "Alice":   "06 93 28 14 03",
+                  "Bob":     "06 84 19 37 47",
+                  "Charlie": "04 92 84 92 03"  }
 ```
 
 ---
 
 ```python
-ages = { "Alice": 20, "Bob": 24, "Charlie": 19 }
+phone_numbers = { "Alice":   "06 93 28 14 03",
+                  "Bob":     "06 84 19 37 47",
+                  "Charlie": "04 92 84 92 03"  }
+```
+
+--
+
+### Accès à une valeur
+
+```python
+phone_numbers["Charlie"]        -> "04 92 84 92 03"
+phone_numbers["Elie"]           -> KeyError !
+phone_numbers.get("Elie", None) -> None
+```
+
+--
+
+### Modification d'une entrée, ajout d'une nouvelle entrée
+
+```python
+phone_numbers["Charlie"] = "06 25 65 92 83"
+phone_numbers["Deborah"] = "07 02 93 84 21"
+```
+
+--
+
+### Tester qu'une clef est dans le dictionnaire
+
+```python
+"Elie" in phone_numbers    # -> False
+"Bob" not in phone_numbers # -> False
+```
+
+---
+
+```python
+phone_numbers = { "Alice":   "06 93 28 14 03",
+                  "Bob":     "06 84 19 37 47",
+                  "Charlie": "04 92 84 92 03"  }
 ```
 
 ### Iteration sur les clefs
 
 ```python
-for prenom in ages:
-    print("Je connais l'age de "+prenom)
+for prenom in phone_numbers:     # Ou plus explicitement: phone_numbers.keys()
+    print("Je connais le numéro de "+prenom)
 ```
+
+--
 
 ### Iteration sur les valeurs
 
 ```python
-for age in ages.values():
-    print("Quelqu'un a "+str(age)+" ans")
+for phone_number in phone_numbers.values():
+    print("Quelqu'un a comme numéro " + phone_number)
 ```
+
+--
 
 ### Iterations sur les clefs et valeurs
 
 ```python
-for prenom, age in ages.items():
-    print(prenom + " a " + str(age) + " ans !")
+for prenom, phone_number in phone_numbers.items():
+    print("Le numéro de " + prenom + " est " + phone_number)
 ```
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
+
+## 8.3 Construction plus complexes
+
+Liste de liste, liste de dict, dict de liste, dict de liste, ...
+
+```python
+contacts = { "Alice":  { "phone": "06 93 28 14 03",
+                         "email": "alice@megacorp.eu" },
+
+             "Bob":    { "phone": "06 84 19 37 47",
+                         "email": "bob.peterson@havard.edu.uk" },
+
+             "Charlie": { "phone": "04 92 84 92 03" } }
+```
+
+---
+
+```python
+contacts = { "Alice":  { "phone": "06 93 28 14 03",
+                         "email": "alice@megacorp.eu" },
+
+             "Bob":    { "phone": "06 84 19 37 47",
+                         "email": "bob.peterson@harvard.edu.uk" },
+
+             "Charlie": { "phone": "04 92 84 92 03" } }
+```
+
+--
+
+### Recuperer le numero de Bob
+
+```python
+contacts["Bob"]["phone"]   # -> "06 84 19 37 47"
+```
+
+--
+
+### Ajouter l'email de Charlie
+
+```python
+contacts["Charlie"]["email"] = "charlie@orange.fr"
+```
+
+--
+
+### Ajouter Deborah avec juste une adresse mail
+
+```python
+contacts["Deborah"] = {"email": "deb@hotmail.fr"}
+```
+
+
+
+
+---
+
+# 8. Structures de données
 
 ## 8.3 Les sets
 
-Les `set`s stockent des éléments de manière unique et désordonnée.
+Les `set`s sont des collections d'éléments **unique** et **non-ordonnée**
 
 ```python
-chat = set("chat")     # -> {'h', 'c', 'a', 't'}
-chien = set("chien")   # -> {'c', 'e', 'i', 'n', 'h'}
-chat - chien           # -> {'a', 't'}
-chien - chat           # -> {'i', 'n', 'e'}
-chat & chien           # -> {'h', 'c'}
-chat | chien           # -> {'c', 't', 'e', 'a', 'i', 'n', 'h'}
-chat.add("z")          # ajoute `z` à `chat`
+chat = set(["c", "h", "a", "t"])        # -> {'h', 'c', 'a', 't'}
+chien = set(["c", "h", "i", "e", "n")   # -> {'c', 'e', 'i', 'n', 'h'}
+chat - chien                            # -> {'a', 't'}
+chien - chat                            # -> {'i', 'n', 'e'}
+chat & chien                            # -> {'h', 'c'}
+chat | chien                            # -> {'c', 't', 'e', 'a', 'i', 'n', 'h'}
+chat.add("z")                           # ajoute `z` à `chat`
 ```
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.4 Les tuples
 
-Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière non-mutable. Typiquement : des coordonnées de point.
+Les tuples permettent de stocker des données de manière similaire à une liste, mais de manière **non-mutable**.
+Generalement itérer sur un tuple n'a pas vraiment de sens...
+
+Les tuples permettent de **grouper des informations ensembles**.
+Typiquement : des coordonnées de point.
 
 ```python
-P = (2,3)
-P[0]        # -> 2
-P[1]        # -> 3
-P[0] = 5    # -> Erreur!
+xyz = (2,3,5)
+xyz[0]        # -> 2
+xyz[1]        # -> 3
+xyz[0] = 5    # -> Erreur!
+```
+
+Autre exemple `dictionnaire.items()` renvoie une liste de tuple `(clef, valeur)` :
+
+```python
+[ (clef1, valeur1), (clef2, valeur2), ... ]
 ```
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.5 List/dict comprehensions
 
@@ -1313,7 +2120,7 @@ Carré des entiers impairs d'une liste
 
 ---
 
-# 8. Structure de données
+# 8. Structures de données
 
 ## 8.5 List/dict comprehensions
 
@@ -1335,22 +2142,275 @@ Carré des entiers impairs d'une liste
 
 ---
 
+# 8. Structures de données
+
+## 8.6 Générateurs
+
+(Pas vraiment une structure de données, mais c'est lié aux boucles ...)
+
+- Une fonction qui renvoie **des** résultats "au fur et à mesure" qu'ils sont demandés ...
+- Se comporte comme un itérateur
+- Peut ne jamais s'arrêter ...!
+- Typiquement, évite de créer des listes intermédiaires
+
+---
+
+# 8. Structures de données
+
+## 8.6 Générateurs : exemple SANS generateur
+
+```python
+mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25,
+                 "Rattata": 15,       "Rondoudou": 23
+                 # [...]
+               }
+
+def au_moins_niveau_20(pokemons):
+
+    output = []
+    for pokemon, niveau in pokemons.items():
+        if niveau >= 20:
+            output.append(pokemon)
+
+    return output
+
+###
+
+for pokemon in au_moins_niveau_20(mes_pokemons):
+   ...
+```
+
+---
+
+# 8. Structures de données
+
+## 8.6 Générateurs : exemple AVEC generateur
+
+```python
+mes_pokemons = { "Bulbizarre": 12,    "Pikachu": 25,
+                 "Rattata": 15,       "Rondoudou": 23
+                 # [...]
+               }
+
+def au_moins_niveau_20(pokemons):
+
+    for pokemon, niveau in pokemons.items():
+        if niveau >= 20:
+            yield pokemon
+
+####
+
+for pokemon in au_moins_niveau_20(mes_pokemons):
+   ...
+```
+
+Il n'est pas nécessaire de créer la liste intermédiaire `output`
+
+---
+
+# 8. Structures de données
+
+## 8.6 Générateurs : autre exemple
+
+```python
+def factoriel():
+
+   n = 1
+   acc = 1
+
+   while True:
+       acc *= n
+       n += 1
+
+       yield acc
+```
+
+---
+
+class: impact
+
+# Recap'
+
+---
+
+# Recap'
+
+## Programmation impérative / procédurale
+
+- Comme une recette de cuisine qui manipule de l'information
+- Une suite d'opération à effectuer
+- Différents concepts pour construire ces opérations:
+    - des variables
+    - des fonctions
+    - des conditions
+    - des boucles
+    - des structures de données (listes, dictionnaires)
+
+---
+
+# Recap'
+
+## Variables
+
+```python
+x = "Toto"
+x = 40
+y = x + 2
+print("y contient " + str(y))
+```
+
+---
+
+# Recap'
+
+## Fonctions
+
+```python
+def aire_triangle(base, hauteur):
+    calcul = base * hauteur / 2
+    return calcul
+
+A1 = aire_triangle(3, 5)      # -> A1 vaut 15 !
+A2 = aire_triangle(4, 2)      # -> A2 vaut 8 !
+```
+
+- Indentation
+- Arguments (peuvent être optionnels si on spécifie une valeur par défaut)
+- Variables locales
+- `return` pour pouvoir récupérer un résultat depuis l'extérieur
+- Appel de fonction
+
+---
+
+# Recap'
+
+## Conditions
+
+```python
+def aire_triangle(base, hauteur):
+
+    if base < 0 or hauteur < 0:
+        print("Il faut donner des valeurs positives!")
+        return -1
+
+    calcul = base * hauteur / 2
+    return calcul
+```
+
+- Indentation
+- Opérateurs (`==`, `!=`, `<=`, `>=`, `and`, `or`, `not`, `in`, ...)
+- Mot clefs `if`, `elif`, `else`
+
+---
+
+# Recap'
+
+## Listes, dictionnaires et boucles
+
+```python
+breakfast = ["Spam", "Eggs", "Bacon", "Spam"]
+breakfast.append("Coffee")
+
+print("Au petit dej' je mange: ")
+for stuff in breakfast:
+    print(stuff)
+```
+
+
+```python
+ingredients_gateau = {"farine": 200,
+                      "beurre": 100,
+                      "chocolat": 150}
+
+for ingredient, qty in ingredients_gateau.items():
+    print("J'ai besoin de " + str(qty) + "g de " + ingredient)
+```
+
+---
+
+# Recap'
+
+## Algorithmes simples : `max`
+
+```python
+def max(liste_entiers):
+    if liste_entiers == []:
+        print("Erreur, peut pas calculer le max d'une liste vide")
+        return None
+
+    m = liste_entiers[0]
+    for entier in liste_entiers:
+        if m < entier:
+            m = entier
+
+    return m
+```
+
+---
+
+# Recap'
+
+## Algorithmes simples : filtrer une liste
+
+```python
+def pairs(liste_entiers):
+
+    resultat = []
+
+    for entier in liste_entiers:
+        if entier % 2 == 0:
+            resultat.append(entier)
+
+    return resultat
+```
+
+
+
+
+---
+
+class: impact
+
 # 9. Fichiers
 
-## 9.1 Lire
+---
+
+# 9. Fichiers
+
+## 9.0 Lire "brutalement"
+
+```python
+f = open("/etc/passwd", "r")
+contenu_du_fichier = f.readlines()
+f.close()
+
+for ligne in contenu_du_fichier:
+    print(ligne)
+```
+
+Attention à bien distinguer:
+- le nom du fichier (`passwd`) et son chemin d'accès absolu (`/etc/passwd`)
+- le vrai fichier qui existe sur le disque
+- la variable / objet Python (dans l'exemple, nommée `f`) qui est une interface pour interagir avec ce fichier
+
+---
+
+# 9. Fichiers
+
+## 9.1 Lire, avec une "gestion de contexte"
 
 ```python
 with open("/etc/passwd", "r") as f:
-    toutes_les_lignes = f.readlines()
+    contenu_du_fichier = f.readlines()
 
-for ligne in toutes_les_lignes:
+for ligne in contenu_du_fichier:
     print(ligne)
 ```
 
 ### Explications
 
 - `open("fichier", "r")` ouvre un fichier en lecture
-- `with ... as ...` ouvre un contexte, à la fin duquel le fichier sera fermé
+- `with ... as ...` ouvre un contexte, à la fin duquel le fichier sera fermé automatiquement
 - `f.readlines()` permet d'obtenir une liste de toutes les lignes du fichier
 
 ---
@@ -1361,6 +2421,8 @@ for ligne in toutes_les_lignes:
 
 - `f.readlines()` renvoie une **liste** contenant les lignes une par une
 - `f.read()` renvoie une (grande) **chaĩne** contenant toutes les lignes concaténées
+
+- Attention, si je modifie la variable `contenu_du_fichier` ... je ne modifie pas vraiment le fichier sur le disque ! Pour cela, il faut explicitement demander à *écrire* dans le fichier.
 
 ---
 
@@ -1398,9 +2460,9 @@ except:
 
 ---
 
-# 9. Exceptions, assertions
+# 9. Fichiers
 
-### 9.3 Fichiers et exceptions (autre exemple)
+## 9.3 Fichiers et exceptions (autre exemple)
 
 ```python
 try:
@@ -1411,6 +2473,28 @@ except PermissionError:
 except FileNotFoundError:
     raise Exception("Ce fichier n'existe pas !")
 ```
+
+---
+
+# 9. Fichiers
+
+## 9.4 Note "technique" sur la lecture des fichiers
+
+- Il y a un "curseur de lecture". On peut lire petit morceaux par petit morceaux ... une fois arrivé au bout, il n'y a plus rien à lire, il faut replacer le curseur si on veut de nouveau lire.
+
+```python
+f = open("/etc/passwd")
+print(f.read())  # ---> Tout plein de choses
+print(f.read())  # ---> Rien !
+f.seek(0)        # On remet le curseur au début
+print(f.read())  # ---> Tout plein de choses !
+```
+
+---
+
+class: impact
+
+# 10. Librairies
 
 ---
 
@@ -1437,6 +2521,28 @@ import math
 math.sqrt(2)   # -> 1.4142135623730951
 ```
 
+
+---
+
+# 10. Librairies
+
+### Importer juste des choses précises
+
+```python
+from un_module import une_fonction, une_autre
+
+une_fonction(...)
+```
+
+### Exemple
+
+```python
+from math import sqrt, sin, cos
+
+sqrt(2)   # -> 1.4142135623730951
+```
+
+
 ---
 
 # 10. Librairies
@@ -1461,6 +2567,7 @@ math.sqrt(2)   # -> 1.4142135623730951
     }
 }
 ```
+
 ---
 
 # 10. Librairies
@@ -1497,11 +2604,34 @@ print(r.status_code)    # -> 200 si ça a marché
 print(r.text)           # -> Le contenu de la page
 ```
 
+
 ---
 
 # 10. Librairies
 
-## 10.3 Exemple : `os`
+## 10.3 Exemple : `csv`
+
+```python
+import csv
+
+# Ouvrir et lire les lignes d'un fichier csv
+with open("table.csv") as f:
+    table = csv.reader(f, delimiter='|')
+    for row in table:
+        print(row[1]) # Afficher le 2eme champ
+        print(row[3]) # Afficher le 4eme champ
+
+with open("newtable.csv", "w") as f:
+    newtable = csv.write(f, delimiter=",")
+    newtable.writerow(["Alice", 32, "Lyon"])
+    newtable.writerow(["Bob", 29, "Bordeaux"])
+```
+
+---
+
+# 10. Librairies
+
+## 10.4 Exemple : `os`
 
 `os` permet d'interagir avec le système d'exploitation pour réaliser différent
 type d'action... Certaines étant spécifiques à l'OS en question (Linux, Windows,
@@ -1511,18 +2641,47 @@ Quelques exemples :
 
 ```python
 import os
-os.listdir("/etc/")  # Liste les fichiers dans /etc/
+os.listdir("/etc/")            # Liste les fichiers dans /etc/
 os.path.join("/etc", "passwd") # Génère un chemin à partir de plusieurs parties
-os.system("ls /etc/") # (à éviter) Execute une commande "brute"
+os.system("touch /etc/toto")   # (à éviter) Execute une commande "brute"
 ```
 
 Voir aussi : copie ou suppression de fichiers, modification des permissions, ...
+
 
 ---
 
 # 10. Librairies
 
-## 10.4 Exemple : `subprocess`
+## 10.5 Exemple : `sys`
+
+permet d'interagir / de s'interfacer avec le systeme
+
+Par exemple:
+
+```python
+import sys
+
+sys.stdout   # La sortie standard du programme
+sys.path     # Les chemins depuis lesquels sont chargés les imports
+sys.argv     # Tableau des arguments passés en ligne de commande
+sys.exit(1)  # Sortir du programme avec un code de retour de 1
+```
+
+---
+
+# 10. Librairies
+
+## 10.6 Exemple : `argparse`
+
+- Du vrai parsing d'argument en ligne de commande
+- (Un peu long à initialiser mais puissant)
+
+---
+
+# 10. Librairies
+
+## 10.7 Exemple : `subprocess`
 
 `subprocess` peut typiquement être utiliser pour lancer des commandes et
 récupérer leur résultat
@@ -1530,6 +2689,28 @@ récupérer leur résultat
 ```python
 out = subprocess.check_output(["echo", "Hello World!"])
 print(out)    # -> Affiche 'Hello World'
+```
+
+- `check_output` : recupère la sortie d'une commande
+- `check_call` : verifie que la commande a bien marché (code de retour '0') ou declenche une exception
+- `Popen` : méthode plus bas niveau
+
+---
+
+# 10. Librairies
+
+## 10.8 Exemple : `io`
+
+Par exemple, pour créer des objets "file-like". Par exemple :
+
+```python
+import io
+
+f = io.StringIO("some initial text data")
+print(f.read())    # -> 'some initial text data'
+f.seek(0)
+f.write("i am writing")
+print(f.read())    # -> 'i am writing text data'
 ```
 
 ---
@@ -1554,503 +2735,217 @@ print(out)    # -> Affiche 'Hello World'
 - Logging, Parsing d'options, ...
 - Internationalisation
 - Templating
-- Plots
-- LDAP
-- ...
+- Plots, LDAP, ...
 
+---
+
+# 10. Librairies
+
+## 10.7 `pip`
+
+- Gestionnaire de paquet / modules Python
+- PIP : "Pip Install Packages"
+- PyPI : Python Package Index
+- Installer un paquet :
+    - `pip3 install <paquet>`
+- Rechercher un paquet :
+    - `pip3 search <motclef>`
+- Installer une liste de dépendances :
+    - `pip3 install -r requirements.txt`
+- Lister les paquets installés
+    - `pip3 list`, `pip3 freeze`
+- Les paquets installés sont dans `/usr/lib/python*/dist-packages/`
 
 
 ---
 
-# 11. Pygame
+# 10. Librairies
 
-### Une librairie pensée pour le jeu vidéo
+## 10.8 Ecrire ses propres modules
 
-* Afficher une fenêtre
-* Dessiner des formes (lignes, rectangles, ...)
-* Importer et afficher des images à des positions données
-* Détecter les touches de clavier
-* Détecter des collisions entre des objets
-* ...
+Considérant les fichiers suivants :
 
----
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      # <-- Contient "def dire_bonjour..."
+```
 
-# 11. Pygame
-
-## 11.1 Premier programme avec Pygame
+Depuis `main.py`, je peux faire
 
 ```python
-import pygame, sys
-from pygame.locals import *
+from mylib.bonjour import dire_bonjour
+
+dire_bonjour("Alex") # -> "Bonjour Alex !"
+
+print(dire_bonjour)
+# -> <function dire_bonjour at 0x7fb964fab668>
 ```
 
 ---
 
+# 10. Librairies
+
+## 10.8 Ecrire ses propres modules
+
+Considérant les fichiers suivants :
+
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      # <-- Contient "def dire_bonjour..."
+```
+
+Depuis `main.py`, je peux *aussi* faire
+
 ```python
-# Initialiser pygame
-pygame.init()
+from mylib import bonjour
 
-# Initialiser une fenêtre / l’écran de jeu
-ecran = pygame.display.set_mode((400, 300))
-pygame.display.set_caption('Mon jeu!')
+bonjour.dire_bonjour("Alex") # -> "Bonjour Alex !"
 
-# Boucle principale
-while True:
-
-    # Verifier si il y a des événement en attente
-    for event in pygame.event.get():
-
-        # Si l'utilisateur a déclenché la fermeture de la fenêtre
-        if event.type == QUIT:
-            # Désinitialiser pygame
-            pygame.quit()
-            # Sortir du programme
-            sys.exit()
+print(bonjour)
+# -> <module 'mylib.bonjour' from 'mylib/bonjour.pyc'>
 ```
 
 ---
 
-## 11.2 Changer la couleur de fond
-
-Modification du programme (couleur = `(0,0,255)`)
-
-```python
-[...]
-
-# Boucle principale
-while True:
-
-    # Remplir l'écran avec une couleur
-    ecran.fill((0,0,255))
-
-    for event in pygame.event.get():
-        [...]
-
-    # Rafraîchir l'écran
-    pygame.display.update()
-```
-
----
-
-# 11. Pygame
-
-## 11.3 Les surfaces
-
-### Charger une image
-
-```python
-monImage = pygame.image.load("chaton.jpg").convert_alpha()
-```
-
-### **Blitter** : Coller une surface sur une autre
-
-```python
-surfaceDArrivee.blit(surface, (x,y))
-```
-
----
-
-### Charger et utiliser des images
-
-```python
-# Charger des images
-fond = pygame.image.load("fond.png").convert()
-image = pygame.image.load("image.png").convert_alpha()
-
-# Boucle principale
-while True:
-
-    for event ...
-        # [...]
-
-    # Coller l'image de fond
-    ecran.blit(fond, (0,0))
-
-    # Coller l'autre image
-    ecran.blit(image, (50,50))
-
-    # [...]
-```
-
----
-
-# 11. Pygame
-
-## 11.4 Les événements
-
-Des événements sont générés en fonction des appuis des touches et des
-mouvements / clics de la souris.
-
-Par exemple, bouger la souris génère un événement `MOUSEMOTION`.
-
----
-
-
-Déplacer une image avec le clavier
----------------------------------
-
-```python
-# Définir la position initiale de l'image
-image_x = 20
-image_y = 20
-
-# Boucle principale
-while True:
-
-    # Verifier si il y a des événement en attente
-    for event in pygame.event.get():
-
-        if (event.type == pygame.KEYDOWN) :
-            if (event.key == pygame.K_LEFT) :
-                image_x -= 2
-            if (event.key == pygame.K_RIGHT) :
-                image_x += 2
-
-    ecran.blit(image, (image_x,image_y))
-```
-
----
-
-## 12. Les classes
-
-```python
-class Monstre:
-
-    def attaque(self, cible):
-        cible.hp -= self.force
-
-class Troll(Monstre):
-
-    def __init__(self):
-        self.hp = 20
-        self.force = 4
-
-    def vomir(self):
-        print("Bleuarg!")
-
-class Gobelin(Monstre):
-
-    def __init__(self):
-        self.hp = 5
-        self.force = 1
-```
-
----
-
-## 12. Les classes
-
-```python
-# Initialiser des créatures
-
-troll = Troll()
-gob_army = [ Gobelin() for i in range(0,4) ]
-
-# Faire une bataille !
-
-print("Le troll a {n} hp".format(n=troll.hp))
-
-troll.attaque(gob_army[0])
-for gob in gob_army:
-    gob.attaque(troll)
-
-print("Le troll a {n} hp".format(n=troll.hp))
-```
-
----
-
-## 12. Les classes
-
-### Elements syntaxiques importants : 
-
-- L'indentation
-- Le mot clef `class`
-- `self` corresponds à l'instance / l'object (similaire à `this` dans d'autres
-  langages)
-- `__init__` corresponds au constructeur
-- J'instancie un objet avec `NomDeClasse()` (eventuellement des arguments)
-
----
-
-
-## 12. Les classes
-
-### Appeler le constructeur de la classe mère...
-
-```python
-class Mere():
-    
-    def __init__(self):
-        print("Je suis dans le constructeur de la classe mere !")
-
-class Fille(Mere):
-
-    def __init__(self):
-        super().__init__()
-
-```
-
----
-
-# Construction d'un jeu tile-based
-
----
-
-
-Elements de game building / design
-----------------------------------
-
-* **Afficher des choses** (écran, images, animations, texte)
-* **Gérer les entrées** (clavier, souris, ...)
-* Jouer des sons, de la musique
-* **Penser l'architecture logicielle du jeu** (structures de données)
-* **Penser la mécanique du jeu** (gameplay)
-* Penser l'univers du jeu
-
-Ref : http://lanyrd.com/2012/pycon/spbxc/
-
----
-
-.center[
-## Jeux tile-based
-
-# ![](http://www.emanueleferonato.com/wp-content/uploads/2010/05/rebuildc2.jpg)
-]
-
----
-
-.center[
-## Jeux tile-based
-
-# ![](https://www.pokebip.com/pages/jeuxvideo/rbvj/soluce_rb/screen_ig/screen047.png)
-]
-
----
-
-.center[
-# Format de la map
-
-# ![](img/textToMap.png)
-]
-
----
-
-.center[
-# Sprites
-
-# ![](img/spriteExample.png)
-]
-
----
-
-# Les grandes étapes
-
-### Le héros
-
-1. Charger le sprite en mémoire
-2. Afficher le héros sur l'écran
-3. Ajouter une méthode `look` pour faire regarder le héros à
-   droite/gauche/haut/bas
-4. Ajouter une méthode `move` qui déplace le héros d'une case
-5. Mapper les touches du clavier sur `look` et `move`
-
----
-
-# Les grandes étapes
-
-### La map
-
-1. Lire le fichier ascii de la map vers une liste
-2. Afficher la map
-
-### Les collisions
-
-1. Vérifier dans `move` si la case de destination est libre
-
+# Exercices complementaires
+
+- Utiliser la librairie random pour simuler 100 lancés de dé 6 et calculer dans un dictionnaire la frequence de chaque face obtenue
+- Dans l'exo precedent, utiliser argparse pour gerer via des arguments en ligne de commande :
+    - le nombre de lancés (par ex. -n 30)
+    - afficer le nombre de lancés bruts (--raw) ou bien la frequence (--freq)
+- Charger deux dates en utlisant la librairie datetime et calculer le "timedelta" en jours
+   - "2019-08-25T00:07:46Z"
+   - "2016-05-17T12:06:54Z"
 
 ---
 
 class: impact
-# Introduction à Flask
+
+# 11. Outils et bonnes pratiques
 
 ---
 
-# Flask
+# Documentation
 
-## En quelques mots (détaillés ensuite)
+Pour les librairies (et Python en général) :
+- `docs.python.org`
+- `devdocs.io`
+- stack overflow ...
+- doc strings
 
-- un "micro-framework" pour faire du web
-- typiquement dans un **virtualenv**
-- Werkzeug : une URL = une fonction (controlleur?) 
-- Jinja : système de **template** (vues?)
-- SQLAlchemy : une classe = table dans une BDD (models, ORM)
-
----
-
-# Virtualenv
-
-- Environnement virtuel
-- Isoler des paquets / dépendances pour utiliser des versions spécifiques
-
-```bash
-# La premiere fois :
-apt-get install python3-virtualenv
-
-# Creation d'un virtualenv 'venv'
-virtualenv -p python3 venv
-source venv/bin/activate
-
-# Installation de dependance, manipulation ...
-pip3 install <une dependance...>
-<une commande...>
-
-# Si on a fini et/ou que l'on veut "sortir" du virtualenv
-deactivate
-```
+Pour votre code :
+- nom de variables, fonctions, argument !!!
+- commentaires, doc strings
+- gestionnaire de version
+- generation de doc automatique ?
 
 ---
 
-# Virtualenv "de base" pour Flask
+# Faire du "bon code"
 
-```python
-virtualenv -p python3 venv
-source venv/bin/activate
+.center[
+**La lisibilité est la priorité numéro 1**
+]
 
-pip install Flask
-pip install Flask-Script
-pip install Flask-SQLAlchemy
-```
+Un programme est vivant et évolue. Mieux vaut un programme cassé mais lisible (donc débuggable) qu'un programme qui marche mais incompréhensible (donc fragile et/ou qu'on ne saura pas faire évoluer)
 
----
+(c.f. Guido van Rossum chez Dropbox)
 
-# Flask's Hello World
-
-### URL = Fonction
-
-```python
-from flask import Flask
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
-```
-
-ensuite : 
-```
-http://monsite.com/   # -> Affichera 'Hello world'
-```
-
-( `@app.route('/')` s'apelle un décorateur )
+Autrement dit : **la lisibilité pour vous et vos collègues a énormément d'importance pour la maintenabilité et l'évolution du projet**
 
 ---
 
-# Flask's Hello World
+# Lisibilité, "bon code"
 
-Lancer le serveur web de test/dev :
-
-```bash
-$ export FLASK_APP=hello.py
-$ flask run
- * Running on http://127.0.0.1:5000/
-```
-
----
-
-# Templating / Jinja
-
-Un template ressemble à
-
-```jinja
-  Bonjour {% prenom %} !
-
-  {% for app in apps %}
-    {{ app.name }} est niveau {{ app.level }} !
-  {% endfor %}
-```
-
-avec par exemple : 
-
-```python
-prenom = "Alex"
-apps = [ { "name": "mailman", "level": 2 },
-         { "name": "wordpress", "level": 7 } ]
-```
+- **Keep It Simple**
+- **Sémantique** : utiliser des noms de variables et de fonctions concis et pertinents
+- **Commentaires** : *lorsque c'est nécessaire*, pour démystifier ce qu'il se passe
+- **Modularité** : découper son programme en fonctions qui chacune résolvent un sous-problème
+- **Couplage faible** : garder ses fonctions autant que possibles indépendantes, limiter les effets de bords
+- **Prendre le temps de refactoriser** quand nécessaire
+    - si je répète plusieurs fois les mémes opérations, peut-être définir une nouvelle fonction
+    - si le contenu d'une variable ou d'une fonction change, peut-être changer son nom
+- **Ne pas abuser** des principes précédents
+    - trop d'abstractions tue l'abstraction
+    - tout ça viens avec le temps et l'expérience
 
 ---
 
-# Templating / Jinja
+# Lisibilité, "bon code"
 
-Rendu : 
-
-```
-  Bonjour Alex !
-
-  mailman est niveau 2 !
-  wordpress est niveau 7 !
-```
+[How to write good code](https://xkcd.lapin.org/strips/844Code%20correct.png)
 
 ---
 
-# Templates dans Flask
+# Conventions de nommages des variables, fonctions et classes
 
-En supposant que le template précédent soit situé dans `templates/hello.html`
+Variables et fonctions en snake case : `nom_de_ma_variable`
 
-```python
-from flask import render_template
+Constantes globales en macro case: `NOM_DE_MA_CONSTANTE`
 
-@app.route('/hello/')
-@app.route('/hello/<name>')
-def hello(name="Alex"):
-    apps = [ { "name": "mailman", "level": 2 },
-             { "name": "wordpress", "level": 7 } ]
-    return render_template('hello.html', 
-                           name=name,
-                           apps=apps)
-```
+Nom de classes en upper camel case : `NomDeMaClasse`
 
 ---
 
-# SQL Alchemy, Models / ORM in Flask
+# Syntaxe, PEP8, linters
 
-```python
-from flask_sqlalchemy import SQLAlchemy
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./db.sqlite'
-db = SQLAlchemy()
-db.init_app(app)
-
-
-class App(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), unique=True, nullable=False)
-    level = db.Column(db.Integer, nullable=False)
-    date_last_test = db.Column(db.Datetime, nullable=True)
-```
+- Le style d'écriture de python est standardisé via la norme PEP8
+- Il existe des "linter" pour détecter le non-respect des conventions (et également certaines erreurs logiques)
+    - Par exemple `flake8`, `pylint`
+- Intégration possible dans `vim` et autres IDE...
+- `autopep8` ou `black` permettent de corriger un bon nombre de problème automatiquement
 
 ---
 
-# SQL Alchemy, Models / ORM in Flask
+# Faire des vrais tests avec pytest
 
-### Ecrire
-
-```python
-# Creer et ajouter une app dans la database...
-mailman = App(name="mailman", level=3)
-db.session.add(mailman)
-db.session.commit()
+Dans mylib.py 
+```
+def func(x):
+    return x + 1
 ```
 
-### Lire
+Dans tests.py
+```
+from mylib import func
 
-```python
-# Trouver toutes les apps..
-App.query.all()
-
-# Trouver toutes les apps level 7 ...
-App.query.filter_by(level=7).all()
-
-# Trouver l'app qui s'apelle mailman
-App.query.filter_by(name="mailman").first()
+def test_answer():
+    assert func(3) == 5
 ```
 
+puis lancer: `pytest tests.py`
+
+`pytest` considere comme des tests toutes les fonctions qui commencent par `test_`
+
+---
+
+# Debugging interactif : `pdb`, `ipdb`
+
+- Python DeBugger
+- Permet (entre autre) de définir des "break point" pour rentrer en interactif
+   - `import ipdb; ipdb.set_trace()`
+   - en 3.7 : `breakpoint()` <small>Mais fait appel à `pdb` et non `ipdb` ?</small>
+- Une fois en interactif, on peut inspecter les variables, tester des choses, ...
+- On dispose aussi de commandes spéciales pour executer le code pas-à-pas
+- Significativement plus efficace que de rajouter des `print()` un peu partout !
+
+---
+
+# Debugging interactif : `pdb`, `ipdb`
+
+### Commandes spéciales
+
+- `l(ist)` : affiche les lignes de code autour de code (ou continue le listing precedent)
+- `c(ontinue)` : continuer l'execution normalement (jusqu'au prochain breakpoint)
+- `s(tep into)` : investiguer plus en détail la ligne en cours, possiblement en descendant dans les appels de fonction
+- `n(ext)` : passer directement à la ligne suivante
+- `w(here)` : print the stack trace, c.a.d. les différents sous-appels de fonction dans lesquels on se trouve
+- `u(p)` : remonte d'un cran dans les appels de la stacktrace
+- `d(own)` : redescend d'un cran dans les appels de la stacktrace
+
+- `pp <variable>` : pretty-print d'une variable (par ex. une liste, un dict, ..)
 
