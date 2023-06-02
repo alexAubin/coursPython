@@ -3,7 +3,7 @@
 
 # Initiation à Python : questionnaire
 
-### 1
+### 1 (1 point)
 
 Un programme contient cette instruction :
 
@@ -19,27 +19,25 @@ Que contient la variable `age` ?
 - C. `None`
 
 
+### 2 (1 point)
 
-### 2
+Pour __afficher__ "Le python c'est cool !" dans la console, j'écris :
+
+- A. `print("Le python, c'est cool !")`
+- B. `return("Le python, c'est cool !")`
+- C. `"Le python, c'est cool"`
+- D. `Le python, c'est cool`
+
+### 3 (1 point)
 
 Pour concaténer un entier `n` à une chaîne de caractère, j'écris :
 
-- A. `"une chaîne" + str(n)`
-- B. `"une chaîne" + int(n)`
-- C. `"une chaîne" + "n"`
+- A. `"une chaîne" + n`
+- B. `"une chaîne" + str(n)`
+- C. `"une chaîne" + int(n)`
+- D. `"une chaîne" + "n"`
 
-
-
-### 3
-
-Pour vérifier qu'une variable `n` est entier, j'utilise :
-
-- A. `isinstance(n, int)` 
-- B. `type(n) == "int"` 
-- C. `int(n) == True` 
-
-
-### 4
+### 4 (2 points)
 
 À la fin de l'execution de ce programme, que contiendra la variable `x` ?
 
@@ -55,8 +53,7 @@ x = dire_bonjour()
 - C. `None`
 
 
-
-### 5
+### 5 (2 points)
 
 Dans le programme de la question précédente, pour que la fonction
 `dire_bonjour()` renvoie `"Bonjour !"`,  j'aurais dû remplacer la deuxième ligne
@@ -66,18 +63,25 @@ par :
 - B. `return print("Bonjour !")`
 - C. Rien du tout, c'était déjà bon !
 
+### 6 (1 point)
 
-### 6
-
-Pour savoir si une variable `n` contient l'entier 20, j'écris :
+Pour tester si une variable `n` contient l'entier 20, j'écris :
 
 - A. `n = 20`
 - B. `n = "20"`
 - C. `n == 20`
 - D. `n == "20"`
 
+### 7 (1 point)
 
-### 7
+Pour vérifier qu'une variable `n` est entier, j'utilise :
+
+- A. `isinstance(n, int)` 
+- B. `type(n) == "int"` 
+- C. `int(n) == True` 
+
+
+### 8 (2 points)
 
 Qu'affiche le programme suivant ?
 
@@ -93,7 +97,7 @@ for i in range(0,10):
 - C. Il y a une erreur de syntaxe
 
 
-### 8
+### 9 (2 points)
 
 Qu'affiche le programme suivant ?
 
@@ -108,8 +112,19 @@ for i in range(0,10):
 - B. Rien du tout
 - C. Il y a une erreur de syntaxe
 
+### 10 (2 points)
 
-### 9
+Écrire le code d'une fonction `moyenne` qui prends comme arguments 3 nombres notés `a`, `b` et `c`, et renvoie leur moyenne.
+
+```python
+|
+|
+|
+|
+|
+```
+
+### 11 (1 point)
 
 Une liste a été créée de cette manière :
 
@@ -123,137 +138,45 @@ Laquelle de ces instructions renvoie `"Python"` ?
 - B. `ma_liste[2]`
 - C. `ma_liste[3]`
 
-### 10
+### 12 (1 point)
 
-Pour découper une chaine de caractère `s` par rapport aux `;` qu'elle contient
-et obtenir ainsi une liste, j'utilise : 
+Pour itérer sur les éléments d'une liste `L`, j'utilise préférientiellement une syntaxe du type :
 
-- A. `s.strip(';')`
-- B. `s.join(';')`
-- C. `s.split(';')`
+- A. `for element in L:`
+- B. `for i in range(0, len(L)):`
+- C. `for L[i] in L:`
 
+### 13 (1 point)
 
-### 11
-
-Pour importer la librairie permettant de manipuler du json, j'écris au début de
-mon programme :
-
-- A. `include json`
-- B. `import json`
-- C. `require json`
-
-### 12
-
-Ecrire une fonction `pairs` qui prends en argument une liste d'entier et renvoie
-la liste entiers pairs qu'elle contient. Par exemple, `pairs([3, 6, 9, 5, 2])`
-renverra `[6, 2]`.
+Après avoir écris le programme suivant : 
 
 ```python
-|
-|
-|
-|
-|
-|
-|
+def est_pair(n):
+    return n%2==0
 ```
 
-### 13
+pour tester le bon fonctionnement de la fonction `est_pair` : 
 
-Ecrire un petit programme qui ouvre le fichier `/etc/resolv.conf` et stocke son
-contenu dans une variable `content`. (Sans oublier de fermer le programme,
-explicitement ou implicitement)
+- A. Je lance directement ce programme. Il m'affichera `True` ou `False` si ça marche ;
+- B. J'ajoute un unique appel à la fonction à la fin du programme : `est_pair()` ;
+- C. Je teste avec plusieurs valeurs, par exemple `est_pair(5)` et `est_pair(10)`, pour vérifier que la fonction réponds entièrement au cahier des charges ;
+- D. Je demande à mon boss si c'était bien ce qu'il fallait écrire.
 
-```python
-|
-|
-|
-|
-```
+### 14 (1 point)
 
-### 14
+En testant un programme, une erreur se produit. Pour comprendre et corriger le problème de manière efficace : 
 
-Compléter ce programme pour afficher dans la console le type de Pikachu à partir
-du contenu de `d` :
-
-```python
-d = { "pikachu":   { "type": "Foudre", "level": 15 }, 
-      "salameche": { "type": "Feu",    "level": 23 }
-    }
-
-|
-|
-|
-```
-
-### 15
-
-Écrire la première ligne (`for ...`) qui permet d'itérer à la fois sur les clefs
-et les valeurs d'un dictionnaire `d`.
-
-```python
-|
-|
-|
-```
-
-### 16
-
-Ecrire un programme qui, étant donné une chaîne de caractère `stuff`, essaye de
-la convertir en `float`, et stocke le résultat dans une variable `f`. Si la
-conversion n'est pas possible / pas réussie, stocker `-1.0` dans `f` à la place.
-
-```python
-|
-|
-|
-|
-|
-|
-```
+- A. J'efface des lignes qui semblent poser problème jusqu'à ce qu'il n'y ai plus d'erreurs ;
+- B. J'apelle mon boss pour qu'il m'aide ;
+- C. Je relis attentivement le message d'erreur et la ligne correspondante pour identifier la véritable cause du problème.
 
 
-### 17
-
-Ajouter, avant les deux lignes déjà écrites, quelques lignes permettant de
-définir une classe `Voiture`, et que `v.color` renvoie `"bleu"`
-
-```python
-|
-|
-|
-|
-|
-|
-|
-
-v = Voiture()
-print(v.color)
-```
-
-### 18
-
-En python, ce que l'on note généralement `self` représente :
-
-- A. Le constructeur de la classe
-- B. La classe en train d'être modifiée / étudiée
-- C. L'objet en train d'être modifié / étudié
-
-### 19
-
-Pour expliciter et tester une hypothèse faite par un programme (par exemple,
-avoir une liste d'au moins 3 elements), j'utilise :
-
-- A. `if`
-- B. `except`
-- C. `assert`
-
-### 20
+### 15 (1 point)
 
 Pour faciliter la compréhension de mon programme par mes collègues et mon futur
 moi, j'appelle mes fonctions et mes variables :
 
-- A. Par des noms qui décrivent précisémment ce qu'elles font / contiennent
+- A. Par des noms qui décrivent précisémment ce qu'elles font / contiennent ;
 - B. Avec une seule lettre comme `a`, `b`, `f`, `x` ...
 - C. Obiwan Kénobi
 - D. La réponse D.
