@@ -665,14 +665,19 @@ class: impact
 
 - `pp <variable>` : pretty-print d'une variable (par ex. une liste, un dict, ..)
 
+---
 
+# Debugging interactif : `pdb`, `ipdb`
 
+### Astuces
 
-
-
-
-
-
+Indépendamment de `pdb`, on peut utiliser plusieurs choses pour inspecter le contenu d'un objet:
+- `un_objet.__dict__`
+- `dir(un_objet)`
+- `import inspect` (boîte à outil puissante pour étudier les objets)
+   - `inspect.getmembers(un_objet)`
+   - `inspect.getsourcefile(un_objet)`
+   - ... voir https://docs.python.org/3/library/inspect.html
 
 ---
 

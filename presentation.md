@@ -18,7 +18,7 @@ layout: true
 
 # {{title}}
 
-*Devenez un jedi de la programmation en trois jours!*
+*Devenez un jedi de la programmation en cinq jours!*
 ]
 
 ---
@@ -126,7 +126,7 @@ Formateur
 
 # Plan
 
-#### Partie 1 : Notions de "bases" (1 jour ... et demi?)
+#### Partie 1 : Notions de "bases" (2 ~ 3 jours)
 
 - Variables, fonctions
 - Structures de contrôle (conditions, boucles)
@@ -141,6 +141,10 @@ Formateur
 #### Partie 2 : Orienté objet (1 jour)
 
 - Orienté objet
+   - principe
+   - classes, attributs, méthodes
+   - héritage
+- Design patterns (patrons de conception)
 - Base de données / ORM ?
 
 ---
@@ -148,49 +152,26 @@ Formateur
 # Plan
 
 
-#### Partie 3 : Python 'avancé' (le reste)
+#### Partie 3 : Python 'avancé' (1 ~ 2 jours)
 
 - Modules pythons : création, publication
 - Bonnes pratiques : conventions, PEP8, Black, MyPy
 - Debugging avec pdb / ipdb
-- Librairies communes : `os`, `logging`
 - Multiprocess, multithreading
-
----
-
-#### Partie 1 : Notions de "bases" (1 jour ... et demi?)
-
-- Variables, fonctions
-- Structures de contrôle (conditions, boucles)
-- Structures de données (listes, dictionnaires, ...)
-- Fichiers, exceptions, librairies, ...
-
-
-#### Partie 2 : Orienté objet (1 jour)
-
-- Orienté objet
-- Base de données / ORM ?
-
-
-#### Partie 3 : Python 'avancé' (le reste)
-
-- Modules pythons : création, publication
-- Bonnes pratiques : conventions, PEP8, Black, MyPy
-- Debugging avec pdb / ipdb
-- Librairies communes : `os`, `logging`
-- Multiprocess, multithreading
-
+- Création d'interface
+- Inteface Python/C
 
 
 ---
 
-# Méthode
+# Méthode de travail
 
-Alternance entre
+Alterner entre théorie et pratique
 - explications théoriques sur une notion donnée
-- partage du support sur [https://aleks.internetlib.re/](https://aleks.internetlib.re/)
+- partage du support sur [https://aleks.internetlib.re/docs/formationPython](https://aleks.internetlib.re/docs/formationPython)
 - mise en application sur des exercices.
-- n'hésitez pas à poser vos questions !!
+
+N'hésitez pas à poser vos questions : **je suis payé pour ça !**
 
 # Travail en distanciel
 
@@ -303,6 +284,17 @@ class: impact
 Dans Thonny :
 
 ```python
+print("Hello, world!")
+```
+
+---
+
+# 0. Hello world !
+
+En Python, les lignes commençant par `#` sont des commentaires:
+
+```python
+# C'est mon premier programme en Python, c'est supayre!
 print("Hello, world!")
 ```
 
@@ -427,6 +419,16 @@ print(reponse)
 - Différent du concept mathématique
 
 .center[![](img/memory2.png)]
+
+---
+
+# 1. Les variables
+
+## (parenthèse technique)
+
+En Python, contrairement à d'autres langages, il faut voir les variables moins comme les contenants en eux-même que comme des références (ou bien (analogie) des étiquettes/post-it)
+- pas très importants pour les types "simples" tels que entiers ou chaine de caractères
+- important lorsqu'on parlera des listes : plusieurs variables peuvent correspondre à la même liste
 
 ---
 
@@ -1175,18 +1177,16 @@ if condition:
 
 # 5. Conditions
 
-## 5.2 Exemple
+## 5.2 Exemple 
 
 ```python
-def dire_bonjour(nom):
-    if nom == "Jack Sparrow":
-        return "Bonjour, *Capitaine* " + nom
-    else:
-        return "Bonjour, " + nom
+reponse = int(input("Combien font 6 fois 7 ?"))
+
+if reponse == 42:
+   print("Oui c'est bien ça ! Bravo !")
+else:
+   print("T'es sur !?")
 ```
-
-.center[![](img/captain.jpg)]
-
 
 ---
 
@@ -1206,6 +1206,24 @@ elif n < X:
 else:
    print("Mon nombre est plus petit que ça !")
 ```
+
+---
+
+# 5. Conditions
+
+## 5.2 Exemple 3
+
+```python
+def dire_bonjour(nom):
+    if nom == "Jack Sparrow":
+        return "Bonjour, *Capitaine* " + nom
+    else:
+        return "Bonjour, " + nom
+```
+
+.center[![](img/captain.jpg)]
+
+
 
 ---
 
@@ -1965,7 +1983,7 @@ for pokemon in favourite_pokemons:
 
 ---
 
-### Les listes sont comme des références en C++
+### Les listes sont comme des références en C++ (1/3)
 
 ```python
 L = []
@@ -1982,6 +2000,40 @@ Affiche:
 ["toto"]
 ["toto"]
 ```
+
+---
+
+### Les listes sont comme des références en C++ (2/3)
+
+```python
+def ajouter_toto(L):
+    L.append("toto")
+
+ma_liste = []
+ajouter_toto(ma_liste)
+print(ma_liste)
+```
+
+Affiche `["toto"]`
+
+La liste est passée comme référence (et non comme copie) à la fonction, qui peut ainsi modifier la "vraie liste" du contexte parent. (Ce qui peut être volontaire ... ou involontaire...)
+
+---
+
+### Les listes sont comme des références en C++ (3/3)
+
+```python
+def ajouter_toto(L):
+    L = []
+
+ma_liste = ["toto"]
+ajouter_toto(ma_liste)
+print(ma_liste)
+```
+
+Affiche *toujours* `["toto"]` !
+
+L'instruction `L = []` réassigne `L` à un nouveau contenu. C'est comme avoir déplacé un post-it d'un saladier vers un autre. Maintenant, `L` et `ma_liste` pointe bien vers deux contenu distincts, et `ma_liste` n'a pas été modifiée.
 
 ---
 
@@ -2073,6 +2125,21 @@ for phone_number in phone_numbers.values():
 ```python
 for prenom, phone_number in phone_numbers.items():
     print("Le numéro de " + prenom + " est " + phone_number)
+```
+
+--
+
+### Comme les listes ... les dictionnaires sont des références aussi !
+
+- Plusieurs variables peuvent pointer vers le même dictionnaire
+- Lorsque passée en argument d'une fonction : on passe une référence et non une copie
+- Situation plus subtile:
+
+```
+L = [1, 2, 3]
+D = {"A": 3.14, "B": L}
+D["B"].append(4)
+print(L)     # -> affiche [1, 2, 3, 4]
 ```
 
 ---
@@ -2253,8 +2320,6 @@ def au_moins_niveau_20(pokemons):
 
     return output
 
-###
-
 for pokemon in au_moins_niveau_20(mes_pokemons):
    ...
 ```
@@ -2276,8 +2341,6 @@ def au_moins_niveau_20(pokemons):
     for pokemon, niveau in pokemons.items():
         if niveau >= 20:
             yield pokemon
-
-####
 
 for pokemon in au_moins_niveau_20(mes_pokemons):
    ...

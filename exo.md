@@ -289,8 +289,15 @@ et les lignes vides. Spécifier le caractère qui symbolise le début d'un
 commentaire en argument de la fonction. (Ou pourra utiliser la méthode `strip()`
 des chaînes de caractère pour identifier plus facilement les lignes vides)
 
-
 ## 10. Librairies
+
+Les énoncés des exercices suivants peuvent être un peu plus ouverts que les
+précédents, et ont aussi pour objectifs de vous inciter à explorer la
+documentation des librairies (ou Internet en général...) pour trouver les
+outils dont vous avez besoin. Il existe de nombreuse façon de résoudre chaque
+exercice.
+
+#### JSON, requests et argparse
 
 10.1.1 : Télécharger le fichier `https://app.yunohost.org/default/v2/apps.json` (avec
 votre navigateur ou `wget` par exemple). Écrire une fonction qui lit ce fichier,
@@ -306,4 +313,29 @@ le code du retour est bien 200 avant de continuer).
 10.1.3 : Exporter le résultat d'un filtre (par exemple toutes les applications
 avec level >= 7) dans un fichier json.
 
-10.2 : Avec la librairie `random`, écrire une fonction `jets_de_des(N)` qui simule N lancés de dés 6 et retourne le nombre d'occurence de chaque face dans un dictionnaire. Par exemple : `{1: 13, 2:16, 3:12, ... }`. Calculer ensuite la frequence (`nb_occurences / nb_lancés_total`) pour chaque face. Testez avec un N grand et en déduire si votre dé virtuel est pipé ou non.
+10.1.4 : À l'aide de la librairie `argparse`, paramétrez le tri à l'aide d'un argument donné en ligne de commande. Par exemple: `python3 filtre_apps.py --level 7` exportera dans "result.json" seulement les apps level >= 7.
+
+#### CSV
+
+10.2.1 : Récupérer le fichier de données CSV auprès du formateur, le lire, et 
+afficher le nom des personnes ayant moins de 24 ans. Pour ce faire, on 
+utilisera la librarie `csv`.
+
+10.2.2 : Trier les personnes du fichier CSV par année de naissance et
+enregistrer une nouvelle version de ce fichier avec seulement le nom et l'année
+de naissance. Pour trier, on pourra utiliser `sorted` et son argument `key`.
+
+### Random
+
+10.3 : Écrire une fonction `jets_de_des(N)` qui simule N lancés de dés 6 et retourne le nombre d'occurence de chaque face dans un dictionnaire. Par exemple : `{1: 13, 2:16, 3:12, ... }`. Calculer ensuite la frequence (`nb_occurences / nb_lancés_total`) pour chaque face. Testez avec un N grand et en déduire si votre dé virtuel est pipé ou non.
+
+10.4 : Écrire un fonction `create_tmp_dir` qui choisi un nombre au hasard entre
+0 et 100000 puis créer le dossier `/tmp/tmp-{lenombre}` et retourne le nom du
+dossier ainsi créé. On pourra utiliser la librairie `random` pour choisir un
+nom aléatoire, et `os.system` ou `subprocess.check_call` pour créer le dossier.
+
+### Interaction avec le systeme de fichier
+
+10.5.1 : Écrire une fonction qui permet de trouver récursivement dans un dossier
+tous les fichiers modifiés il y a moins de 5 minutes.
+
