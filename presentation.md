@@ -2800,7 +2800,193 @@ with open("newtable.csv", "w") as f:
 
 # 10. Librairies
 
-## 10.4 `pip`
+## 10.4 Librairie `os`
+
+Il s'agit de pleins de petites fonction utilitaire pour interagir avec l'OS : le système de fichier, les variables d'environnement, lancer des commandes "brutes", ...
+
+Ces fonctionnalités sont rendues "portables" autant que possible et sont censées s'adapter au système de fichier sur lequel on exécute 
+
+---
+
+# 10. Librairies
+
+## 10.4 Librairie `os`
+
+### Créer/supprimer/gérer les permissions/voir les métadonnées
+
+- `os.mkdir(chemin)` :  créer un dossier
+- `os.remove(chemin)` : supprimer un fichier
+- `os.chown`/`os.chmod` : permet de changer le propriétaire / les permissions d'un fichier
+- `os.stat(chemin)` : retourne les métadonnées d'un fichier
+    - par ex.: `os.stat("/var/log/kern.log")`
+    - renvoie: `os.stat_result(st_mode=33184, st_ino=3160118, st_dev=65025, st_nlink=1, st_uid=0, st_gid=4, st_size=106455, st_atime=1667689202, st_mtime=1667923564, st_ctime=1667923564)`
+    - par ex. `st_mtime` est la date / timestamp de dernière modification
+
+---
+
+# 10. Librairies
+
+## 10.4 Librairie `os`
+
+### Naviguer dans les fichiers
+
+- `os.path.listdir(dossier)` : retourne la liste des fichiers et sous-dossiers dans `dossier`
+- `os.walk(dossier)` : génère les noms de fichiers récursivement dans `dossier`
+- `os.path.isfile(chemin)` : teste si `chemin` corresponds à un fichier
+- `os.path.isdir(chemin)` : teste si `chemin` correponds à un dossier
+- `os.path.join('/home', 'alex', 'Documents')` : construit un chemin complet 'intelligement' à partir des différents morceaux fournis, dans ce cas : `/home/alex/Documents`
+
+et aussi une autre librairie cool: `glob`
+- `glob.glob(/home/alex/*.py)` : permet d'itérer sur tous les fichiers qui finissent par `.py` dans mon dossier perso
+
+---
+
+# 10. Librairies
+
+## 10.4 Librairie `os`
+
+### Variables d'environnement
+
+- `os.environ` : retourne un dictionnaire avec les variables d'environnement passées au script
+   - par ex.: `os.environ["USER"]` vaut `alex`
+   - ou encore: `os.environ["HOME"]` vaut `/home/alex`
+
+---
+
+
+## 10.4 Librairie `os`
+
+### Executer des commandes "brutes"
+
+- `code_de_retour = os.system("ls /home/alex")` : 
+    - execute la commande et affiche le résultat dans le terminal
+    - renvoie **le code de retour** de la commande (NB: la sortie de la commande est uniquement dans le terminal, elle n'est pas renvoyée, on obtient seulement le code de retour!)
+    - ATTENTION aux injections ! Par ex. `os.system("ls /home/alex/" + fichier)` avec `fichier` qui serait une information fournie par l'utilisateur créé un gros problème de sécurité.
+
+Pour un mécanisme plus sécurisé et puissant, voir la librairie `subprocess`:
+
+```python
+out = subprocess.check_output(["echo", "Hello World!"])
+print(out)    # -> Affiche 'Hello World'
+```
+
+- `subprocess.check_output(...)` : recupère la sortie d'une commande
+- `subprocess.check_call(...)` : verifie que la commande a bien marché (code de retour '0') ou declenche une exception
+- `subprocess.Popen(...)` : méthode plus bas niveau où on a un contrôle très fin
+
+---
+
+# 10. Librairies
+
+## 10.5 Librairie `logging`
+
+### Pourquoi une librairie pour le logging plutot que juste `print`
+
+- Différent niveaux de message : `debug`, `info`, `warning`, `error`, `critical`(?)
+- Possibilité de logger les infos dans un fichier (ou virtuellement n'importe quoi)
+   - on est pas forcément "devant" le terminal dans lequel le programme se lance
+   - recherche plus facile dans un fichier lorsqu'on a un grand volume de message
+- Suivi de l'heure à laquelle un message a été émis
+- Suivi de quelle partie du code (ou fichier) a émis le message
+- ...
+
+De plus, la librairie `logging` est une sorte de standard de-facto utilisé par plein de librairie, et fourni un fonctionnement unifié que l'on peut personnaliser ensuite.
+
+---
+
+## 10.5 Librairie `logging`
+
+### Fonctionnement de base
+
+```python
+import logging
+
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s : %(name)s : %(levelname)s : %(message)s')
+
+logging.info("Le programme vient de se lancer")
+for i in range(10):
+    logging.debug(f"La valeur de i vaut {i}")
+
+logging.warning("Oh non c'est la fin du programme!")
+```
+
+```
+2022-11-03 23:42:47,887 : root : INFO : Le programme vient de se lancer
+2022-11-03 23:42:47,887 : root : WARNING : Oh non c'est la fin du programme!
+```
+
+---
+
+## 10.5 Librairie `logging`
+
+### Fonctionnement avancé
+
+```python
+import logging
+import logging.handlers
+logger = logging.getLogger(__name__)
+
+logger.setLevel(logging.DEBUG)
+
+# Definir le 'handler' qui va vers le fichier + son style de formattage
+file_handler = logging.handlers.RotatingFileHandler('programme.log')
+formatter    = logging.Formatter('%(asctime)s : %(name)s : %(levelname)s : %(message)s')
+file_handler.setFormatter(formatter)
+
+# Ajouter le handler qui va vers le fichier + aussi celui vers la console
+logger.addHandler(file_handler)
+logger.addHandler(logging.StreamHandler())
+
+logger.info("Le programme vient de se lancer")
+for i in range(10):
+    logger.debug(f"La valeur de i vaut {i}")
+logger.warning("Oh non c'est la fin du programme!")
+```
+
+---
+
+## 10.5 Librairie `logging`
+
+### Éléments de fonctionnement
+
+- Les **logger** : c'est l'objet qui permet d'émettre les messages avec `logger.info()`, `.warning()`, etc.
+    - Pour la tracabilité, on en créer un différent dans chaque fichier de code avec `logger = logging.getLogger(__name__)`
+- Les **handler** : ce sont les destinations des messages, typiquement console ou fichier
+- Les **formatter** : c'est la façon dont sont écrit les messages dans le log
+- Les **filter** : (pas illustré) ce sont des mécaniques pour ne garder que certains messages
+
+---
+
+## 10.5 Librairie `logging`
+
+### Logger les exceptions
+
+- Les méthodes `logger.info()`, `.warning()`, `.error()`, etc. loggent juste un message
+- Il existe une méthode spéciale `logger.exception()` qui *en plus* logge la stacktrace de la dernière exception qui s'est produite (mais sans redéclencher l'erreur ni faire crasher le programme)
+
+```python
+try:
+    int("trois")
+except:
+    logger.exception("Une exception s'est produite")
+```
+
+```
+Une exception s'est produite
+Traceback (most recent call last):
+  File "/home/alex/dev/coursPython/sandbox/log/main.py", line 23, in <module>
+    int("trois")
+ValueError: invalid literal for int() with base 10: 'trois'
+```
+
+
+
+---
+
+# 10. Librairies
+
+## `pip`
 
 - Gestionnaire de paquet / modules Python
 - PIP : "Pip Install Packages"
@@ -2814,5 +3000,201 @@ with open("newtable.csv", "w") as f:
 - Lister les paquets installés
     - `pip3 list`, `pip3 freeze`
 - Les paquets installés sont dans `/usr/lib/python*/dist-packages/`
+
+
+---
+
+# 10. Librairies
+
+## `pip`
+
+- Gestionnaire de paquet / modules Python
+- PIP : "Pip Install Packages"
+- PyPI : Python Package Index
+- Installer un paquet :
+    - `pip3 install <paquet>`
+- Rechercher un paquet :
+    - `pip3 search <motclef>`
+- Installer une liste de dépendances :
+    - `pip3 install -r requirements.txt`
+- Lister les paquets installés
+    - `pip3 list`, `pip3 freeze`
+
+---
+
+# 10. Librairies
+
+## `pip`
+
+- Les paquets Pythons sont installés dans `/usr/lib/python*/dist-packages/`
+
+---
+
+## Ecrire ses propres modules
+
+Considérant les fichiers suivants :
+
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      # <-- Contient "def dire_bonjour..."
+```
+
+Depuis `main.py`, je peux faire
+
+```python
+from mylib.bonjour import dire_bonjour
+
+dire_bonjour("Alex") # -> "Bonjour Alex !"
+
+print(dire_bonjour)
+# -> <function dire_bonjour at 0x7fb964fab668>
+```
+
+---
+
+## Ecrire ses propres modules
+
+Considérant les fichiers suivants :
+
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      # <-- Contient "def dire_bonjour..."
+```
+
+Depuis `main.py`, je peux *aussi* faire
+
+```python
+from mylib import bonjour
+
+bonjour.dire_bonjour("Alex") # -> "Bonjour Alex !"
+
+print(bonjour)
+# -> <module 'mylib.bonjour' from 'mylib/bonjour.pyc'>
+```
+
+---
+
+## Ecrire ses propres modules
+
+Considérant les fichiers suivants :
+
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      # <-- Contient "def dire_bonjour..."
+```
+
+Attention : si j'ai du code dans le contexte 'global' de `bonjour.py` (comme par exemple des `print()` ou des tests de la fonction), le code sera executé au moment de l'import (donc les `print()` apparaîtront dans la console etc...)
+
+Il existe tout de même une astuce qui consiste à êcrire:
+
+```python
+if __name__ == "__main__":
+    # Ici, du code qui ne sera executé *QUE* si je lance `python3 bonjour.py`
+    # directement (pas lors de l'import)
+
+    # Test dire_bonjour
+    dire_bonjour("Alex")
+```
+
+
+---
+
+## Ecrire ses propres modules
+
+Situation de la vraie vie, un site de vente en ligne : on a pleins de structures différentes à gérer, on les organise dans un dossier `models/`:
+
+```text
+├── app.py
+└── models/
+    ├── __init__.py
+    ├── user.py
+    ├── product.py
+    ├── order.py
+    └── invoice.py
+└── views/
+    ├── landpage.html
+    ├── catalog.html
+    └── checkout.html
+└── assets/
+    └── logo.png
+```
+
+---
+
+## Un "vrai" module (installable par d'autres gens)
+
+- Étape 1 : écrire un fichier 'setup.py' à la racine de mon projet, qui contient les métadonnées de mon module
+
+```bash
+└── mylib/
+    ├── __init__.py
+    └── bonjour.py      
+└─ setup.py
+```
+
+```python
+from setuptools import setup
+
+setup(
+   name='mylib',
+   version='1.0',
+   license="MIT",
+   description='Un super module avec des utilitaires pour dire bonjour',
+   author='Alex',
+   author_email='aleks@whatever.tld',
+   packages=['mylib'],
+   install_requires=['wheel', 'requests'], # Dépendances nécessaires pour ce paquet
+)
+```
+
+---
+
+## Un "vrai" module (installable par d'autres gens)
+
+- Étape 1.5 : Tester d'installer le module sur son propre système
+
+```bash
+python3 setup.py install
+```
+
+On devrait voir:
+
+```text
+copying build/lib/bonjour/bonjour.py -> build/bdist.linux-x86_64/egg/bonjour
+[...]
+byte-compiling build/bdist.linux-x86_64/egg/bonjour/bonjour.py to bonjour.cpython-39.pyc
+[...]
+Copying bonjour-1.0-py3.9.egg to /usr/local/lib/python3.9/dist-packages
+
+Installed /usr/local/lib/python3.9/dist-packages/bonjour-1.0-py3.9.egg
+[...]
+```
+
+Et ensuite, n'importe où sur le système je devrais pouvoir faire:
+
+```python
+from mylib.bonjour import dire_bonjour
+dire_bonjour("Alex")
+```
+
+---
+
+## Un "vrai" module (installable par d'autres gens)
+
+- Étape 2 : Envoyer le paquet sur les serveurs de Pypi.org
+- *(pour tester, on peut utiliser plutôt TestPyPI / test.pypi.org)*
+- Il faut créer un compte: https://test.pypi.org/account/register/
+- Vérifier que le nom de la librairie qu'on veut créer n'existe pas déjà
+- Installer `twine` sur machine (petit utilitaire pour uploader sur pypi)
+- Uploader : `twine upload --repository testpypi dist/*`
+- ... attendre quelques minutes ...
+- Tester l'install avec : `pip install --index-url https://test.pypi.org/simple/ your-package`
+
 
 
