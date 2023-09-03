@@ -93,11 +93,8 @@ Pour des applications plus grosses, on préferera tout même **Django** qui est 
 - Isoler des paquets / dépendances pour utiliser des versions spécifiques
 
 ```bash
-# La premiere fois :
-sudo apt install python-virtualenv python3-virtualenv virtualenv
-
 # Creation d'un virtualenv 'venv'
-virtualenv -p python3 venv
+python3 -m venv venv
 source venv/bin/activate
 
 # Installation de dependances
@@ -117,7 +114,7 @@ deactivate
 # Virtualenv "de base" pour Flask
 
 ```python
-virtualenv -p python3 venv
+python3 -m venv venv
 source venv/bin/activate
 
 pip install Flask

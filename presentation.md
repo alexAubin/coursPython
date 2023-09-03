@@ -115,7 +115,7 @@ Formateur
 # Horaires ?
 
 - 9h -> 12h30 ? pause vers 10h30 ?
-- 14h -> 17h30 ? pause vers 15h30 ?
+- 13h30 -> 17h ? pause vers 15h30 ?
 
 # Évaluation
 
@@ -297,6 +297,17 @@ En Python, les lignes commençant par `#` sont des commentaires:
 # C'est mon premier programme en Python, c'est supayre!
 print("Hello, world!")
 ```
+
+
+---
+
+# 0. Hello world !
+
+**Python est un langage interprété**
+- stricto-sensu, lorsqu'on exécute un programme python, ce n'est pas "votre" programme qui tourne dans le processeur, c'est **l'interpréteur Python** qui lit votre programme et "converti à la volée" les lignes de code en instructions pour la machine
+- l'éxécution se fait ligne par ligne : il n'y a pas beaucoup de garantie que le programme ne crashera pas plus loin dans le programme à cause, par exemple, d'une variable qui n'est pas définie
+- (néanmoins au lancement du programme, l'interpréteur vérifie les éléments de syntaxe "basique", par exemple une parenthèse qui n'a pas été refermée est détectée dès le début...)
+
 
 ---
 
@@ -614,8 +625,8 @@ class: impact
 ### Syntaxe des chaînes
 
 - Entre simple quote (`'`) ou double quotes (`"`). Par exemple: `"hello"`
-- `print("hello")` affiche le texte `Hello`
-- `print(hello)` affiche **le contenu d'une variable qui s'apellerait** `Hello`
+- `print("hello")` affiche le texte `hello`
+- `print(hello)` affiche **le contenu d'une variable qui s'apellerait** `hello`
 
 ### Longueur
 
@@ -3102,6 +3113,22 @@ if __name__ == "__main__":
     dire_bonjour("Alex")
 ```
 
+---
+
+## Ecrire ses propres modules
+
+Considérant les fichiers suivants :
+
+```bash
+├── main.py
+└── mylib/
+    ├── __init__.py
+    ├── bonjour.py      # <-- Contient "def dire_bonjour..."
+    └── __pycache__
+          └── bonjour.cpython-39.pyc
+```
+
+Note technique : lorsqu'on importe un module, Python fait une sorte de "demi-compilation" et met en cache ce résultat dans `__pycache__` sous forme de `.pyc`. Ceci permet à Python d'économiser du temps lors des imports qui peuvent être très nombreux plus la taille d'un projet grandi.
 
 ---
 
